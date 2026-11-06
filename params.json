@@ -1,0 +1,3306 @@
+[
+  {
+    "key": "selected",
+    "name": "Voice",
+    "min": 0,
+    "max": 7,
+    "default": 0,
+    "display": "int",
+    "options": [
+      "A01",
+      "A02",
+      "A03",
+      "A04",
+      "A05",
+      "A06",
+      "A07",
+      "A08"
+    ]
+  },
+  {
+    "key": "v0_freq",
+    "name": "A01 FREQUENCY",
+    "min": 20,
+    "max": 20000,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_wave",
+    "name": "A01 WAVE MORPH",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_attack",
+    "name": "A01 AMP ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_decay",
+    "name": "A01 AMP DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 260,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_modmode",
+    "name": "A01 PITCH MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "DECAY",
+      "SINE",
+      "RANDOM"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v0_modamt",
+    "name": "A01 PITCH AMOUNT",
+    "min": -96,
+    "max": 96,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_modrate",
+    "name": "A01 PITCH TIME / RATE",
+    "min": 0,
+    "max": 20000,
+    "default": 60,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_modvel",
+    "name": "A01 PITCH VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_mix",
+    "name": "A01 NOISE MIX",
+    "min": 0,
+    "max": 100,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_filter",
+    "name": "A01 FILTER MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "LP",
+      "BP",
+      "HP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v0_cutoff",
+    "name": "A01 CUTOFF",
+    "min": 20,
+    "max": 18000,
+    "default": 2500,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_res",
+    "name": "A01 RESONANCE",
+    "min": 0.1,
+    "max": 20,
+    "default": 0.707,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_natk",
+    "name": "A01 NOISE ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_ndcy",
+    "name": "A01 NOISE DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 120,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_env",
+    "name": "A01 NOISE ENVELOPE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "EXP",
+      "LINEAR",
+      "CLAP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v0_stereo",
+    "name": "A01 STEREO NOISE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v0_drive",
+    "name": "A01 DRIVE",
+    "min": 0,
+    "max": 50,
+    "default": 5,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_eqfreq",
+    "name": "A01 EQ FREQUENCY",
+    "min": 20,
+    "max": 18000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_eqgain",
+    "name": "A01 EQ GAIN",
+    "min": -24,
+    "max": 24,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_level",
+    "name": "A01 LEVEL",
+    "min": 0,
+    "max": 100,
+    "default": 80,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_ovel",
+    "name": "A01 OSC VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_nvel",
+    "name": "A01 NOISE VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_pan",
+    "name": "A01 PAN",
+    "min": -100,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_choke",
+    "name": "A01 CHOKE GROUP",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "GROUP 1",
+      "GROUP 2",
+      "GROUP 3"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v0_mute",
+    "name": "A01 MUTE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v0_solo",
+    "name": "A01 SOLO",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v1_freq",
+    "name": "A02 FREQUENCY",
+    "min": 20,
+    "max": 20000,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_wave",
+    "name": "A02 WAVE MORPH",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_attack",
+    "name": "A02 AMP ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_decay",
+    "name": "A02 AMP DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 260,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_modmode",
+    "name": "A02 PITCH MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "DECAY",
+      "SINE",
+      "RANDOM"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v1_modamt",
+    "name": "A02 PITCH AMOUNT",
+    "min": -96,
+    "max": 96,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_modrate",
+    "name": "A02 PITCH TIME / RATE",
+    "min": 0,
+    "max": 20000,
+    "default": 60,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_modvel",
+    "name": "A02 PITCH VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_mix",
+    "name": "A02 NOISE MIX",
+    "min": 0,
+    "max": 100,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_filter",
+    "name": "A02 FILTER MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "LP",
+      "BP",
+      "HP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v1_cutoff",
+    "name": "A02 CUTOFF",
+    "min": 20,
+    "max": 18000,
+    "default": 2500,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_res",
+    "name": "A02 RESONANCE",
+    "min": 0.1,
+    "max": 20,
+    "default": 0.707,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_natk",
+    "name": "A02 NOISE ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_ndcy",
+    "name": "A02 NOISE DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 120,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_env",
+    "name": "A02 NOISE ENVELOPE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "EXP",
+      "LINEAR",
+      "CLAP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v1_stereo",
+    "name": "A02 STEREO NOISE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v1_drive",
+    "name": "A02 DRIVE",
+    "min": 0,
+    "max": 50,
+    "default": 5,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_eqfreq",
+    "name": "A02 EQ FREQUENCY",
+    "min": 20,
+    "max": 18000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_eqgain",
+    "name": "A02 EQ GAIN",
+    "min": -24,
+    "max": 24,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_level",
+    "name": "A02 LEVEL",
+    "min": 0,
+    "max": 100,
+    "default": 80,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_ovel",
+    "name": "A02 OSC VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_nvel",
+    "name": "A02 NOISE VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_pan",
+    "name": "A02 PAN",
+    "min": -100,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_choke",
+    "name": "A02 CHOKE GROUP",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "GROUP 1",
+      "GROUP 2",
+      "GROUP 3"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v1_mute",
+    "name": "A02 MUTE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v1_solo",
+    "name": "A02 SOLO",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v2_freq",
+    "name": "A03 FREQUENCY",
+    "min": 20,
+    "max": 20000,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_wave",
+    "name": "A03 WAVE MORPH",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_attack",
+    "name": "A03 AMP ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_decay",
+    "name": "A03 AMP DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 260,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_modmode",
+    "name": "A03 PITCH MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "DECAY",
+      "SINE",
+      "RANDOM"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v2_modamt",
+    "name": "A03 PITCH AMOUNT",
+    "min": -96,
+    "max": 96,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_modrate",
+    "name": "A03 PITCH TIME / RATE",
+    "min": 0,
+    "max": 20000,
+    "default": 60,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_modvel",
+    "name": "A03 PITCH VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_mix",
+    "name": "A03 NOISE MIX",
+    "min": 0,
+    "max": 100,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_filter",
+    "name": "A03 FILTER MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "LP",
+      "BP",
+      "HP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v2_cutoff",
+    "name": "A03 CUTOFF",
+    "min": 20,
+    "max": 18000,
+    "default": 2500,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_res",
+    "name": "A03 RESONANCE",
+    "min": 0.1,
+    "max": 20,
+    "default": 0.707,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_natk",
+    "name": "A03 NOISE ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_ndcy",
+    "name": "A03 NOISE DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 120,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_env",
+    "name": "A03 NOISE ENVELOPE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "EXP",
+      "LINEAR",
+      "CLAP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v2_stereo",
+    "name": "A03 STEREO NOISE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v2_drive",
+    "name": "A03 DRIVE",
+    "min": 0,
+    "max": 50,
+    "default": 5,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_eqfreq",
+    "name": "A03 EQ FREQUENCY",
+    "min": 20,
+    "max": 18000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_eqgain",
+    "name": "A03 EQ GAIN",
+    "min": -24,
+    "max": 24,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_level",
+    "name": "A03 LEVEL",
+    "min": 0,
+    "max": 100,
+    "default": 80,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_ovel",
+    "name": "A03 OSC VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_nvel",
+    "name": "A03 NOISE VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_pan",
+    "name": "A03 PAN",
+    "min": -100,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_choke",
+    "name": "A03 CHOKE GROUP",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "GROUP 1",
+      "GROUP 2",
+      "GROUP 3"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v2_mute",
+    "name": "A03 MUTE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v2_solo",
+    "name": "A03 SOLO",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v3_freq",
+    "name": "A04 FREQUENCY",
+    "min": 20,
+    "max": 20000,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_wave",
+    "name": "A04 WAVE MORPH",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_attack",
+    "name": "A04 AMP ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_decay",
+    "name": "A04 AMP DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 260,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_modmode",
+    "name": "A04 PITCH MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "DECAY",
+      "SINE",
+      "RANDOM"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v3_modamt",
+    "name": "A04 PITCH AMOUNT",
+    "min": -96,
+    "max": 96,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_modrate",
+    "name": "A04 PITCH TIME / RATE",
+    "min": 0,
+    "max": 20000,
+    "default": 60,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_modvel",
+    "name": "A04 PITCH VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_mix",
+    "name": "A04 NOISE MIX",
+    "min": 0,
+    "max": 100,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_filter",
+    "name": "A04 FILTER MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "LP",
+      "BP",
+      "HP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v3_cutoff",
+    "name": "A04 CUTOFF",
+    "min": 20,
+    "max": 18000,
+    "default": 2500,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_res",
+    "name": "A04 RESONANCE",
+    "min": 0.1,
+    "max": 20,
+    "default": 0.707,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_natk",
+    "name": "A04 NOISE ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_ndcy",
+    "name": "A04 NOISE DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 120,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_env",
+    "name": "A04 NOISE ENVELOPE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "EXP",
+      "LINEAR",
+      "CLAP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v3_stereo",
+    "name": "A04 STEREO NOISE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v3_drive",
+    "name": "A04 DRIVE",
+    "min": 0,
+    "max": 50,
+    "default": 5,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_eqfreq",
+    "name": "A04 EQ FREQUENCY",
+    "min": 20,
+    "max": 18000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_eqgain",
+    "name": "A04 EQ GAIN",
+    "min": -24,
+    "max": 24,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_level",
+    "name": "A04 LEVEL",
+    "min": 0,
+    "max": 100,
+    "default": 80,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_ovel",
+    "name": "A04 OSC VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_nvel",
+    "name": "A04 NOISE VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_pan",
+    "name": "A04 PAN",
+    "min": -100,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_choke",
+    "name": "A04 CHOKE GROUP",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "GROUP 1",
+      "GROUP 2",
+      "GROUP 3"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v3_mute",
+    "name": "A04 MUTE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v3_solo",
+    "name": "A04 SOLO",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v4_freq",
+    "name": "A05 FREQUENCY",
+    "min": 20,
+    "max": 20000,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_wave",
+    "name": "A05 WAVE MORPH",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_attack",
+    "name": "A05 AMP ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_decay",
+    "name": "A05 AMP DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 260,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_modmode",
+    "name": "A05 PITCH MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "DECAY",
+      "SINE",
+      "RANDOM"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v4_modamt",
+    "name": "A05 PITCH AMOUNT",
+    "min": -96,
+    "max": 96,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_modrate",
+    "name": "A05 PITCH TIME / RATE",
+    "min": 0,
+    "max": 20000,
+    "default": 60,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_modvel",
+    "name": "A05 PITCH VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_mix",
+    "name": "A05 NOISE MIX",
+    "min": 0,
+    "max": 100,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_filter",
+    "name": "A05 FILTER MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "LP",
+      "BP",
+      "HP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v4_cutoff",
+    "name": "A05 CUTOFF",
+    "min": 20,
+    "max": 18000,
+    "default": 2500,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_res",
+    "name": "A05 RESONANCE",
+    "min": 0.1,
+    "max": 20,
+    "default": 0.707,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_natk",
+    "name": "A05 NOISE ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_ndcy",
+    "name": "A05 NOISE DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 120,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_env",
+    "name": "A05 NOISE ENVELOPE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "EXP",
+      "LINEAR",
+      "CLAP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v4_stereo",
+    "name": "A05 STEREO NOISE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v4_drive",
+    "name": "A05 DRIVE",
+    "min": 0,
+    "max": 50,
+    "default": 5,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_eqfreq",
+    "name": "A05 EQ FREQUENCY",
+    "min": 20,
+    "max": 18000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_eqgain",
+    "name": "A05 EQ GAIN",
+    "min": -24,
+    "max": 24,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_level",
+    "name": "A05 LEVEL",
+    "min": 0,
+    "max": 100,
+    "default": 80,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_ovel",
+    "name": "A05 OSC VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_nvel",
+    "name": "A05 NOISE VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_pan",
+    "name": "A05 PAN",
+    "min": -100,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_choke",
+    "name": "A05 CHOKE GROUP",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "GROUP 1",
+      "GROUP 2",
+      "GROUP 3"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v4_mute",
+    "name": "A05 MUTE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v4_solo",
+    "name": "A05 SOLO",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v5_freq",
+    "name": "A06 FREQUENCY",
+    "min": 20,
+    "max": 20000,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_wave",
+    "name": "A06 WAVE MORPH",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_attack",
+    "name": "A06 AMP ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_decay",
+    "name": "A06 AMP DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 260,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_modmode",
+    "name": "A06 PITCH MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "DECAY",
+      "SINE",
+      "RANDOM"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v5_modamt",
+    "name": "A06 PITCH AMOUNT",
+    "min": -96,
+    "max": 96,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_modrate",
+    "name": "A06 PITCH TIME / RATE",
+    "min": 0,
+    "max": 20000,
+    "default": 60,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_modvel",
+    "name": "A06 PITCH VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_mix",
+    "name": "A06 NOISE MIX",
+    "min": 0,
+    "max": 100,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_filter",
+    "name": "A06 FILTER MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "LP",
+      "BP",
+      "HP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v5_cutoff",
+    "name": "A06 CUTOFF",
+    "min": 20,
+    "max": 18000,
+    "default": 2500,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_res",
+    "name": "A06 RESONANCE",
+    "min": 0.1,
+    "max": 20,
+    "default": 0.707,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_natk",
+    "name": "A06 NOISE ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_ndcy",
+    "name": "A06 NOISE DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 120,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_env",
+    "name": "A06 NOISE ENVELOPE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "EXP",
+      "LINEAR",
+      "CLAP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v5_stereo",
+    "name": "A06 STEREO NOISE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v5_drive",
+    "name": "A06 DRIVE",
+    "min": 0,
+    "max": 50,
+    "default": 5,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_eqfreq",
+    "name": "A06 EQ FREQUENCY",
+    "min": 20,
+    "max": 18000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_eqgain",
+    "name": "A06 EQ GAIN",
+    "min": -24,
+    "max": 24,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_level",
+    "name": "A06 LEVEL",
+    "min": 0,
+    "max": 100,
+    "default": 80,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_ovel",
+    "name": "A06 OSC VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_nvel",
+    "name": "A06 NOISE VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_pan",
+    "name": "A06 PAN",
+    "min": -100,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_choke",
+    "name": "A06 CHOKE GROUP",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "GROUP 1",
+      "GROUP 2",
+      "GROUP 3"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v5_mute",
+    "name": "A06 MUTE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v5_solo",
+    "name": "A06 SOLO",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v6_freq",
+    "name": "A07 FREQUENCY",
+    "min": 20,
+    "max": 20000,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_wave",
+    "name": "A07 WAVE MORPH",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_attack",
+    "name": "A07 AMP ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_decay",
+    "name": "A07 AMP DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 260,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_modmode",
+    "name": "A07 PITCH MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "DECAY",
+      "SINE",
+      "RANDOM"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v6_modamt",
+    "name": "A07 PITCH AMOUNT",
+    "min": -96,
+    "max": 96,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_modrate",
+    "name": "A07 PITCH TIME / RATE",
+    "min": 0,
+    "max": 20000,
+    "default": 60,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_modvel",
+    "name": "A07 PITCH VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_mix",
+    "name": "A07 NOISE MIX",
+    "min": 0,
+    "max": 100,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_filter",
+    "name": "A07 FILTER MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "LP",
+      "BP",
+      "HP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v6_cutoff",
+    "name": "A07 CUTOFF",
+    "min": 20,
+    "max": 18000,
+    "default": 2500,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_res",
+    "name": "A07 RESONANCE",
+    "min": 0.1,
+    "max": 20,
+    "default": 0.707,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_natk",
+    "name": "A07 NOISE ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_ndcy",
+    "name": "A07 NOISE DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 120,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_env",
+    "name": "A07 NOISE ENVELOPE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "EXP",
+      "LINEAR",
+      "CLAP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v6_stereo",
+    "name": "A07 STEREO NOISE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v6_drive",
+    "name": "A07 DRIVE",
+    "min": 0,
+    "max": 50,
+    "default": 5,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_eqfreq",
+    "name": "A07 EQ FREQUENCY",
+    "min": 20,
+    "max": 18000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_eqgain",
+    "name": "A07 EQ GAIN",
+    "min": -24,
+    "max": 24,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_level",
+    "name": "A07 LEVEL",
+    "min": 0,
+    "max": 100,
+    "default": 80,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_ovel",
+    "name": "A07 OSC VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_nvel",
+    "name": "A07 NOISE VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_pan",
+    "name": "A07 PAN",
+    "min": -100,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_choke",
+    "name": "A07 CHOKE GROUP",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "GROUP 1",
+      "GROUP 2",
+      "GROUP 3"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v6_mute",
+    "name": "A07 MUTE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v6_solo",
+    "name": "A07 SOLO",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v7_freq",
+    "name": "A08 FREQUENCY",
+    "min": 20,
+    "max": 20000,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_wave",
+    "name": "A08 WAVE MORPH",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_attack",
+    "name": "A08 AMP ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_decay",
+    "name": "A08 AMP DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 260,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_modmode",
+    "name": "A08 PITCH MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "DECAY",
+      "SINE",
+      "RANDOM"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v7_modamt",
+    "name": "A08 PITCH AMOUNT",
+    "min": -96,
+    "max": 96,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_modrate",
+    "name": "A08 PITCH TIME / RATE",
+    "min": 0,
+    "max": 20000,
+    "default": 60,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_modvel",
+    "name": "A08 PITCH VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_mix",
+    "name": "A08 NOISE MIX",
+    "min": 0,
+    "max": 100,
+    "default": 12,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_filter",
+    "name": "A08 FILTER MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "LP",
+      "BP",
+      "HP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v7_cutoff",
+    "name": "A08 CUTOFF",
+    "min": 20,
+    "max": 18000,
+    "default": 2500,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_res",
+    "name": "A08 RESONANCE",
+    "min": 0.1,
+    "max": 20,
+    "default": 0.707,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_natk",
+    "name": "A08 NOISE ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_ndcy",
+    "name": "A08 NOISE DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 120,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_env",
+    "name": "A08 NOISE ENVELOPE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "EXP",
+      "LINEAR",
+      "CLAP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v7_stereo",
+    "name": "A08 STEREO NOISE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v7_drive",
+    "name": "A08 DRIVE",
+    "min": 0,
+    "max": 50,
+    "default": 5,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_eqfreq",
+    "name": "A08 EQ FREQUENCY",
+    "min": 20,
+    "max": 18000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_eqgain",
+    "name": "A08 EQ GAIN",
+    "min": -24,
+    "max": 24,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_level",
+    "name": "A08 LEVEL",
+    "min": 0,
+    "max": 100,
+    "default": 80,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_ovel",
+    "name": "A08 OSC VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_nvel",
+    "name": "A08 NOISE VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_pan",
+    "name": "A08 PAN",
+    "min": -100,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_choke",
+    "name": "A08 CHOKE GROUP",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "GROUP 1",
+      "GROUP 2",
+      "GROUP 3"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v7_mute",
+    "name": "A08 MUTE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "v7_solo",
+    "name": "A08 SOLO",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "OFF",
+      "ON"
+    ]
+  },
+  {
+    "key": "trigger",
+    "name": "TRIGGER",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "hold_ms": 120
+  },
+  {
+    "key": "alter",
+    "name": "ALTER",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "hold_ms": 120
+  },
+  {
+    "key": "random",
+    "name": "RANDOM",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "hold_ms": 120
+  },
+  {
+    "key": "compare",
+    "name": "COMPARE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "hold_ms": 120
+  },
+  {
+    "key": "select0",
+    "name": "A01",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true
+  },
+  {
+    "key": "select1",
+    "name": "A02",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true
+  },
+  {
+    "key": "select2",
+    "name": "A03",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true
+  },
+  {
+    "key": "select3",
+    "name": "A04",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true
+  },
+  {
+    "key": "select4",
+    "name": "A05",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true
+  },
+  {
+    "key": "select5",
+    "name": "A06",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true
+  },
+  {
+    "key": "select6",
+    "name": "A07",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true
+  },
+  {
+    "key": "select7",
+    "name": "A08",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true
+  },
+  {
+    "key": "ab0",
+    "name": "A01 B",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "A",
+      "B"
+    ],
+    "poll": false
+  },
+  {
+    "key": "ab1",
+    "name": "A02 B",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "A",
+      "B"
+    ],
+    "poll": false
+  },
+  {
+    "key": "ab2",
+    "name": "A03 B",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "A",
+      "B"
+    ],
+    "poll": false
+  },
+  {
+    "key": "ab3",
+    "name": "A04 B",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "A",
+      "B"
+    ],
+    "poll": false
+  },
+  {
+    "key": "ab4",
+    "name": "A05 B",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "A",
+      "B"
+    ],
+    "poll": false
+  },
+  {
+    "key": "ab5",
+    "name": "A06 B",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "A",
+      "B"
+    ],
+    "poll": false
+  },
+  {
+    "key": "ab6",
+    "name": "A07 B",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "A",
+      "B"
+    ],
+    "poll": false
+  },
+  {
+    "key": "ab7",
+    "name": "A08 B",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "A",
+      "B"
+    ],
+    "poll": false
+  },
+  {
+    "key": "q0_0",
+    "name": "FREQUENCY",
+    "min": 20,
+    "max": 20000,
+    "default": 55,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q0_1",
+    "name": "WAVE MORPH",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q0_2",
+    "name": "AMP ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q0_3",
+    "name": "AMP DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 260,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q0_4",
+    "name": "PITCH MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false,
+    "options": [
+      "DECAY",
+      "SINE",
+      "RANDOM"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "q0_5",
+    "name": "PITCH AMOUNT",
+    "min": -96,
+    "max": 96,
+    "default": 12,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q0_6",
+    "name": "PITCH TIME / RATE",
+    "min": 0,
+    "max": 20000,
+    "default": 60,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q0_7",
+    "name": "PITCH VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q1_0",
+    "name": "NOISE MIX",
+    "min": 0,
+    "max": 100,
+    "default": 12,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q1_1",
+    "name": "FILTER MODE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false,
+    "options": [
+      "LP",
+      "BP",
+      "HP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "q1_2",
+    "name": "CUTOFF",
+    "min": 20,
+    "max": 18000,
+    "default": 2500,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q1_3",
+    "name": "RESONANCE",
+    "min": 0.1,
+    "max": 20,
+    "default": 0.707,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q1_4",
+    "name": "NOISE ATTACK",
+    "min": 0,
+    "max": 10000,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q1_5",
+    "name": "NOISE DECAY",
+    "min": 10,
+    "max": 10000,
+    "default": 120,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q1_6",
+    "name": "NOISE ENVELOPE",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false,
+    "options": [
+      "EXP",
+      "LINEAR",
+      "CLAP"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "q1_7",
+    "name": "STEREO NOISE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "q2_0",
+    "name": "DRIVE",
+    "min": 0,
+    "max": 50,
+    "default": 5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q2_1",
+    "name": "EQ FREQUENCY",
+    "min": 20,
+    "max": 18000,
+    "default": 200,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q2_2",
+    "name": "EQ GAIN",
+    "min": -24,
+    "max": 24,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q2_3",
+    "name": "LEVEL",
+    "min": 0,
+    "max": 100,
+    "default": 80,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q2_4",
+    "name": "OSC VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q2_5",
+    "name": "NOISE VELOCITY",
+    "min": 0,
+    "max": 200,
+    "default": 100,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q2_6",
+    "name": "PAN",
+    "min": -100,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "q2_7",
+    "name": "CHOKE GROUP",
+    "min": 0,
+    "max": 3,
+    "default": 0,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "GROUP 1",
+      "GROUP 2",
+      "GROUP 3"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "v0_modmode__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v0_modmode"
+  },
+  {
+    "key": "v0_filter__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v0_filter"
+  },
+  {
+    "key": "v0_env__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v0_env"
+  },
+  {
+    "key": "v0_stereo__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v0_stereo"
+  },
+  {
+    "key": "v0_choke__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v0_choke"
+  },
+  {
+    "key": "v1_modmode__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v1_modmode"
+  },
+  {
+    "key": "v1_filter__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v1_filter"
+  },
+  {
+    "key": "v1_env__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v1_env"
+  },
+  {
+    "key": "v1_stereo__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v1_stereo"
+  },
+  {
+    "key": "v1_choke__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v1_choke"
+  },
+  {
+    "key": "v2_modmode__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v2_modmode"
+  },
+  {
+    "key": "v2_filter__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v2_filter"
+  },
+  {
+    "key": "v2_env__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v2_env"
+  },
+  {
+    "key": "v2_stereo__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v2_stereo"
+  },
+  {
+    "key": "v2_choke__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v2_choke"
+  },
+  {
+    "key": "v3_modmode__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v3_modmode"
+  },
+  {
+    "key": "v3_filter__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v3_filter"
+  },
+  {
+    "key": "v3_env__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v3_env"
+  },
+  {
+    "key": "v3_stereo__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v3_stereo"
+  },
+  {
+    "key": "v3_choke__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v3_choke"
+  },
+  {
+    "key": "v4_modmode__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v4_modmode"
+  },
+  {
+    "key": "v4_filter__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v4_filter"
+  },
+  {
+    "key": "v4_env__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v4_env"
+  },
+  {
+    "key": "v4_stereo__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v4_stereo"
+  },
+  {
+    "key": "v4_choke__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v4_choke"
+  },
+  {
+    "key": "v5_modmode__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v5_modmode"
+  },
+  {
+    "key": "v5_filter__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v5_filter"
+  },
+  {
+    "key": "v5_env__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v5_env"
+  },
+  {
+    "key": "v5_stereo__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v5_stereo"
+  },
+  {
+    "key": "v5_choke__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v5_choke"
+  },
+  {
+    "key": "v6_modmode__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v6_modmode"
+  },
+  {
+    "key": "v6_filter__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v6_filter"
+  },
+  {
+    "key": "v6_env__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v6_env"
+  },
+  {
+    "key": "v6_stereo__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v6_stereo"
+  },
+  {
+    "key": "v6_choke__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v6_choke"
+  },
+  {
+    "key": "v7_modmode__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v7_modmode"
+  },
+  {
+    "key": "v7_filter__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v7_filter"
+  },
+  {
+    "key": "v7_env__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v7_env"
+  },
+  {
+    "key": "v7_stereo__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v7_stereo"
+  },
+  {
+    "key": "v7_choke__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v7_choke"
+  },
+  {
+    "key": "activity0",
+    "name": "A01 activity",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "activity1",
+    "name": "A02 activity",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "activity2",
+    "name": "A03 activity",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "activity3",
+    "name": "A04 activity",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "activity4",
+    "name": "A05 activity",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "activity5",
+    "name": "A06 activity",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "activity6",
+    "name": "A07 activity",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "activity7",
+    "name": "A08 activity",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "send0_reverb",
+    "name": "A01 REVERB SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send0_delay",
+    "name": "A01 DELAY SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send1_reverb",
+    "name": "A02 REVERB SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send1_delay",
+    "name": "A02 DELAY SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send2_reverb",
+    "name": "A03 REVERB SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send2_delay",
+    "name": "A03 DELAY SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send3_reverb",
+    "name": "A04 REVERB SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send3_delay",
+    "name": "A04 DELAY SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send4_reverb",
+    "name": "A05 REVERB SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send4_delay",
+    "name": "A05 DELAY SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send5_reverb",
+    "name": "A06 REVERB SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send5_delay",
+    "name": "A06 DELAY SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send6_reverb",
+    "name": "A07 REVERB SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send6_delay",
+    "name": "A07 DELAY SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send7_reverb",
+    "name": "A08 REVERB SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "send7_delay",
+    "name": "A08 DELAY SEND",
+    "min": 0,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "rev_on",
+    "name": "REVERB",
+    "min": 0,
+    "max": 1,
+    "default": 1,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "rev_size",
+    "name": "SIZE",
+    "min": 0,
+    "max": 100,
+    "default": 65,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "rev_decay",
+    "name": "DECAY",
+    "min": 0.2,
+    "max": 8,
+    "default": 2.4,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "rev_damp",
+    "name": "DAMPING",
+    "min": 0,
+    "max": 100,
+    "default": 45,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "rev_return",
+    "name": "RETURN",
+    "min": 0,
+    "max": 100,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "del_on",
+    "name": "DELAY",
+    "min": 0,
+    "max": 1,
+    "default": 1,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "del_sync",
+    "name": "CLOCK",
+    "min": 0,
+    "max": 1,
+    "default": 1,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "FREE",
+      "SYNC"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "del_div",
+    "name": "TIME",
+    "min": 0,
+    "max": 4,
+    "default": 2,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "1/16",
+      "1/8",
+      "1/8 D",
+      "1/4",
+      "1/2"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "del_ms",
+    "name": "TIME",
+    "min": 20,
+    "max": 1500,
+    "default": 375,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "del_feedback",
+    "name": "FEEDBACK",
+    "min": 0,
+    "max": 90,
+    "default": 35,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "del_tone",
+    "name": "TONE",
+    "min": 0,
+    "max": 100,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "del_return",
+    "name": "RETURN",
+    "min": 0,
+    "max": 100,
+    "default": 50,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "del_div__open",
+    "name": "Delay time options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "del_div"
+  },
+  {
+    "key": "fx_time",
+    "name": "DELAY TIME",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "poll": false
+  }
+]

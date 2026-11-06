@@ -1,0 +1,1541 @@
+{
+  "archive_sha256": "c82dd4b4eb58f4c157a47a975de0e77966475cc56d27108b21d419e68b438f78",
+  "seed_hex": "0xb0eb2dade048a0ce0df5daed443b68ee",
+  "method": "Six randomly drawn kits per generation G04–G28, exact Best of Generation folders only; duplicate converted sound states rejected.",
+  "count": 150,
+  "kit_count": 150,
+  "sound_count": 1200,
+  "extra_init_included": false,
+  "generation_counts": {
+    "G04": 6,
+    "G05": 6,
+    "G06": 6,
+    "G07": 6,
+    "G08": 6,
+    "G09": 6,
+    "G10": 6,
+    "G11": 6,
+    "G12": 6,
+    "G13": 6,
+    "G14": 6,
+    "G15": 6,
+    "G16": 6,
+    "G17": 6,
+    "G18": 6,
+    "G19": 6,
+    "G20": 6,
+    "G21": 6,
+    "G22": 6,
+    "G23": 6,
+    "G24": 6,
+    "G25": 6,
+    "G26": 6,
+    "G27": 6,
+    "G28": 6
+  },
+  "max_display_name_length": 11,
+  "max_filename_length": 14,
+  "presets": [
+    {
+      "index": 0,
+      "name": "Ash Pulse",
+      "file": "AshPulse.xpl",
+      "generation": "G04",
+      "original_name": "Unshun Tallabia (93)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 4/Best of Generation 4/Unshun Tallabia (93).mtpreset",
+      "source_sha256": "5b6a50a37879da97adc8fa094bc2756c8271c8dc117795c3e0cbf3e78e85d014",
+      "state_sha256": "b5c51f5cdb31960b00ee0162b00ef1917b6ad994072aeb82e03072be093815af"
+    },
+    {
+      "index": 1,
+      "name": "Ash Dust",
+      "file": "AshDust.xpl",
+      "generation": "G04",
+      "original_name": "Panhunt Dispiritic (165)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 4/Best of Generation 4/Panhunt Dispiritic (165).mtpreset",
+      "source_sha256": "fb08d78b24fc542e882ace70956288f3dba4feec45a0992a14cb04c9eb455991",
+      "state_sha256": "85617e251640c04aa0fd5263df5acd8caafc8ec0105322d63ed2e4541c1857e3"
+    },
+    {
+      "index": 2,
+      "name": "Ash Circuit",
+      "file": "AshCircuit.xpl",
+      "generation": "G04",
+      "original_name": "Multivati Cathogenous (103)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 4/Best of Generation 4/Multivati Cathogenous (103).mtpreset",
+      "source_sha256": "aec70a69fe02674c0855bae48fd612b95f8c5cd71065cdbbcb8306e707e60692",
+      "state_sha256": "7db6f10f869c6e9f268d199930b95088845a31ff561a9063bdbfe68ac2702e89"
+    },
+    {
+      "index": 3,
+      "name": "Ash Echo",
+      "file": "AshEcho.xpl",
+      "generation": "G04",
+      "original_name": "Unpunction Unsquiquisita (102)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 4/Best of Generation 4/Unpunction Unsquiquisita (102).mtpreset",
+      "source_sha256": "19e37fb53b5a27e24c29751e441e3102b420d9a231b6d024ca702dada19e5deb",
+      "state_sha256": "56d9590ee90accdf61612e0d56e4d3ebb0a5fdd0d085855076186a34fb5de53b"
+    },
+    {
+      "index": 4,
+      "name": "Ash Spark",
+      "file": "AshSpark.xpl",
+      "generation": "G04",
+      "original_name": "Chaethora Nonize (98)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 4/Best of Generation 4/Chaethora Nonize (98).mtpreset",
+      "source_sha256": "3118d0e64486dc38eee690b597e828d961a9a105cee500240a3f8a2bff95e743",
+      "state_sha256": "c6118fde11059688dc8817d0d1b0c84781aedaed8118b33417829891f84df784"
+    },
+    {
+      "index": 5,
+      "name": "Ash Bloom",
+      "file": "AshBloom.xpl",
+      "generation": "G04",
+      "original_name": "Curify Scrupul (91)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 4/Best of Generation 4/Curify Scrupul (91).mtpreset",
+      "source_sha256": "da82f6509193dc15fac9908f2465357144c6c928145b1a6fdff7bc16cc3b8955",
+      "state_sha256": "cad8a86ee41b66e43f5407bb44e9f4198288a0dbb7f41eb2641e4ca1ea215406"
+    },
+    {
+      "index": 6,
+      "name": "Ash Grain",
+      "file": "AshGrain.xpl",
+      "generation": "G05",
+      "original_name": "Aclast Degrab (105)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 5/Best of Generation 5/Aclast Degrab (105).mtpreset",
+      "source_sha256": "71edef0e2d37fa1772ec4b87b9e56216f76895e11bc206e0eb0d375b20b55d10",
+      "state_sha256": "3f20fce5847628d3b7ce1f73571c2fee4db785f532f161803b0c9e35312bc158"
+    },
+    {
+      "index": 7,
+      "name": "Ash Drift",
+      "file": "AshDrift.xpl",
+      "generation": "G05",
+      "original_name": "Bucolite Undefer (128)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 5/Best of Generation 5/Bucolite Undefer (128).mtpreset",
+      "source_sha256": "db801b231b5f5529c7ed8d730f332047a5e944283b34a9cc05a25d794d6aee08",
+      "state_sha256": "30369fbd44cdc8a88fefd9aea162c6e9cea9fec6f34f1013ba07aefa223ab375"
+    },
+    {
+      "index": 8,
+      "name": "Ash Metal",
+      "file": "AshMetal.xpl",
+      "generation": "G05",
+      "original_name": "Saccofight Ciliodon (96)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 5/Best of Generation 5/Saccofight Ciliodon (96).mtpreset",
+      "source_sha256": "b871e6c3eeaca7a4cbf347cccfc8d433880fdd33311da7beb8b9dae2817a1b0e",
+      "state_sha256": "8c203fe646eec6b60bca4a8d91116c9c13bd9642fca2d03d8662dbfaba7fe48e"
+    },
+    {
+      "index": 9,
+      "name": "Ash Orbit",
+      "file": "AshOrbit.xpl",
+      "generation": "G05",
+      "original_name": "Cypselom Iodogynia (102)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 5/Best of Generation 5/Cypselom Iodogynia (102).mtpreset",
+      "source_sha256": "1ae1595e775856f58b506d9b3f736cc6e2c9d362410b6f09e82a3d773ffba1df",
+      "state_sha256": "92ff1677f1185a62327bd3dd55da7d94870fc8c3143d5f1776fe5cbb1eefab1b"
+    },
+    {
+      "index": 10,
+      "name": "Ion Pulse",
+      "file": "IonPulse.xpl",
+      "generation": "G05",
+      "original_name": "Dovispertropin (128)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 5/Best of Generation 5/Dovispertropin (128).mtpreset",
+      "source_sha256": "f09e70554fecb896539e7292d47f117ee5cb972cb0a1e076f39c4dc2b29fc85d",
+      "state_sha256": "89792760af301f01c9a89acaa32cf21f25bdb0ce003865735cb0ec5c2bd67d11"
+    },
+    {
+      "index": 11,
+      "name": "Ion Dust",
+      "file": "IonDust.xpl",
+      "generation": "G05",
+      "original_name": "Rewray Hyphrasolith (90)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 5/Best of Generation 5/Rewray Hyphrasolith (90).mtpreset",
+      "source_sha256": "3dc6c050fde76e17fed0fddfd83c665be8a3ec8902270412a6cc1da3492ebef1",
+      "state_sha256": "0bbccff563fed38aa216c3ad25f7af2529253b7728699a3c41aeb29190bb991c"
+    },
+    {
+      "index": 12,
+      "name": "Ion Circuit",
+      "file": "IonCircuit.xpl",
+      "generation": "G06",
+      "original_name": "Hexagger Dutify (121)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 6/Best of Generation 6/Hexagger Dutify (121).mtpreset",
+      "source_sha256": "b22eeab971c55818d7f063ec6fba3dc47726d364388a197a2354ceaa1b1c8a42",
+      "state_sha256": "28e9588c2780c56c1cd499412b20695dcf68b0c276b88168befa45b31143c12c"
+    },
+    {
+      "index": 13,
+      "name": "Ion Echo",
+      "file": "IonEcho.xpl",
+      "generation": "G06",
+      "original_name": "Pedress Nontal (122)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 6/Best of Generation 6/Pedress Nontal (122).mtpreset",
+      "source_sha256": "ce9fdb4d831370c76d2303242f316672b48945840c5f20efce56c5ba881941e7",
+      "state_sha256": "ca7d8b10ac9ea0c65918388aa9fbeec468e428f38a4fe39b38cb89b684d02384"
+    },
+    {
+      "index": 14,
+      "name": "Ion Spark",
+      "file": "IonSpark.xpl",
+      "generation": "G06",
+      "original_name": "Subservadib Supervatograph (133)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 6/Best of Generation 6/Subservadib Supervatograph (133).mtpreset",
+      "source_sha256": "c0635c472601980e9ac4329a276b387af6d6b47ffc7a485cff7b4aa31bec002a",
+      "state_sha256": "199d0e54f93b8d1aaf4c60240c1315a58fe6ab2bc5049d91d3f793149b3124de"
+    },
+    {
+      "index": 15,
+      "name": "Ion Bloom",
+      "file": "IonBloom.xpl",
+      "generation": "G06",
+      "original_name": "Pedati Untrichinnat (111)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 6/Best of Generation 6/Pedati Untrichinnat (111).mtpreset",
+      "source_sha256": "89543975977f6085f797a28aac386712b04d291c3b884bf1e56b3c6f90cc8959",
+      "state_sha256": "77f5b91ac8ea4bfff593e2649803ca5892b75773523afb0d02850a527d474a25"
+    },
+    {
+      "index": 16,
+      "name": "Ion Grain",
+      "file": "IonGrain.xpl",
+      "generation": "G06",
+      "original_name": "Beguidic Homelodes (113)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 6/Best of Generation 6/Beguidic Homelodes (113).mtpreset",
+      "source_sha256": "0c54a0cf0d4513674a4c2aa7e8f68e021cb78c9eea6ab16a2b821d570b151a42",
+      "state_sha256": "1753dff7f67a13baa8d33a2565515e7be7414c3e9fc89bfcf61813bf0cf07f4a"
+    },
+    {
+      "index": 17,
+      "name": "Ion Drift",
+      "file": "IonDrift.xpl",
+      "generation": "G06",
+      "original_name": "Protodromous (117)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 6/Best of Generation 6/Protodromous (117).mtpreset",
+      "source_sha256": "9d8826ab3fece1eee1a392e07ae20a10d3bb2bfb75cdde7457297486faf9fbce",
+      "state_sha256": "85cf2a1808c3bdf20ad41c1f1cc1ad351073f5c4110e79a3d235a495c82fe701"
+    },
+    {
+      "index": 18,
+      "name": "Ion Metal",
+      "file": "IonMetal.xpl",
+      "generation": "G07",
+      "original_name": "Unlegala Tamalogist (115)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 7/Best of Generation 7/Unlegala Tamalogist (115).mtpreset",
+      "source_sha256": "860ad0ffd73818558eca11559b5876cf8a69d9fd134aeee78b29a9f1639a0a90",
+      "state_sha256": "a3de3f5be8cf2104820aa3fb7741509260916a3268b23b533de105962dd55455"
+    },
+    {
+      "index": 19,
+      "name": "Ion Orbit",
+      "file": "IonOrbit.xpl",
+      "generation": "G07",
+      "original_name": "Stenon Galaccini (103)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 7/Best of Generation 7/Stenon Galaccini (103).mtpreset",
+      "source_sha256": "59417e48fcb1c388662a8345cdc0b2c57dbccbafd119175b6f29cdb0f93e8594",
+      "state_sha256": "30cfac4d7c68ac47bb6c04bfb03f90405ce37887b23b6d8bb6db1da2aa7aef49"
+    },
+    {
+      "index": 20,
+      "name": "Neo Pulse",
+      "file": "NeoPulse.xpl",
+      "generation": "G07",
+      "original_name": "Bhotic Unmeat (86)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 7/Best of Generation 7/Bhotic Unmeat (86).mtpreset",
+      "source_sha256": "fbe6a9a4426f564e1ed2bfbc9e9247b5909fce119fa031ae7c09ca455a009749",
+      "state_sha256": "f23f17e851fe215397e7db0a8f47160b7236f02fd81618cf5548a0a813a8a5dd"
+    },
+    {
+      "index": 21,
+      "name": "Neo Dust",
+      "file": "NeoDust.xpl",
+      "generation": "G07",
+      "original_name": "Inexpedip Nohun (93)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 7/Best of Generation 7/Inexpedip Nohun (93).mtpreset",
+      "source_sha256": "b7c5119926331fb9f8df9c40051e23c6e1eb75a4cd2c20520cbd5f720f02365b",
+      "state_sha256": "559587edada3e3d59b1c3a04054c303572de4360dae8b18318c00ff8ba617c97"
+    },
+    {
+      "index": 22,
+      "name": "Neo Circuit",
+      "file": "NeoCircuit.xpl",
+      "generation": "G07",
+      "original_name": "Scrati Chondrost (114)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 7/Best of Generation 7/Scrati Chondrost (114).mtpreset",
+      "source_sha256": "8f522f35f90ab5979d19ca924240af0f6906192cd110d3f509daddc557327f2f",
+      "state_sha256": "54dde3121516ada36d072be5323779e8f7bd2449baf69ae42dec572834cb478d"
+    },
+    {
+      "index": 23,
+      "name": "Neo Echo",
+      "file": "NeoEcho.xpl",
+      "generation": "G07",
+      "original_name": "Neiform Gokurtic (109)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 7/Best of Generation 7/Neiform Gokurtic (109).mtpreset",
+      "source_sha256": "2dc720dad7eb7475739c339ff2cf6a0965f3e90af5105d973ef4406cb29d4153",
+      "state_sha256": "dcc158c58abf36cd120d69ef0051a58b1cebda0039f03adb7d312ce6dd8329d6"
+    },
+    {
+      "index": 24,
+      "name": "Neo Spark",
+      "file": "NeoSpark.xpl",
+      "generation": "G08",
+      "original_name": "Begathism Submetasom (91)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 8/Best of Generation 8/Begathism Submetasom (91).mtpreset",
+      "source_sha256": "cc3b1f5e2df9f7fb7ebc1d1ae1682d6017d3ef576ae68ec5ec596fa32d4c7655",
+      "state_sha256": "b2aac531ad298e3ac3be94cc794f3264374b00dde67aedc852d401ff82ab8f2d"
+    },
+    {
+      "index": 25,
+      "name": "Neo Bloom",
+      "file": "NeoBloom.xpl",
+      "generation": "G08",
+      "original_name": "Proexperiton (104)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 8/Best of Generation 8/Proexperiton (104).mtpreset",
+      "source_sha256": "2c6f2911f081b46312f268e989ecf5524c47a3887d64872992f60dbafef04c30",
+      "state_sha256": "3109d686c85fe9a001b4cfed50248f4b02d74b4c057136200c9723d08c074a93"
+    },
+    {
+      "index": 26,
+      "name": "Neo Grain",
+      "file": "NeoGrain.xpl",
+      "generation": "G08",
+      "original_name": "Lipofibrium Plumbar (92)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 8/Best of Generation 8/Lipofibrium Plumbar (92).mtpreset",
+      "source_sha256": "9b610693ec379695f8d1df4cf81d84b076f2ab702472e090e5c81bbbc49af03d",
+      "state_sha256": "1479044dc587929b411ad8c8b5af1f6d652a305503e7fdc53545d292ee7f68f2"
+    },
+    {
+      "index": 27,
+      "name": "Neo Drift",
+      "file": "NeoDrift.xpl",
+      "generation": "G08",
+      "original_name": "Prematologist (111)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 8/Best of Generation 8/Prematologist (111).mtpreset",
+      "source_sha256": "88e261930b654fec262d7a42411f09ad874ad446567d2e838929816adc2bdc5a",
+      "state_sha256": "08995b0968165c86763bc8a4ccb4139f595db73a9d78fd782ccdbc7e146cf152"
+    },
+    {
+      "index": 28,
+      "name": "Neo Metal",
+      "file": "NeoMetal.xpl",
+      "generation": "G08",
+      "original_name": "Polycant Gumism (102)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 8/Best of Generation 8/Polycant Gumism (102).mtpreset",
+      "source_sha256": "54937603014d71c7aac003888b15679de0e5b55eecb21cd5e7875827d1a11ba7",
+      "state_sha256": "073e67ddc21ff053bebb77e88f6d685cc59de7e29184d483a0fd1cb2b4044f44"
+    },
+    {
+      "index": 29,
+      "name": "Neo Orbit",
+      "file": "NeoOrbit.xpl",
+      "generation": "G08",
+      "original_name": "Proctognath Vampine (120)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 8/Best of Generation 8/Proctognath Vampine (120).mtpreset",
+      "source_sha256": "f9ec92ad19dd2c114765a8b7ce0a8b80446ec02157c0f7ad17adc899c0049932",
+      "state_sha256": "1afe296f4f3415f2b5d865199d05ff14dca8911c314bface442378447f61f096"
+    },
+    {
+      "index": 30,
+      "name": "Ice Pulse",
+      "file": "IcePulse.xpl",
+      "generation": "G09",
+      "original_name": "Confish Sinid (119)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 9/Best of Generation 9/Confish Sinid (119).mtpreset",
+      "source_sha256": "c61d80d6ae665fc651ad01913aa0d1c703c651a6347acdde285532500831cad0",
+      "state_sha256": "238feb153599c68e230fed933cacaaacf00c47b3e44a199e3ca2f7934e69083d"
+    },
+    {
+      "index": 31,
+      "name": "Ice Dust",
+      "file": "IceDust.xpl",
+      "generation": "G09",
+      "original_name": "Solenapher Fastigato (72)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 9/Best of Generation 9/Solenapher Fastigato (72).mtpreset",
+      "source_sha256": "76cffbcc000f8f310cefa47200824bc90d909d4bf55ec203b9cb954d4c97a926",
+      "state_sha256": "aae30f6bef3d5e81597085fac26d3e0edcf910807f6e392dff8adb83514286c2"
+    },
+    {
+      "index": 32,
+      "name": "Ice Circuit",
+      "file": "IceCircuit.xpl",
+      "generation": "G09",
+      "original_name": "Mesoscula Pyroprosa (100)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 9/Best of Generation 9/Mesoscula Pyroprosa (100).mtpreset",
+      "source_sha256": "238bd014ce4ac11638928ccb74976d656908cfb7ca9fb5dd5dfb104aed62348f",
+      "state_sha256": "2cf5189f609383d2d75b81fa4dc10d2545c7ae419ed09261a0333181daa07e92"
+    },
+    {
+      "index": 33,
+      "name": "Ice Echo",
+      "file": "IceEcho.xpl",
+      "generation": "G09",
+      "original_name": "Petrogynang Vegetabolis (71)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 9/Best of Generation 9/Petrogynang Vegetabolis (71).mtpreset",
+      "source_sha256": "9df3dd57430e2d8a914e55ff2522c69377fc2974d2291ff7c755e972c0a69567",
+      "state_sha256": "2a32376eb9b44021ed6df22f6f9259e1deaad30b2a0f3881691ec22e09b911cd"
+    },
+    {
+      "index": 34,
+      "name": "Ice Spark",
+      "file": "IceSpark.xpl",
+      "generation": "G09",
+      "original_name": "Fluenzie Bryotrope (87)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 9/Best of Generation 9/Fluenzie Bryotrope (87).mtpreset",
+      "source_sha256": "2801ad1170a32fe50ac4743d31a22ff7590ddc5f4b3cc2ec07fb529c769b58df",
+      "state_sha256": "f1703d8598469bd3c02fe553761288e59c99b5ac52faa9667b329e359e1d29f6"
+    },
+    {
+      "index": 35,
+      "name": "Ice Bloom",
+      "file": "IceBloom.xpl",
+      "generation": "G09",
+      "original_name": "Overfraudful (131)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 9/Best of Generation 9/Overfraudful (131).mtpreset",
+      "source_sha256": "b59c32f0b3cbc297abdc061e10666132ebb378a57b000197dbfbd3ec95843021",
+      "state_sha256": "4b26f0705118929a4d02341ff32034a8cdfb4af7ad711fdbc086e42313b728ec"
+    },
+    {
+      "index": 36,
+      "name": "Ice Grain",
+      "file": "IceGrain.xpl",
+      "generation": "G10",
+      "original_name": "Styptosty Flatti (101)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 10/Best of Generation 10/Styptosty Flatti (101).mtpreset",
+      "source_sha256": "eb4dd193d841c93ee8a38d7ad5b6cf8d76014ee4ba16e0bdb2055f7abb7cea49",
+      "state_sha256": "3d158a0c798bb5e9db3d9a70a4d9dada41abadec1fe22a8afad795ecd1160795"
+    },
+    {
+      "index": 37,
+      "name": "Ice Drift",
+      "file": "IceDrift.xpl",
+      "generation": "G10",
+      "original_name": "Dhandsick Sublapsa (112)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 10/Best of Generation 10/Dhandsick Sublapsa (112).mtpreset",
+      "source_sha256": "30ae4a09b3b23014aaaa160c0c0175175592300fada3e870d78efd8c83aa044e",
+      "state_sha256": "5ca9596c91ea4091025faa4f4465dd43132bafeeba444373ec8d814a53948058"
+    },
+    {
+      "index": 38,
+      "name": "Ice Metal",
+      "file": "IceMetal.xpl",
+      "generation": "G10",
+      "original_name": "Sorrivate Hometric (100)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 10/Best of Generation 10/Sorrivate Hometric (100).mtpreset",
+      "source_sha256": "2fc1abb91b942d4460f6c03f0dfa84c369736f40820c656c00c94d63c16a7f10",
+      "state_sha256": "5a5234ec9116cd31a275f24f7caddb246b19c7d3798bb15c54dc76fa6bea0176"
+    },
+    {
+      "index": 39,
+      "name": "Ice Orbit",
+      "file": "IceOrbit.xpl",
+      "generation": "G10",
+      "original_name": "Corroscopy Soccemia (102)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 10/Best of Generation 10/Corroscopy Soccemia (102).mtpreset",
+      "source_sha256": "7a761f486af95e19613056d7c0d2c694041489311bbad7d38ee6e9aaf1ccd862",
+      "state_sha256": "1a11cec76e521b75f13037af0f444639be8afb96fba7d3d29cee23c05c435b9c"
+    },
+    {
+      "index": 40,
+      "name": "Red Pulse",
+      "file": "RedPulse.xpl",
+      "generation": "G10",
+      "original_name": "Matrioxidate (105)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 10/Best of Generation 10/Matrioxidate (105).mtpreset",
+      "source_sha256": "5ffc18014251dfb9956514799f40fcb5bc02d6a708ed1d450cfb26079f0636a3",
+      "state_sha256": "7629f0ba30ee0bdc43a75237cd5ceab54db67b9a838684cbb428b9c6e5cc41f0"
+    },
+    {
+      "index": 41,
+      "name": "Red Dust",
+      "file": "RedDust.xpl",
+      "generation": "G10",
+      "original_name": "Potism Wanwork (98)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 10/Best of Generation 10/Potism Wanwork (98).mtpreset",
+      "source_sha256": "17ee7af5751764fe212bec29ef9c09b3925a2c1fe51b3bbc7b79170850d4c964",
+      "state_sha256": "b3d0670adeaacdf82046bd507095a1dc10f15aeac4542d359ad45f0f3444030a"
+    },
+    {
+      "index": 42,
+      "name": "Red Circuit",
+      "file": "RedCircuit.xpl",
+      "generation": "G11",
+      "original_name": "Redital Calamorph (100)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 11/Best of Generation 11/Redital Calamorph (100).mtpreset",
+      "source_sha256": "315505acc3c1adb5be426b21d4077cd22985fed417258561ebb01ebe6f540ed8",
+      "state_sha256": "a7d3c4def3e879c91708e253358a4b2f6e32c739c3badbbd9c4a3032ded96575"
+    },
+    {
+      "index": 43,
+      "name": "Red Echo",
+      "file": "RedEcho.xpl",
+      "generation": "G11",
+      "original_name": "Postrachilis (111)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 11/Best of Generation 11/Postrachilis (111).mtpreset",
+      "source_sha256": "c397dc51812adca6f53d98c90204c4d7c145973bc6d6d5602782f6ed392e5d96",
+      "state_sha256": "77b6677c9b54b92584fbc24dee79abd4a5a01cd32f17c5fae28a504d309839fa"
+    },
+    {
+      "index": 44,
+      "name": "Red Spark",
+      "file": "RedSpark.xpl",
+      "generation": "G11",
+      "original_name": "Ceritor Damoeba (79)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 11/Best of Generation 11/Ceritor Damoeba (79).mtpreset",
+      "source_sha256": "3dfe99764833285ea8b4aaa01f1e3d05cd593adc8c36b49343c4408de9cd9cb3",
+      "state_sha256": "5cbbf049c666de6a5577db2809f7c9ff1febef38033511d0b41f79ede019d99a"
+    },
+    {
+      "index": 45,
+      "name": "Red Bloom",
+      "file": "RedBloom.xpl",
+      "generation": "G11",
+      "original_name": "Shellule Unduplici (151)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 11/Best of Generation 11/Shellule Unduplici (151).mtpreset",
+      "source_sha256": "4bf485db98f0ae5d932248eeb9c034c1e885c2d469d5a50ff9d23b5c33566492",
+      "state_sha256": "cb2a0812cd37a1916d12e0badfaf213dff1498eed2b81ea7b9f723245b5649b5"
+    },
+    {
+      "index": 46,
+      "name": "Red Grain",
+      "file": "RedGrain.xpl",
+      "generation": "G11",
+      "original_name": "Pseudogy Sulphosphoroid (87)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 11/Best of Generation 11/Pseudogy Sulphosphoroid (87).mtpreset",
+      "source_sha256": "c70a5fe8a6c74bbcf326926a38d17a889d8b543658c95cc7d62b3d61346df838",
+      "state_sha256": "d7f9667c09139ae542d55fa54c54614eeb0f8617704b59f855a1e3bfbe28fd1d"
+    },
+    {
+      "index": 47,
+      "name": "Red Drift",
+      "file": "RedDrift.xpl",
+      "generation": "G11",
+      "original_name": "Silving Enfels (88)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 11/Best of Generation 11/Silving Enfels (88).mtpreset",
+      "source_sha256": "89d32634aba03f4612be1e3a44fbbf13a9d9dae6101c4937ba58a001a132d5d0",
+      "state_sha256": "158b8a25a56ef0da1c75bcd68f62e3918c375d949a3164094a9552771c882c5b"
+    },
+    {
+      "index": 48,
+      "name": "Red Metal",
+      "file": "RedMetal.xpl",
+      "generation": "G12",
+      "original_name": "Satiring Ziphioxe (109)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 12/Best of Generation 12/Satiring Ziphioxe (109).mtpreset",
+      "source_sha256": "4eb9a85da3a892c543b1ce77df71e2e3318291be434c580c9c522e8b5d818ddb",
+      "state_sha256": "b4663eadda1cad6fcd9560e92313608aa88e85d61820ba38d96af52a024bbd8c"
+    },
+    {
+      "index": 49,
+      "name": "Red Orbit",
+      "file": "RedOrbit.xpl",
+      "generation": "G12",
+      "original_name": "Karyocarp Teloot (113)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 12/Best of Generation 12/Karyocarp Teloot (113).mtpreset",
+      "source_sha256": "3284963c689dbdb854573d8ff3dbde1bc984019530d0436206d0612ea82ca59f",
+      "state_sha256": "40efe26e15177906ba2813945a8c1587bbfef9f7a244c60387005f70cc020a69"
+    },
+    {
+      "index": 50,
+      "name": "Dry Pulse",
+      "file": "DryPulse.xpl",
+      "generation": "G12",
+      "original_name": "Admoniform Hognath (131)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 12/Best of Generation 12/Admoniform Hognath (131).mtpreset",
+      "source_sha256": "bb5f3b748b967d91d3142bc7af6fe037befccba99b2ff83f49078a1f4f06c550",
+      "state_sha256": "8837b342d52ec021ebbb40c9de3c0544c2d5dccd8d6d7636942b69251f6eda38"
+    },
+    {
+      "index": 51,
+      "name": "Dry Dust",
+      "file": "DryDust.xpl",
+      "generation": "G12",
+      "original_name": "Scolona Mispute (115)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 12/Best of Generation 12/Scolona Mispute (115).mtpreset",
+      "source_sha256": "ec2c87cec486a5d4ee9e22eec1b9fa430204ac4e04ceabf8b666ed93572a9ff7",
+      "state_sha256": "dd46a4f78c3855703f02afea0ddcbbf7f67a84a8d3447c37092cade0e0d4c8af"
+    },
+    {
+      "index": 52,
+      "name": "Dry Circuit",
+      "file": "DryCircuit.xpl",
+      "generation": "G12",
+      "original_name": "Unprigmatism (92)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 12/Best of Generation 12/Unprigmatism (92).mtpreset",
+      "source_sha256": "8a21d21ea8da43ab0d58f74043bd66ef1e1e7d431ef56336e644a9fb3c91de39",
+      "state_sha256": "270e791c937c7b0c41a5cf1177d2d76661c0ab0ff3fb5719941e39441e609d69"
+    },
+    {
+      "index": 53,
+      "name": "Dry Echo",
+      "file": "DryEcho.xpl",
+      "generation": "G12",
+      "original_name": "Elecher Hippome (61)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 12/Best of Generation 12/Elecher Hippome (61).mtpreset",
+      "source_sha256": "f39d4c46a304e37a80a03a404aaf09f160bd47913883e7cee554b20517ddbe5b",
+      "state_sha256": "a476434140eb2fb98e1bda3460686742f506fa54c8fb30c3f83d82a056aec012"
+    },
+    {
+      "index": 54,
+      "name": "Dry Spark",
+      "file": "DrySpark.xpl",
+      "generation": "G13",
+      "original_name": "Phonother Endosime (94)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 13/Best of Generation 13/Phonother Endosime (94).mtpreset",
+      "source_sha256": "7707b7dc094152abae725763e5eecd8c6e379d47af92a3f7789319c3cb0beebd",
+      "state_sha256": "500bd37b0192273b323e75d8cb243b8c6cc9a98684744b6e8e6b8dcde2624a7e"
+    },
+    {
+      "index": 55,
+      "name": "Dry Bloom",
+      "file": "DryBloom.xpl",
+      "generation": "G13",
+      "original_name": "Naphost Undispend (113)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 13/Best of Generation 13/Naphost Undispend (113).mtpreset",
+      "source_sha256": "82ccfd4e4d5f4ed3467ea8b468b7de04d8c311d7c1167c1709365b4fdedfaa41",
+      "state_sha256": "df7bc24455b388d2ef3d3867e7aa4a3f227f6198c823e6cbbec5ba825e438e42"
+    },
+    {
+      "index": 56,
+      "name": "Dry Grain",
+      "file": "DryGrain.xpl",
+      "generation": "G13",
+      "original_name": "Clinode Hyperexceed (142)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 13/Best of Generation 13/Clinode Hyperexceed (142).mtpreset",
+      "source_sha256": "79d460124f4c5e33e98d37de671c8999c7db9b73bf0f39bf0966a84d646a7ec3",
+      "state_sha256": "4851cf23d07823112f01f7f58ef8401cd0d046bc2a795b4552f078e2cbd209ae"
+    },
+    {
+      "index": 57,
+      "name": "Dry Drift",
+      "file": "DryDrift.xpl",
+      "generation": "G13",
+      "original_name": "Sipunction Prepatell (144)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 13/Best of Generation 13/Sipunction Prepatell (144).mtpreset",
+      "source_sha256": "662835475701f18316ea7707baf9456848432b6943c2d2a1d34adaa7a8519aef",
+      "state_sha256": "860aeff03c991d64585e4c062c623b6c932311e579e923a5594c8c5d42a75c2e"
+    },
+    {
+      "index": 58,
+      "name": "Dry Metal",
+      "file": "DryMetal.xpl",
+      "generation": "G13",
+      "original_name": "Megachildish (104)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 13/Best of Generation 13/Megachildish (104).mtpreset",
+      "source_sha256": "92f9e741e3dc8115eb087450e10a4a1bc9357d8a057f6c811cd04aed65c77b40",
+      "state_sha256": "c94739157b02a3972212ff36e7e6684cade92060f500ad339687c20c1d000e50"
+    },
+    {
+      "index": 59,
+      "name": "Dry Orbit",
+      "file": "DryOrbit.xpl",
+      "generation": "G13",
+      "original_name": "Unrecompunch (108)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 13/Best of Generation 13/Unrecompunch (108).mtpreset",
+      "source_sha256": "d7d12248e680858426902edbf1368cf82b0027aec9365bc43d84b0c5141b2070",
+      "state_sha256": "48d92b5aa9e2da13bb1f2bd9f56950b7542ac9af9f278ea6f34132ddb158da16"
+    },
+    {
+      "index": 60,
+      "name": "Low Pulse",
+      "file": "LowPulse.xpl",
+      "generation": "G14",
+      "original_name": "Succedaemosporan (115)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 14/Best of Generation 14/Succedaemosporan (115).mtpreset",
+      "source_sha256": "14ca139c4e75d5fb552aa6ebaf1fd983b9b535e506506416cc33fcb0d2a00bb4",
+      "state_sha256": "95257e35f041cd58270d5e4e0900ba882a17ccc062001f15223d0eb419ed10fd"
+    },
+    {
+      "index": 61,
+      "name": "Low Dust",
+      "file": "LowDust.xpl",
+      "generation": "G14",
+      "original_name": "Enturish Phanitis (116)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 14/Best of Generation 14/Enturish Phanitis (116).mtpreset",
+      "source_sha256": "2976bc9cfc974272d9d1137a72bc751bad028029e050cf8f1bf9b236e7a89c0b",
+      "state_sha256": "95cf9d6bf35cd7ca281bde996289958a6fe4c7160157289a6740f4ca9589a955"
+    },
+    {
+      "index": 62,
+      "name": "Low Circuit",
+      "file": "LowCircuit.xpl",
+      "generation": "G14",
+      "original_name": "Cerebream Biopsid (112)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 14/Best of Generation 14/Cerebream Biopsid (112).mtpreset",
+      "source_sha256": "1efc90005de9c439eae7065dcd30e08690c5721bca0ab79ef7f838cf246c3006",
+      "state_sha256": "4eaf807abaf9b2fe7ba24f93a58fe689042865135fe6001b8110c6877175928b"
+    },
+    {
+      "index": 63,
+      "name": "Low Echo",
+      "file": "LowEcho.xpl",
+      "generation": "G14",
+      "original_name": "Kitamitis Photogynous (98)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 14/Best of Generation 14/Kitamitis Photogynous (98).mtpreset",
+      "source_sha256": "4947ab36092a1cf23e6d13fdd4113b32c1302b52248625862a70936a78f7192f",
+      "state_sha256": "e07b84236b991d7f0101721a94e43d6951d520f504b5add58dbe8185480e975c"
+    },
+    {
+      "index": 64,
+      "name": "Low Spark",
+      "file": "LowSpark.xpl",
+      "generation": "G14",
+      "original_name": "Soldite Octative (122)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 14/Best of Generation 14/Soldite Octative (122).mtpreset",
+      "source_sha256": "65f2edd0716f39353d9cd446a6cc882e75469ed309c1d3768f08bf0bd3713c18",
+      "state_sha256": "8ff86a6132e5a7d1eb271aff2e7862073da559768140052471fa371861038834"
+    },
+    {
+      "index": 65,
+      "name": "Low Bloom",
+      "file": "LowBloom.xpl",
+      "generation": "G14",
+      "original_name": "Buxace Unautish (114)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 14/Best of Generation 14/Buxace Unautish (114).mtpreset",
+      "source_sha256": "f65cff44a7e0ac8d1d06786a4197f18ab5419dadc65ef740070cd2747e126e2b",
+      "state_sha256": "6a9d5db9a31431ffa393bfaeb775e9f361daf053b0921854823352799e4f9b25"
+    },
+    {
+      "index": 66,
+      "name": "Low Grain",
+      "file": "LowGrain.xpl",
+      "generation": "G15",
+      "original_name": "Cerebinthia Arrazin (102)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 15/Best of Generation 15/Cerebinthia Arrazin (102).mtpreset",
+      "source_sha256": "18087057b5056e31f39f0307f34469536c8c8a78255fac5401f9f4f805eb7626",
+      "state_sha256": "4fafafe1cf08dc8c116e596ff7d6d387b91e0984a02bfb60ce50dcbc2f3c0892"
+    },
+    {
+      "index": 67,
+      "name": "Low Drift",
+      "file": "LowDrift.xpl",
+      "generation": "G15",
+      "original_name": "Brious Unquin (106)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 15/Best of Generation 15/Brious Unquin (106).mtpreset",
+      "source_sha256": "fffe577da0cc726f046f747af75a96d44c4d8c3252426061d849e0895189402a",
+      "state_sha256": "6d0cb726b21c78c1835112873cedba7ead76fbe8c19e365f5f11b34dfa99e7a4"
+    },
+    {
+      "index": 68,
+      "name": "Low Metal",
+      "file": "LowMetal.xpl",
+      "generation": "G15",
+      "original_name": "Anamic Acerine (102)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 15/Best of Generation 15/Anamic Acerine (102).mtpreset",
+      "source_sha256": "ae78d7e62d453c2f1b3892292516572608e9942858c9cf468929322b7077901f",
+      "state_sha256": "1ba06398bb20311d1376e1c23e76900014f221f2576298d8789cca890cb837eb"
+    },
+    {
+      "index": 69,
+      "name": "Low Orbit",
+      "file": "LowOrbit.xpl",
+      "generation": "G15",
+      "original_name": "Hemitator Paedon (116)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 15/Best of Generation 15/Hemitator Paedon (116).mtpreset",
+      "source_sha256": "88b0a1412258ba160a9e37c31186fa911e0db240461f197dedc812d3be5f6e62",
+      "state_sha256": "24d05ae3134b47ce251313e76187a2fd3dcf814df2f082da9fbe09a4e5f5bddd"
+    },
+    {
+      "index": 70,
+      "name": "Raw Pulse",
+      "file": "RawPulse.xpl",
+      "generation": "G15",
+      "original_name": "Mensatiliac Glycoon (77)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 15/Best of Generation 15/Mensatiliac Glycoon (77).mtpreset",
+      "source_sha256": "25c86d926659107a168e586f27bc2d474460b640ad2e7b636c13b5a386444173",
+      "state_sha256": "747f3e1d64a4083224871f6fcde650d8d486057079f097303072e0295812c75a"
+    },
+    {
+      "index": 71,
+      "name": "Raw Dust",
+      "file": "RawDust.xpl",
+      "generation": "G15",
+      "original_name": "Overobate Scalence (115)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 15/Best of Generation 15/Overobate Scalence (115).mtpreset",
+      "source_sha256": "2cd10623e05e7cb5e2cbb8a46fb9f2d2974a4e46d3997987d811cda69aeeb543",
+      "state_sha256": "4217541a227fb01467ceee212f2e81c6b6ceeb292076a5f06d071131bd1aa26f"
+    },
+    {
+      "index": 72,
+      "name": "Raw Circuit",
+      "file": "RawCircuit.xpl",
+      "generation": "G16",
+      "original_name": "Teoclave Paymenon (128)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 16/Best of Generation 16/Teoclave Paymenon (128).mtpreset",
+      "source_sha256": "d80e3705cf515047d79e82b17064a838276d74897a6e4047d74167013405934a",
+      "state_sha256": "e039eb490c46f1852b06f5b55e30c89a202f3d0aa32dd037629b6a360ad10936"
+    },
+    {
+      "index": 73,
+      "name": "Raw Echo",
+      "file": "RawEcho.xpl",
+      "generation": "G16",
+      "original_name": "Unscoffen Hemation (112)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 16/Best of Generation 16/Unscoffen Hemation (112).mtpreset",
+      "source_sha256": "b69ac554bf6986d5fcd15f5d6bfeaad6ed88a31e63476f9783f75b78368caab1",
+      "state_sha256": "33217d64713dd5f8d0920a12a959fad60a86872c416cab1746de72df715d0666"
+    },
+    {
+      "index": 74,
+      "name": "Raw Spark",
+      "file": "RawSpark.xpl",
+      "generation": "G16",
+      "original_name": "Resolvabilitate (124)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 16/Best of Generation 16/Resolvabilitate (124).mtpreset",
+      "source_sha256": "e98766c2ecb346a840234d6b0ec76e792549f9a9f65605ee6af5cd08e5836b68",
+      "state_sha256": "e35209e547105f6f6eb09082b75fe01a5b2e62269a116eb0da713068e1c02a1c"
+    },
+    {
+      "index": 75,
+      "name": "Raw Bloom",
+      "file": "RawBloom.xpl",
+      "generation": "G16",
+      "original_name": "Laboracon Fluctual (104)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 16/Best of Generation 16/Laboracon Fluctual (104).mtpreset",
+      "source_sha256": "5f72ae2a3130ead87c387684e100ca663496e4b8583af6ad653c8d5ad3c2daaf",
+      "state_sha256": "526a57c6e10a0f46feffa9b64fc638e1de0ffbdb8daded9fe270050f5d2d2c31"
+    },
+    {
+      "index": 76,
+      "name": "Raw Grain",
+      "file": "RawGrain.xpl",
+      "generation": "G16",
+      "original_name": "Pogonac Thiosauror (98)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 16/Best of Generation 16/Pogonac Thiosauror (98).mtpreset",
+      "source_sha256": "66dd8d5839e5433fb9cfc3bfb30a16f933d33e58281b084ae910b82afd0b4a8c",
+      "state_sha256": "20ef0187bae4b83771b0e2866ac06e9e3c22017a833cb41975bdc76c9781985a"
+    },
+    {
+      "index": 77,
+      "name": "Raw Drift",
+      "file": "RawDrift.xpl",
+      "generation": "G16",
+      "original_name": "Heptarma Isomic (84)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 16/Best of Generation 16/Heptarma Isomic (84).mtpreset",
+      "source_sha256": "562c40d379e0eeb0b70d5d347fe61827275d831aab0ffe4c2350d2ccac4fc256",
+      "state_sha256": "cb6204d726e69c660a03964481b8ebcda755f652f24538852e2c5dcb8467398a"
+    },
+    {
+      "index": 78,
+      "name": "Raw Metal",
+      "file": "RawMetal.xpl",
+      "generation": "G17",
+      "original_name": "Episcape Fiberation (119)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 17/Best of Generation 17/Episcape Fiberation (119).mtpreset",
+      "source_sha256": "b369d52ff395421e65c1e59975a7a4534cc4f8ea9d7c2c5c6f85bd07f33c9a34",
+      "state_sha256": "bf8e5da799477b30f0d61b93ba4422d69b8fc0678fe700ec482e7f4568b8c2de"
+    },
+    {
+      "index": 79,
+      "name": "Raw Orbit",
+      "file": "RawOrbit.xpl",
+      "generation": "G17",
+      "original_name": "Papacifie Falatosis (110)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 17/Best of Generation 17/Papacifie Falatosis (110).mtpreset",
+      "source_sha256": "494cce156e80a514097d4bec2b47b45a66d500b0738d409bd2883aa531e9688d",
+      "state_sha256": "576de116081a4dc951255a0a3213ba0dd0f08b7777c2cd8ce8189654a6cd1ec6"
+    },
+    {
+      "index": 80,
+      "name": "Air Pulse",
+      "file": "AirPulse.xpl",
+      "generation": "G17",
+      "original_name": "Praetop Paleocomi (111)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 17/Best of Generation 17/Praetop Paleocomi (111).mtpreset",
+      "source_sha256": "ed64ea8ef635461cfe4b6a115cb1095f70278a0b7102613c310f5daa0a1a2dc3",
+      "state_sha256": "d7363d87b3991ae7e7aa82a60b43378b29c8a24c546e06f22a922ab96b19e928"
+    },
+    {
+      "index": 81,
+      "name": "Air Dust",
+      "file": "AirDust.xpl",
+      "generation": "G17",
+      "original_name": "Quinhydrograph (88)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 17/Best of Generation 17/Quinhydrograph (88).mtpreset",
+      "source_sha256": "cf8f37d9d9964b428b54b7edf5c4391e737a50701a7421b614a22c3fea2a43f5",
+      "state_sha256": "d05b85679145a82381685d010d6cd64a13b35b03bcbce3c579dd94a1a2214d87"
+    },
+    {
+      "index": 82,
+      "name": "Air Circuit",
+      "file": "AirCircuit.xpl",
+      "generation": "G17",
+      "original_name": "Hypoadron Ammatous (80)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 17/Best of Generation 17/Hypoadron Ammatous (80).mtpreset",
+      "source_sha256": "2867cd660721d1aa3958cc6d1df211327b6dd4b3a69de63333ce7f533766b3e1",
+      "state_sha256": "6f4504cf49e8f3cab83e1134d122e62222b5eb07a8f74467eeccec2cb6a0efe6"
+    },
+    {
+      "index": 83,
+      "name": "Air Echo",
+      "file": "AirEcho.xpl",
+      "generation": "G17",
+      "original_name": "Preprion Surfactic (127)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 17/Best of Generation 17/Preprion Surfactic (127).mtpreset",
+      "source_sha256": "40526df8e68597d3f00406194941b50b7fbaaa8879023eeac39bc87240ada303",
+      "state_sha256": "f96d87bc3d286848867e070f32ce3022b6252bdcae10fcfc1b721465b016f640"
+    },
+    {
+      "index": 84,
+      "name": "Air Spark",
+      "file": "AirSpark.xpl",
+      "generation": "G18",
+      "original_name": "Iatrix Defendear (105)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 18/Best of Generation 18/Iatrix Defendear (105).mtpreset",
+      "source_sha256": "e74d716780cd4111a65fcc68fb7dc5f1ea9f3c42e41308337b7ce775bf3cb549",
+      "state_sha256": "06448340aed3e13eda1508dace800731f6e0e54e1154fb75ebebf45f5cc3c916"
+    },
+    {
+      "index": 85,
+      "name": "Air Bloom",
+      "file": "AirBloom.xpl",
+      "generation": "G18",
+      "original_name": "Repreagh Indebathy (69)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 18/Best of Generation 18/Repreagh Indebathy (69).mtpreset",
+      "source_sha256": "5eba67e07f5c10b048a1ef1478ebb4f6db06b21abb74243fe919662ac0f9047d",
+      "state_sha256": "1602101bd7f1612e0a6f80292553f7c950c98e44fd12042b401ba95a78e49ca0"
+    },
+    {
+      "index": 86,
+      "name": "Air Grain",
+      "file": "AirGrain.xpl",
+      "generation": "G18",
+      "original_name": "Unpromotivagan (86)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 18/Best of Generation 18/Unpromotivagan (86).mtpreset",
+      "source_sha256": "b47a81659e16f8355ceab15cdc5da4f44169338f07a111a5b405e740d2174b48",
+      "state_sha256": "68fd01df76ba96e08b99f82f94e87d4655a395d8b25c149db9eac82bb6dfc2f8"
+    },
+    {
+      "index": 87,
+      "name": "Air Drift",
+      "file": "AirDrift.xpl",
+      "generation": "G18",
+      "original_name": "Phycitropism (113)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 18/Best of Generation 18/Phycitropism (113).mtpreset",
+      "source_sha256": "a3cf7f71e8aa399e5b408fdcb5964918697b8bd6cfb7b7f797c9b2f74fcc4c97",
+      "state_sha256": "2bd60c69ddbb93b30be78e17296d12e8931ef5cf24b1b316d67774e2cd220b7c"
+    },
+    {
+      "index": 88,
+      "name": "Air Metal",
+      "file": "AirMetal.xpl",
+      "generation": "G18",
+      "original_name": "Iatriarch Neoid (122)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 18/Best of Generation 18/Iatriarch Neoid (122).mtpreset",
+      "source_sha256": "714b0c33a9543fd537fab6e7c797461db7a565d1cb3444e268ca256af6393abf",
+      "state_sha256": "21550949ba2a5ebb949fe427a8fccd5c828d48402fccee7fd7e690da4f8fa2f4"
+    },
+    {
+      "index": 89,
+      "name": "Air Orbit",
+      "file": "AirOrbit.xpl",
+      "generation": "G18",
+      "original_name": "Palaeophagic (93)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 18/Best of Generation 18/Palaeophagic (93).mtpreset",
+      "source_sha256": "38bdddde3e506dda8cb024268493aecac3177e490ec1774363457c3195977443",
+      "state_sha256": "b5275c99ec46c288a898bfa62b5b8e8593e0105e76f13aee794b02fcd01955c3"
+    },
+    {
+      "index": 90,
+      "name": "Tin Pulse",
+      "file": "TinPulse.xpl",
+      "generation": "G19",
+      "original_name": "Crambula Preportward (106)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 19/Best of Generation 19/Crambula Preportward (106).mtpreset",
+      "source_sha256": "d71692b328d89efd505b15130e1e8cca31b3f880e0082efba43957050516f0fa",
+      "state_sha256": "b18574ae4afb0af18ff9f949d61f8ff4ed0a8ffa5b7e9a8009c78c268e538f30"
+    },
+    {
+      "index": 91,
+      "name": "Tin Dust",
+      "file": "TinDust.xpl",
+      "generation": "G19",
+      "original_name": "Apotation Nonilia (101)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 19/Best of Generation 19/Apotation Nonilia (101).mtpreset",
+      "source_sha256": "24d9a000bc3c2c45c1f2b6a00953b6c6c0ed1c699f7fc4bfb62dd04769bf8738",
+      "state_sha256": "f954f34867b02eedb1a5bcac9fb25387507de8e454b2557fa23601ecf8aee1c9"
+    },
+    {
+      "index": 92,
+      "name": "Tin Circuit",
+      "file": "TinCircuit.xpl",
+      "generation": "G19",
+      "original_name": "Pondyle Enderluca (88)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 19/Best of Generation 19/Pondyle Enderluca (88).mtpreset",
+      "source_sha256": "4a01ff56368d86cf00a79a528eb2fa2277263f4742c1ff758edec5f84f356a73",
+      "state_sha256": "898c6f6bebfb6cf8be53e99fab0f9fb9a43ca7d6c8ed4a347587a96cadd5bc02"
+    },
+    {
+      "index": 93,
+      "name": "Tin Echo",
+      "file": "TinEcho.xpl",
+      "generation": "G19",
+      "original_name": "Punnibranc Omnireman (116)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 19/Best of Generation 19/Punnibranc Omnireman (116).mtpreset",
+      "source_sha256": "3d569857e441cf3072d7e65e4f791abdf90cd6827ce254679479ae31c3e11d20",
+      "state_sha256": "6171e2d2c481e3439d0469dda7f7526508d0e51704f7313c68a7d99e81781f4f"
+    },
+    {
+      "index": 94,
+      "name": "Tin Spark",
+      "file": "TinSpark.xpl",
+      "generation": "G19",
+      "original_name": "Windbroad Symphase (97)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 19/Best of Generation 19/Windbroad Symphase (97).mtpreset",
+      "source_sha256": "919a67cce824216e81795edc52e98060a2cb1cd987efd896a967dbd0cb9c11e6",
+      "state_sha256": "84a9445fe508f6575ad02842fa0a34c35969e20fed2b1ee7a42a8fac2d8e94a7"
+    },
+    {
+      "index": 95,
+      "name": "Tin Bloom",
+      "file": "TinBloom.xpl",
+      "generation": "G19",
+      "original_name": "Hypochronoma (82)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 19/Best of Generation 19/Hypochronoma (82).mtpreset",
+      "source_sha256": "26768477076309c2e2cac61deb5a97b8f26fc4cf047e7fed8a1230f060ce7aba",
+      "state_sha256": "71acbec479030b07bcb2f8e3708b2d24c63992eb305695e1b4fcac3a45324d02"
+    },
+    {
+      "index": 96,
+      "name": "Tin Grain",
+      "file": "TinGrain.xpl",
+      "generation": "G20",
+      "original_name": "Aminist Monadulitic (107)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 20/Best of Generation 20/Aminist Monadulitic (107).mtpreset",
+      "source_sha256": "abde555f94de46acc0fee56828bc08c2f00562ba29bc082665d002fdef9c5498",
+      "state_sha256": "3a1dc1f424b38358f3d5b5e8f17206a8d5f02b110aafffaa2b83347baa24797c"
+    },
+    {
+      "index": 97,
+      "name": "Tin Drift",
+      "file": "TinDrift.xpl",
+      "generation": "G20",
+      "original_name": "Coetic Inoflat (105)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 20/Best of Generation 20/Coetic Inoflat (105).mtpreset",
+      "source_sha256": "7e1f40ae0821e99f14fbacaf81a1a80290368b78c494c2ef0d8b27a5516722ed",
+      "state_sha256": "920ddcb2c738f9e02c8c7cf955e3585bd72f574a8d8812dc0546630a458da384"
+    },
+    {
+      "index": 98,
+      "name": "Tin Metal",
+      "file": "TinMetal.xpl",
+      "generation": "G20",
+      "original_name": "Annulliwa Huamule (82)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 20/Best of Generation 20/Annulliwa Huamule (82).mtpreset",
+      "source_sha256": "c0981785ffa58d1388a90d97fd2d60c7280c2f9201dca3c65813ef19eb79441f",
+      "state_sha256": "a603d74823d42267a27eb55f044c2d319c82a29e2317df29cc93e08177fbb925"
+    },
+    {
+      "index": 99,
+      "name": "Tin Orbit",
+      "file": "TinOrbit.xpl",
+      "generation": "G20",
+      "original_name": "Teucrar Pyropal (123)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 20/Best of Generation 20/Teucrar Pyropal (123).mtpreset",
+      "source_sha256": "6a48ea567749c8df6f365410e9a07bd573f9862e9e411fa22d19ce21173538bd",
+      "state_sha256": "25463e77801e61902e7bc773047410c289f3b20293ffc7f7d7164a0a3d3a1ca1"
+    },
+    {
+      "index": 100,
+      "name": "Jet Pulse",
+      "file": "JetPulse.xpl",
+      "generation": "G20",
+      "original_name": "Chebosilverin (105)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 20/Best of Generation 20/Chebosilverin (105).mtpreset",
+      "source_sha256": "405590ce50cd02694d1cab25557d77ccdc6db2752f34fe5e4a03c126f9fa38fc",
+      "state_sha256": "cc46df4f67c2ab955ec43293213abd7336e7ffb53142179c15de6b95b384e684"
+    },
+    {
+      "index": 101,
+      "name": "Jet Dust",
+      "file": "JetDust.xpl",
+      "generation": "G20",
+      "original_name": "Nyctimhood Pyroar (121)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 20/Best of Generation 20/Nyctimhood Pyroar (121).mtpreset",
+      "source_sha256": "50199b4b97233408d54744ff436ebb72d49333564973f5f1d8bd58ceeb95e2e3",
+      "state_sha256": "73a072c8e553347d76a715e8f84ce45312aec45fd7ab9c12cf12ea9eaea50560"
+    },
+    {
+      "index": 102,
+      "name": "Jet Circuit",
+      "file": "JetCircuit.xpl",
+      "generation": "G21",
+      "original_name": "Scorbutt Iberan (108)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 21/Best of Generation 21/Scorbutt Iberan (108).mtpreset",
+      "source_sha256": "26a14cf650d3733c32ac624a2428ad8d95f604cf6dd668b0fc08f410b5f6ef74",
+      "state_sha256": "8f4929bcbc20598b1a977e33f3cbc0e46c14b6433d2e0b1bee1e4af740460bd3"
+    },
+    {
+      "index": 103,
+      "name": "Jet Echo",
+      "file": "JetEcho.xpl",
+      "generation": "G21",
+      "original_name": "Catastric Soroscler (90)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 21/Best of Generation 21/Catastric Soroscler (90).mtpreset",
+      "source_sha256": "e15f63c4de97be1f835baa68980f11b11ee05a70bb40be05dd7000d1f06d1057",
+      "state_sha256": "4d02e20d0541d1694618291a1686e1742820d9215400205cbfaec0bd8819405f"
+    },
+    {
+      "index": 104,
+      "name": "Jet Spark",
+      "file": "JetSpark.xpl",
+      "generation": "G21",
+      "original_name": "Palaeostration (118)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 21/Best of Generation 21/Palaeostration (118).mtpreset",
+      "source_sha256": "413c25f7e3567a3e5a94a5caf5ed4f6d0ab05ad372f6e75cd771028ecd54c5b7",
+      "state_sha256": "e7035593561a78f2e88d96d42d43abd83fb200d967bee6d4cb507d2fa92f453d"
+    },
+    {
+      "index": 105,
+      "name": "Jet Bloom",
+      "file": "JetBloom.xpl",
+      "generation": "G21",
+      "original_name": "Coarskip Reinvil (114)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 21/Best of Generation 21/Coarskip Reinvil (114).mtpreset",
+      "source_sha256": "0fde486e6390aa647ea7d514876ec4b840ef972e1bff260340f245922de02428",
+      "state_sha256": "4a7590acdba9d4542bf2ca69dd03953c95f4f5b2f8b52191e85496682fd31774"
+    },
+    {
+      "index": 106,
+      "name": "Jet Grain",
+      "file": "JetGrain.xpl",
+      "generation": "G21",
+      "original_name": "Excrucified Muscult (103)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 21/Best of Generation 21/Excrucified Muscult (103).mtpreset",
+      "source_sha256": "1a58684f13a488f4b9e1889ded9cde05c90e3a6a88202768983d805e85ccb37d",
+      "state_sha256": "92be2d4b3079afb1a0858e196aaa5d6577ee46b5df3497f72d473dd306c849b7"
+    },
+    {
+      "index": 107,
+      "name": "Jet Drift",
+      "file": "JetDrift.xpl",
+      "generation": "G21",
+      "original_name": "Sanguiradivision (99)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 21/Best of Generation 21/Sanguiradivision (99).mtpreset",
+      "source_sha256": "0ae952010419349078dae10f94a017aafc6d70c9682e019d4405bdbdde11c840",
+      "state_sha256": "03b19d63781c597ed3962386d8359d5bb2c3ac0ff1d9baaf5b3f514f0f9ebafa"
+    },
+    {
+      "index": 108,
+      "name": "Jet Metal",
+      "file": "JetMetal.xpl",
+      "generation": "G22",
+      "original_name": "Truffli Nimbroil (101)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 22/Best of Generation 22/Truffli Nimbroil (101).mtpreset",
+      "source_sha256": "6de13757abcef787caf50d9142d27fa532388e3873577612f5ac201f2cd43c90",
+      "state_sha256": "dd22dce950cede7ff14130a2062ce5cb31d2408ecfc344223c3c0026f597ef7a"
+    },
+    {
+      "index": 109,
+      "name": "Jet Orbit",
+      "file": "JetOrbit.xpl",
+      "generation": "G22",
+      "original_name": "Clamai Podous (104)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 22/Best of Generation 22/Clamai Podous (104).mtpreset",
+      "source_sha256": "b9348d240362fb9a2a11dfa4e538f5cc033d61f0fa9b8491565ff1f0dc5e3d6d",
+      "state_sha256": "201d5213240f61ae87875b07a31b0e4828a839f0358d8509c7bf6f1d6165c19e"
+    },
+    {
+      "index": 110,
+      "name": "Orb Pulse",
+      "file": "OrbPulse.xpl",
+      "generation": "G22",
+      "original_name": "Pittolitic Hyphelism (139)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 22/Best of Generation 22/Pittolitic Hyphelism (139).mtpreset",
+      "source_sha256": "d5f266ba9931bde55e122fe607e3a12136bf77c3c5ab3a8f19107d2f1cab4405",
+      "state_sha256": "ea51b95f8efaa8fe302710468449ec1e7d539e6453e18a8f41bf24d1fd3eefae"
+    },
+    {
+      "index": 111,
+      "name": "Orb Dust",
+      "file": "OrbDust.xpl",
+      "generation": "G22",
+      "original_name": "Hypoena Suborak (56)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 22/Best of Generation 22/Hypoena Suborak (56).mtpreset",
+      "source_sha256": "31083cac063ec2554e1aa2f072db495470b7d4904b92267a0cf7d347ecba4540",
+      "state_sha256": "625c6c71fa5d3485a2586583165ca64fc45b9b66877590fc27796f362193250d"
+    },
+    {
+      "index": 112,
+      "name": "Orb Circuit",
+      "file": "OrbCircuit.xpl",
+      "generation": "G22",
+      "original_name": "Jubility Unhind (102)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 22/Best of Generation 22/Jubility Unhind (102).mtpreset",
+      "source_sha256": "0e12aa763b0bac1912fabb6b84f543cae530e76fc7b20d99bca167ca255f7e86",
+      "state_sha256": "5c5a321335638d3285d179e1c0106a90e7ff5f0637ac7d36bfd49aa08862ed07"
+    },
+    {
+      "index": 113,
+      "name": "Orb Echo",
+      "file": "OrbEcho.xpl",
+      "generation": "G22",
+      "original_name": "Coschole Norlastic (123)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 22/Best of Generation 22/Coschole Norlastic (123).mtpreset",
+      "source_sha256": "d867445a7e5112094dc0c488a44d110d5911fdeba5956d25d49a34fb13182636",
+      "state_sha256": "f9ffd1fbc583aa999d0eab089c3973d3102b0b270a0ec9798deb065742d05650"
+    },
+    {
+      "index": 114,
+      "name": "Orb Spark",
+      "file": "OrbSpark.xpl",
+      "generation": "G23",
+      "original_name": "Physiogen Omphose (89)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 23/Best of Generation 23/Physiogen Omphose (89).mtpreset",
+      "source_sha256": "28513ccf420f54f1296426bae2bc05de6580f8bf47886357ff171a7638507f81",
+      "state_sha256": "c247efd2b5c8337dbff3a8f3052bf73a1ba69ae525e4711597b1a180a61adaa4"
+    },
+    {
+      "index": 115,
+      "name": "Orb Bloom",
+      "file": "OrbBloom.xpl",
+      "generation": "G23",
+      "original_name": "Unstocarp Pygaen (100)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 23/Best of Generation 23/Unstocarp Pygaen (100).mtpreset",
+      "source_sha256": "d1042e297ee06ada07a67a43bfdc73ed1babeff9d06f5e54f1f10f333f587c1b",
+      "state_sha256": "d1d1b79041eed1e382889ef14362eb50508db8f2eb26d7205691f75c445528b3"
+    },
+    {
+      "index": 116,
+      "name": "Orb Grain",
+      "file": "OrbGrain.xpl",
+      "generation": "G23",
+      "original_name": "Hemata Aisser (88)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 23/Best of Generation 23/Hemata Aisser (88).mtpreset",
+      "source_sha256": "8c0e6437a9834fbe7bc47a0f87ef0ff823a6327e140533e527f112054df4bf65",
+      "state_sha256": "64684e2e82d7705a58343bc95caaefaa030e50b81d6c32123bd54233fc033f8b"
+    },
+    {
+      "index": 117,
+      "name": "Orb Drift",
+      "file": "OrbDrift.xpl",
+      "generation": "G23",
+      "original_name": "Snowshee Hectophil (71)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 23/Best of Generation 23/Snowshee Hectophil (71).mtpreset",
+      "source_sha256": "95bd4f145e86beed438ee35e7ee2dd49dce60d52de91fe807b1defcfadf9c20e",
+      "state_sha256": "7dc4900a0040c9422ba8c25f286d9e1cf35ac3004a70c88e9db7778738513fb5"
+    },
+    {
+      "index": 118,
+      "name": "Orb Metal",
+      "file": "OrbMetal.xpl",
+      "generation": "G23",
+      "original_name": "Disputum Neophill (101)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 23/Best of Generation 23/Disputum Neophill (101).mtpreset",
+      "source_sha256": "00fa5a6536936163088162522b25dfc5b47974840dc2ec6aa35021f649f278eb",
+      "state_sha256": "add71f455a5f32b5daf80894f8b4eb1efa85e22c9d36d209b64a9daa1b15740f"
+    },
+    {
+      "index": 119,
+      "name": "Orb Orbit",
+      "file": "OrbOrbit.xpl",
+      "generation": "G23",
+      "original_name": "Antinulous Sabbation (109)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 23/Best of Generation 23/Antinulous Sabbation (109).mtpreset",
+      "source_sha256": "d8754d7593610c77405624a0f0aab61cc610d9dd35ebc275d43a2457949a114b",
+      "state_sha256": "49665ba476bee055e95672bd952217085d099426490b1f1ce705c3ddb98560fb"
+    },
+    {
+      "index": 120,
+      "name": "Bit Pulse",
+      "file": "BitPulse.xpl",
+      "generation": "G24",
+      "original_name": "Semihypnoti Preoptery (86)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 24/Best of Generation 24/Semihypnoti Preoptery (86).mtpreset",
+      "source_sha256": "171b9d54e6cc02d98e67938e9a493bb47ad1a12c386f43b5ba086c46b98f32b1",
+      "state_sha256": "221969951fd69cf818de6879e588c72156b5797c36a57de073011c65ca846bfd"
+    },
+    {
+      "index": 121,
+      "name": "Bit Dust",
+      "file": "BitDust.xpl",
+      "generation": "G24",
+      "original_name": "Eelpless Comparascence (111)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 24/Best of Generation 24/Eelpless Comparascence (111).mtpreset",
+      "source_sha256": "de947cd5ea4b5d3c72d588acd5c01c47315e0e9e15160d339442a59f5e1ec123",
+      "state_sha256": "94177ff133e30fd3fdb6f6ae55118806384693bb1beede15bd12c4f7f9b883b6"
+    },
+    {
+      "index": 122,
+      "name": "Bit Circuit",
+      "file": "BitCircuit.xpl",
+      "generation": "G24",
+      "original_name": "Sulphinch Mdewan (73)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 24/Best of Generation 24/Sulphinch Mdewan (73).mtpreset",
+      "source_sha256": "e20e878aa489672d8556b76655345704e2c82ee5384f51b02e425f01ad34190c",
+      "state_sha256": "4a422af669a11fc6afb760120c99fbda10edc127c45ca228c1715118e5b5721c"
+    },
+    {
+      "index": 123,
+      "name": "Bit Echo",
+      "file": "BitEcho.xpl",
+      "generation": "G24",
+      "original_name": "Fumara Beflowan (98)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 24/Best of Generation 24/Fumara Beflowan (98).mtpreset",
+      "source_sha256": "9890bbb575cd578b11a3bf57828605924fa60f2ede36c71855c8342a7220e140",
+      "state_sha256": "d67eb6a039ec98fe53ba3158176f4ef2bdc61372ba8b2de19e8836cbcd77cef9"
+    },
+    {
+      "index": 124,
+      "name": "Bit Spark",
+      "file": "BitSpark.xpl",
+      "generation": "G24",
+      "original_name": "Soroscopal Leucotoscolin (94)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 24/Best of Generation 24/Soroscopal Leucotoscolin (94).mtpreset",
+      "source_sha256": "a4699ef849eac01a0fc4ae0441291ee159f2a251bf9140c9b9cb3b739756342b",
+      "state_sha256": "abf067197a5a700234b9a459c89875200432c30abd12cde7bafcc42ee0c6db9f"
+    },
+    {
+      "index": 125,
+      "name": "Bit Bloom",
+      "file": "BitBloom.xpl",
+      "generation": "G24",
+      "original_name": "Overnum Pearm (91)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 24/Best of Generation 24/Overnum Pearm (91).mtpreset",
+      "source_sha256": "9747802a9d0ab3e7fef178c2a724968120081e987ddd039f55ad57cc4971de4d",
+      "state_sha256": "dfb1b279497e6f0ae27e9f61493dc784c780df43ff85d783cc4164e0a7a6cb31"
+    },
+    {
+      "index": 126,
+      "name": "Bit Grain",
+      "file": "BitGrain.xpl",
+      "generation": "G25",
+      "original_name": "Leopsic Extraodon (106)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 25/Best of Generation 25/Leopsic Extraodon (106).mtpreset",
+      "source_sha256": "2c1f89fe85b6ba5871ac6b4dbb9cd289ef66660a4e0ad3736274821582521484",
+      "state_sha256": "583e1a1daf9c08ef3f9d0a8c9f9cb63a56eae8b042c23939aaa37d806602bb9b"
+    },
+    {
+      "index": 127,
+      "name": "Bit Drift",
+      "file": "BitDrift.xpl",
+      "generation": "G25",
+      "original_name": "Exudatum Opposis (94)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 25/Best of Generation 25/Exudatum Opposis (94).mtpreset",
+      "source_sha256": "5ea139d9325a5b426736fa11ffcbaba1958e93a7cb49ce52d549ff7f1b96607b",
+      "state_sha256": "fd76528c5e7e21ff714012b3c4efd394931744053246f968f91d48083d7e2eca"
+    },
+    {
+      "index": 128,
+      "name": "Bit Metal",
+      "file": "BitMetal.xpl",
+      "generation": "G25",
+      "original_name": "Indelirif Albitious (87)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 25/Best of Generation 25/Indelirif Albitious (87).mtpreset",
+      "source_sha256": "33053e19824984cbe5e2faf87dbcea11e02bdc8681e16a4b51a0c143971078a0",
+      "state_sha256": "012611f4265ba088e024b00cb8980d508088116d13180155f2d557b45c58681a"
+    },
+    {
+      "index": 129,
+      "name": "Bit Orbit",
+      "file": "BitOrbit.xpl",
+      "generation": "G25",
+      "original_name": "Unobsequene Trisposable (95)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 25/Best of Generation 25/Unobsequene Trisposable (95).mtpreset",
+      "source_sha256": "8abfb3050255d67cf2fe31e3d4992e6ac99a9294b07a5f4284b34a46ecf1397b",
+      "state_sha256": "a6bad4f3a2f87db89c6056a36b60f47060994209830004a229ee4840a56d2ef9"
+    },
+    {
+      "index": 130,
+      "name": "Arc Pulse",
+      "file": "ArcPulse.xpl",
+      "generation": "G25",
+      "original_name": "Pseudobus Florocracy (90)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 25/Best of Generation 25/Pseudobus Florocracy (90).mtpreset",
+      "source_sha256": "ea01de39b4d2523de772c3eede143a70a19ad339d3f4ab42b286948b244e954e",
+      "state_sha256": "4d32374aaf5a437d605e37dd570ea741a002cbae6da0d958e157edce2dc15f7a"
+    },
+    {
+      "index": 131,
+      "name": "Arc Dust",
+      "file": "ArcDust.xpl",
+      "generation": "G25",
+      "original_name": "Cornithos Outbraic (74)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 25/Best of Generation 25/Cornithos Outbraic (74).mtpreset",
+      "source_sha256": "43386a9019f36865c3b483a05bcd358bac52a96673f008e7f32c6026b9e55f7b",
+      "state_sha256": "6d98eefec90c1d7d21020eadaec65da728fa976b5ec0bbbdf21cfc5f8d20de94"
+    },
+    {
+      "index": 132,
+      "name": "Arc Circuit",
+      "file": "ArcCircuit.xpl",
+      "generation": "G26",
+      "original_name": "Copapilate Antifriar (159)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 26/Best of Generation 26/Copapilate Antifriar (159).mtpreset",
+      "source_sha256": "2d303edc912d725a0af149b47694867d262326df5bf43e4188496add81bd56d1",
+      "state_sha256": "39fa766d944ad7d452f4287aa44cdc90e16fb7c4303bd3eae8bc1e076c02e894"
+    },
+    {
+      "index": 133,
+      "name": "Arc Echo",
+      "file": "ArcEcho.xpl",
+      "generation": "G26",
+      "original_name": "Cacogant Unexposis (107)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 26/Best of Generation 26/Cacogant Unexposis (107).mtpreset",
+      "source_sha256": "c376e7bbfeb87fc15b02a1715cdd4b1da0041799a6c9b2ad76cdb0984b1dbd55",
+      "state_sha256": "a33718b8d1b6735d40ec8dba44d308193245675b2b4e8a7cfb642888e9489966"
+    },
+    {
+      "index": 134,
+      "name": "Arc Spark",
+      "file": "ArcSpark.xpl",
+      "generation": "G26",
+      "original_name": "Narchidia Untuply (112)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 26/Best of Generation 26/Narchidia Untuply (112).mtpreset",
+      "source_sha256": "67126bebdc2f9d72d9e60a02ebb76a6e892101ccbb392a29fbc9701187ec2f49",
+      "state_sha256": "4b9262a2e279d4d752e09ac838234fed61b47b4386bd8f104f8c9375d668ee76"
+    },
+    {
+      "index": 135,
+      "name": "Arc Bloom",
+      "file": "ArcBloom.xpl",
+      "generation": "G26",
+      "original_name": "Ophilosa Incontriginous (117)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 26/Best of Generation 26/Ophilosa Incontriginous (117).mtpreset",
+      "source_sha256": "f5807cad0164e1ef2939999e450169c3c77172dcaa30be1fd76e2c3d9a38033d",
+      "state_sha256": "cbec6b77d9f2713155e39928a907d870297796d29220cf70802c98a0e1fd7f33"
+    },
+    {
+      "index": 136,
+      "name": "Arc Grain",
+      "file": "ArcGrain.xpl",
+      "generation": "G26",
+      "original_name": "Desynarm Rhizog (124)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 26/Best of Generation 26/Desynarm Rhizog (124).mtpreset",
+      "source_sha256": "a5b87d99245b308b010783eab2653f50d046760a8568d7b40f14680c3709c017",
+      "state_sha256": "1a451141e2bace068617f02492e3ec7e9241c77e66b0f3b95f71529fda5b1c5b"
+    },
+    {
+      "index": 137,
+      "name": "Arc Drift",
+      "file": "ArcDrift.xpl",
+      "generation": "G26",
+      "original_name": "Tragamic Estriot (76)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 26/Best of Generation 26/Tragamic Estriot (76).mtpreset",
+      "source_sha256": "45544b34f58aa43a836d9603a44a1022a4db3d1564454fa827b91eb82245551b",
+      "state_sha256": "226fdaaddbc06158cc62a14859983003a0918724c6eff5442ebe2df2648ad900"
+    },
+    {
+      "index": 138,
+      "name": "Arc Metal",
+      "file": "ArcMetal.xpl",
+      "generation": "G27",
+      "original_name": "Megacous Tarradio (92)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 27/Best of Generation 27/Megacous Tarradio (92).mtpreset",
+      "source_sha256": "36cc88833fe35392a6466986fb1cea9718745e73e31610baae4b825033e39d9e",
+      "state_sha256": "3b7af9628ecdc5919fd54c1d920006e5c8a018b0ff6243b849b44dc9a115b200"
+    },
+    {
+      "index": 139,
+      "name": "Arc Orbit",
+      "file": "ArcOrbit.xpl",
+      "generation": "G27",
+      "original_name": "Retiretin Calamania (90)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 27/Best of Generation 27/Retiretin Calamania (90).mtpreset",
+      "source_sha256": "67db1498ac67ed673cb01f8b5f65132b7bcc7bb1e130739eb32062e3f32fe774",
+      "state_sha256": "d23b1c8b7fb41455c11a938f96d893b79df7236f27aeefa934546963c365af2a"
+    },
+    {
+      "index": 140,
+      "name": "Fog Pulse",
+      "file": "FogPulse.xpl",
+      "generation": "G27",
+      "original_name": "Catarrhy Leptal (121)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 27/Best of Generation 27/Catarrhy Leptal (121).mtpreset",
+      "source_sha256": "e832d30aa7e62d7c712bb4e1dbcd2aa968c659f6cf00f583084e5ec2ae84ba5d",
+      "state_sha256": "862191341d6334e40fb09513dff8bc156091e8ef4bfa0f27dec835e79e3a45ad"
+    },
+    {
+      "index": 141,
+      "name": "Fog Dust",
+      "file": "FogDust.xpl",
+      "generation": "G27",
+      "original_name": "Conscrib Intramon (89)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 27/Best of Generation 27/Conscrib Intramon (89).mtpreset",
+      "source_sha256": "34a4dfa68072a050f10abd9d09e0c50cd057a2a8ec8755ed44e301504cd23e98",
+      "state_sha256": "2d27c5691274eaa9343332f30b3cb91983055299aae3befbdf0ab40505d94715"
+    },
+    {
+      "index": 142,
+      "name": "Fog Circuit",
+      "file": "FogCircuit.xpl",
+      "generation": "G27",
+      "original_name": "Outtu Unagg Idioptosis (98)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 27/Best of Generation 27/Outtu Unagg Idioptosis (98).mtpreset",
+      "source_sha256": "8a5d8bcb8e62e3aef44746747cdb9033d1d60564b4bf3666882c467484e14f2b",
+      "state_sha256": "a4b738894631edeadc4a5e066566c9ab0c59ee4b6c52b0af03d62ea34cf5852e"
+    },
+    {
+      "index": 143,
+      "name": "Fog Echo",
+      "file": "FogEcho.xpl",
+      "generation": "G27",
+      "original_name": "Becropulitic (90)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 27/Best of Generation 27/Becropulitic (90).mtpreset",
+      "source_sha256": "5762de13d21f4c7fa04146ae4ffca8939797768db388dd01196b3d6631424e3f",
+      "state_sha256": "57f4310863dc1f667e21ddda33dd3cb53d7d0524b56a0d0787b65cac4baa387f"
+    },
+    {
+      "index": 144,
+      "name": "Fog Spark",
+      "file": "FogSpark.xpl",
+      "generation": "G28",
+      "original_name": "Haemode Lyarthin (124)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 28/Best of Generation 28/Haemode Lyarthin (124).mtpreset",
+      "source_sha256": "8863875d967592cb2c2b33d9d2555006c30df6cb4bd409d9d7e1965552d873c6",
+      "state_sha256": "993801e1c3bef87c54d968951b33cb337bfbf9e05946cb2852a34ed0fcc2c0a3"
+    },
+    {
+      "index": 145,
+      "name": "Fog Bloom",
+      "file": "FogBloom.xpl",
+      "generation": "G28",
+      "original_name": "Unpalea Mesognathe (132)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 28/Best of Generation 28/Unpalea Mesognathe (132).mtpreset",
+      "source_sha256": "3e859aa649b3c7a57c42cf555188b037426a18d51b8dba2700c9bdde7599bf86",
+      "state_sha256": "dad3754f33f2aca6da666a95c00b4e9665ea75cc68604d0b8c060a20e6329de1"
+    },
+    {
+      "index": 146,
+      "name": "Fog Grain",
+      "file": "FogGrain.xpl",
+      "generation": "G28",
+      "original_name": "Steweep Tybal (108)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 28/Best of Generation 28/Steweep Tybal (108).mtpreset",
+      "source_sha256": "1e6b6585ce2503ab392ede803b8a53cea29a4fb15be77c6ba377ea0794471490",
+      "state_sha256": "f0d2f728cb728daf1ab906f05bcfe13ca68b9274d0e03fe0c95ab1ba2bb03942"
+    },
+    {
+      "index": 147,
+      "name": "Fog Drift",
+      "file": "FogDrift.xpl",
+      "generation": "G28",
+      "original_name": "Irrepresenic (97)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 28/Best of Generation 28/Irrepresenic (97).mtpreset",
+      "source_sha256": "2f3fda2eff4caa165969e6faca4de76e42e2e593d0638c6453de8f9f7a669f35",
+      "state_sha256": "bddfdb0db5b41d5cc24daa3a6145d895f56cf141fec7f22a1fc6f4a63242dd74"
+    },
+    {
+      "index": 148,
+      "name": "Fog Metal",
+      "file": "FogMetal.xpl",
+      "generation": "G28",
+      "original_name": "Ammophoria Proporifer (130)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 28/Best of Generation 28/Ammophoria Proporifer (130).mtpreset",
+      "source_sha256": "cc16a62b4afb0ddccc1266b01a10bca914b6f3e64fc12e1ae849686ea182aafa",
+      "state_sha256": "d54bd51c1b1c342c0ae72a7a3a9963b12c940ebba8e1cb7b37bd61360279fecf"
+    },
+    {
+      "index": 149,
+      "name": "Fog Orbit",
+      "file": "FogOrbit.xpl",
+      "generation": "G28",
+      "original_name": "Malappoinsuffrutula (89)",
+      "source": "Patternarium - Best and Worst G04-G28/Best and Worst of Patternarium Generation 28/Best of Generation 28/Malappoinsuffrutula (89).mtpreset",
+      "source_sha256": "447b974504b5678a082f50e098b46b08449cf85586df0d2db0094f2ceaefee52",
+      "state_sha256": "150ad3fc24c1227e3f43a3a5832babfcab756f8de2c0facda875a6365b806ba0"
+    }
+  ],
+  "rejected": []
+}

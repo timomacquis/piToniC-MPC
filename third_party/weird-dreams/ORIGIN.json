@@ -1,0 +1,8 @@
+{
+  "repository": "https://github.com/filliformes/weird-dreams-move",
+  "commit": "eabd121d1ffd5d98c077633edeb18df90f85124b",
+  "files": [
+    "README.md",
+    "src/dsp/weird_dreams.c"
+  ]
+}

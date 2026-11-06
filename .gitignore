@@ -1,0 +1,8 @@
+build/
+__pycache__/
+*.pyc
+Banks/*/Compiled/
+Banks/*/Generated/
+Banks/*/Runtime/
+Banks/*/Build/
+dist/
