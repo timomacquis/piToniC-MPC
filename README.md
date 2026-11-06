@@ -1,6 +1,6 @@
 # πToniC
 
-An eight-voice percussion synthesizer for MPC OS, with native touch controls, per-voice sound design and shared reverb and delay.
+A Microtonic-inspired drum machine with eight independent percussion voices for MPC OS, with native sequencing, contextual Q-Links, reverb and delay.
 
 Build a kit, play it from the pads, and sequence it with the Force's own Step Sequencer. πToniC produces audio directly; it has no internal pattern sequencer.
 
