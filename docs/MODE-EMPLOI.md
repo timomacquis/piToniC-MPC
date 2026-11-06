@@ -1,6 +1,12 @@
 # πToniC — mode d’emploi
 
-πToniC est un instrument à huit voix de synthèse de percussion. A01–A08 sont des emplacements : chaque voix peut produire un timbre différent, sans rôle imposé.
+Une boîte à rythmes inspirée de Microtonic, avec huit voix de percussion indépendantes.
+
+Façonnez un son.  
+Construisez un motif.  
+Donnez à chaque voix son propre espace grâce à une réverbération et un delay partagés.
+
+Explorez **150 presets de kits Patternarium BEST convertis**, puis faites-les vôtres.
 
 ## Jouer et séquencer
 
