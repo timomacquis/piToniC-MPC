@@ -1,6 +1,7 @@
 # πToniC 1.0.0
 
-Eight-voice percussion synthesis with native MPC sequencing, touch controls and shared stereo effects.
+A Microtonic-inspired drum machine with eight independent percussion voices for MPC OS, with native sequencing, contextual Q-Links, reverb and delay.
+
 
 - Oscillator morphing, filtered noise, amplitude and pitch envelopes, sine/random pitch modulation.
 - Per-voice drive, EQ, velocity response, pan and choke groups.
