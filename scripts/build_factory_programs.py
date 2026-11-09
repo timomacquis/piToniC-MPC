@@ -19,7 +19,7 @@ header=['/* Generated Patternarium factory bank; preserve source credits and pro
 for item in items:header.append('{'+json.dumps(item['name'])+','+json.dumps(item['state'])+'},')
 header.append('};');(generated/'pitonic_factory_programs.h').write_text('\n'.join(header)+'\n')
 (generated/'program-list.json').write_text(json.dumps([{k:v for k,v in i.items() if k!='state'} for i in items],indent=2)+'\n')
-flags=['-std=c11','-O2','-fPIC','-shared','-DPITONIC_FACTORY_PROGRAMS=1','-I'+str(generated),'-Ibuild','-Isrc','-Ithird_party/mpc-wrapper/wrapper'];sources=['src/engine.c','third_party/mpc-wrapper/wrapper/vst2_wrap.c'];libs=['-lpthread','-lm','-ldl']
+flags=['-std=c11','-D_POSIX_C_SOURCE=200809L','-O2','-fPIC','-shared','-DPITONIC_FACTORY_PROGRAMS=1','-I'+str(generated),'-Ibuild','-Isrc','-Ithird_party/mpc-wrapper/wrapper'];sources=['src/engine.c','third_party/mpc-wrapper/wrapper/vst2_wrap.c'];libs=['-lpthread','-lm','-ldl']
 subprocess.run(['gcc',*flags,*sources,*libs,'-o',str(out/'pitonic-x86_64.so')],check=True)
 root=Path(os.environ.get('PITONIC_SYSROOT',str(B.parent/'piClideaN MPC/toolchain/root')));cc=root/'usr/bin/arm-linux-gnueabihf-gcc-12';env=dict(os.environ);env['PATH']=str(root/'usr/bin')+os.pathsep+env.get('PATH','');env['LD_LIBRARY_PATH']=str(root/'usr/lib/x86_64-linux-gnu')+os.pathsep+env.get('LD_LIBRARY_PATH','')
 subprocess.run([str(cc),'--sysroot='+str(root),'-march=armv7-a','-mfpu=neon','-mfloat-abi=hard',*flags,*sources,'-static-libgcc',*libs,'-o',str(out/'pitonic.so')],env=env,check=True)

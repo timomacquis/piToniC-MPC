@@ -28,7 +28,7 @@ A02 joue : son bouton s’illumine en azur, tandis qu’A03 reste sélectionnée
 
 ## TONE
 
-![πToniC — TONE](images/tone-force.png)
+![πToniC — TONE](images/tone-commander-1.0.1.png)
 
 - **FREQUENCY** : fréquence de l’oscillateur.
 - **WAVE MORPH** : transition sinus → triangle → dent de scie → carré.
@@ -42,7 +42,7 @@ La vitesse effective du mode SINE est limitée à 2 000 Hz.
 
 ## NOISE
 
-![πToniC — NOISE](images/noise-force.png)
+![πToniC — NOISE](images/noise-commander-1.0.1.png)
 
 - **NOISE MIX** : équilibre oscillateur / bruit.
 - **FILTER MODE** : LP, BP ou HP ; **CUTOFF / RESONANCE** façonnent le bruit.
@@ -52,7 +52,7 @@ La vitesse effective du mode SINE est limitée à 2 000 Hz.
 
 ## CHARACTER
 
-![πToniC — CHARACTER](images/character-force.png)
+![πToniC — CHARACTER](images/character-commander-1.0.1.png)
 
 **DRIVE** sature la voix. **EQ FREQUENCY / GAIN** modifient sa couleur.
 
@@ -62,7 +62,7 @@ Les voix d’un même **CHOKE GROUP** se coupent mutuellement. OFF les laisse in
 
 ## EFFECTS
 
-![πToniC — EFFECTS](images/effects-force.png)
+![πToniC — EFFECTS](images/effects-commander-1.0.1.png)
 
 Deux effets communs aux huit voix : **REVERB à gauche, DELAY à droite**. Chaque effet reçoit les départs de MIXER. Les deux chemins fonctionnent en parallèle ; le delay n’est pas envoyé dans la reverb, ni l’inverse.
 
@@ -87,7 +87,7 @@ Le delay conserve une entrée stéréo et croise les retours de feedback entre g
 
 ## MIXER
 
-![πToniC — MIXER](images/mixer-force.png)
+![πToniC — MIXER](images/mixer-commander-1.0.1.png)
 
 Chaque tranche possède **LEVEL, PAN, REVERB, DELAY, M et S**.
 
@@ -125,3 +125,30 @@ Sauvegarder un preset avec le menu natif de la Force inclut les huit voix, les s
 
 Les anciens presets et projets πToniC PT1 restent lisibles ; ils rétablissent les nouveaux sends à zéro et les effets à leurs valeurs initiales. Un ancien build ne peut pas charger les états enrichis avec les effets.
 
+## État de validation
+
+Le Step Sequencer natif, la banque PRESET, le focus, l’activité azur et les Q-Links des quatre pages initiales sont validés par Greg sur Force. La version 1.0.0, y compris EFFECTS et les sends, a été essayée par Greg sur Force : lecture, cinq onglets/Q-Links, effets et réouverture du projet avec ses réglages confirmés. Installation, désinstallation et réinstallation standard vérifiées.
+
+## Source SAMPLE — 1.0.1
+
+![πToniC — SAMPLE](images/sample-commander-1.0.1.png)
+
+Dans **TONE**, choisissez **SYNTH** ou **SAMPLE** pour la voix sélectionnée.
+
+**LOAD** ouvre le navigateur de WAV. **USER / SD**, **DRIVES**, **UP**, **PREVIOUS** et **NEXT** permettent de parcourir les dossiers ; touchez un fichier pour le charger. **CANCEL** ferme le panneau. Jusqu'à 256 entrées par dossier sont affichées ; rangez les grandes collections en sous-dossiers.
+
+WAV mono ou stéréo : PCM 16/24/32 bits ou float32, 8 à 192 kHz, dix secondes maximum. Le chargement et la préparation de la forme d'onde se font en arrière-plan. Un fichier absent, illisible, trop long ou non pris en charge est signalé ; la source sample reste silencieuse.
+
+- **TUNE** : ±48 demi-tons ; 0 lit le fichier à sa vitesse d'origine. Changer le pitch change aussi la durée.
+- **START** : point de départ, en pourcentage du fichier.
+- **AMP** et **PITCH MODULATION** gardent leur rôle ; le sample peut être mélangé au bruit, puis traité par DRIVE/EQ et les effets.
+- Les sept Q-Links de TONE deviennent TUNE, START, AMP ATTACK, AMP DECAY, PITCH AMOUNT, PITCH TIME/RATE et PITCH VELOCITY. En SYNTH, les deux premiers retrouvent FREQUENCY et WAVE MORPH.
+- Lecture one-shot, sans boucle ni time-stretch ; une nouvelle note redéclenche la voix.
+
+A/B conserve deux jeux TUNE/START ; source et fichier restent communs à la voix. ALTER et RAND VOICE conservent le fichier et la source, mais peuvent modifier les réglages, y compris TUNE/START.
+
+**Les projets et presets enregistrent le chemin d'origine, pas le fichier audio.** Conservez les samples au même endroit et sur un support disponible à la réouverture. La collecte automatique à côté du preset n'est pas incluse dans cette version. Gardez une copie des projets d'origine avant essai : un ancien binaire ne lit pas la nouvelle extension d'état sample.
+
+Candidat validé par l’auteur en session musicale sur Force Gen1. Le paquet public est reconstruit à partir de ce candidat ; cela ne constitue pas un nouveau cycle formel d’installation/désinstallation du paquet exact.
+
+L’aperçu montre les crêtes positives et négatives, avec une normalisation visuelle sans modifier le son. Les lignes durée/stéréo/Ready sont retirées ; les erreurs de chargement apparaissent sur la ligne du fichier.

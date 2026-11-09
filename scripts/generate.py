@@ -31,6 +31,17 @@ for key,name,lo,hi,default,unit in FX_FIELDS:
  P.append(p)
 P.append(dict(key='del_div__open',name='Delay time options',min=0,max=1,default=0,popup_of='del_div'))
 P.append(dict(key='fx_time',name='DELAY TIME',min=0,max=1,default=.5,dynamic_display=True,poll=False))
+# Sample additions are appended; published 331 handles stay fixed.
+for v in range(8):P.append(dict(key=f'v{v}_source',name=f'A{v+1:02} SOURCE',min=0,max=1,default=0,options=['SYNTH','SAMPLE'],poll=False))
+P.append(dict(key='source',name='SOURCE',min=0,max=1,default=0,options=['SYNTH','SAMPLE'],poll=False))
+for k,n,lo,hi in [('sample_tune','TUNE',-48,48),('sample_start','START',0,99.9)]:P.append(dict(key=k,name=n,min=lo,max=hi,default=0,dynamic_display=True,poll=False))
+for i in range(7):P.append(dict(key=f'tone_q{i}',name='TONE',min=0,max=1,default=.5,dynamic_display=True,dynamic_name=True,poll=False))
+for k in ['load','browse_up','browse_prev','browse_next','browse_close','browse_sd','browse_media']+[f'browse_item{i}' for i in range(8)]:P.append(dict(key=k,name=k.upper(),min=0,max=1,default=0,momentary=True,dynamic_display=k.startswith('browse_item'),poll=False))
+P.append(dict(key='browse',name='Sample browser',min=0,max=1,default=0,poll=False))
+for k in ['sample_name','sample_info','sample_status','browse_path','browse_page']:P.append(dict(key=k,name=k,min=0,max=1,default=0,dynamic_display=True,poll=False))
+for i in range(32):P.append(dict(key=f'sample_wave{i}',name='Waveform',min=0,max=1,default=0,poll=False))
+for v in range(8):
+ for k,n,lo,hi in [('sample_tune','TUNE',-48,48),('sample_start','START',0,99.9)]:P.append(dict(key=f'v{v}_{k}',name=f'A{v+1:02} {n}',min=lo,max=hi,default=0,dynamic_display=True,poll=False))
 keys=[p['key'] for p in P];lock=B/'params.lock'
 if lock.exists():assert keys[:len(old:=lock.read_text().splitlines())]==old,'Parameter indices changed'
 lock.write_text('\n'.join(keys)+'\n')

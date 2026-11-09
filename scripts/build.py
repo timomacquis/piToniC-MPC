@@ -4,7 +4,7 @@ from config import B
 os.chdir(B)
 def run(args,**kw):subprocess.run([str(a) for a in args],check=True,**kw)
 run([sys.executable,'scripts/generate.py'])
-flags=['-std=c11','-O2','-fPIC','-shared','-Ibuild','-Isrc','-Ithird_party/mpc-wrapper/wrapper']
+flags=['-std=c11','-D_POSIX_C_SOURCE=200809L','-O2','-fPIC','-shared','-Ibuild','-Isrc','-Ithird_party/mpc-wrapper/wrapper']
 sources=['src/engine.c','third_party/mpc-wrapper/wrapper/vst2_wrap.c']
 run(['gcc',*flags,*sources,'-lpthread','-lm','-ldl','-o','build/pitonic-x86_64.so'])
 root=os.environ.get('PITONIC_SYSROOT')

@@ -3302,5 +3302,804 @@
     "default": 0.5,
     "dynamic_display": true,
     "poll": false
+  },
+  {
+    "key": "v0_source",
+    "name": "A01 SOURCE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "SYNTH",
+      "SAMPLE"
+    ],
+    "poll": false
+  },
+  {
+    "key": "v1_source",
+    "name": "A02 SOURCE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "SYNTH",
+      "SAMPLE"
+    ],
+    "poll": false
+  },
+  {
+    "key": "v2_source",
+    "name": "A03 SOURCE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "SYNTH",
+      "SAMPLE"
+    ],
+    "poll": false
+  },
+  {
+    "key": "v3_source",
+    "name": "A04 SOURCE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "SYNTH",
+      "SAMPLE"
+    ],
+    "poll": false
+  },
+  {
+    "key": "v4_source",
+    "name": "A05 SOURCE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "SYNTH",
+      "SAMPLE"
+    ],
+    "poll": false
+  },
+  {
+    "key": "v5_source",
+    "name": "A06 SOURCE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "SYNTH",
+      "SAMPLE"
+    ],
+    "poll": false
+  },
+  {
+    "key": "v6_source",
+    "name": "A07 SOURCE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "SYNTH",
+      "SAMPLE"
+    ],
+    "poll": false
+  },
+  {
+    "key": "v7_source",
+    "name": "A08 SOURCE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "SYNTH",
+      "SAMPLE"
+    ],
+    "poll": false
+  },
+  {
+    "key": "source",
+    "name": "SOURCE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "options": [
+      "SYNTH",
+      "SAMPLE"
+    ],
+    "poll": false
+  },
+  {
+    "key": "sample_tune",
+    "name": "TUNE",
+    "min": -48,
+    "max": 48,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "sample_start",
+    "name": "START",
+    "min": 0,
+    "max": 99.9,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "tone_q0",
+    "name": "TONE",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "tone_q1",
+    "name": "TONE",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "tone_q2",
+    "name": "TONE",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "tone_q3",
+    "name": "TONE",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "tone_q4",
+    "name": "TONE",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "tone_q5",
+    "name": "TONE",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "tone_q6",
+    "name": "TONE",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "load",
+    "name": "LOAD",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": false,
+    "poll": false
+  },
+  {
+    "key": "browse_up",
+    "name": "BROWSE_UP",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": false,
+    "poll": false
+  },
+  {
+    "key": "browse_prev",
+    "name": "BROWSE_PREV",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": false,
+    "poll": false
+  },
+  {
+    "key": "browse_next",
+    "name": "BROWSE_NEXT",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": false,
+    "poll": false
+  },
+  {
+    "key": "browse_close",
+    "name": "BROWSE_CLOSE",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": false,
+    "poll": false
+  },
+  {
+    "key": "browse_sd",
+    "name": "BROWSE_SD",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": false,
+    "poll": false
+  },
+  {
+    "key": "browse_media",
+    "name": "BROWSE_MEDIA",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": false,
+    "poll": false
+  },
+  {
+    "key": "browse_item0",
+    "name": "BROWSE_ITEM0",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "browse_item1",
+    "name": "BROWSE_ITEM1",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "browse_item2",
+    "name": "BROWSE_ITEM2",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "browse_item3",
+    "name": "BROWSE_ITEM3",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "browse_item4",
+    "name": "BROWSE_ITEM4",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "browse_item5",
+    "name": "BROWSE_ITEM5",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "browse_item6",
+    "name": "BROWSE_ITEM6",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "browse_item7",
+    "name": "BROWSE_ITEM7",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "browse",
+    "name": "Sample browser",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_name",
+    "name": "sample_name",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "sample_info",
+    "name": "sample_info",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "sample_status",
+    "name": "sample_status",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "browse_path",
+    "name": "browse_path",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "browse_page",
+    "name": "browse_page",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "sample_wave0",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave1",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave2",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave3",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave4",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave5",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave6",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave7",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave8",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave9",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave10",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave11",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave12",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave13",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave14",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave15",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave16",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave17",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave18",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave19",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave20",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave21",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave22",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave23",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave24",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave25",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave26",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave27",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave28",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave29",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave30",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_wave31",
+    "name": "Waveform",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "v0_sample_tune",
+    "name": "A01 TUNE",
+    "min": -48,
+    "max": 48,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_sample_start",
+    "name": "A01 START",
+    "min": 0,
+    "max": 99.9,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_sample_tune",
+    "name": "A02 TUNE",
+    "min": -48,
+    "max": 48,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_sample_start",
+    "name": "A02 START",
+    "min": 0,
+    "max": 99.9,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_sample_tune",
+    "name": "A03 TUNE",
+    "min": -48,
+    "max": 48,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_sample_start",
+    "name": "A03 START",
+    "min": 0,
+    "max": 99.9,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_sample_tune",
+    "name": "A04 TUNE",
+    "min": -48,
+    "max": 48,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_sample_start",
+    "name": "A04 START",
+    "min": 0,
+    "max": 99.9,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_sample_tune",
+    "name": "A05 TUNE",
+    "min": -48,
+    "max": 48,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_sample_start",
+    "name": "A05 START",
+    "min": 0,
+    "max": 99.9,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_sample_tune",
+    "name": "A06 TUNE",
+    "min": -48,
+    "max": 48,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_sample_start",
+    "name": "A06 START",
+    "min": 0,
+    "max": 99.9,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_sample_tune",
+    "name": "A07 TUNE",
+    "min": -48,
+    "max": 48,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_sample_start",
+    "name": "A07 START",
+    "min": 0,
+    "max": 99.9,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_sample_tune",
+    "name": "A08 TUNE",
+    "min": -48,
+    "max": 48,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_sample_start",
+    "name": "A08 START",
+    "min": 0,
+    "max": 99.9,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
   }
 ]

@@ -8,6 +8,11 @@ Build a kit, play it from the pads, and sequence it with the Force's own Step Se
 
 ## Features
 
+- Per-voice SYNTH / SAMPLE source with mono/stereo WAV loading (up to ten seconds).
+- TUNE and START controls, waveform overview and contextual SAMPLE Q-Links.
+- Samples keep their original paths; no audio is embedded in presets or projects.
+
+
 - Eight independent voices on MIDI notes 36–43.
 - Oscillator morphing, amplitude and pitch envelopes, sine/random pitch modulation.
 - Filtered noise with EXP, LINEAR and CLAP envelopes; optional independent stereo noise.
@@ -21,9 +26,9 @@ Build a kit, play it from the pads, and sequence it with the Force's own Step Se
 
 ## Download and install
 
-[Download πToniC 1.0.0 for Gen1 ARMv7](https://github.com/timomacquis/piToniC-MPC/releases/tag/v1.0.0).
+[Download πToniC 1.0.1 for Gen1 ARMv7](https://github.com/timomacquis/piToniC-MPC/releases/tag/v1.0.1).
 
-The release package is **piToniC-1.0.0-Patternarium-BEST150-mpc-armv7.zip**.
+The release package is **piToniC-1.0.1-mpc-armv7.zip**.
 
 This build targets **Gen1 ARMv7** devices with MPC OS 3.x and standalone VST support. Hardware use has been on an Akai Force running OS 3.10.0.49. A 64-bit Gen2 package is not provided.
 
@@ -37,7 +42,7 @@ Factory sends start at zero. Raise a REVERB or DELAY send in MIXER, then adjust 
 
 [User manual](docs/USER-MANUAL.md) · [Mode d’emploi français](docs/MODE-EMPLOI.md)
 
-![πToniC shared effects](docs/images/effects-force.png)
+![πToniC shared effects](docs/images/effects-commander-1.0.1.png)
 
 ## Development
 

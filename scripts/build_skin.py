@@ -96,10 +96,42 @@ def tools(parts,mixer):
   parts.append(toggle('compare','A / B',900,548,110,52,cond));parts.append(toggle('alter','ALTER',1020,548,90,52,cond));parts.append(toggle('random','RAND VOICE',1120,548,140,52,cond))
   # A/B readout is tied to this voice, independent of the momentary switch.
   parts.append(place(local(f'abread{v}_{len(defs)}',[label(0,0,48,28,n=20)]),f'ab{v}',950,604,48,24,cond))
+# Shared cached bipolar envelope: 11 positive x 11 negative levels in
+# 128 full frames, matching the native count convention. Adjacent columns
+# touch, and every state shares the same baseline. Worker computes extrema.
+im=Image.new('RGB',(18,80*128),PANEL);d=ImageDraw.Draw(im)
+for frame in range(128):
+ code=min(frame,120);negative,slot=divmod(code,11);positive=10-slot if negative&1 else slot;yy=frame*80+40
+ if code:d.rectangle((0,yy-round(36*positive/10),17,yy+round(36*negative/10)),fill='#a9d2df')
+ else:d.line((0,yy,17,yy),fill='#a9d2df')
+im.save(A/'sample_wave.png')
+def readout(key,x,y,w,h,n=20):return place(local('sample_read_'+key+'_'+str(len(defs)),[label(0,0,w,h,n=n)]),key,x,y,w,h)
+def tone_sample(parts,v):
+ selected=[gate('selected',v,8)];syn=selected+[gate(f'v{v}_source',0)];sam=selected+[gate(f'v{v}_source',1)]
+ bitmap('source_title.png',128,42,'SOURCE');parts.append(art('source_title.png',20,78,128,42));parts[-1]['bounds']['additionalInvalidatingHandles']=selected
+ # Two native radio buttons on one binary parameter.
+ for mode,title in enumerate(['SYNTH','SAMPLE']):
+  off=bitmap('source_'+title+'_off.png',128,42,title);on=bitmap('source_'+title+'_on.png',128,42,title,'#383122',AMBER)
+  native=child('Button',dict(version=2,onImage=on,offImage=off,buttonId=mode,numButtonsInGroup=2,handleName='Data',gestureBehaviour='Instant'),0,0,128,42)
+  parts.append(place(local(f'source_select{v}_{mode}',[native],[action('Q-Link')]),f'v{v}_source',350+mode*136,78,128,42,selected))
+ parts.append(dial(f'v{v}_freq','FREQUENCY',20,138,292,122,syn));parts.append(dial(f'v{v}_wave','WAVE MORPH',324,138,292,122,syn))
+ for key,title,x in [('sample_tune','TUNE',20),('sample_start','START',324)]:parts.append(dial(key,title,x,336,292,110,sam))
+ for key,x,y,w,h,n in [('sample_name',30,135,440,36,23)]:parts.append(readout(key,x,y,w,h,n));parts[-1]['bounds']['additionalInvalidatingHandles']=sam
+ parts.append(toggle('load','LOAD',486,135,128,42,sam))
+ for i in range(32):
+  native=child('Knob',dict(version=5,knobType='FilmStrip',filmStrip='sample_wave.png',numFrames=128,invert=False,dragOrientation='Vertical',handleName='Data'),0,0,18,80)
+  native['bounds']['acceptsHWFocus']='No';parts.append(place(local(f'sample_peak{v}_{i}',[native]),f'sample_wave{i}',24+i*18,186,18,80,sam));parts[-1]['bounds']['acceptsHWFocus']='No'
+ parts.extend([dial(f'v{v}_attack','AMP ATTACK',648,138,300,122,selected),dial(f'v{v}_decay','AMP DECAY',960,138,300,122,selected)])
+ parts.append(toggle(f'v{v}_modmode__open','PITCH MODE',648,280,300,42,selected));parts.append(readout(f'v{v}_modmode',972,280,280,42,24));parts[-1]['bounds']['additionalInvalidatingHandles']=selected
+ for key,title,x in [('modamt','PITCH AMOUNT',648),('modrate','PITCH TIME / RATE',960)]:parts.append(dial(f'v{v}_{key}',title,x,336,300,110,selected))
+ parts.append(dial(f'v{v}_modvel','PITCH VELOCITY',960,450,300,86,selected))
+
 tabs=[]
 for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
  parts=[art('background.png',0,0,1280,628)];selectors(parts)
- if page<3:
+ if page==0:
+  for v in range(8):tone_sample(parts,v)
+ elif page<3:
   for v in range(8):
    for i in range(8):
     f=FIELDS[page*8+i];key=f'v{v}_{f[0]}';x=20+(i%4)*312;y=114+(i//4)*166;cond=[gate('selected',v,8)]
@@ -148,11 +180,23 @@ for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
      native=child('Button',dict(version=2,onImage=tag+'.png',offImage=tag+'.png',buttonId=op,numButtonsInGroup=len(f[5]),handleName='Data',gestureBehaviour='Instant'),0,0,440,62)
      parts.append(place(local(tag,[native],[action('Q-Link')]),key,200+(op%2)*460,150+(op//2)*90,440,62,cond))
     parts.append(toggle(flag,'CANCEL',470,442,340,56,cond))
+
+ if page==0:
+  for c in parts[1:]:c['bounds']['additionalInvalidatingHandles'].append(gate('browse',0))
+  cond=[gate('browse',1)]
+  bitmap('sample_browser_bg.png',1240,604,'',PANEL);c=art('sample_browser_bg.png',20,4,1240,604);c['bounds']['additionalInvalidatingHandles']=cond;parts.append(c)
+  for key,x,y,w,h,n in [('browse_path',40,64,1180,36,24),('browse_page',560,550,260,42,24)]:parts.append(readout(key,x,y,w,h,n));parts[-1]['bounds']['additionalInvalidatingHandles']=cond
+  for key,caption,x,w in [('browse_up','UP',40,130),('browse_sd','USER / SD',182,180),('browse_media','DRIVES',374,180),('browse_close','CANCEL',1060,170)]:parts.append(toggle(key,caption,x,12,w,42,cond))
+  for i in range(8):
+   x=40+(i%2)*608;y=116+(i//2)*104;key=f'browse_item{i}'
+   bitmap('sample_entry.png',592,84,'',FIELD);parts.append(place(local('sample_entry'+str(i),[art('sample_entry.png',0,0,592,84),label(14,12,562,60,n=26)],[action('Toggle Switch')]),key,x,y,592,84,cond))
+  parts.append(toggle('browse_prev','PREVIOUS',40,550,220,42,cond));parts.append(toggle('browse_next','NEXT',1000,550,220,42,cond))
+
  name=local('page'+str(page),parts);tabs.append(dict(version=3,tabName=title,fnKeyIndex=page,fnKeySubIndex=0,qlinkBoundsData=['0 0 0 0'],componentName=name,initialSize='0 0 1280 628',scale=1.))
 J={'pageData':{'version':1,'info':{'version':1,'type':'CompleteDescription'},'componentDefinitions':{'version':1,'importFiles':['/usr/share/Akai/Content/Synths/Generic/Generic Knob Overlay.json','/usr/share/Akai/Content/Synths/Generic/Generic Menu Overlay.json'],'localComponentDefinitions':defs},'tabs':tabs}}
 (A/'TUI.json').write_text(json.dumps(J,ensure_ascii=False,separators=(',',':')))
 ql=[]
-page_keys=[[f'q0_{i}' for i in [0,1,2,3,5,6,7]], [f'q1_{i}' for i in [0,2,3,4,5]], [f'q2_{i}' for i in range(7)], ['rev_size','rev_decay','rev_damp','rev_return','fx_time','del_feedback','del_tone','del_return'], [f'v{i}_level' for i in range(8)]]
+page_keys=[[f'tone_q{i}' for i in range(7)], [f'q1_{i}' for i in [0,2,3,4,5]], [f'q2_{i}' for i in range(7)], ['rev_size','rev_decay','rev_damp','rev_return','fx_time','del_feedback','del_tone','del_return'], [f'v{i}_level' for i in range(8)]]
 for page,keys in enumerate(page_keys):
  mapping={f'Q-Link {i}':-1 for i in range(1,17)}
  for physical,key in zip([13,9,5,1,14,10,6,2],keys):mapping[f'Q-Link {physical}']=I[key]

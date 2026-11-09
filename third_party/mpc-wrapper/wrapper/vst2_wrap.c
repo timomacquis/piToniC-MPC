@@ -569,6 +569,10 @@ static void housekeeping(AEffect *e, int32_t n) {
         /* Port-local sorted lookup: bounded logarithmic lookup for per-step parameters.
          * Preserve upstream notification semantics and its 50 ms display throttle. */
         for (int k = 0; k < 32 && mpc_engine_changed(w->dsp, key, sizeof key) > 0; k++) {
+            /* piToniC source changes rename TONE aliases. One coalesced,
+             * throttled host refresh is necessary to update hardware names;
+             * ordinary values/selection with the same context never request it. */
+            if (!strcmp(key, "qlink_names")) { w->need_update_display = 1; continue; }
             int lo = 0, hi = NPARAMS;
             while (lo < hi) {
                 int mid = lo + (hi - lo) / 2;

@@ -9,16 +9,17 @@ From the repository root:
 ```sh
 python3 -m venv build/venv
 build/venv/bin/pip install Pillow
-python3 scripts/generate.py
+build/venv/bin/python scripts/generate.py
 build/venv/bin/python scripts/build_skin.py
-build/venv/bin/python scripts/preview.py
-PITONIC_SYSROOT=/path/to/toolchain python3 scripts/build_factory_programs.py
-python3 scripts/package.py
+PITONIC_SYSROOT=/path/to/toolchain build/venv/bin/python scripts/build.py
+PITONIC_SYSROOT=/path/to/toolchain build/venv/bin/python scripts/build_factory_programs.py
+mkdir -p Validation/sample-1.0.1
+build/venv/bin/python scripts/package_sample.py
 ```
 
 The factory build produces PC and ARMv7 binaries and a hash receipt under `Banks/PatternariumBest150/Compiled`. Packaging verifies that receipt and the source inputs, creates the standard installer archive and checks its CRC and per-file SHA-256 hashes.
 
-The archive is written to `Banks/PatternariumBest150/Build`. Copy the ZIP and its `.sha256` file to your release assets. Do not run an installer on a development PC.
+The archive is written to `dist/1.0.1`. Copy the ZIP and its `.sha256` file to your release assets. Do not run an installer on a development PC.
 
 ## Tests
 

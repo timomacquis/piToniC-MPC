@@ -2,7 +2,7 @@
   "repo": "sd88me/mpc-vst-plugins",
   "commit": "97a2effca4114dd00f738b018e2f0d1d3ccb2d7f",
   "source": "Local piClideaN wrapper snapshot; inherited context extensions disabled for piToniC.",
-  "modifications": "Native enum notifications do not request global UpdateDisplay. Sorted parameter lookup, bounded notifications (8), chunk validation and ARM pthread compatibility retained. \u03c0ToniC also adds logarithmic Hz/time normalization with physical-value state; tested inverse conversions. Conditional private full-state factory VST programs and PTPROG1 program-index chunk envelope; no factory data in baseline builds.",
+  "modifications": "Native enum notifications do not request global UpdateDisplay. Sorted parameter lookup, bounded notifications (8), chunk validation and ARM pthread compatibility retained. πToniC also adds logarithmic Hz/time normalization with physical-value state; tested inverse conversions. Conditional private full-state factory VST programs and PTPROG1 program-index chunk envelope; no factory data in baseline builds.; 1.0.1-candidate.2 handles the explicit qlink_names context event with one coalesced/throttled display update, only when selected voice changes SYNTH/SAMPLE type.",
   "files": [
     {
       "file": "INHERITED-PROVENANCE.json",
@@ -34,7 +34,7 @@
     },
     {
       "file": "wrapper/vst2_wrap.c",
-      "sha256": "4f0db0f36da587c16b4590590f6b1cb07318af1806acab11e6faf55b2babd3e3"
+      "sha256": "abe97568f38038c9e64a4c02fa6b79145d911169781734d3ee88de4040fbf22f"
     }
   ]
 }

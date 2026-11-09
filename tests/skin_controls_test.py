@@ -5,7 +5,7 @@ from config import B,FOLDER
 from PIL import Image
 p=json.loads((B/'params.json').read_text());indices={x['key']:i for i,x in enumerate(p)}
 a=B/'build/skin'/FOLDER/'Plugin Skins'
-expected=[[f'q0_{i}' for i in [0,1,2,3,5,6,7]],[f'q1_{i}' for i in [0,2,3,4,5]],[f'q2_{i}' for i in range(7)],['rev_size','rev_decay','rev_damp','rev_return','fx_time','del_feedback','del_tone','del_return'],[f'v{i}_level' for i in range(8)]]
+expected=[[f'tone_q{i}' for i in range(7)],[f'q1_{i}' for i in [0,2,3,4,5]],[f'q2_{i}' for i in range(7)],['rev_size','rev_decay','rev_damp','rev_return','fx_time','del_feedback','del_tone','del_return'],[f'v{i}_level' for i in range(8)]]
 for fn in ['Q-Links.json','Q-Links - 8by1.json','Q-Links - 4by4.json']:
  document=json.loads((a/fn).read_text())
  assert set(document)=={'version','info','Screen Mode Q-Links','Program Mode Q-Links'}
@@ -25,8 +25,8 @@ for v in range(8):
  im=Image.open(a/f'pad{v}_1.png');assert (241,242,237) not in im.getdata(), 'Permanent white selected border'
 print('PASS: exact physical Q-Link ordering, empty slots, appended indices, passive native focus overlays and no permanent white selection outline')
 
-assert len(p)==331
-assert (B/'params.lock').read_text().splitlines()[:301]==(B/'tests/fixtures/parameter-prefix.lock').read_text().splitlines()
+assert len(p)==418
+assert (B/'params.lock').read_text().splitlines()[:301]==(B/'Validation/effects/params-before.lock').read_text().splitlines()
 tabs=json.loads((a/'TUI.json').read_text())['pageData']['tabs']
 assert [t['tabName'] for t in tabs]==['TONE','NOISE','CHARACTER','EFFECTS','MIXER']
 print('PASS: five tabs, 301 unchanged indices and shared effects Q-Link page')
