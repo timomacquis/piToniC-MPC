@@ -4,7 +4,7 @@ import ctypes as C,struct,wave,tempfile,time
 B=Path(__file__).resolve().parents[1]
 Create=C.CFUNCTYPE(C.c_void_p,C.c_char_p);Destroy=C.CFUNCTYPE(None,C.c_void_p);Midi=C.CFUNCTYPE(None,C.c_void_p,C.POINTER(C.c_uint8),C.c_int);Set=C.CFUNCTYPE(None,C.c_void_p,C.c_char_p,C.c_char_p);Get=C.CFUNCTYPE(C.c_int,C.c_void_p,C.c_char_p,C.c_char_p,C.c_int);Render=C.CFUNCTYPE(None,C.c_void_p,C.POINTER(C.c_int16),C.c_int)
 class API(C.Structure):_fields_=[('create',Create),('destroy',Destroy),('midi',Midi),('set',Set),('get',Get),('render',Render)]
-paths=[B/'Validation/sample-1.0.1-candidate.2/baseline/pitonic-x86_64.so',B/'Banks/PatternariumBest150/Compiled/pitonic-x86_64.so']
+paths=[B/'Validation/sample-lcd-1.0.2-candidate.1/baseline/pitonic-x86_64.so',B/'Banks/PatternariumBest150/Compiled/pitonic-x86_64.so']
 libs=[C.CDLL(str(p)) for p in paths];instances=[]
 for lib in libs:lib.mpc_engine.restype=C.POINTER(API);api=lib.mpc_engine().contents;instances.append((api,api.create(None)))
 def value(api,p,key):

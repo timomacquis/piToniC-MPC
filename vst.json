@@ -1,8 +1,8 @@
 {
-  "name": "πToniC",
+  "name": "\u03c0ToniC",
   "vendor": "Timo",
   "uid": "PiTC",
-  "version": 1001,
+  "version": 10002,
   "so": "pitonic.so",
   "params": "params.json",
   "custom_skin": true,

@@ -11,9 +11,11 @@
 #define SP_PATH 1024
 #define SP_ENTRIES 256
 #define SP_BINS 32
+#define SP_LCD_COLS 288
+#define SP_LCD_LEVELS 15
 #define SP_MAX_FRAMES 1920000u
 #define SP_MAX_BYTES (32u*1024u*1024u)
-typedef struct {float *data;unsigned frames,rate;int channels;float peaks[SP_BINS],minima[SP_BINS],maxima[SP_BINS],preview_scale;char path[SP_PATH];} Sample;
+typedef struct {float *data;unsigned frames,rate,lcd_frames;int channels;float peaks[SP_BINS],minima[SP_BINS],maxima[SP_BINS],preview_scale;unsigned char lcd[2][SP_LCD_COLS];char path[SP_PATH];} Sample;
 /* Serpentine packing keeps adjacent filmstrip frames visually adjacent even
  * if a native host rounds a normalized value one frame differently. */
 static unsigned sp_wave_code(const Sample *s,unsigned bin){unsigned negative=(unsigned)(-s->minima[bin]*s->preview_scale+.5f),positive=(unsigned)(s->maxima[bin]*s->preview_scale+.5f);if(negative>10)negative=10;if(positive>10)positive=10;return negative*11+((negative&1)?10-positive:positive);}
@@ -43,6 +45,7 @@ static Sample *sp_read(const char *path,int *status){
  if(!data||(fmt!=1&&fmt!=3)||(ch!=1&&ch!=2)||rate<8000||rate>192000||(bits!=16&&bits!=24&&bits!=32)||(fmt==3&&bits!=32)||align!=ch*(bits/8)||!bytes||bytes%align){fclose(f);return NULL;}
  unsigned frames=bytes/align;if(frames>rate*10u||frames>SP_MAX_FRAMES){*status=5;fclose(f);return NULL;}
  Sample *s=calloc(1,sizeof *s);if(!s){*status=6;fclose(f);return NULL;}s->data=malloc((size_t)frames*ch*sizeof(float));if(!s->data){sp_free(s);*status=6;fclose(f);return NULL;}
+ float low[2][SP_LCD_COLS]={{0}},high[2][SP_LCD_COLS]={{0}};
  s->frames=frames;s->rate=rate;s->channels=ch;snprintf(s->path,sizeof s->path,"%s",path);fseek(f,data,SEEK_SET);
  for(unsigned i=0;i<frames*ch;i++){if(fread(h,1,bits/8,f)!=bits/8){sp_free(s);fclose(f);return NULL;}float v;
  if(fmt==3){uint32_t u=sp_u32(h);memcpy(&v,&u,4);if(!isfinite(v)){sp_free(s);fclose(f);return NULL;}}
@@ -50,8 +53,24 @@ static Sample *sp_read(const char *path,int *status){
  else if(bits==24){int32_t v24=(int32_t)((unsigned)h[0]<<8|(unsigned)h[1]<<16|(unsigned)h[2]<<24);v=v24/2147483648.f;}
  else v=(int32_t)sp_u32(h)/2147483648.f;
  if(v>1)v=1;if(v< -1)v=-1;s->data[i]=v;unsigned bin=(unsigned)((uint64_t)(i/ch)*SP_BINS/frames);if(fabsf(v)>s->peaks[bin])s->peaks[bin]=fabsf(v);if(v<s->minima[bin])s->minima[bin]=v;if(v>s->maxima[bin])s->maxima[bin]=v;
+
  }
  float peak=0;for(unsigned bin=0;bin<SP_BINS;bin++)if(s->peaks[bin]>peak)peak=s->peaks[bin];s->preview_scale=peak>1e-12f?10.f/peak:0;
+ /* Display-only tail framing: -60 dB relative to peak, 5% margin (at
+  * least 2 ms). Keep the original leading silence and every audio frame. */
+ s->lcd_frames=frames;
+ if(peak>1e-12f){unsigned last=0;for(unsigned i=0;i<frames*ch;i++)if(fabsf(s->data[i])>peak*.001f)last=i/ch+1;
+  unsigned margin=last/20;if(margin<rate/500)margin=rate/500;
+  if(last&&last+margin<frames)s->lcd_frames=last+margin;
+ }
+ for(unsigned frame=0;frame<s->lcd_frames;frame++)for(unsigned c=0;c<ch;c++){
+  float value=s->data[frame*ch+c];unsigned x=(unsigned)((uint64_t)frame*SP_LCD_COLS/s->lcd_frames);
+  if(value<low[c][x])low[c][x]=value;if(value>high[c][x])high[c][x]=value;
+ }
+ /* Per-channel extrema, normalized only for the cached drawing, never audio. */
+ float lcd_scale=peak>1e-12f?14.f/peak:0;
+ for(unsigned c=0;c<ch;c++)for(unsigned x=0;x<SP_LCD_COLS;x++){unsigned negative=(unsigned)(-low[c][x]*lcd_scale+.5f),positive=(unsigned)(high[c][x]*lcd_scale+.5f);if(negative>14)negative=14;if(positive>14)positive=14;s->lcd[c][x]=(unsigned char)(negative*15+((negative&1)?14-positive:positive));}
+
  fclose(f);*status=2;return s;
 }
 static int sp_entry_cmp(const void *a,const void *b){const SPEntry *x=a,*y=b;if(x->directory!=y->directory)return y->directory-x->directory;return strcasecmp(x->name,y->name);}

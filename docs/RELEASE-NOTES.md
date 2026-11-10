@@ -1,4 +1,4 @@
-# πToniC 1.0.0
+# πToniC 1.0.2
 
 A Microtonic-inspired drum machine.
 
@@ -8,17 +8,13 @@ Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and i
 
 Shared stereo reverb and tempo-synced delay complete the engine.
 
-A Microtonic-inspired drum machine with eight independent percussion voices for MPC OS, with native sequencing, contextual Q-Links, reverb and delay.
+- Fix TONE control bindings so visible controls and contextual Q-Links use the same TUNE/START aliases in SAMPLE and FREQUENCY/WAVE MORPH aliases in SYNTH.
+- Add a black LCD sample overview: one waveform for mono, separate left/right traces for stereo and a dashed START marker.
+- Frame the audible sample tail automatically with a small margin, preserving leading silence. This only changes the display: PCM, playback duration and the stored START percentage remain unchanged.
+- Cache the display on the loading worker; turning START or TUNE does not rebuild or resend the waveform.
+- Reduce LOAD height and balance its vertical spacing.
+- Refresh English/French manuals with current Force screenshots and place SAMPLE inside TONE.
 
+All 418 parameters from 1.0.1 retain their indices. Passive display parameters are appended. The 150 native Patternarium BEST kits and original sample paths are preserved. Keep older project copies: older binaries cannot read sample-enriched states.
 
-- Oscillator morphing, filtered noise, amplitude and pitch envelopes, sine/random pitch modulation.
-- Per-voice drive, EQ, velocity response, pan and choke groups.
-- A/B comparison, ALTER and RAND VOICE.
-- Shared reverb and synchronised/free delay, with two sends per voice.
-- Five touch pages, contextual Q-Links and azure trigger activity.
-- 150 converted Patternarium BEST kits in the native PRESET menu.
-- Native preset and project storage including edited sounds, sends and effects.
-
-Package: ARMv7 Gen1, MPC OS 3.x. No ARM64 Gen2 build is included.
-
-Factory sends start at zero. Raise the REVERB or DELAY send on a mixer channel to hear the shared effect.
+Gen1 ARMv7 / Force, MPC OS 3.x. Based on the candidate installed on the author's Force. TUNE/START routing and marker movement were confirmed on candidate.1; the revised framing and LOAD spacing were installed as candidate.2. No new exact-release install/uninstall qualification or Gen2 hardware claim is made.

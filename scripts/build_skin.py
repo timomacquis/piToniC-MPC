@@ -96,15 +96,29 @@ def tools(parts,mixer):
   parts.append(toggle('compare','A / B',900,548,110,52,cond));parts.append(toggle('alter','ALTER',1020,548,90,52,cond));parts.append(toggle('random','RAND VOICE',1120,548,140,52,cond))
   # A/B readout is tied to this voice, independent of the momentary switch.
   parts.append(place(local(f'abread{v}_{len(defs)}',[label(0,0,48,28,n=20)]),f'ab{v}',950,604,48,24,cond))
-# Shared cached bipolar envelope: 11 positive x 11 negative levels in
-# 128 full frames, matching the native count convention. Adjacent columns
-# touch, and every state shares the same baseline. Worker computes extrema.
-im=Image.new('RGB',(18,80*128),PANEL);d=ImageDraw.Draw(im)
-for frame in range(128):
- code=min(frame,120);negative,slot=divmod(code,11);positive=10-slot if negative&1 else slot;yy=frame*80+40
- if code:d.rectangle((0,yy-round(36*positive/10),17,yy+round(36*negative/10)),fill='#a9d2df')
- else:d.line((0,yy,17,yy),fill='#a9d2df')
-im.save(A/'sample_wave.png')
+# LCD: one shared 256-frame atlas, 15 x 15 bipolar peak states.
+# 2 x 52 x 256 stays below the 16384-pixel filmstrip height ceiling.
+LCD_COLS=288
+im=Image.new('RGB',(2,52*256),'#020405');d=ImageDraw.Draw(im)
+for frame in range(256):
+ code=round(frame*224/255);negative,slot=divmod(code,15);positive=14-slot if negative&1 else slot;yy=frame*52+26
+ d.line((0,yy,1,yy),fill='#29434b')
+ if code:d.rectangle((0,yy-round(23*positive/14),1,yy+round(23*negative/14)),fill='#badde8')
+im.save(A/'sample_lcd.png')
+im=Image.new('RGB',(596,136),'#020405');ImageDraw.Draw(im).rectangle((0,0,595,135),outline='#42515c');im.save(A/'sample_lcd_frame.png')
+im=Image.new('RGBA',(2,120));d=ImageDraw.Draw(im)
+for yy in range(0,120,9):d.line((0,yy,0,min(yy+4,119)),fill=INK,width=1)
+im.save(A/'sample_start_marker.png')
+def sample_lcd(parts):
+ sam=[gate('source',1)]
+ c=art('sample_lcd_frame.png',20,180,596,136);c['bounds']['additionalInvalidatingHandles']=sam;parts.append(c)
+ for channel,stereo,y in [(0,0,222),(0,1,188),(1,1,254)]:
+  for i in range(LCD_COLS):
+   knob=child('Knob',dict(version=5,knobType='FilmStrip',filmStrip='sample_lcd.png',numFrames=256,invert=False,dragOrientation='Vertical',handleName='Data'),0,0,2,52);knob['bounds']['acceptsHWFocus']='No'
+   c=place(local(f'lcd_{channel}_{stereo}_{i}',[knob]),f'sample_lcd{channel*LCD_COLS+i}',28+i*2,y,2,52,sam+[gate('sample_stereo',stereo)]);c['bounds']['acceptsHWFocus']='No';parts.append(c)
+ # START changes only these tiny cached markers, not the waveform handles.
+ for i in range(LCD_COLS):
+  c=art('sample_start_marker.png',28+i*2,188,2,120);c['bounds']['additionalInvalidatingHandles']=sam+[gate('sample_marker',i,LCD_COLS)];parts.append(c)
 def readout(key,x,y,w,h,n=20):return place(local('sample_read_'+key+'_'+str(len(defs)),[label(0,0,w,h,n=n)]),key,x,y,w,h)
 def tone_sample(parts,v):
  selected=[gate('selected',v,8)];syn=selected+[gate(f'v{v}_source',0)];sam=selected+[gate(f'v{v}_source',1)]
@@ -114,23 +128,21 @@ def tone_sample(parts,v):
   off=bitmap('source_'+title+'_off.png',128,42,title);on=bitmap('source_'+title+'_on.png',128,42,title,'#383122',AMBER)
   native=child('Button',dict(version=2,onImage=on,offImage=off,buttonId=mode,numButtonsInGroup=2,handleName='Data',gestureBehaviour='Instant'),0,0,128,42)
   parts.append(place(local(f'source_select{v}_{mode}',[native],[action('Q-Link')]),f'v{v}_source',350+mode*136,78,128,42,selected))
- parts.append(dial(f'v{v}_freq','FREQUENCY',20,138,292,122,syn));parts.append(dial(f'v{v}_wave','WAVE MORPH',324,138,292,122,syn))
- for key,title,x in [('sample_tune','TUNE',20),('sample_start','START',324)]:parts.append(dial(key,title,x,336,292,110,sam))
- for key,x,y,w,h,n in [('sample_name',30,135,440,36,23)]:parts.append(readout(key,x,y,w,h,n));parts[-1]['bounds']['additionalInvalidatingHandles']=sam
- parts.append(toggle('load','LOAD',486,135,128,42,sam))
- for i in range(32):
-  native=child('Knob',dict(version=5,knobType='FilmStrip',filmStrip='sample_wave.png',numFrames=128,invert=False,dragOrientation='Vertical',handleName='Data'),0,0,18,80)
-  native['bounds']['acceptsHWFocus']='No';parts.append(place(local(f'sample_peak{v}_{i}',[native]),f'sample_wave{i}',24+i*18,186,18,80,sam));parts[-1]['bounds']['acceptsHWFocus']='No'
- parts.extend([dial(f'v{v}_attack','AMP ATTACK',648,138,300,122,selected),dial(f'v{v}_decay','AMP DECAY',960,138,300,122,selected)])
+ parts.append(dial('tone_q0','FREQUENCY',20,138,292,122,syn));parts.append(dial('tone_q1','WAVE MORPH',324,138,292,122,syn))
+ for key,title,x in [('tone_q0','TUNE',20),('tone_q1','START',324)]:parts.append(dial(key,title,x,336,292,110,sam))
+ for key,x,y,w,h,n in [('sample_name',30,132,440,36,23)]:parts.append(readout(key,x,y,w,h,n));parts[-1]['bounds']['additionalInvalidatingHandles']=sam
+ parts.append(toggle('load','LOAD',486,135,128,30,sam))
+ parts.extend([dial('tone_q2','AMP ATTACK',648,138,300,122,selected),dial('tone_q3','AMP DECAY',960,138,300,122,selected)])
  parts.append(toggle(f'v{v}_modmode__open','PITCH MODE',648,280,300,42,selected));parts.append(readout(f'v{v}_modmode',972,280,280,42,24));parts[-1]['bounds']['additionalInvalidatingHandles']=selected
- for key,title,x in [('modamt','PITCH AMOUNT',648),('modrate','PITCH TIME / RATE',960)]:parts.append(dial(f'v{v}_{key}',title,x,336,300,110,selected))
- parts.append(dial(f'v{v}_modvel','PITCH VELOCITY',960,450,300,86,selected))
+ for key,title,x in [('tone_q4','PITCH AMOUNT',648),('tone_q5','PITCH TIME / RATE',960)]:parts.append(dial(key,title,x,336,300,110,selected))
+ parts.append(dial('tone_q6','PITCH VELOCITY',960,450,300,86,selected))
 
 tabs=[]
 for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
  parts=[art('background.png',0,0,1280,628)];selectors(parts)
  if page==0:
   for v in range(8):tone_sample(parts,v)
+  sample_lcd(parts)
  elif page<3:
   for v in range(8):
    for i in range(8):

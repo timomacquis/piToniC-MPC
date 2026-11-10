@@ -25,7 +25,7 @@ for v in range(8):
  im=Image.open(a/f'pad{v}_1.png');assert (241,242,237) not in im.getdata(), 'Permanent white selected border'
 print('PASS: exact physical Q-Link ordering, empty slots, appended indices, passive native focus overlays and no permanent white selection outline')
 
-assert len(p)==418
+assert len(p)==996
 assert (B/'params.lock').read_text().splitlines()[:301]==(B/'Validation/effects/params-before.lock').read_text().splitlines()
 tabs=json.loads((a/'TUI.json').read_text())['pageData']['tabs']
 assert [t['tabName'] for t in tabs]==['TONE','NOISE','CHARACTER','EFFECTS','MIXER']

@@ -4101,5 +4101,4629 @@
     "default": 0,
     "dynamic_display": true,
     "poll": false
+  },
+  {
+    "key": "sample_lcd0",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd1",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd2",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd3",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd4",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd5",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd6",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd7",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd8",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd9",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd10",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd11",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd12",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd13",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd14",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd15",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd16",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd17",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd18",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd19",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd20",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd21",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd22",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd23",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd24",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd25",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd26",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd27",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd28",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd29",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd30",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd31",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd32",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd33",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd34",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd35",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd36",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd37",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd38",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd39",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd40",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd41",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd42",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd43",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd44",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd45",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd46",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd47",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd48",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd49",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd50",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd51",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd52",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd53",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd54",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd55",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd56",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd57",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd58",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd59",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd60",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd61",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd62",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd63",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd64",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd65",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd66",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd67",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd68",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd69",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd70",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd71",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd72",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd73",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd74",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd75",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd76",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd77",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd78",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd79",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd80",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd81",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd82",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd83",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd84",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd85",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd86",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd87",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd88",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd89",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd90",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd91",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd92",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd93",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd94",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd95",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd96",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd97",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd98",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd99",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd100",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd101",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd102",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd103",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd104",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd105",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd106",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd107",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd108",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd109",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd110",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd111",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd112",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd113",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd114",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd115",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd116",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd117",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd118",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd119",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd120",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd121",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd122",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd123",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd124",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd125",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd126",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd127",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd128",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd129",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd130",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd131",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd132",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd133",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd134",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd135",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd136",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd137",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd138",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd139",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd140",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd141",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd142",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd143",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd144",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd145",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd146",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd147",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd148",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd149",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd150",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd151",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd152",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd153",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd154",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd155",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd156",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd157",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd158",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd159",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd160",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd161",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd162",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd163",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd164",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd165",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd166",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd167",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd168",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd169",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd170",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd171",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd172",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd173",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd174",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd175",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd176",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd177",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd178",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd179",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd180",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd181",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd182",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd183",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd184",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd185",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd186",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd187",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd188",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd189",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd190",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd191",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd192",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd193",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd194",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd195",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd196",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd197",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd198",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd199",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd200",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd201",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd202",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd203",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd204",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd205",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd206",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd207",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd208",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd209",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd210",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd211",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd212",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd213",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd214",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd215",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd216",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd217",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd218",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd219",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd220",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd221",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd222",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd223",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd224",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd225",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd226",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd227",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd228",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd229",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd230",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd231",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd232",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd233",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd234",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd235",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd236",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd237",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd238",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd239",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd240",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd241",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd242",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd243",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd244",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd245",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd246",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd247",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd248",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd249",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd250",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd251",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd252",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd253",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd254",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd255",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd256",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd257",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd258",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd259",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd260",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd261",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd262",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd263",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd264",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd265",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd266",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd267",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd268",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd269",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd270",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd271",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd272",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd273",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd274",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd275",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd276",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd277",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd278",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd279",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd280",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd281",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd282",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd283",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd284",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd285",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd286",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd287",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd288",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd289",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd290",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd291",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd292",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd293",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd294",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd295",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd296",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd297",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd298",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd299",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd300",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd301",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd302",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd303",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd304",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd305",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd306",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd307",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd308",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd309",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd310",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd311",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd312",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd313",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd314",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd315",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd316",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd317",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd318",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd319",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd320",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd321",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd322",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd323",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd324",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd325",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd326",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd327",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd328",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd329",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd330",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd331",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd332",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd333",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd334",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd335",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd336",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd337",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd338",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd339",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd340",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd341",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd342",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd343",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd344",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd345",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd346",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd347",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd348",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd349",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd350",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd351",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd352",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd353",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd354",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd355",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd356",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd357",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd358",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd359",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd360",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd361",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd362",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd363",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd364",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd365",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd366",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd367",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd368",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd369",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd370",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd371",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd372",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd373",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd374",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd375",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd376",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd377",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd378",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd379",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd380",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd381",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd382",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd383",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd384",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd385",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd386",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd387",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd388",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd389",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd390",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd391",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd392",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd393",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd394",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd395",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd396",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd397",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd398",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd399",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd400",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd401",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd402",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd403",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd404",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd405",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd406",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd407",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd408",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd409",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd410",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd411",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd412",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd413",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd414",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd415",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd416",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd417",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd418",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd419",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd420",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd421",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd422",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd423",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd424",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd425",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd426",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd427",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd428",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd429",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd430",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd431",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd432",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd433",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd434",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd435",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd436",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd437",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd438",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd439",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd440",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd441",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd442",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd443",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd444",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd445",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd446",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd447",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd448",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd449",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd450",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd451",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd452",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd453",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd454",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd455",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd456",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd457",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd458",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd459",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd460",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd461",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd462",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd463",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd464",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd465",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd466",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd467",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd468",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd469",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd470",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd471",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd472",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd473",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd474",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd475",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd476",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd477",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd478",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd479",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd480",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd481",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd482",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd483",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd484",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd485",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd486",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd487",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd488",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd489",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd490",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd491",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd492",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd493",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd494",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd495",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd496",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd497",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd498",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd499",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd500",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd501",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd502",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd503",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd504",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd505",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd506",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd507",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd508",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd509",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd510",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd511",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd512",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd513",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd514",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd515",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd516",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd517",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd518",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd519",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd520",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd521",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd522",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd523",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd524",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd525",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd526",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd527",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd528",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd529",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd530",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd531",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd532",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd533",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd534",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd535",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd536",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd537",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd538",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd539",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd540",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd541",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd542",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd543",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd544",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd545",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd546",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd547",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd548",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd549",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd550",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd551",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd552",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd553",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd554",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd555",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd556",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd557",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd558",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd559",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd560",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd561",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd562",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd563",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd564",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd565",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd566",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd567",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd568",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd569",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd570",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd571",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd572",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd573",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd574",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_lcd575",
+    "name": "LCD waveform",
+    "min": 0,
+    "max": 224,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_stereo",
+    "name": "LCD stereo",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "sample_marker",
+    "name": "LCD START",
+    "min": 0,
+    "max": 99.9,
+    "default": 0,
+    "poll": false
   }
 ]

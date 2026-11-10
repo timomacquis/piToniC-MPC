@@ -12,9 +12,17 @@ Explorez **150 presets de kits Patternarium BEST convertis**, puis faites-les v�
 
 ## Jouer et séquencer
 
-Les notes MIDI **36–43** déclenchent A01–A08. Les notes 0–7 sont également acceptées comme alias sur le chemin DRUM compatible. Jouer une note ne change pas la voix sélectionnée pour l’édition.
+Jouez les huit voix avec les notes MIDI **36–43** : A01 à A08. Les notes 0–7 sont aussi acceptées sur le chemin DRUM compatible.
 
-Le séquenceur est celui de la Force. Pour la correspondance A01–A08 / notes 36–43 : **SHIFT + STEP SEQUENCER → Scale : Chromatic → Snap to Scale : activé**. Vérifier le registre de départ.
+Vous pouvez jouer une voix tout en en réglant une autre.
+
+Composez avec le **Step Sequencer de la Force**.
+
+Pour retrouver A01–A08 sur les notes 36–43 :
+
+**SHIFT + STEP SEQUENCER → Scale : Chromatic → Snap to Scale : activé.**
+
+Vérifiez aussi le registre de départ.
 
 TRIGGER permet d’écouter la voix sélectionnée. Les enveloppes déterminent la durée des sons ; relâcher la note ne coupe pas le hit.
 
@@ -30,7 +38,11 @@ A02 joue : son bouton s’illumine en azur, tandis qu’A03 reste sélectionnée
 
 ## TONE
 
-![πToniC — TONE](images/tone-commander-1.0.1.png)
+Choisissez **SYNTH** pour créer un son, ou **SAMPLE** pour partir d’un WAV. Chaque voix fait son propre choix.
+
+### SYNTH — façonnez une percussion
+
+![πToniC — TONE](images/tone-force-1.0.2.png)
 
 - **FREQUENCY** : fréquence de l’oscillateur.
 - **WAVE MORPH** : transition sinus → triangle → dent de scie → carré.
@@ -42,9 +54,47 @@ A02 joue : son bouton s’illumine en azur, tandis qu’A03 reste sélectionnée
 
 La vitesse effective du mode SINE est limitée à 2 000 Hz.
 
+### SAMPLE — partez d’un son
+
+![πToniC — SAMPLE](images/sample-force-1.0.2.png)
+
+Un kick enregistré ? Une texture ? Un bruit trouvé ?
+
+Choisissez **SAMPLE**, puis **LOAD** et touchez votre fichier WAV.
+
+**USER / SD** et **DRIVES** choisissent le support. **UP** remonte d’un dossier ; **PREVIOUS / NEXT** changent de page. **CANCEL** ferme le navigateur.
+
+WAV mono ou stéréo, **10 secondes maximum** : PCM 16/24/32 bits ou float32, de 8 à 192 kHz. Le navigateur affiche jusqu’à 256 entrées par dossier.
+
+**TUNE** monte ou descend le son, jusqu’à ±48 demi-tons. À zéro, il joue à sa vitesse d’origine. Plus aigu, il devient aussi plus court.
+
+**START** choisit où commencer, en pourcentage du fichier entier.
+
+Chaque note relance le sample : lecture unique, sans boucle ni time-stretch.
+
+L’enveloppe **AMP**, la modulation de hauteur, le bruit et les effets restent à votre disposition. Essayez un sample court avec un peu de bruit : une nouvelle percussion se dessine.
+
+### Lire le LCD
+
+Une onde en mono. Deux en stéréo.
+
+L’écran cadre la partie sonore et laisse une petite marge après sa fin. Le silence initial est conservé ; le fichier et sa lecture ne changent pas.
+
+Le **trait pointillé** indique START. Si le départ dépasse la partie affichée, il reste au bord droit.
+
+L’onde est préparée au chargement, puis gardée en cache. Une erreur de chargement apparaît à la place du nom de fichier.
+
+### Retrouvez vos sons
+
+**A / B** garde deux réglages TUNE/START pour le même fichier. **ALTER** et **RAND VOICE** gardent le sample, mais font varier ses réglages.
+
+Les deux premiers Q-Links deviennent **TUNE et START**. Repassez en SYNTH : ils retrouvent **FREQUENCY et WAVE MORPH**.
+
+**Les presets et projets retiennent le chemin du sample, pas le son lui-même.** Gardez vos fichiers au même endroit. La copie automatique près du preset n’est pas encore disponible.
+
 ## NOISE
 
-![πToniC — NOISE](images/noise-commander-1.0.1.png)
+![πToniC — NOISE](images/noise-force-1.0.2.png)
 
 - **NOISE MIX** : équilibre oscillateur / bruit.
 - **FILTER MODE** : LP, BP ou HP ; **CUTOFF / RESONANCE** façonnent le bruit.
@@ -54,9 +104,11 @@ La vitesse effective du mode SINE est limitée à 2 000 Hz.
 
 ## CHARACTER
 
-![πToniC — CHARACTER](images/character-commander-1.0.1.png)
+![πToniC — CHARACTER](images/character-force-1.0.2.png)
 
-**DRIVE** sature la voix. **EQ FREQUENCY / GAIN** modifient sa couleur.
+Un peu de mordant ? Montez **DRIVE**.
+
+Pour changer la couleur, jouez avec **EQ FREQUENCY / GAIN**.
 
 **LEVEL, OSC VELOCITY, NOISE VELOCITY et PAN** règlent le niveau, les sensibilités à la vélocité et le panoramique.
 
@@ -64,11 +116,15 @@ Les voix d’un même **CHOKE GROUP** se coupent mutuellement. OFF les laisse in
 
 ## EFFECTS
 
-![πToniC — EFFECTS](images/effects-commander-1.0.1.png)
+![πToniC — EFFECTS](images/effects-force-1.0.2.png)
 
-Deux effets communs aux huit voix : **REVERB à gauche, DELAY à droite**. Chaque effet reçoit les départs de MIXER. Les deux chemins fonctionnent en parallèle ; le delay n’est pas envoyé dans la reverb, ni l’inverse.
+Un peu d’espace à gauche : **REVERB**.
 
-Les boutons ON / OFF activent ou désactivent progressivement l’entrée et le retour de l’effet. Le signal direct reste présent. Désactiver masque le retour ; la queue interne se vide et peut redevenir audible si l’effet est réactivé rapidement.
+Des échos à droite : **DELAY**.
+
+Les huit voix partagent ces deux effets. Dosez chaque envoi dans MIXER. Ils fonctionnent en parallèle : aucun ne traverse l’autre.
+
+**ON / OFF** active ou masque l’effet en douceur. Le son direct reste présent. Si vous réactivez vite l’effet, sa fin peut encore résonner.
 
 ### Reverb
 
@@ -85,16 +141,20 @@ Les boutons ON / OFF activent ou désactivent progressivement l’entrée et le 
 - **TONE** : filtre passe-bas des répétitions ; monter conserve davantage d’aigus.
 - **RETURN** : niveau global du retour de delay.
 
-Le delay conserve une entrée stéréo et croise les retours de feedback entre gauche et droite. Les changements de temps sont progressifs et peuvent produire un glissement de hauteur. Le tempo valide de MPC est utilisé entre 20 et 400 BPM ; avant sa réception, le moteur utilise 120 BPM. Le buffer couvre les divisions proposées sur cette plage.
+Les répétitions se croisent entre gauche et droite. Changez TIME pendant qu’elles résonnent : leur hauteur peut glisser.
+
+SYNC suit le tempo de la Force de 20 à 400 BPM ; avant sa réception, il utilise 120 BPM.
 
 ## MIXER
 
-![πToniC — MIXER](images/mixer-commander-1.0.1.png)
+![πToniC — MIXER](images/mixer-force-1.0.2.png)
 
 Chaque tranche possède **LEVEL, PAN, REVERB, DELAY, M et S**.
 
 - **REVERB / DELAY** dosent les départs de cette voix vers les effets communs, après LEVEL et PAN. Ils n’enlèvent pas le signal direct.
-- **M** coupe la voix ; **S** joue uniquement les voix en solo. Plusieurs solos sont possibles. Mute reste prioritaire.
+- **M** coupe la voix.
+
+**S** isole les voix en solo. Vous pouvez en choisir plusieurs ; Mute reste prioritaire.
 - Les queues déjà présentes dans les effets peuvent continuer après un Mute ; les nouveaux déclenchements de la voix sont exclus.
 
 Pour essayer : choisir une voix, monter son send REVERB ou DELAY, puis vérifier que l’effet correspondant est ON et son RETURN supérieur à zéro.
@@ -105,7 +165,8 @@ Les presets antérieurs gardent leurs sons : leurs nouveaux sends sont à **zér
 
 | Onglet | Huit encodeurs |
 | --- | --- |
-| TONE | Frequency · Wave Morph · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate · Pitch Velocity · libre |
+| TONE · SYNTH | Frequency · Wave Morph · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate · Pitch Velocity · libre |
+| TONE · SAMPLE | Tune · Start · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate · Pitch Velocity · libre |
 | NOISE | Noise Mix · Cutoff · Resonance · Noise Attack · Noise Decay · libre · libre · libre |
 | CHARACTER | Drive · EQ Frequency · EQ Gain · Level · Osc Velocity · Noise Velocity · Pan · libre |
 | EFFECTS | Reverb Size · Decay · Damping · Return · Delay Time · Feedback · Tone · Return |
@@ -130,27 +191,3 @@ Les anciens presets et projets πToniC PT1 restent lisibles ; ils rétablissent 
 ## État de validation
 
 Le Step Sequencer natif, la banque PRESET, le focus, l’activité azur et les Q-Links des quatre pages initiales sont validés par Greg sur Force. La version 1.0.0, y compris EFFECTS et les sends, a été essayée par Greg sur Force : lecture, cinq onglets/Q-Links, effets et réouverture du projet avec ses réglages confirmés. Installation, désinstallation et réinstallation standard vérifiées.
-
-## Source SAMPLE — 1.0.1
-
-![πToniC — SAMPLE](images/sample-commander-1.0.1.png)
-
-Dans **TONE**, choisissez **SYNTH** ou **SAMPLE** pour la voix sélectionnée.
-
-**LOAD** ouvre le navigateur de WAV. **USER / SD**, **DRIVES**, **UP**, **PREVIOUS** et **NEXT** permettent de parcourir les dossiers ; touchez un fichier pour le charger. **CANCEL** ferme le panneau. Jusqu'à 256 entrées par dossier sont affichées ; rangez les grandes collections en sous-dossiers.
-
-WAV mono ou stéréo : PCM 16/24/32 bits ou float32, 8 à 192 kHz, dix secondes maximum. Le chargement et la préparation de la forme d'onde se font en arrière-plan. Un fichier absent, illisible, trop long ou non pris en charge est signalé ; la source sample reste silencieuse.
-
-- **TUNE** : ±48 demi-tons ; 0 lit le fichier à sa vitesse d'origine. Changer le pitch change aussi la durée.
-- **START** : point de départ, en pourcentage du fichier.
-- **AMP** et **PITCH MODULATION** gardent leur rôle ; le sample peut être mélangé au bruit, puis traité par DRIVE/EQ et les effets.
-- Les sept Q-Links de TONE deviennent TUNE, START, AMP ATTACK, AMP DECAY, PITCH AMOUNT, PITCH TIME/RATE et PITCH VELOCITY. En SYNTH, les deux premiers retrouvent FREQUENCY et WAVE MORPH.
-- Lecture one-shot, sans boucle ni time-stretch ; une nouvelle note redéclenche la voix.
-
-A/B conserve deux jeux TUNE/START ; source et fichier restent communs à la voix. ALTER et RAND VOICE conservent le fichier et la source, mais peuvent modifier les réglages, y compris TUNE/START.
-
-**Les projets et presets enregistrent le chemin d'origine, pas le fichier audio.** Conservez les samples au même endroit et sur un support disponible à la réouverture. La collecte automatique à côté du preset n'est pas incluse dans cette version. Gardez une copie des projets d'origine avant essai : un ancien binaire ne lit pas la nouvelle extension d'état sample.
-
-Candidat validé par l’auteur en session musicale sur Force Gen1. Le paquet public est reconstruit à partir de ce candidat ; cela ne constitue pas un nouveau cycle formel d’installation/désinstallation du paquet exact.
-
-L’aperçu montre les crêtes positives et négatives, avec une normalisation visuelle sans modifier le son. Les lignes durée/stéréo/Ready sont retirées ; les erreurs de chargement apparaissent sur la ligne du fichier.

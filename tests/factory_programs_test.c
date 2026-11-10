@@ -4,7 +4,7 @@
 static intptr_t host(AEffect*a,int32_t op,int32_t i,intptr_t v,void*p,float f){(void)a;(void)op;(void)i;(void)v;(void)p;(void)f;return 0;}
 static void state(AEffect*e,char*b){wrap_t*w=e->object;assert(eng_get(w,"state",b,32768)>0);}
 int main(void){
- AEffect*a=VSTPluginMain(host),*b=VSTPluginMain(host);assert(a&&b&&a->numPrograms==PITONIC_FACTORY_COUNT&&b->numPrograms==PITONIC_FACTORY_COUNT);assert(a->numParams==418);char text[32768],other[32768],name[64];
+ AEffect*a=VSTPluginMain(host),*b=VSTPluginMain(host);assert(a&&b&&a->numPrograms==PITONIC_FACTORY_COUNT&&b->numPrograms==PITONIC_FACTORY_COUNT);assert(a->numParams==NPARAMS);char text[32768],other[32768],name[64];
  for(int i=0;i<PITONIC_FACTORY_COUNT;i++){
   memset(name,0,sizeof name);assert(a->dispatcher(a,effGetProgramNameIndexed,i,0,name,0)==1);assert(!strcmp(name,PITONIC_FACTORY[i].name));
   a->dispatcher(a,effSetProgram,0,i,0,0);assert(a->dispatcher(a,effGetProgram,0,0,0,0)==i);state(a,text);assert(!strcmp(text,PITONIC_FACTORY[i].state));

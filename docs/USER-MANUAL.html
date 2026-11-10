@@ -13,7 +13,9 @@
 <p><img alt="πToniC — A02 activity" src="images/activity-force.png" /></p>
 <p>A02 is playing: its button pulses azure while A03 remains selected for editing.</p>
 <h2>2. TONE</h2>
-<p><img alt="πToniC — TONE" src="images/tone-commander-1.0.1.png" /></p>
+<p>Choose <strong>SYNTH</strong> to shape a sound, or <strong>SAMPLE</strong> to start with a WAV. Each voice has its own choice.</p>
+<h3>SYNTH — shape a hit</h3>
+<p><img alt="πToniC — TONE" src="images/tone-force-1.0.2.png" /></p>
 <ul>
 <li><strong>FREQUENCY</strong> tunes the oscillator.</li>
 <li><strong>WAVE MORPH</strong> moves through sine, triangle, saw and square.</li>
@@ -23,20 +25,42 @@
 <li><strong>PITCH TIME / RATE</strong> sets milliseconds in DECAY mode and Hz in SINE / RANDOM. The effective sine rate is capped at 2,000 Hz.</li>
 <li><strong>PITCH VELOCITY</strong> makes pitch modulation respond to playing velocity.</li>
 </ul>
+<h3>SAMPLE — start with a sound</h3>
+<p><img alt="πToniC — SAMPLE" src="images/sample-force-1.0.2.png" /></p>
+<p>A recorded kick? A texture? A found sound?</p>
+<p>Choose <strong>SAMPLE</strong>, press <strong>LOAD</strong>, then tap your WAV file.</p>
+<p><strong>USER / SD</strong> and <strong>DRIVES</strong> choose the storage location. <strong>UP</strong> goes up a folder; <strong>PREVIOUS / NEXT</strong> turn the pages. <strong>CANCEL</strong> closes the browser.</p>
+<p>Mono or stereo WAV, <strong>up to 10 seconds</strong>: PCM 16/24/32-bit or float32, 8–192 kHz. The browser shows up to 256 entries per folder.</p>
+<p><strong>TUNE</strong> shifts pitch by up to ±48 semitones. Zero plays at the original speed. Higher pitches also make the sound shorter.</p>
+<p><strong>START</strong> chooses the starting point as a percentage of the whole file.</p>
+<p>Each note retriggers the sample: one-shot playback, without looping or time-stretch.</p>
+<p>The <strong>AMP</strong> envelope, pitch modulation, noise and effects remain available. Try a short sample with a little noise: a new percussion sound takes shape.</p>
+<h3>Read the LCD</h3>
+<p>One waveform for mono. Two for stereo.</p>
+<p>The display frames the sound with a small margin after its tail. Leading silence stays visible; the file and playback stay unchanged.</p>
+<p>The <strong>dashed line</strong> marks START. If the starting point lies beyond the displayed region, the line stays at the right edge.</p>
+<p>The waveform is prepared at loading and cached. Loading errors appear in place of the filename.</p>
+<h3>Keep your sounds together</h3>
+<p><strong>A / B</strong> keeps two TUNE/START settings for the same file. <strong>ALTER</strong> and <strong>RAND VOICE</strong> keep the sample while varying its settings.</p>
+<p>The first two Q-Links become <strong>TUNE and START</strong>. Switch back to SYNTH and they return to <strong>FREQUENCY and WAVE MORPH</strong>.</p>
+<p><strong>Presets and projects store the sample path, not the audio itself.</strong> Keep files in their original locations. Automatic collection beside the preset is not available yet.</p>
 <h2>3. NOISE</h2>
-<p><img alt="πToniC — NOISE" src="images/noise-commander-1.0.1.png" /></p>
+<p><img alt="πToniC — NOISE" src="images/noise-force-1.0.2.png" /></p>
 <p><strong>NOISE MIX</strong> balances oscillator and noise.</p>
 <p><strong>FILTER MODE</strong> selects LP, BP or HP. Shape it with <strong>CUTOFF</strong> and <strong>RESONANCE</strong>.</p>
 <p><strong>NOISE ATTACK / DECAY</strong> set the noise envelope. Choose <strong>EXP</strong>, <strong>LINEAR</strong> or <strong>CLAP</strong> with NOISE ENVELOPE.</p>
 <p><strong>STEREO NOISE</strong> uses independent noise sources on the two sides. OFF uses a common source.</p>
 <h2>4. CHARACTER</h2>
-<p><img alt="πToniC — CHARACTER" src="images/character-commander-1.0.1.png" /></p>
-<p><strong>DRIVE</strong> adds saturation. <strong>EQ FREQUENCY / GAIN</strong> change the voice's colour.</p>
+<p><img alt="πToniC — CHARACTER" src="images/character-force-1.0.2.png" /></p>
+<p>Want a little bite? Turn up <strong>DRIVE</strong>.</p>
+<p>Shape the colour with <strong>EQ FREQUENCY / GAIN</strong>.</p>
 <p><strong>LEVEL</strong> sets its volume. <strong>OSC VELOCITY / NOISE VELOCITY</strong> control the two velocity responses. <strong>PAN</strong> places the voice in stereo.</p>
 <p>Voices in the same <strong>CHOKE GROUP</strong> cut one another off. Choose OFF to let them ring independently.</p>
 <h2>5. EFFECTS</h2>
-<p><img alt="πToniC — EFFECTS" src="images/effects-commander-1.0.1.png" /></p>
-<p>One shared reverb on the left. One shared delay on the right. Feed them from the MIXER sends; the dry sound stays present. The effects run in parallel.</p>
+<p><img alt="πToniC — EFFECTS" src="images/effects-force-1.0.2.png" /></p>
+<p>Space on the left: <strong>REVERB</strong>.</p>
+<p>Echoes on the right: <strong>DELAY</strong>.</p>
+<p>All eight voices share these effects. Feed them from the MIXER sends; the dry sound stays present. The effects run in parallel.</p>
 <h3>Reverb</h3>
 <ul>
 <li><strong>SIZE</strong> changes the reverb network's size.</li>
@@ -52,7 +76,7 @@
 <p>SYNC uses valid host tempo between 20 and 400 BPM; it falls back to 120 BPM before receiving tempo. The buffer covers all offered divisions within that range.</p>
 <p><strong>ON / OFF</strong> fades the effect input and return. The internal tail drains while OFF; quickly re-enabling can reveal the remainder.</p>
 <h2>6. MIXER</h2>
-<p><img alt="πToniC — MIXER" src="images/mixer-commander-1.0.1.png" /></p>
+<p><img alt="πToniC — MIXER" src="images/mixer-force-1.0.2.png" /></p>
 <p>Each voice has <strong>LEVEL, PAN, REVERB, DELAY, M and S</strong>.</p>
 <p><strong>REVERB / DELAY</strong> set its two sends, after level and pan. Start with one send, then adjust the effect's RETURN.</p>
 <p><strong>M</strong> silences the voice.</p>
@@ -75,8 +99,12 @@
 </thead>
 <tbody>
 <tr>
-<td>TONE</td>
+<td>TONE · SYNTH</td>
 <td>Frequency · Wave Morph · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate · Pitch Velocity · unused</td>
+</tr>
+<tr>
+<td>TONE · SAMPLE</td>
+<td>Tune · Start · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate · Pitch Velocity · unused</td>
 </tr>
 <tr>
 <td>NOISE</td>
@@ -101,13 +129,4 @@
 <p>The native <strong>PRESET</strong> menu lists 150 converted Patternarium BEST kits. Selecting a kit recalls all eight voices and their A/B sound states. The first program loads when you insert the instrument.</p>
 <p>Use MPC's native preset save function to keep your own kits, including sends and effects. A project stores the selected program and your edits. Audio tails are transient and are cleared on state recall.</p>
 <p>Legacy πToniC PT1 states load with zero sends and default effects. Older binaries cannot load new effect-enriched states.</p>
-<p>The kits are adapted parameter recipes for πToniC's own engine. They do not reproduce Microtonic's sound exactly. Source credits accompany the bank.</p>
-<h2>SAMPLE source — 1.0.1</h2>
-<p><img alt="πToniC — SAMPLE" src="images/sample-commander-1.0.1.png" /></p>
-<p>In <strong>TONE</strong>, select <strong>SYNTH</strong> or <strong>SAMPLE</strong> for each voice. <strong>LOAD</strong> opens the WAV browser. Use <strong>USER / SD</strong>, <strong>DRIVES</strong>, <strong>UP</strong>, <strong>PREVIOUS</strong> and <strong>NEXT</strong>, then tap a file. <strong>CANCEL</strong> closes the panel. The browser displays up to 256 entries per directory; split larger collections into subfolders.</p>
-<p>Supported WAV: mono/stereo PCM 16/24/32-bit and float32, 8–192 kHz, up to ten seconds per voice. Files and static waveform peaks are prepared by a background worker. Missing, unsupported or oversized files are reported; the sample source remains silent.</p>
-<p><strong>TUNE</strong> adjusts pitch ±48 semitones, with 0 at original speed. <strong>START</strong> sets the starting position. Pitch changes playback duration; there is no time-stretch or looping. Each note retriggers the voice. AMP and PITCH MODULATION, noise mixing, character processing and effect sends remain available.</p>
-<p>TONE's seven Q-Links control TUNE, START, AMP ATTACK, AMP DECAY, PITCH AMOUNT, PITCH TIME/RATE and PITCH VELOCITY. In SYNTH, the first two return to FREQUENCY and WAVE MORPH. A/B stores separate TUNE/START settings; source and file are shared. ALTER and RAND VOICE preserve the file/source while varying sound settings.</p>
-<p><strong>Projects and presets retain original sample paths, not embedded audio.</strong> Keep files at the same locations on available media. Collecting samples beside saved presets is deferred. Preserve original project copies: older binaries cannot read the new sample state extension.</p>
-<p>Tested on Force Gen1 by the author during a musical session. The release package is rebuilt from that candidate; this is separate from a formal install/uninstall qualification. Gen2 hardware is not qualified.</p>
-<p>The sample overview shows cached, display-normalized positive/negative peaks. Normal duration/stereo/Ready lines are hidden; load errors use the filename line.</p></body></html>
+<p>The kits are adapted parameter recipes for πToniC's own engine. They do not reproduce Microtonic's sound exactly. Source credits accompany the bank.</p></body></html>

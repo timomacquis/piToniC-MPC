@@ -42,6 +42,10 @@ for k in ['sample_name','sample_info','sample_status','browse_path','browse_page
 for i in range(32):P.append(dict(key=f'sample_wave{i}',name='Waveform',min=0,max=1,default=0,poll=False))
 for v in range(8):
  for k,n,lo,hi in [('sample_tune','TUNE',-48,48),('sample_start','START',0,99.9)]:P.append(dict(key=f'v{v}_{k}',name=f'A{v+1:02} {n}',min=lo,max=hi,default=0,dynamic_display=True,poll=False))
+# Cached LCD preview additions. All 418 published parameter indices stay fixed.
+for i in range(576):P.append(dict(key=f'sample_lcd{i}',name='LCD waveform',min=0,max=224,default=0,poll=False))
+P.append(dict(key='sample_stereo',name='LCD stereo',min=0,max=1,default=0,poll=False))
+P.append(dict(key='sample_marker',name='LCD START',min=0,max=99.9,default=0,poll=False))
 keys=[p['key'] for p in P];lock=B/'params.lock'
 if lock.exists():assert keys[:len(old:=lock.read_text().splitlines())]==old,'Parameter indices changed'
 lock.write_text('\n'.join(keys)+'\n')

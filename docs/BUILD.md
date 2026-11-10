@@ -13,13 +13,13 @@ build/venv/bin/python scripts/generate.py
 build/venv/bin/python scripts/build_skin.py
 PITONIC_SYSROOT=/path/to/toolchain build/venv/bin/python scripts/build.py
 PITONIC_SYSROOT=/path/to/toolchain build/venv/bin/python scripts/build_factory_programs.py
-mkdir -p Validation/sample-1.0.1
+mkdir -p Validation/sample-1.0.2
 build/venv/bin/python scripts/package_sample.py
 ```
 
 The factory build produces PC and ARMv7 binaries and a hash receipt under `Banks/PatternariumBest150/Compiled`. Packaging verifies that receipt and the source inputs, creates the standard installer archive and checks its CRC and per-file SHA-256 hashes.
 
-The archive is written to `dist/1.0.1`. Copy the ZIP and its `.sha256` file to your release assets. Do not run an installer on a development PC.
+The archive is written to `dist/1.0.2`. Copy the ZIP and its `.sha256` file to your release assets. Do not run an installer on a development PC.
 
 ## Tests
 
