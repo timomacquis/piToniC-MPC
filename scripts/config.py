@@ -24,3 +24,6 @@ FX_FIELDS=[
  ('del_on','DELAY',0,1,1,['OFF','ON']),('del_sync','CLOCK',0,1,1,['FREE','SYNC']),
  ('del_div','TIME',0,4,2,['1/16','1/8','1/8 D','1/4','1/2']),('del_ms','TIME',20,1500,375,'ms'),
  ('del_feedback','FEEDBACK',0,90,35,'%'),('del_tone','TONE',0,100,55,'%'),('del_return','RETURN',0,100,50,'%')]
+
+# Canonical product description for future package metadata.
+DESCRIPTION = 'A Microtonic-inspired drum machine. πToniC features 8 independent drum voices, each combining filtered noise with a morphing oscillator or WAV sample playback. Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and individual voice controls. Shared stereo reverb and tempo-synced delay complete the engine.'

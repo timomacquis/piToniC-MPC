@@ -1,10 +1,12 @@
 # πToniC — User Manual
 
-A Microtonic-inspired drum machine with eight independent percussion voices.
+A Microtonic-inspired drum machine.
 
-Shape a hit.  
-Build a pattern.  
-Give each voice its own space with shared reverb and delay.
+πToniC features 8 independent drum voices, each combining filtered noise with a morphing oscillator or WAV sample playback.
+
+Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and individual voice controls.
+
+Shared stereo reverb and tempo-synced delay complete the engine.
 
 Explore **150 converted Patternarium BEST kit presets**, then make them your own.
 

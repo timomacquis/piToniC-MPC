@@ -1,5 +1,13 @@
 # πToniC 1.0.0
 
+A Microtonic-inspired drum machine.
+
+πToniC features 8 independent drum voices, each combining filtered noise with a morphing oscillator or WAV sample playback.
+
+Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and individual voice controls.
+
+Shared stereo reverb and tempo-synced delay complete the engine.
+
 A Microtonic-inspired drum machine with eight independent percussion voices for MPC OS, with native sequencing, contextual Q-Links, reverb and delay.
 
 

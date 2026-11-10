@@ -1,10 +1,12 @@
 # πToniC — mode d’emploi
 
-Une boîte à rythmes inspirée de Microtonic, avec huit voix de percussion indépendantes.
+Une boîte à rythmes inspirée de Microtonic.
 
-Façonnez un son.  
-Construisez un motif.  
-Donnez à chaque voix son propre espace grâce à une réverbération et un delay partagés.
+πToniC propose 8 voix de percussion indépendantes, chacune associant du bruit filtré à un oscillateur à forme variable ou à la lecture d’un sample WAV.
+
+Son moteur sonore réunit modulation de hauteur, enveloppes d’amplitude, drive, EQ et réglages individuels par voix.
+
+Une reverb stéréo et un delay synchronisé au tempo complètent le moteur.
 
 Explorez **150 presets de kits Patternarium BEST convertis**, puis faites-les vôtres.
 

@@ -1,7 +1,7 @@
 """Standard 1.0.1 Gen1 package; no install, no publish, no sample redistribution."""
 from pathlib import Path
 import hashlib,json,shutil,subprocess,sys,zipfile,xml.etree.ElementTree as ET
-from config import B,FOLDER,VERSION
+from config import B,FOLDER,VERSION,DESCRIPTION
 bank=B/'Banks/PatternariumBest150';build=json.loads((bank/'Compiled/BUILD.json').read_text());assert build['programs']==150
 for name,digest in build['inputs'].items():assert hashlib.sha256((B/name).read_bytes()).hexdigest()==digest,'Stale build: '+name
 so=bank/'Compiled/pitonic.so';assert hashlib.sha256(so.read_bytes()).hexdigest()==build['outputs']['pitonic.so']
@@ -27,7 +27,7 @@ assert credits.exists();shutil.copy2(credits,stage/'PATTERNARIUM-CREDITS.md')
 entry=B/'build/sample-entry.xml';entry.write_text(ET.tostring(ET.Element('PLUGIN',name='πToniC',descriptiveName='πToniC',format='VST',category='Synth',manufacturer='Timo',version=VERSION.split('-',1)[0],file='%payload-path%/'+FOLDER+'/pitonic.so',uid='50695443',isInstrument='1',numInputs='0',numOutputs='2'),encoding='unicode'))
 runtime_version=VERSION.split('-',1)[0]
 out=B/'dist'/VERSION;out.mkdir(parents=True,exist_ok=True)
-subprocess.run([sys.executable,str(B/'third_party/open-mpc-release/tools/release.py'),'--so',str(so),'--skin',str(stage),'--entry',str(entry),'--version',runtime_version,'--id','pitonic','--repo','timomacquis/piToniC-MPC','--license','MIT AND LicenseRef-Patternarium','--about','Eight-voice percussion synthesis and WAV playback with shared reverb and delay.','-o',str(out)],check=True)
+subprocess.run([sys.executable,str(B/'third_party/open-mpc-release/tools/release.py'),'--so',str(so),'--skin',str(stage),'--entry',str(entry),'--version',runtime_version,'--id','pitonic','--repo','timomacquis/piToniC-MPC','--license','MIT AND LicenseRef-Patternarium','--about',DESCRIPTION,'-o',str(out)],check=True)
 z=out/('ToniC-'+runtime_version+'-mpc-armv7.zip');target=out/('piToniC-'+VERSION+'-mpc-armv7.zip');z.replace(target)
 subprocess.run([sys.executable,str(B/'third_party/open-mpc-release/tools/catalog_check.py'),str(target),'--catalog','--require-portable','--expect-id','pitonic','--expect-repo','timomacquis/piToniC-MPC'],check=True)
 with zipfile.ZipFile(target) as archive:
