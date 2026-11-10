@@ -6,4 +6,4 @@ The Open MPC registry controls these fields in catalog/plugins/<id>.json in open
 - Description: summary. Use the English paragraphs from PRODUCT-DESCRIPTION.json as plain text.
 - Preview: screenshot. Commit the chosen PNG/JPG here, then use its public raw HTTPS URL pinned to a commit or tag in the registry. The catalog card uses a 2:1 frame and may crop edges; clicking opens the full image.
 
-The existing Cover is retained for this presentation update. Documentation changes do not qualify a new plugin build or alter existing release ZIPs.
+πToniC uses Cover.jpg from the development folder for its current preview. Documentation changes do not qualify a new plugin build or alter existing release ZIPs.

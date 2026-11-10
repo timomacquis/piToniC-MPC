@@ -8,7 +8,7 @@ Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and i
 
 Shared stereo reverb and tempo-synced delay complete the engine.
 
-![πToniC](Cover.png)
+![πToniC](Cover.jpg)
 
 ## Features
 
