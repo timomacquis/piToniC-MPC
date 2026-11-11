@@ -14,7 +14,7 @@ shutil.copytree(B/'build/skin'/FOLDER,stage)
 shutil.copytree(bank/'Presets',stage/'Presets')
 # Ship user guidance and images, excluding research inventories and device logs.
 (stage/'docs').mkdir()
-for name in ['USER-MANUAL.md','MODE-EMPLOI.md','SAMPLE-LCD-1.0.2.md','RELEASE-NOTES-1.0.2.md','PRODUCT-DESCRIPTION.json']:
+for name in ['USER-MANUAL.md','MODE-EMPLOI.md','SAMPLE-LCD-1.0.2.md','RELEASE-NOTES-1.0.2.md','RELEASE-NOTES-1.0.3.md','PRODUCT-DESCRIPTION.json']:
  shutil.copy2(B/'docs'/name,stage/'docs'/name)
 shutil.copytree(B/'docs/images',stage/'docs/images')
 (stage/'licenses').mkdir()
@@ -23,7 +23,7 @@ for name in ['SELECTION.json','CONVERSION-REPORT.json','NAMES.md']:shutil.copy2(
 credits=B/'Releases/1.0.0/Public/PATTERNARIUM-CREDITS.md'
 if not credits.exists():credits=bank/'Runtime'/FOLDER/'PATTERNARIUM-CREDITS.md'
 assert credits.exists();shutil.copy2(credits,stage/'PATTERNARIUM-CREDITS.md')
-(stage/'PROVENANCE.json').write_text(json.dumps({'version':VERSION,'status':'release based on installed Gen1 candidate.2; exact-release install/uninstall not newly qualified','architecture':'armv7','programs':150,'engine_sha256':build['outputs']['pitonic.so'],'hardware_access':False,'samples_included':False,'source_hashes':build['inputs']},indent=2)+'\n')
+(stage/'PROVENANCE.json').write_text(json.dumps({'version':VERSION,'status':'Compact-panel UI installed as a skin trial; release rebuilt and checked offline; exact-package device qualification not newly performed','architecture':'armv7','programs':150,'engine_sha256':build['outputs']['pitonic.so'],'hardware_access':False,'samples_included':False,'source_hashes':build['inputs']},indent=2)+'\n')
 entry=B/'build/sample-entry.xml';entry.write_text(ET.tostring(ET.Element('PLUGIN',name='πToniC',descriptiveName='πToniC',format='VST',category='Synth',manufacturer='Timo',version=VERSION.split('-',1)[0],file='%payload-path%/'+FOLDER+'/pitonic.so',uid='50695443',isInstrument='1',numInputs='0',numOutputs='2'),encoding='unicode'))
 runtime_version=VERSION.split('-',1)[0]
 out=B/'dist'/VERSION;out.mkdir(parents=True,exist_ok=True)

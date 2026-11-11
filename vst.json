@@ -2,7 +2,7 @@
   "name": "\u03c0ToniC",
   "vendor": "Timo",
   "uid": "PiTC",
-  "version": 10002,
+  "version": 10003,
   "so": "pitonic.so",
   "params": "params.json",
   "custom_skin": true,

@@ -1,10 +1,10 @@
 """Original native MPC skin; shared cached artwork, no stock skin redistribution."""
-import json,math,hashlib,shutil
+import json,math,hashlib,shutil,os,copy
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont
 from config import B,FIELDS,FOLDER,VERSION
 P=json.loads((B/'params.json').read_text());I={p['key']:i for i,p in enumerate(P)}
-OUT=B/'build/skin'/FOLDER;A=OUT/'Plugin Skins'
+OUT=B/os.environ.get('PTON_SKIN_OUTPUT','build/skin')/FOLDER;A=OUT/'Plugin Skins'
 if OUT.exists():shutil.rmtree(OUT)
 A.mkdir(parents=True,exist_ok=True);defs=[]
 BG='#171c1f';PANEL='#141d24';FIELD='#242c31';INK='#f1f2ed';EDGE='#42515c';AMBER='#c7aa6d'
@@ -19,8 +19,8 @@ def art(name,x,y,w,h):
 def label(x,y,w,h,kind='Value',n=26):
  c=child('Label',dict(version=1,textStyle=dict(version=1,font=dict(version=1,name='Titillium Web',style='Regular',height=float(n)),colour='fff1f2ed',justification='left verticallyCentred',case='Original'),type=kind,handleName='Data'),x,y,w,h);c['bounds']['acceptsHWFocus']='No';return c
 def action(h,event='Mouse Down'):return {'version':2,'onAction':event,'handler':h,'handleName':'Data','additionalData':'','handle remapping':{'version':1,'map':[]}}
-def local(name,parts,actions=None):
- if actions:
+def local(name,parts,actions=None,focus_ring=True):
+ if actions and focus_ring:
   for part in parts:part['bounds']['acceptsHWFocus']='No'
   w=max(int(c['bounds']['bounds'].split()[0])+int(c['bounds']['bounds'].split()[2]) for c in parts);h=max(int(c['bounds']['bounds'].split()[1])+int(c['bounds']['bounds'].split()[3]) for c in parts)
   fn=f'focus_{w}_{h}.png'
@@ -137,6 +137,46 @@ def tone_sample(parts,v):
  for key,title,x in [('tone_q4','PITCH AMOUNT',648),('tone_q5','PITCH TIME / RATE',960)]:parts.append(dial(key,title,x,336,300,110,selected))
  parts.append(dial('tone_q6','PITCH VELOCITY',960,450,300,86,selected))
 
+# Compact selection panels; first-level widgets are kept byte-for-byte intact.
+compact_layout=[]
+def modal_base(parts,key,title,options,flag,cond,close_key=None,width=None,height=None,caption=None):
+ opener=next(c for c in parts if any(m['key']=='Data' and m['value']==f'Parameter {I[key]}' for m in c['handle remapping']['map']))
+ xx,yy,ow,oh=map(int,opener['bounds']['bounds'].split())
+ n=len(options);cols=3 if n in [3,5] else min(2,n);rows=math.ceil(n/cols)
+ bw=max(110,math.ceil(max([font(22).getlength(t) for t in options] or [100]))+32)
+ w=width or max(420,48+cols*bw+(cols-1)*12);bw=(w-48-(cols-1)*12)//cols;footer=70+rows*36+(rows-1)*12+22;h=height or footer+60
+ x=(1280-w)//2;y=(628-h)//2
+ if x<xx+ow and x+w>xx and y<yy+oh and y+h>yy:
+  if yy-h-12>=0:y=yy-h-12
+  elif yy+oh+12+h<=628:y=yy+oh+12
+  elif xx-w-12>=0:x=xx-w-12
+  elif xx+ow+12+w<=1280:x=xx+ow+12
+ close_key=close_key or flag
+ if not (A/'compact_scrim.png').exists():Image.new('RGBA',(1280,628),(4,7,13,155)).save(A/'compact_scrim.png')
+ blocker=local('compact_blocker_'+str(len(defs)),[art('compact_scrim.png',0,0,1280,628)],[action('Toggle Switch')],focus_ring=False)
+ cs=[place(blocker,close_key,0,0,1280,628)]
+ fn=f'compact_opener_{len(defs)}.png';bitmap(fn,ow,oh,caption or '', '#383122',AMBER)
+ if not caption:
+  im=Image.open(A/fn);ImageDraw.Draw(im).text((10,8),'TIME',font=font(18),fill=INK);im.save(A/fn)
+ raised=[art(fn,0,0,ow,oh)]
+ if not caption:raised.append(label(20,40,ow-40,52,n=30))
+ raised_type=local('compact_raised_'+str(len(defs)),raised);c=place(raised_type,'del_div' if not caption else key,xx,yy,ow,oh);c['bounds']['acceptsHWFocus']='No';cs.append(c)
+ panel=f'compact_panel_{w}_{h}.png';bitmap(panel,w,h,'',PANEL)
+ surface=local('compact_surface_'+str(len(defs)),[art(panel,0,0,w,h)],[action('Q-Link')],focus_ring=False);cs.append(place(surface,close_key,x,y,w,h))
+ fn='compact_title_'+hashlib.sha256(title.encode()).hexdigest()[:12]+'.png';im=Image.new('RGB',(w-48,32),PANEL);ImageDraw.Draw(im).text((0,16),title,font=font(22),fill=INK,anchor='lm');im.save(A/fn);cs.append(art(fn,x+24,y+14,w-48,32))
+ compact_layout.append(dict(key=key,flag=flag,title=title,panel=[x,y,w,h],opener=[xx,yy,ow,oh],columns=cols,options=n,conditions=cond))
+ return cs,x,y,w,h,bw,cols,footer
+def finish_modal(parts,cs,cond):
+ for c in cs:c['bounds']['additionalInvalidatingHandles'].extend(cond);parts.append(c)
+def compact_picker(parts,key,title,options,cond):
+ flag=key+'__open';cs,x,y,w,h,bw,cols,footer=modal_base(parts,flag,title,options,flag,cond,caption=None if key=='del_div' else title)
+ for op,caption in enumerate(options):
+  tag='compact_choice_'+hashlib.sha256((key+str(op)).encode()).hexdigest()[:14]
+  for state in [0,1]:bitmap(tag+f'_{state}.png',bw,36,caption,'#383122' if state else FIELD,AMBER if state else INK)
+  native=child('Button',dict(version=2,onImage=tag+'_1.png',offImage=tag+'_0.png',buttonId=op,numButtonsInGroup=len(options),handleName='Data',gestureBehaviour='Instant'),0,0,bw,36)
+  cs.append(place(local(tag,[native],[action('Q-Link')]),key,x+24+(op%cols)*(bw+12),y+70+(op//cols)*48,bw,36))
+ cs.append(toggle(flag,'CLOSE',x+(w-160)//2,y+footer,160,36));finish_modal(parts,cs,cond)
+
 tabs=[]
 for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
  parts=[art('background.png',0,0,1280,628)];selectors(parts)
@@ -170,42 +210,25 @@ for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
   parts.append(place(local('delay_div_open',[content[0],art('delay_time_caption.png',10,8,264,25),read],[action('Toggle Switch')]),'del_div__open',660,154,284,122,[gate('del_sync',1)]))
  if page!=3:tools(parts,page==4)
  if page==3:
-  for c in parts[1:]:c['bounds']['additionalInvalidatingHandles'].append(gate('del_div__open',0))
-  cond=[gate('del_div__open',1)];bitmap('popup.png',1080,456,'',PANEL);c=art('popup.png',100,86,1080,456);c['bounds']['additionalInvalidatingHandles']=cond;parts.append(c)
-  for op,caption in enumerate(['1/16','1/8','1/8 D','1/4','1/2']):
-   tag=f'delay_div_option{op}';bitmap(tag+'.png',440,62,caption);native=child('Button',dict(version=2,onImage=tag+'.png',offImage=tag+'.png',buttonId=op,numButtonsInGroup=5,handleName='Data',gestureBehaviour='Instant'),0,0,440,62)
-   parts.append(place(local(tag,[native],[action('Q-Link')]),'del_div',200+(op%2)*460,150+(op//2)*90,440,62,cond))
-  parts.append(toggle('del_div__open','CANCEL',470,442,340,56,cond))
- # Hide all interactive background controls while any picker on this page is open.
- if page<3:
-  closed=[gate(f'v{v}_{f[0]}__open',0) for v in range(8) for f in FIELDS[page*8:page*8+8] if isinstance(f[5],list)]
-  for c in parts[1:]:c['bounds']['additionalInvalidatingHandles'].extend(closed)
- # Opaque option panels, added last; wrapper closes on exact option selection.
+  compact_picker(parts,'del_div','DELAY TIME',['1/16','1/8','1/8 D','1/4','1/2'],[gate('del_div__open',1)])
  if page<3:
   for v in range(8):
-   for i in range(8):
-    f=FIELDS[page*8+i]
-    if not isinstance(f[5],list):continue
-    key=f'v{v}_{f[0]}';flag=key+'__open';cond=[gate('selected',v,8),gate(flag,1)];bitmap('popup.png',1080,456,'',PANEL);parts.append(art('popup.png',100,86,1080,456));parts[-1]['bounds']['additionalInvalidatingHandles']=cond
-    for op,caption in enumerate(f[5]):
-     tag=f'option_{key}_{op}';bitmap(tag+'.png',440,62,caption)
-     native=child('Button',dict(version=2,onImage=tag+'.png',offImage=tag+'.png',buttonId=op,numButtonsInGroup=len(f[5]),handleName='Data',gestureBehaviour='Instant'),0,0,440,62)
-     parts.append(place(local(tag,[native],[action('Q-Link')]),key,200+(op%2)*460,150+(op//2)*90,440,62,cond))
-    parts.append(toggle(flag,'CANCEL',470,442,340,56,cond))
-
+   for f in FIELDS[page*8:page*8+8]:
+    if isinstance(f[5],list):compact_picker(parts,f'v{v}_{f[0]}',f[1],f[5],[gate('selected',v,8),gate(f'v{v}_{f[0]}__open',1)])
  if page==0:
-  for c in parts[1:]:c['bounds']['additionalInvalidatingHandles'].append(gate('browse',0))
   cond=[gate('browse',1)]
-  bitmap('sample_browser_bg.png',1240,604,'',PANEL);c=art('sample_browser_bg.png',20,4,1240,604);c['bounds']['additionalInvalidatingHandles']=cond;parts.append(c)
-  for key,x,y,w,h,n in [('browse_path',40,64,1180,36,24),('browse_page',560,550,260,42,24)]:parts.append(readout(key,x,y,w,h,n));parts[-1]['bounds']['additionalInvalidatingHandles']=cond
-  for key,caption,x,w in [('browse_up','UP',40,130),('browse_sd','USER / SD',182,180),('browse_media','DRIVES',374,180),('browse_close','CANCEL',1060,170)]:parts.append(toggle(key,caption,x,12,w,42,cond))
+  cs,x,y,w,h,_,_,_=modal_base(parts,'load','LOAD SAMPLE',[''], 'browse',cond,close_key='browse_close',width=1180,height=418,caption='LOAD')
+  compact_layout[-1].update(kind='sample_browser',columns=2,options=8)
+  cs.append(readout('browse_path',x+24,y+100,w-48,36,24))
+  for key,caption,dx,bw in [('browse_up','UP',24,120),('browse_sd','USER / SD',156,180),('browse_media','DRIVES',348,180),('browse_close','CLOSE',w-184,160)]:cs.append(toggle(key,caption,x+dx,y+54,bw,36))
   for i in range(8):
-   x=40+(i%2)*608;y=116+(i//2)*104;key=f'browse_item{i}'
-   bitmap('sample_entry.png',592,84,'',FIELD);parts.append(place(local('sample_entry'+str(i),[art('sample_entry.png',0,0,592,84),label(14,12,562,60,n=26)],[action('Toggle Switch')]),key,x,y,592,84,cond))
-  parts.append(toggle('browse_prev','PREVIOUS',40,550,220,42,cond));parts.append(toggle('browse_next','NEXT',1000,550,220,42,cond))
+   key=f'browse_item{i}';fn='compact_sample_entry.png';bitmap(fn,560,36,'',FIELD)
+   cs.append(place(local('compact_sample_entry'+str(i),[art(fn,0,0,560,36),label(12,2,536,32,n=26)],[action('Toggle Switch')]),key,x+24+(i%2)*572,y+148+(i//2)*48,560,36))
+  cs.append(toggle('browse_prev','PREVIOUS',x+24,y+354,180,36));cs.append(readout('browse_page',x+(w-260)//2,y+354,260,36,24));cs.append(toggle('browse_next','NEXT',x+w-204,y+354,180,36));finish_modal(parts,cs,cond)
 
  name=local('page'+str(page),parts);tabs.append(dict(version=3,tabName=title,fnKeyIndex=page,fnKeySubIndex=0,qlinkBoundsData=['0 0 0 0'],componentName=name,initialSize='0 0 1280 628',scale=1.))
 J={'pageData':{'version':1,'info':{'version':1,'type':'CompleteDescription'},'componentDefinitions':{'version':1,'importFiles':['/usr/share/Akai/Content/Synths/Generic/Generic Knob Overlay.json','/usr/share/Akai/Content/Synths/Generic/Generic Menu Overlay.json'],'localComponentDefinitions':defs},'tabs':tabs}}
+(B/'Validation/UI-Compact-Panels/layout.json').write_text(json.dumps(compact_layout,ensure_ascii=False,indent=2)+'\n')
 (A/'TUI.json').write_text(json.dumps(J,ensure_ascii=False,separators=(',',':')))
 ql=[]
 page_keys=[[f'tone_q{i}' for i in range(7)], [f'q1_{i}' for i in [0,2,3,4,5]], [f'q2_{i}' for i in range(7)], ['rev_size','rev_decay','rev_damp','rev_return','fx_time','del_feedback','del_tone','del_return'], [f'v{i}_level' for i in range(8)]]

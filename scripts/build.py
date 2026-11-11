@@ -8,7 +8,7 @@ flags=['-std=c11','-D_POSIX_C_SOURCE=200809L','-O2','-fPIC','-shared','-Ibuild',
 sources=['src/engine.c','third_party/mpc-wrapper/wrapper/vst2_wrap.c']
 run(['gcc',*flags,*sources,'-lpthread','-lm','-ldl','-o','build/pitonic-x86_64.so'])
 root=os.environ.get('PITONIC_SYSROOT')
-if not root:root=str(B.parent/'piClideaN MPC/toolchain/root')
+if not root:root=str(B.parent/'πClideaN/toolchain/root')
 from pathlib import Path
 root=Path(root);cc=root/'usr/bin/arm-linux-gnueabihf-gcc-12'
 if not cc.exists():raise SystemExit('Set PITONIC_SYSROOT to the ARMv7 compiler/sysroot before building the device plugin.')

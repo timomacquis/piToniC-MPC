@@ -12,6 +12,9 @@ Shared stereo reverb and tempo-synced delay complete the engine.
 
 ## Features
 
+- Compact selection panels over the dimmed current screen, yellow opening selectors and 36 px panel buttons.
+
+
 - Per-voice SYNTH / SAMPLE source with mono/stereo WAV loading (up to ten seconds).
 - TUNE and START controls, waveform overview and contextual SAMPLE Q-Links.
 - Samples keep their original paths; no audio is embedded in presets or projects.
@@ -30,9 +33,9 @@ Shared stereo reverb and tempo-synced delay complete the engine.
 
 ## Download and install
 
-[Download πToniC 1.0.2 for Gen1 ARMv7](https://github.com/timomacquis/piToniC-MPC/releases/tag/v1.0.2).
+[Download πToniC 1.0.3 for Gen1 ARMv7](https://github.com/timomacquis/piToniC-MPC/releases/tag/v1.0.3).
 
-The release package is **piToniC-1.0.2-mpc-armv7.zip**.
+The release package is **piToniC-1.0.3-mpc-armv7.zip**.
 
 This build targets **Gen1 ARMv7** devices with MPC OS 3.x and standalone VST support. Hardware use has been on an Akai Force running OS 3.10.0.49. A 64-bit Gen2 package is not provided.
 
@@ -46,7 +49,7 @@ Factory sends start at zero. Raise a REVERB or DELAY send in MIXER, then adjust 
 
 [User manual](docs/USER-MANUAL.md) · [Mode d’emploi français](docs/MODE-EMPLOI.md)
 
-![πToniC shared effects](docs/images/effects-commander-1.0.2.png)
+![πToniC shared effects](docs/images/effects-force-1.0.2.png)
 
 ## Development
 

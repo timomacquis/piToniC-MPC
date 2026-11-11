@@ -1,4 +1,4 @@
-# πToniC 1.0.2
+# πToniC 1.0.3
 
 A Microtonic-inspired drum machine.
 
@@ -8,13 +8,12 @@ Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and i
 
 Shared stereo reverb and tempo-synced delay complete the engine.
 
-- Fix TONE control bindings so visible controls and contextual Q-Links use the same TUNE/START aliases in SAMPLE and FREQUENCY/WAVE MORPH aliases in SYNTH.
-- Add a black LCD sample overview: one waveform for mono, separate left/right traces for stereo and a dashed START marker.
-- Frame the audible sample tail automatically with a small margin, preserving leading silence. This only changes the display: PCM, playback duration and the stored START percentage remain unchanged.
-- Cache the display on the loading worker; turning START or TUNE does not rebuild or resend the waveform.
-- Reduce LOAD height and balance its vertical spacing.
-- Refresh English/French manuals with current Force screenshots and place SAMPLE inside TONE.
+- Replace full-page selectors with compact panels sized to their contents.
+- Keep the current screen visible under a dim overlay and highlight the opening selector in yellow.
+- Use 36 px buttons within panels, preserving the existing main-screen control sizes.
+- Apply the design to voice option selectors and delay divisions.
+- Make the sample browser compact, retaining eight entries, navigation and the existing larger text sizes.
 
-All 418 parameters from 1.0.1 retain their indices. Passive display parameters are appended. The 150 native Patternarium BEST kits and original sample paths are preserved. Keep older project copies: older binaries cannot read sample-enriched states.
+Sound synthesis, sample playback, contextual Q-Links, parameter indices, saved states and the 150 Patternarium BEST kits are preserved.
 
-Gen1 ARMv7 / Force, MPC OS 3.x. Based on the candidate installed on the author's Force. TUNE/START routing and marker movement were confirmed on candidate.1; the revised framing and LOAD spacing were installed as candidate.2. No new exact-release install/uninstall qualification or Gen2 hardware claim is made.
+Gen1 ARMv7 / Force. The skin was installed on the author's Force. Offline checks compare original control bindings, geometry, native selector encoding, parameter identity and Q-Links. No new exhaustive touch/audio or exact-package install/uninstall qualification is claimed; no Gen2 package is included.

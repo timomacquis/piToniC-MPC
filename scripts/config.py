@@ -1,6 +1,6 @@
 from pathlib import Path
 B=Path(__file__).resolve().parents[1]
-VERSION='1.0.2'
+VERSION='1.0.3'
 FOLDER='Timo - VST - πToniC'
 # Physical units. All canonical voice parameters stay at fixed append-only indices.
 FIELDS=[

@@ -191,3 +191,8 @@ Les anciens presets et projets πToniC PT1 restent lisibles ; ils rétablissent 
 ## État de validation
 
 Le Step Sequencer natif, la banque PRESET, le focus, l’activité azur et les Q-Links des quatre pages initiales sont validés par Greg sur Force. La version 1.0.0, y compris EFFECTS et les sends, a été essayée par Greg sur Force : lecture, cinq onglets/Q-Links, effets et réouverture du projet avec ses réglages confirmés. Installation, désinstallation et réinstallation standard vérifiées.
+
+
+### Panneaux de sélection
+
+Les sélecteurs ouvrent un panneau compact au-dessus de l’écran assombri. Le bouton d’ouverture devient jaune. Choisis une option, ou ferme le panneau sans modifier le réglage. Les boutons internes font 36 px ; les commandes de la page gardent leur taille.

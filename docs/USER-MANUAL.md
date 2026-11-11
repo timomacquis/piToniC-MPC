@@ -185,3 +185,8 @@ Use MPC's native preset save function to keep your own kits, including sends and
 Legacy πToniC PT1 states load with zero sends and default effects. Older binaries cannot load new effect-enriched states.
 
 The kits are adapted parameter recipes for πToniC's own engine. They do not reproduce Microtonic's sound exactly. Source credits accompany the bank.
+
+
+### Selection panels
+
+Selectors open a compact panel over the dimmed current screen. The opening selector turns yellow. Choose an option, or close the panel without changing the setting. Panel buttons are 36 px high; main-page controls retain their size.
