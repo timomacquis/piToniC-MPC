@@ -36,3 +36,6 @@ ASAN_OPTIONS=detect_leaks=1 build/factory-test
 Offline tests cover voice routing, MIDI offsets, state parsing, effect stability, tempo, activity, native programs and Q-Link document structure. They do not replace listening, touch/Q-Link checks or installation/removal tests on the intended hardware.
 
 Keep existing parameter indices unchanged. Add new parameters at the end of `params.lock`.
+
+
+[Gen2 ARM64 build and validation scope](INSTALLATION-GEN2.md).

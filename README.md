@@ -66,3 +66,8 @@ The 150 factory kits are converted parameter recipes from the Patternarium Best 
 See [THIRD-PARTY.md](THIRD-PARTY.md) and the package's PATTERNARIUM-CREDITS.md. No Microtonic factory preset bank or proprietary DSP is included.
 
 Unofficial community software; not affiliated with Akai, inMusic or Sonic Charge.
+
+
+## Gen2 ARM64 — 1.0.3
+
+[Download the Gen2 package](https://github.com/timomacquis/piToniC-MPC/releases/download/v1.0.3/piToniC-1.0.3-mpc-aarch64.zip) · [Gen2 status and guide](docs/INSTALLATION-GEN2.md). **Not tested on Gen2 hardware.** PC checks pass; Gen1 remains unchanged.
