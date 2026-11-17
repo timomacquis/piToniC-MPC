@@ -12,7 +12,8 @@ Shared stereo reverb and tempo-synced delay complete the engine.
 
 ## Features
 
-- Compact selection panels over the dimmed current screen, yellow opening selectors and 36 px panel buttons.
+- Compact selection panels over the dimmed current screen, amber opening selectors and 36 px panel buttons.
+- Shared colour charter: blue outline for selectors without a neutral value, amber once CHOKE or STEREO NOISE leaves OFF, gold sample waveform.
 
 
 - Per-voice SYNTH / SAMPLE source with mono/stereo WAV loading (up to ten seconds).
@@ -33,11 +34,14 @@ Shared stereo reverb and tempo-synced delay complete the engine.
 
 ## Download and install
 
-[Download πToniC 1.0.3 for Gen1 ARMv7](https://github.com/timomacquis/piToniC-MPC/releases/tag/v1.0.3).
+πToniC **1.0.4** — [release v1.0.4](https://github.com/timomacquis/piToniC-MPC/releases/tag/v1.0.4):
 
-The release package is **piToniC-1.0.3-mpc-armv7.zip**.
+| Device generation | Download |
+| --- | --- |
+| **Gen1 / Force** — ARM32 | [piToniC-1.0.4-vst2-armv7.zip](https://github.com/timomacquis/piToniC-MPC/releases/download/v1.0.4/piToniC-1.0.4-vst2-armv7.zip) |
+| **Gen2** — ARM64 (not tested on hardware) | [piToniC-1.0.4-vst2-aarch64.zip](https://github.com/timomacquis/piToniC-MPC/releases/download/v1.0.4/piToniC-1.0.4-vst2-aarch64.zip) |
 
-This build targets **Gen1 ARMv7** devices with MPC OS 3.x and standalone VST support. Hardware use has been on an Akai Force running OS 3.10.0.49. A 64-bit Gen2 package is not provided.
+Unzip, copy the folder **`Timo - VST - πToniC`** into **`VST2 Plugins`** at the root of a drive (User Memory: `/sdcard/VST2 Plugins`), then restart MPC. This is the installation method defined by Akai's plugin SDK: no installer script, no `Synths` folder, no MPC.settings entry. Requires MPC OS 3.10.1+ with Enhancements and External Plugin Support enabled. Hardware use: Akai Force.
 
 See [Installation and removal](docs/INSTALLATION.md).
 
@@ -63,11 +67,6 @@ Voice and effects architecture draws on WeirdDrums by Daniele Filaretti and Weir
 
 The 150 factory kits are converted parameter recipes from the Patternarium Best of Generation G04–G28 collection. Original generated sounds: Sonic Charge / Patternarium. Attribution and selection provenance accompany the bank. The engine is independent and does not claim identical sound to Microtonic.
 
-See [THIRD-PARTY.md](THIRD-PARTY.md) and the package's PATTERNARIUM-CREDITS.md. No Microtonic factory preset bank or proprietary DSP is included.
+See [THIRD-PARTY.md](THIRD-PARTY.md) and the bank's NAMES.md / CONVERSION-REPORT.json. No Microtonic factory preset bank or proprietary DSP is included.
 
 Unofficial community software; not affiliated with Akai, inMusic or Sonic Charge.
-
-
-## Gen2 ARM64 — 1.0.3
-
-[Download the Gen2 package](https://github.com/timomacquis/piToniC-MPC/releases/download/v1.0.3/piToniC-1.0.3-mpc-aarch64.zip) · [Gen2 status and guide](docs/INSTALLATION-GEN2.md). **Not tested on Gen2 hardware.** PC checks pass; Gen1 remains unchanged.

@@ -1,8 +1,16 @@
 build/
 __pycache__/
 *.pyc
+
+# User-supplied commercial preset conversions: never publish.
+Private/
+
+# Local reference archives and generated distribution trees.
+reference/presets/
+dist/
+Banks/*/Build/
 Banks/*/Compiled/
 Banks/*/Generated/
 Banks/*/Runtime/
-Banks/*/Build/
-dist/
+Validation/effects/*.so
+Releases/

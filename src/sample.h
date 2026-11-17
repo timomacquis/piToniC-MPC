@@ -46,15 +46,18 @@ static Sample *sp_read(const char *path,int *status){
  unsigned frames=bytes/align;if(frames>rate*10u||frames>SP_MAX_FRAMES){*status=5;fclose(f);return NULL;}
  Sample *s=calloc(1,sizeof *s);if(!s){*status=6;fclose(f);return NULL;}s->data=malloc((size_t)frames*ch*sizeof(float));if(!s->data){sp_free(s);*status=6;fclose(f);return NULL;}
  float low[2][SP_LCD_COLS]={{0}},high[2][SP_LCD_COLS]={{0}};
- s->frames=frames;s->rate=rate;s->channels=ch;snprintf(s->path,sizeof s->path,"%s",path);fseek(f,data,SEEK_SET);
- for(unsigned i=0;i<frames*ch;i++){if(fread(h,1,bits/8,f)!=bits/8){sp_free(s);fclose(f);return NULL;}float v;
- if(fmt==3){uint32_t u=sp_u32(h);memcpy(&v,&u,4);if(!isfinite(v)){sp_free(s);fclose(f);return NULL;}}
+ s->frames=frames;s->rate=rate;s->channels=ch;snprintf(s->path,sizeof s->path,"%s",path);
+ /* 1.0.4 : une seule lecture du bloc data (worker uniquement), au lieu d'un fread par échantillon. */
+ unsigned char *raw=malloc((size_t)frames*align);if(!raw){sp_free(s);*status=6;fclose(f);return NULL;}
+ if(fseek(f,data,SEEK_SET)||fread(raw,1,(size_t)frames*align,f)!=(size_t)frames*align){free(raw);sp_free(s);fclose(f);return NULL;}
+ for(unsigned i=0;i<frames*ch;i++){const unsigned char *h=raw+(size_t)i*(bits/8);float v;
+ if(fmt==3){uint32_t u=sp_u32(h);memcpy(&v,&u,4);if(!isfinite(v)){free(raw);sp_free(s);fclose(f);return NULL;}}
  else if(bits==16)v=(int16_t)sp_u16(h)/32768.f;
  else if(bits==24){int32_t v24=(int32_t)((unsigned)h[0]<<8|(unsigned)h[1]<<16|(unsigned)h[2]<<24);v=v24/2147483648.f;}
  else v=(int32_t)sp_u32(h)/2147483648.f;
  if(v>1)v=1;if(v< -1)v=-1;s->data[i]=v;unsigned bin=(unsigned)((uint64_t)(i/ch)*SP_BINS/frames);if(fabsf(v)>s->peaks[bin])s->peaks[bin]=fabsf(v);if(v<s->minima[bin])s->minima[bin]=v;if(v>s->maxima[bin])s->maxima[bin]=v;
-
  }
+ free(raw);
  float peak=0;for(unsigned bin=0;bin<SP_BINS;bin++)if(s->peaks[bin]>peak)peak=s->peaks[bin];s->preview_scale=peak>1e-12f?10.f/peak:0;
  /* Display-only tail framing: -60 dB relative to peak, 5% margin (at
   * least 2 ms). Keep the original leading silence and every audio frame. */
@@ -91,7 +94,7 @@ static SampleIO *sp_create(void){SampleIO *io=calloc(1,sizeof *io);if(!io)return
 static void sp_destroy(SampleIO *io){if(!io)return;atomic_store(&io->stop,1);if(io->started)pthread_join(io->thread,NULL);for(int i=0;i<8;i++){sp_free(io->current[i]);sp_free(atomic_load(&io->pending[i]));sp_free(atomic_load(&io->retired[i]));}pthread_mutex_destroy(&io->mutex);free(io);}
 static int sp_start(SampleIO *io){if(io->started)return 1;if(pthread_create(&io->thread,NULL,sp_worker,io))return 0;io->started=1;return 1;}
 static int sp_request(SampleIO *io,int v,const char *path){if(!io||v<0||v>=8||strlen(path)>=SP_PATH||(path[0]&&path[0]!='/')||strchr(path,'\n')||strchr(path,'\r'))return 0;
- if(!sp_start(io)||pthread_mutex_trylock(&io->mutex))return 0;snprintf(io->requested[v],SP_PATH,"%s",path);atomic_fetch_add(&io->request[v],1);atomic_store(&io->status[v],path[0]?1:0);pthread_mutex_unlock(&io->mutex);return 1;}
-static void sp_nav(SampleIO *io,const char *path){if(!io||strlen(path)>=SP_PATH||!sp_start(io)||pthread_mutex_trylock(&io->mutex))return;snprintf(io->navigation,SP_PATH,"%s",path);atomic_fetch_add(&io->nav_request,1);pthread_mutex_unlock(&io->mutex);}
+ if(!sp_start(io)||pthread_mutex_lock(&io->mutex))return 0;snprintf(io->requested[v],SP_PATH,"%s",path);atomic_fetch_add(&io->request[v],1);atomic_store(&io->status[v],path[0]?1:0);pthread_mutex_unlock(&io->mutex);return 1;}
+static void sp_nav(SampleIO *io,const char *path){if(!io||strlen(path)>=SP_PATH||!sp_start(io)||pthread_mutex_lock(&io->mutex))return;snprintf(io->navigation,SP_PATH,"%s",path);atomic_fetch_add(&io->nav_request,1);pthread_mutex_unlock(&io->mutex);}
 /* Audio-side ownership transfer only; worker frees retired buffers. */
 static int sp_commit(SampleIO *io,int i){if(!io||atomic_load(&io->retired[i]))return 0;Sample *s=atomic_exchange(&io->pending[i],NULL);if(!s)return 0;Sample *old=io->current[i];io->current[i]=s;atomic_store(&io->retired[i],old);return 1;}

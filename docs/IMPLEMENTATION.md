@@ -1,46 +1,49 @@
-# Engine and implementation
+# πToniC — architecture actuelle
 
-## Audio and MIDI
+Base : **1.0.2**. Les [spécifications](SPECIFICATIONS.md) décrivent le périmètre ; les [notes de release](RELEASE-NOTES-1.0.2.md) précisent ce qui a été qualifié.
 
-Eight independent percussion voices run at 44.1 kHz. Each voice combines a morphing oscillator and filtered noise, with separate amplitude envelopes, pitch modulation, stereo positioning, drive and EQ. Per-instance state owns the voices, random generators, caches and effect buffers.
+## Synthèse et MIDI
 
-MIDI notes 36–43 and aliases 0–7 trigger the voices. Note Off does not gate these percussion envelopes. Mute/Solo excludes new triggers; a short release handles voices already sounding. Choke groups use deterministic same-frame priority.
+Huit voix dans une instance VST2. Le contrat du moteur est 44 100 Hz, stéréo signé 16 bits ; le wrapper convertit les tranches de rendu de 1 à 128 frames vers la sortie float de l’hôte.
 
-The VST2 wrapper is built with SAMPLE_ACCURATE. Events retain their deltaFrames positions; the engine renders variable sub-blocks around their offsets. There is no separate sequencing thread or internal pattern sequencer.
+Oscillateur sinus/triangle/dent-de-scie/carré avec morphing, bruit filtré, enveloppes d’amplitude et de hauteur, sensibilités à la vélocité, drive et EQ par voix. Les paramètres dérivés sont mis en cache ; voix silencieuses et chemins inutilisés évitent leurs calculs. Les changements de niveau, retriggers et releases utilisent de courtes transitions.
 
-## Shared effects
+Les notes 0–7 et 36–43 adressent A01–A08. Les Note Off ne raccourcissent pas les enveloppes de percussion. Le MIDI ne déplace pas la sélection d’édition. Le Step Sequencer natif a été validé sur la Force ; il ne s’agit pas d’un séquenceur ajouté au moteur.
 
-Two post-level/post-pan send buses feed one shared reverb and one shared delay. Dry and wet signals are summed before the existing output gain and final int16 limiting.
+## SAMPLE et affichage
 
-The reverb uses eight damped combs and four allpasses. Size moves interpolated taps; decay determines nominal feedback RT60. The delay uses fractional stereo reads, filtered cross-feedback and a six-second buffer. Cached coefficients and smoothed sends, time, returns and toggles reduce per-sample work and control discontinuities.
+Le worker de chargement possède les accès fichiers, allocations et libérations des WAV. Le rendu n’effectue pas ces opérations. La substitution du sample remplace la source tonale ; bruit, enveloppes et traitements restent disponibles.
 
-SYNC receives host tempo through the wrapper's HAS_LFO_BPM path. It supports 20–400 BPM and falls back to 120 BPM before receiving a valid tempo. Effects skip network processing with no input or remaining tail. Buffers are allocated with the instance; render does not allocate or access files or the network.
+Les extrema min/max sont calculés au chargement, puis mis en cache : 288 colonnes par canal. START/TUNE ne recalculent ni ne renvoient l’onde. Le cadrage de fin silencieuse ne change ni le PCM ni le pourcentage START enregistré. Voir [les règles précises du LCD](SAMPLE-LCD-1.0.2.md).
 
-Effect tails are transient. OFF fades the input and return while the tail drains; quick re-enable can expose the remainder. Preset/state recall clears the buffers.
+## Effets partagés
 
-## Parameters and Q-Links
 
-The parameter table is append-only and locked by `params.lock`. Canonical voice parameters retain fixed indices; contextual aliases route TONE, NOISE and CHARACTER controls to the selected voice. MIXER maps to eight independent levels. EFFECTS maps to shared controls, including a TIME alias that follows SYNC/FREE and accumulates small discrete nudges.
+Eight existing voices feed two stereo buses after level, pan, retrigger crossfade and mute/solo release. Each bus owns one shared effect instance, never eight per-voice effects. The dry mix remains unchanged. Returns are summed before the existing output gain and final int16 clipping.
 
-The skin ships Q-Links.json, Q-Links - 8by1.json and Q-Links - 4by4.json. Each contains Screen Mode and Program Mode sections. The Force's eight physical positions are mapped through slots 13, 9, 5, 1, 14, 10, 6, 2. Unused slots remain -1.
+- Reverb: eight damped feedback combs, four allpasses; independent left/right networks. SIZE changes interpolated delay taps smoothly, DECAY sets nominal feedback RT60, DAMPING controls the loop low-pass. Diffusion and filtering affect perceived decay.
+- Delay: stereo fractional ring reads, cross-channel filtered feedback. SYNC uses native host tempo via the existing HAS_LFO_BPM wrapper hook; FREE uses 20–1500 ms. Divisions: 1/16, 1/8, dotted 1/8, 1/4, 1/2. A six-second buffer covers 20–400 BPM; initial fallback is 120 BPM. No new clock thread or MIDI port.
+- Tone is a cached low-pass coefficient. Feedback is limited to 90%. Sends, returns and effect toggles ramp. Time changes use a smoothed read position and can pitch-shift the existing repeats.
+- Networks stop processing when no input/tail is present. Silence and feedback paths suppress tiny denormal values. Rings are allocated once with the engine instance (about 2.2 MiB for the effect structure), even when unused; no per-sample allocation or file I/O. This memory allocation is not a device CPU measurement.
+- OFF fades the input and return; the internal tail drains. Rapid re-enable may reveal the remaining tail. Mute/Solo excludes new triggers and releases the voice; already accumulated effect tails continue. A discrete preset/state load clears transient effect buffers.
 
-The wrapper retains bounded parameter notifications, logarithmic control normalization and direct parameter lookup. Ordinary writes do not rebuild the whole parameter screen. Skin artwork and filmstrips are shared. The native focus outline and transient azure activity overlays do not change voice selection.
+The architecture is adapted from the preserved Weird Dreams source by Vincent Fillion (based on WeirdDrums); the new bounded DSP is in src/effects.h. It does not compile the upstream compressor, master EQ or full application.
 
-## Native presets and state
 
-The built-in bank exposes 150 VST programs, with full-kit states loaded transactionally. Program enumeration populates the native PRESET menu; XPL browser copies serve a separate purpose.
+## Paramètres, presets et Q-Links
 
-The PTPROG1 wrapper chunk stores program index and complete edited state. PT1 describes the voices and A/B banks; an optional FX1 suffix stores sends and shared effect settings. Validation rejects incomplete or invalid states before committing them. Re-echoing the current program does not erase restored edits.
+Les paramètres sont ajoutés en fin de table, jamais réordonnés. Les contrôles visibles TONE et les Q-Links physiques utilisent les mêmes alias contextuels `tone_q` : deux chemins cohérents vers les paramètres canoniques de la voix sélectionnée.
 
-Legacy PT1 states load with zero sends and default effects. Effect-enriched states require a binary supporting FX1. No waveform or tail buffer is persisted.
+Le menu PRESET énumère des programmes VST : déposer des XPL dans un dossier de sauvegarde ne suffit pas. La banque native contient 150 programmes Patternarium BEST. Le wrapper garde l’index du programme et l’état édité ; il ne recharge pas la recette d’usine à la réouverture au détriment des modifications.
 
-## Sources
+A/B compare les timbres d’une voix ; sends et effets partagés restent hors de cette comparaison. Les états PT1 historiques sont complétés par des extensions validées avant application. Les buffers de réverbération/delay, l’activité et les caches graphiques ne sont pas sauvegardés comme sons en cours.
 
-- `src/engine.c`: voice engine, MIDI, parameters, notifications and serialization.
-- `src/effects.h`: shared effects.
-- `scripts/generate.py`: fixed parameter table and generated headers.
-- `scripts/build_skin.py`: touch pages and Q-Link variants.
-- `scripts/build_factory_programs.py`: full-state factory program table and binaries.
-- `third_party/mpc-wrapper/wrapper/vst2_wrap.c`: host integration and chunks.
+Notifications natives bornées, ressources graphiques partagées, absence de reconstruction globale pour les simples réglages : conserver ces propriétés lors de toute extension.
 
-See THIRD-PARTY.md for upstream provenance and licences.
+[Guide générique : conventions exactes des Q-Links et des presets](../../Generic-Plugin-Development.md).
+
+## Compilation et preuves
+
+[Compilation](BUILD.md) · [Installation](INSTALLATION.md). Les tests hôte et moteurs ne prouvent pas à eux seuls le comportement tactile ou musical. Les rapports datés de `Validation/` gardent leur périmètre original.
+
+[Implémentation initiale](IMPLEMENTATION.md) et [première extension d’effets](EFFECTS-IMPLEMENTATION.md) : historique complet, avec les anciens nombres de paramètres et attentes de validation.

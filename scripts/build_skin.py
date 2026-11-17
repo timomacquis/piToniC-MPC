@@ -1,5 +1,5 @@
 """Original native MPC skin; shared cached artwork, no stock skin redistribution."""
-import json,math,hashlib,shutil,os,copy
+import json,math,hashlib,shutil,os,copy,re
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont
 from config import B,FIELDS,FOLDER,VERSION
@@ -7,10 +7,10 @@ P=json.loads((B/'params.json').read_text());I={p['key']:i for i,p in enumerate(P
 OUT=B/os.environ.get('PTON_SKIN_OUTPUT','build/skin')/FOLDER;A=OUT/'Plugin Skins'
 if OUT.exists():shutil.rmtree(OUT)
 A.mkdir(parents=True,exist_ok=True);defs=[]
-BG='#171c1f';PANEL='#141d24';FIELD='#242c31';INK='#f1f2ed';EDGE='#42515c';AMBER='#c7aa6d'
+BG='#171c1f';PANEL='#141d24';FIELD='#242c31';INK='#f1f2ed';EDGE='#42515c';AMBER='#c7aa6d';BLUE='#518397'  # 1.0.4 charte : sélecteur sans valeur neutre = liseré bleu
 def font(n):return ImageFont.truetype(str(B/'reference/fonts/TitilliumWeb-Regular.ttf'),n)
-def bitmap(name,w,h,caption='',fill=FIELD,ink=INK):
- im=Image.new('RGB',(w,h),BG);d=ImageDraw.Draw(im);d.rounded_rectangle((1,1,w-2,h-2),radius=9,fill=fill,outline=EDGE);d.text((w/2,h/2),caption,font=font(19 if w<140 else 23),fill=ink,anchor='mm');im.save(A/name);return name
+def bitmap(name,w,h,caption='',fill=FIELD,ink=INK,edge=None):
+ im=Image.new('RGB',(w,h),BG);d=ImageDraw.Draw(im);d.rounded_rectangle((1,1,w-2,h-2),radius=9,fill=fill,outline=edge or ('#897447' if fill=='#383122' else EDGE));d.text((w/2,h/2),caption,font=font(19 if w<140 else 23),fill=ink,anchor='mm');im.save(A/name);return name
 def bounds(x,y,w,h,extra=None):return dict(version=2,acceptsHWFocus='Yes',showWhenDataModelInvalid='Hide',whenVisible='Always',boundsType='Absolute',bounds=f'{x} {y} {w} {h}',additionalInvalidatingHandles=extra or [])
 def child(kind,data,x,y,w,h):return {'version':2,'componentData':{'version':1,'name':kind,'type':kind,'data':data},'handle remapping':{'version':1,'map':[]},'bounds':bounds(x,y,w,h)}
 def gate(key,v,n=2):return f'IndexedEnabling/{v}/{n}/Parameter {I[key]}'
@@ -31,13 +31,30 @@ def local(name,parts,actions=None,focus_ring=True):
 serial=0
 def place(kind,key,x,y,w,h,extra=None):
  c=child(kind,dict(version=1,handleName='Data'),x,y,w,h);c['handle remapping']['map']=[dict(key='Data',value=f'Parameter {I[key]}')];c['bounds']['additionalInvalidatingHandles']=extra or [];return c
+NEUTRAL={'OFF','EMPTY','-','--','NONE'}
+def enum_of(key):
+ # 'v3_choke__open' -> ('v3_choke', options) for enumerated voice fields.
+ m=re.fullmatch(r'(v\d_)?(\w+?)__open',key)
+ if not m:return None,None
+ f=next((f for f in FIELDS if f[0]==m.group(2) and isinstance(f[5],list)),None)
+ return (key[:-6],f[5]) if f else (None,None)
 def toggle(key,title,x,y,w,h,extra=None):
  global serial
- serial+=1;parts=[]
+ serial+=1;parts=[];vkey,opts=enum_of(key)
+ neutral=bool(opts) and opts[0] in NEUTRAL;blue=(bool(opts) and not neutral) or key=='del_sync'
  for state in [0,1]:
-  fn=f'button_{title.replace("/","-").replace(" ","_")}_{w}_{h}_{state}.png'
-  if not (A/fn).exists():bitmap(fn,w,h,('ON' if state else 'OFF') if key in ['rev_on','del_on'] else ('SYNC' if state else 'FREE') if key=='del_sync' else title,'#383122' if state else FIELD,AMBER if state else INK)
+  look='_blue' if blue and (state==0 or key=='del_sync') else ''
+  fn=f'button_{title.replace("/","-").replace(" ","_")}_{w}_{h}_{state}{look}.png'
+  if key=='del_sync':
+   if not (A/fn).exists():bitmap(fn,w,h,'SYNC' if state else 'FREE',FIELD,INK,BLUE)
+  elif not (A/fn).exists():bitmap(fn,w,h,('ON' if state else 'OFF') if key in ['rev_on','del_on'] else title,'#383122' if state else FIELD,AMBER if state else INK,BLUE if look else None)
   c=art(fn,0,0,w,h);c['bounds']['additionalInvalidatingHandles']=[gate(key,state)];parts.append(c)
+  if state==0 and neutral:
+   # Ambre dès que la valeur quitte sa position neutre (OFF).
+   afn=f'button_{title.replace("/","-").replace(" ","_")}_{w}_{h}_set.png'
+   if not (A/afn).exists():bitmap(afn,w,h,title,'#383122',AMBER)
+   for k in range(1,len(opts)):
+    c=art(afn,0,0,w,h);c['bounds']['additionalInvalidatingHandles']=[gate(key,0),gate(vkey,k,len(opts))];parts.append(c)
  name=local('toggle'+str(serial),parts,[action('Toggle Switch'),action('Toggle Switch','Enter Pressed')]);return place(name,key,x,y,w,h,extra)
 def dial(key,title,x,y,w,h,extra=None,slider=False):
  global serial
@@ -103,7 +120,7 @@ im=Image.new('RGB',(2,52*256),'#020405');d=ImageDraw.Draw(im)
 for frame in range(256):
  code=round(frame*224/255);negative,slot=divmod(code,15);positive=14-slot if negative&1 else slot;yy=frame*52+26
  d.line((0,yy,1,yy),fill='#29434b')
- if code:d.rectangle((0,yy-round(23*positive/14),1,yy+round(23*negative/14)),fill='#badde8')
+ if code:d.rectangle((0,yy-round(23*positive/14),1,yy+round(23*negative/14)),fill='#c4ab70')
 im.save(A/'sample_lcd.png')
 im=Image.new('RGB',(596,136),'#020405');ImageDraw.Draw(im).rectangle((0,0,595,135),outline='#42515c');im.save(A/'sample_lcd_frame.png')
 im=Image.new('RGBA',(2,120));d=ImageDraw.Draw(im)
@@ -202,7 +219,7 @@ for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
   parts.extend([toggle('rev_on','ON',480,84,128,48),toggle('del_on','ON',1112,84,128,48),toggle('del_sync','SYNC',812,84,128,48)])
   for key,caption,x,y in [('rev_size','SIZE',24,154),('rev_decay','DECAY',336,154),('rev_damp','DAMPING',24,334),('rev_return','RETURN',336,334),('del_feedback','FEEDBACK',972,154),('del_tone','TONE',660,334),('del_return','RETURN',972,334)]:parts.append(dial(key,caption,x,y,284,122))
   parts.append(dial('del_ms','TIME / MS',660,154,284,122,[gate('del_sync',0)]))
-  bitmap('delay_time_field.png',284,122,'',PANEL)
+  bitmap('delay_time_field.png',284,122,'',PANEL,INK,BLUE)
   im=Image.new('RGB',(264,25),PANEL);ImageDraw.Draw(im).text((0,0),'TIME',font=font(18),fill=INK);im.save(A/'delay_time_caption.png')
   content=[art('delay_time_field.png',0,0,284,122),label(20,40,244,52,n=30)]
   # Parameter label reads the division while parent exclusively owns opening the picker.

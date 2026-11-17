@@ -195,4 +195,10 @@ Le Step Sequencer natif, la banque PRESET, le focus, l’activité azur et les Q
 
 ### Panneaux de sélection
 
-Les sélecteurs ouvrent un panneau compact au-dessus de l’écran assombri. Le bouton d’ouverture devient jaune. Choisis une option, ou ferme le panneau sans modifier le réglage. Les boutons internes font 36 px ; les commandes de la page gardent leur taille.
+Les sélecteurs ouvrent un panneau compact au-dessus de l’écran assombri. Le bouton d’ouverture devient ambre. Choisis une option, ou ferme le panneau sans modifier le réglage. Les boutons internes font 36 px ; les commandes de la page gardent leur taille.
+
+### Couleurs des sélecteurs
+
+- **Liseré bleu** : sélecteur sans position neutre (PITCH MODE, FILTER MODE, NOISE ENVELOPE, TIME du delay en SYNC) et bouton SYNC / FREE, dont les deux positions ont un sens.
+- **Ambre** : réglage actif — un ON, ou un sélecteur sorti de OFF (CHOKE GROUP, STEREO NOISE).
+- **Azur** : impulsion d’activité d’une voix.

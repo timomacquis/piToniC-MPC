@@ -2,7 +2,8 @@
  * Voice architecture and basic wave/noise/envelope building blocks adapted from
  * Weird Dreams (Vincent Fillion), based on WeirdDrums (Daniele Filaretti, MIT).
  * No Microtonic binaries, presets, algorithms or TR GPL source incorporated.
- * Native MPC engine: shared send effects; no file I/O, allocations or locks in render/set/get.
+ * Native MPC engine: shared send effects; no file I/O or allocations in render/set/get, no locks in render.
+ * set() may wait briefly on the sample worker mutex (held only for short copies).
  */
 #include "engine.h"
 #include "fields.h"
@@ -153,7 +154,7 @@ static void state_set(PT *p,const char *str){Voice staged[8];memcpy(staged,p->v,
  if(i<16)send[i/2][i%2]=x;else fx[i-16]=x;s=end;}
  while(*s==' '||*s=='\n'||*s=='\r'||*s=='\t')s++;}
  int sources[8]={0};float tunes[8][2]={{0}},starts[8][2]={{0}};char paths[8][SP_PATH]={{0}};if(!sample_state_read(&s,sources,tunes,starts,paths))return;
- if(p->samples&&memcmp(p->sample_paths,paths,sizeof paths)){if(!sp_start(p->samples))return;if(pthread_mutex_trylock(&p->samples->mutex))return;for(int v=0;v<8;v++){memcpy(p->samples->requested[v],paths[v],SP_PATH);atomic_fetch_add(&p->samples->request[v],1);atomic_store(&p->samples->status[v],paths[v][0]?1:0);}pthread_mutex_unlock(&p->samples->mutex);p->samples->browser=0;}
+ if(p->samples&&memcmp(p->sample_paths,paths,sizeof paths)){if(!sp_start(p->samples))return;pthread_mutex_lock(&p->samples->mutex); /* 1.0.4 : attendre, ne plus rejeter l'état */for(int v=0;v<8;v++){memcpy(p->samples->requested[v],paths[v],SP_PATH);atomic_fetch_add(&p->samples->request[v],1);atomic_store(&p->samples->status[v],paths[v][0]?1:0);}pthread_mutex_unlock(&p->samples->mutex);p->samples->browser=0;}
  if(p->samples)p->samples->browser=0;
  memcpy(p->sample_paths,paths,sizeof paths);memcpy(p->source,sources,sizeof sources);memcpy(p->tune,tunes,sizeof tunes);memcpy(p->start,starts,sizeof starts);p->sample_dirty=1;
  memcpy(p->sends,send,sizeof send);memset(p->send_smooth,0,sizeof p->send_smooth);
@@ -177,12 +178,12 @@ static int sample_set(PT *p,const char *key,const char *val){SampleIO *io=p->sam
  if(p->source[v]&&i<2){if(i==0)p->tune[v][p->v[v].bank]=-48+96*x;else p->start[v][p->v[v].bank]=99.9f*x;}
  else {const PTField *d=&pt_fields[f];float value=(f==FREQ||f==ATK||f==DCY||f==RATE)?((d->lo+(d->lo==0?1:0))*powf((d->hi+(d->lo==0?1:0))/(d->lo+(d->lo==0?1:0)),x)-(d->lo==0?1:0)):d->lo+x*(d->hi-d->lo);change(p,v,f,value);}sample_controls(p);return 1;}
  if(!io)return 0;
- if(!strcmp(key,"load")){if(x>.5f){io->browser=1;io->owner=v;char path[SP_PATH];if(!pthread_mutex_trylock(&io->mutex)){snprintf(path,sizeof path,"%s",io->directory);pthread_mutex_unlock(&io->mutex);sp_nav(io,path);}sample_change(p);}return 1;}
+ if(!strcmp(key,"load")){if(x>.5f){io->browser=1;io->owner=v;char path[SP_PATH];if(!pthread_mutex_lock(&io->mutex)){snprintf(path,sizeof path,"%s",io->directory);pthread_mutex_unlock(&io->mutex);sp_nav(io,path);}sample_change(p);}return 1;}
  if(!strcmp(key,"browse_close")){if(x>.5f){io->browser=0;sample_change(p);}return 1;}
  if(!strcmp(key,"browse_sd")||!strcmp(key,"browse_media")){if(x>.5f)sp_nav(io,!strcmp(key,"browse_sd")?"/sdcard":"/media");return 1;}
- if(!strcmp(key,"browse_up")){if(x>.5f){char path[SP_PATH];if(pthread_mutex_trylock(&io->mutex))return 1;snprintf(path,sizeof path,"%s",io->directory);pthread_mutex_unlock(&io->mutex);char *slash=strrchr(path,'/');if(slash==path)path[1]=0;else if(slash)*slash=0;sp_nav(io,path);}return 1;}
- if(!strcmp(key,"browse_prev")||!strcmp(key,"browse_next")){if(x>.5f&&!pthread_mutex_trylock(&io->mutex)){int next=io->page+(!strcmp(key,"browse_next")?1:-1);if(next>=0&&next*8<io->count)io->page=next;pthread_mutex_unlock(&io->mutex);sample_change(p);}return 1;}
- if(sscanf(key,"browse_item%d%n",&i,&n)==1&&key[n]==0&&i>=0&&i<8){if(x>.5f&&!pthread_mutex_trylock(&io->mutex)){int item=io->page*8+i,dir=0;char path[SP_PATH]={0};if(item<io->count){dir=io->entries[item].directory;if(snprintf(path,sizeof path,"%s/%s",io->directory,io->entries[item].name)>=(int)sizeof path)path[0]=0;}pthread_mutex_unlock(&io->mutex);if(path[0]){if(dir)sp_nav(io,path);else if(sp_request(io,io->owner,path)){snprintf(p->sample_paths[io->owner],SP_PATH,"%s",path);sample_release(&p->v[io->owner]);io->browser=0;sample_change(p);}}}return 1;}
+ if(!strcmp(key,"browse_up")){if(x>.5f){char path[SP_PATH];if(pthread_mutex_lock(&io->mutex))return 1;snprintf(path,sizeof path,"%s",io->directory);pthread_mutex_unlock(&io->mutex);char *slash=strrchr(path,'/');if(slash==path)path[1]=0;else if(slash)*slash=0;sp_nav(io,path);}return 1;}
+ if(!strcmp(key,"browse_prev")||!strcmp(key,"browse_next")){if(x>.5f&&!pthread_mutex_lock(&io->mutex)){int next=io->page+(!strcmp(key,"browse_next")?1:-1);if(next>=0&&next*8<io->count)io->page=next;pthread_mutex_unlock(&io->mutex);sample_change(p);}return 1;}
+ if(sscanf(key,"browse_item%d%n",&i,&n)==1&&key[n]==0&&i>=0&&i<8){if(x>.5f&&!pthread_mutex_lock(&io->mutex)){int item=io->page*8+i,dir=0;char path[SP_PATH]={0};if(item<io->count){dir=io->entries[item].directory;if(snprintf(path,sizeof path,"%s/%s",io->directory,io->entries[item].name)>=(int)sizeof path)path[0]=0;}pthread_mutex_unlock(&io->mutex);if(path[0]){if(dir)sp_nav(io,path);else if(sp_request(io,io->owner,path)){snprintf(p->sample_paths[io->owner],SP_PATH,"%s",path);sample_release(&p->v[io->owner]);io->browser=0;sample_change(p);}}}return 1;}
  return 0;
 }
 static int sample_get(PT *p,const char *key,char *buf,int len){SampleIO *io=p->samples;int v=p->selected,n=0,i;Voice *voice=&p->v[v];

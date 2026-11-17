@@ -1,41 +1,25 @@
-# Build from source
+# Construire πToniC — Gen1
 
-Requirements: Python 3, Pillow, a native C compiler and an ARMv7 hard-float GCC/sysroot with pthread, libm and libdl. Wrapper and packaging sources are included; their provenance records identify upstream revisions and local changes.
+Base actuelle : 1.0.3. Linux/WSL, Python 3 et Pillow, compilateur ARM hard-float. `PITONIC_SYSROOT` permet de choisir le sysroot ; le poste local réutilise `πClideaN/toolchain/root`.
 
-Set `PITONIC_SYSROOT` to the toolchain root containing `usr/bin/arm-linux-gnueabihf-gcc-12`. Adapt the compiler path in the build scripts if your toolchain uses a different name. The bundled code targets 44.1 kHz and ARMv7 NEON.
-
-From the repository root:
+Depuis la racine du projet :
 
 ```sh
-python3 -m venv build/venv
-build/venv/bin/pip install Pillow
-build/venv/bin/python scripts/generate.py
-build/venv/bin/python scripts/build_skin.py
-PITONIC_SYSROOT=/path/to/toolchain build/venv/bin/python scripts/build.py
-PITONIC_SYSROOT=/path/to/toolchain build/venv/bin/python scripts/build_factory_programs.py
-mkdir -p Validation/sample-1.0.2
-build/venv/bin/python scripts/package_sample.py
+python3 scripts/generate.py
+# Employer ici un Python avec Pillow.
+python3 scripts/build_skin.py
+python3 scripts/build.py
+python3 scripts/build_factory_programs.py
+python3 scripts/package_sample.py
 ```
 
-The factory build produces PC and ARMv7 binaries and a hash receipt under `Banks/PatternariumBest150/Compiled`. Packaging verifies that receipt and the source inputs, creates the standard installer archive and checks its CRC and per-file SHA-256 hashes.
+La banque `Banks/PatternariumBest150` et ses sources/attributions doivent être présentes. Le paquetage vérifie les empreintes des entrées, du moteur et du skin : si elles diffèrent, reconstruire les sorties correspondantes au lieu de contourner le contrôle.
 
-The archive is written to `dist/1.0.2`. Copy the ZIP and its `.sha256` file to your release assets. Do not run an installer on a development PC.
+Les tests sont dans `scripts/test.sh` et `tests/` : moteur/wrapper, effets, presets, Q-Links SAMPLE et LCD. Certaines comparaisons audio privées exigent leur baseline conservée ; leur absence ne doit pas être déclarée comme un test réussi.
 
-## Tests
+Le ZIP final est dans `dist/1.0.3/`. Les archives déjà publiées restent inchangées lors d’une simple mise à jour documentaire. Aucun script de compilation ne vaut autorisation d’installer ou de relancer MPC.
 
-```sh
-sh scripts/test.sh
-build/venv/bin/python tests/skin_controls_test.py
-gcc -std=c11 -g -O1 -fsanitize=address,undefined -fno-omit-frame-pointer \
-  -DPITONIC_FACTORY_PROGRAMS=1 -IBanks/PatternariumBest150/Generated \
-  -Ibuild -Isrc -Ithird_party/mpc-wrapper/wrapper \
-  tests/factory_programs_test.c src/engine.c -lpthread -lm -ldl -o build/factory-test
-ASAN_OPTIONS=detect_leaks=1 build/factory-test
-```
-
-Offline tests cover voice routing, MIDI offsets, state parsing, effect stability, tempo, activity, native programs and Q-Link document structure. They do not replace listening, touch/Q-Link checks or installation/removal tests on the intended hardware.
-
-Keep existing parameter indices unchanged. Add new parameters at the end of `params.lock`.
+[Architecture](IMPLEMENTATION.md) · [Publication commune](../../Documentation/Maintenance/PUBLICATIONS.md).
 
 
 [Gen2 ARM64 build and validation scope](INSTALLATION-GEN2.md).

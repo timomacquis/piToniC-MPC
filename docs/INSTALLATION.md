@@ -1,43 +1,32 @@
 # Installation and removal
 
+πToniC installs the way Akai's plugin SDK defines it: **one folder inside `VST2 Plugins`**. There is no installer script, nothing goes into `Synths`, and nothing is written to MPC.settings. The MPC finds the plugin by scanning `VST2 Plugins` when its app starts.
+
 ## Requirements
 
-Gen1 ARMv7 standalone hardware with MPC OS 3.x, standalone VST support and SSH access. The current package is not an ARM64 / Gen2 build or an MPC OS 2.x skin.
+- MPC OS **3.10.1 or later**.
+- **Preferences → Enhancements (Beta) → Enable Enhancements** and **External Plugin Support** switched on.
+- Gen1 / Force (ARM32): the `-vst2-armv7.zip` package. Gen2 (ARM64): the `-vst2-aarch64.zip` package, see [Gen2 guide](INSTALLATION-GEN2.md) — not tested on Gen2 hardware.
+- A drive that allows executable plugins. The internal User Memory always does; removable drives may be mounted `noexec`.
 
-The standard destination is `/sdcard/Synths/Timo - VST - πToniC`. A different writable Synths folder can be selected with the installer. External drives must allow executable plugin binaries.
+## Install or update
 
-## Install
+1. Save your project.
+2. Download the ZIP for your device and check it against its `.sha256` file.
+3. Unzip it. It contains the folder **`Timo - VST - πToniC`** and `INSTALL.txt`.
+4. Copy that folder into **`VST2 Plugins`** at the root of a drive. On the internal User Memory this is `/sdcard/VST2 Plugins/`. When updating, replace the previous folder entirely.
+5. Restart the MPC app (or the device). πToniC appears in the plugin browser under **External Plugins**.
 
-1. Save the current project.
-2. Extract `piToniC-1.0.0-Patternarium-BEST150-mpc-armv7.zip`.
-3. Verify the archive checksum against its `.sha256` file.
-4. Copy the extracted package to the device.
-5. As root, enter its directory and run:
-
-```sh
-sh install.sh
-```
-
-The installer checks the payload, backs up the affected settings, copies the instrument and registers it. Read its prompts; installation restarts MPC.
-
-For another Synths destination:
-
-```sh
-sh install.sh -t /media/YourDrive/Synths
-```
-
-Open a plugin track, select πToniC and choose a sound from PRESET. The built-in bank also has XPL copies under the Force user instrument preset folder. Existing user presets are not overwritten by the bank-copy step.
+Only the direct children of `VST2 Plugins` are examined; do not nest the folder deeper and do not rename it. The folder name, `plugin.json` and the binary `pitonic.so` form one plugin identity.
 
 ## Remove
 
-Save the project, enter the same extracted package directory, then run:
+Save your project, delete the folder `VST2 Plugins/Timo - VST - πToniC`, then restart MPC. Projects, samples and your own presets (`Plugin Presets`) are separate and are not touched.
 
-```sh
-sh uninstall.sh
-```
+## Moving from an older catalogue package
 
-Use the same `-t` destination if you installed to another Synths folder. The uninstaller removes the plugin registration and packaged content and relaunches MPC according to its prompts. Back up user-created presets and projects before removing anything. User preset copies outside the plugin folder can remain in the browser; they do not keep the instrument installed.
+Earlier releases were also distributed as catalogue packages whose `install.sh` copied the plugin into `Synths` and registered it in MPC.settings. If you used one of them, remove that copy with its own `uninstall.sh` (same `-t` destination) before installing this folder, otherwise MPC lists the plugin twice. The UID and parameters are unchanged, so existing projects reopen with this version.
 
-## Recovery
+## Presets
 
-Keep the previous working package and the installer's backup. An installer backup is a recovery aid, not a substitute for saving a project. Never remove or replace MPC settings wholesale without checking which other plugins they register.
+The 150 Patternarium BEST kits are native programs built into the binary: choose them from the PRESET arrow. No preset file needs to be copied. Your own saved presets live in the MPC user `Plugin Presets` folder.

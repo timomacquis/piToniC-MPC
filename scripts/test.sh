@@ -13,3 +13,5 @@ gcc $FLAGS tests/effects_test.c -lm -o build/effects-test
 ASAN_OPTIONS=detect_leaks=1 ./build/effects-test
 gcc $FLAGS tests/sample_test.c -lm -pthread -o build/sample-test
 ASAN_OPTIONS=detect_leaks=1 ./build/sample-test
+gcc $FLAGS tests/state_size_test.c src/engine.c -lpthread -lm -o build/state-size-test
+./build/state-size-test
