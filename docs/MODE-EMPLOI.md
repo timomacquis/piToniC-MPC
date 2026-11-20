@@ -136,7 +136,7 @@ Les huit voix partagent ces deux effets. Dosez chaque envoi dans MIXER. Ils fonc
 ### Delay
 
 - **SYNC / FREE** : temps lié au tempo MPC ou réglage libre.
-- **TIME** : en SYNC, toucher le champ ouvre le choix **1/16, 1/8, 1/8 D, 1/4, 1/2**. D indique une croche pointée. En FREE, régler entre **20 et 1 500 ms**.
+- **TIME** : en SYNC, tourner pour choisir **1/16, 1/8, 1/8 D, 1/4, 1/2**. D indique une croche pointée. En FREE, régler entre **20 et 1 500 ms**.
 - **FEEDBACK** : quantité réinjectée, de 0 à 90 %. Des valeurs élevées produisent des répétitions longues.
 - **TONE** : filtre passe-bas des répétitions ; monter conserve davantage d’aigus.
 - **RETURN** : niveau global du retour de delay.
@@ -144,6 +144,20 @@ Les huit voix partagent ces deux effets. Dosez chaque envoi dans MIXER. Ils fonc
 Les répétitions se croisent entre gauche et droite. Changez TIME pendant qu’elles résonnent : leur hauteur peut glisser.
 
 SYNC suit le tempo de la Force de 20 à 400 BPM ; avant sa réception, il utilise 120 BPM.
+
+### EXTENDED (1.1.0)
+
+Le bouton **EXTENDED**, en bas de la page, remplace la reverb et le delay par ceux de πMorpH : la reverb **Tidal Verb** et le delay **Dub Station**. Allumé (ambre), la page affiche leurs réglages ; éteint, les effets d'origine reviennent. ON, RETURN et les sends du MIXER restent communs aux deux.
+
+Les presets et les projets existants s'ouvrent EXTENDED éteint : ils sonnent comme avant. Une nouvelle instance démarre EXTENDED allumé.
+
+- **TYPE** (à côté du titre REVERB) : ROOM, HALL, SPRING, PLATE, MODULATED, REVERSE, HALO, HALO+, ABYSS, CASCADE.
+- **DECAY**, **LIVELINESS**, **WARMTH** : longueur, mouvement et chaleur de la queue.
+- **SYNC / FREE** et **TIME** : en SYNC, **1/16, 1/8, 1/8 D, 1/4, 1/4 D, 1/2, 1** ; en FREE, **10 à 2 000 ms**.
+- **FEEDBACK** : jusqu'à 120 % pour l'auto-oscillation dub.
+- **FILTER** : passe-bas à gauche (LP), passe-haut à droite (HP), neutre au centre.
+
+Sans send ouvert, les effets EXTENDED ne calculent rien.
 
 ## MIXER
 
@@ -170,6 +184,7 @@ Les presets antérieurs gardent leurs sons : leurs nouveaux sends sont à **zér
 | NOISE | Noise Mix · Cutoff · Resonance · Noise Attack · Noise Decay · libre · libre · libre |
 | CHARACTER | Drive · EQ Frequency · EQ Gain · Level · Osc Velocity · Noise Velocity · Pan · libre |
 | EFFECTS | Reverb Size · Decay · Damping · Return · Delay Time · Feedback · Tone · Return |
+| EFFECTS · EXTENDED | Decay · Liveliness · Warmth · Return · Delay Time · Feedback · Filter · Return |
 | MIXER | Level A01 à Level A08 |
 
 TONE, NOISE et CHARACTER suivent la voix sélectionnée. EFFECTS pilote les effets partagés ; son Q-Link TIME suit SYNC / FREE. MIXER conserve les huit niveaux indépendamment de la sélection. Les sends se règlent au tactile et à la molette.

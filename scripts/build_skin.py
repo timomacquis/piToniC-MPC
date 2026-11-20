@@ -2,7 +2,9 @@
 import json,math,hashlib,shutil,os,copy,re
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont
-from config import B,FIELDS,FOLDER,VERSION
+from config import B,FIELDS,FOLDER,VERSION,TV_TYPES,DUB_DIVS
+# 1.1.0 : interrupteurs à deux libellés (bordure bleue, pas de position neutre).
+TWO_LABELS={'del_sync':('FREE','SYNC'),'fxn_dsync':('FREE','SYNC')}
 P=json.loads((B/'params.json').read_text());I={p['key']:i for i,p in enumerate(P)}
 OUT=B/os.environ.get('PTON_SKIN_OUTPUT','build/skin')/FOLDER;A=OUT/'Plugin Skins'
 if OUT.exists():shutil.rmtree(OUT)
@@ -41,12 +43,13 @@ def enum_of(key):
 def toggle(key,title,x,y,w,h,extra=None):
  global serial
  serial+=1;parts=[];vkey,opts=enum_of(key)
- neutral=bool(opts) and opts[0] in NEUTRAL;blue=(bool(opts) and not neutral) or key=='del_sync'
+ neutral=bool(opts) and opts[0] in NEUTRAL;blue=(bool(opts) and not neutral) or key in TWO_LABELS
  for state in [0,1]:
-  look='_blue' if blue and (state==0 or key=='del_sync') else ''
+  look='_blue' if blue and (state==0 or key in TWO_LABELS) else ''
   fn=f'button_{title.replace("/","-").replace(" ","_")}_{w}_{h}_{state}{look}.png'
-  if key=='del_sync':
-   if not (A/fn).exists():bitmap(fn,w,h,'SYNC' if state else 'FREE',FIELD,INK,BLUE)
+  if key in TWO_LABELS:
+   fn=f'button_{key}_{w}_{h}_{state}.png'
+   if not (A/fn).exists():bitmap(fn,w,h,TWO_LABELS[key][state],FIELD,INK,BLUE)
   elif not (A/fn).exists():bitmap(fn,w,h,('ON' if state else 'OFF') if key in ['rev_on','del_on'] else title,'#383122' if state else FIELD,AMBER if state else INK,BLUE if look else None)
   c=art(fn,0,0,w,h);c['bounds']['additionalInvalidatingHandles']=[gate(key,state)];parts.append(c)
   if state==0 and neutral:
@@ -177,7 +180,7 @@ def modal_base(parts,key,title,options,flag,cond,close_key=None,width=None,heigh
   im=Image.open(A/fn);ImageDraw.Draw(im).text((10,8),'TIME',font=font(18),fill=INK);im.save(A/fn)
  raised=[art(fn,0,0,ow,oh)]
  if not caption:raised.append(label(20,40,ow-40,52,n=30))
- raised_type=local('compact_raised_'+str(len(defs)),raised);c=place(raised_type,'del_div' if not caption else key,xx,yy,ow,oh);c['bounds']['acceptsHWFocus']='No';cs.append(c)
+ raised_type=local('compact_raised_'+str(len(defs)),raised);c=place(raised_type,key[:-6] if key.endswith('__open') else key,xx,yy,ow,oh);c['bounds']['acceptsHWFocus']='No';cs.append(c)
  panel=f'compact_panel_{w}_{h}.png';bitmap(panel,w,h,'',PANEL)
  surface=local('compact_surface_'+str(len(defs)),[art(panel,0,0,w,h)],[action('Q-Link')],focus_ring=False);cs.append(place(surface,close_key,x,y,w,h))
  fn='compact_title_'+hashlib.sha256(title.encode()).hexdigest()[:12]+'.png';im=Image.new('RGB',(w-48,32),PANEL);ImageDraw.Draw(im).text((0,16),title,font=font(22),fill=INK,anchor='lm');im.save(A/fn);cs.append(art(fn,x+24,y+14,w-48,32))
@@ -186,7 +189,7 @@ def modal_base(parts,key,title,options,flag,cond,close_key=None,width=None,heigh
 def finish_modal(parts,cs,cond):
  for c in cs:c['bounds']['additionalInvalidatingHandles'].extend(cond);parts.append(c)
 def compact_picker(parts,key,title,options,cond):
- flag=key+'__open';cs,x,y,w,h,bw,cols,footer=modal_base(parts,flag,title,options,flag,cond,caption=None if key=='del_div' else title)
+ flag=key+'__open';cs,x,y,w,h,bw,cols,footer=modal_base(parts,flag,title,options,flag,cond,caption=None if key in ('del_div','fxn_ddiv') else title)
  for op,caption in enumerate(options):
   tag='compact_choice_'+hashlib.sha256((key+str(op)).encode()).hexdigest()[:14]
   for state in [0,1]:bitmap(tag+f'_{state}.png',bw,36,caption,'#383122' if state else FIELD,AMBER if state else INK)
@@ -206,7 +209,7 @@ for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
     f=FIELDS[page*8+i];key=f'v{v}_{f[0]}';x=20+(i%4)*312;y=114+(i//4)*166;cond=[gate('selected',v,8)]
     if isinstance(f[5],list):
      parts.append(toggle(key+'__open',f[1],x,y,304,42,cond));parts.append(place(local(f'enumread_{page}_{v}_{i}',[label(0,0,280,50,n=30)]),key,x+12,y+46,280,50,cond))
-    else:parts.append(dial(key,f[1],x,y,304,122,cond))
+    elif v==0:parts.append(dial(f'q{page}_{i}',f[1],x,y,304,122))  # 1.1.0 : alias Q-Link affiché (suit la voix sélectionnée)
  elif page==4:
   for v in range(8):
    x=20+v*156;bitmap(f'strip{v}.png',148,456,'',PANEL);parts.append(art(f'strip{v}.png',x,80,148,456))
@@ -216,18 +219,20 @@ for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
   im=Image.new('RGB',(2,420),EDGE);im.save(A/'effects_divider.png');parts.append(art('effects_divider.png',639,92,2,420))
   for heading,x in [('REVERB',24),('DELAY',660)]:
    fn=f'fx_title_{heading}.png';im=Image.new('RGB',(280,40),BG);ImageDraw.Draw(im).text((0,0),heading,font=font(28),fill=INK);im.save(A/fn);parts.append(art(fn,x,88,280,40))
-  parts.extend([toggle('rev_on','ON',480,84,128,48),toggle('del_on','ON',1112,84,128,48),toggle('del_sync','SYNC',812,84,128,48)])
-  for key,caption,x,y in [('rev_size','SIZE',24,154),('rev_decay','DECAY',336,154),('rev_damp','DAMPING',24,334),('rev_return','RETURN',336,334),('del_feedback','FEEDBACK',972,154),('del_tone','TONE',660,334),('del_return','RETURN',972,334)]:parts.append(dial(key,caption,x,y,284,122))
-  parts.append(dial('del_ms','TIME / MS',660,154,284,122,[gate('del_sync',0)]))
-  bitmap('delay_time_field.png',284,122,'',PANEL,INK,BLUE)
-  im=Image.new('RGB',(264,25),PANEL);ImageDraw.Draw(im).text((0,0),'TIME',font=font(18),fill=INK);im.save(A/'delay_time_caption.png')
-  content=[art('delay_time_field.png',0,0,284,122),label(20,40,244,52,n=30)]
-  # Parameter label reads the division while parent exclusively owns opening the picker.
-  read=place(local('delay_div_read',[label(20,40,244,52,n=30)]),'del_div',0,0,284,122)
-  parts.append(place(local('delay_div_open',[content[0],art('delay_time_caption.png',10,8,264,25),read],[action('Toggle Switch')]),'del_div__open',660,154,284,122,[gate('del_sync',1)]))
+  C=[gate('fxn_mode',0)];N=[gate('fxn_mode',1)]
+  parts.extend([toggle('rev_on','ON',480,84,128,48),toggle('del_on','ON',1112,84,128,48),toggle('del_sync','SYNC',812,84,128,48,C),toggle('fxn_dsync','SYNC',812,84,128,48,N),toggle('fxn_mode','EXTENDED',540,548,200,48)])
+  SLOTS=[(24,154),(336,154),(24,334),(336,334),(660,154),(972,154),(660,334),(972,334)]
+  TC=['SIZE','DECAY','DAMPING','RETURN','TIME','FEEDBACK','TONE','RETURN'];TN=['DECAY','LIVELINESS','WARMTH','RETURN','TIME','FEEDBACK','FILTER','RETURN']
+  for q,(x,y) in enumerate(SLOTS):
+   if TC[q]==TN[q]:parts.append(dial(f'fxq{q}',TC[q],x,y,284,122))
+   else:parts.extend([dial(f'fxq{q}',TC[q],x,y,284,122,C),dial(f'fxq{q}',TN[q],x,y,284,122,N)])
+  # Type de reverb NEW : champ dans la ligne de titre, ouvre la liste des 10 types.
+  bitmap('reverb_type_field.png',284,48,'',PANEL,INK,BLUE)
+  rt=place(local('reverb_type_read',[label(14,0,256,48,n=26)]),'fxn_rtype',0,0,284,48)
+  parts.append(place(local('reverb_type_open',[art('reverb_type_field.png',0,0,284,48),rt],[action('Toggle Switch')]),'fxn_rtype__open',180,84,284,48,N))
  if page!=3:tools(parts,page==4)
  if page==3:
-  compact_picker(parts,'del_div','DELAY TIME',['1/16','1/8','1/8 D','1/4','1/2'],[gate('del_div__open',1)])
+  compact_picker(parts,'fxn_rtype','REVERB TYPE',TV_TYPES,[gate('fxn_rtype__open',1)])
  if page<3:
   for v in range(8):
    for f in FIELDS[page*8:page*8+8]:
@@ -248,7 +253,7 @@ J={'pageData':{'version':1,'info':{'version':1,'type':'CompleteDescription'},'co
 (B/'Validation/UI-Compact-Panels/layout.json').write_text(json.dumps(compact_layout,ensure_ascii=False,indent=2)+'\n')
 (A/'TUI.json').write_text(json.dumps(J,ensure_ascii=False,separators=(',',':')))
 ql=[]
-page_keys=[[f'tone_q{i}' for i in range(7)], [f'q1_{i}' for i in [0,2,3,4,5]], [f'q2_{i}' for i in range(7)], ['rev_size','rev_decay','rev_damp','rev_return','fx_time','del_feedback','del_tone','del_return'], [f'v{i}_level' for i in range(8)]]
+page_keys=[[f'tone_q{i}' for i in range(7)], [f'q1_{i}' for i in [0,2,3,4,5]], [f'q2_{i}' for i in range(7)], [f'fxq{i}' for i in range(8)], [f'v{i}_level' for i in range(8)]]
 for page,keys in enumerate(page_keys):
  mapping={f'Q-Link {i}':-1 for i in range(1,17)}
  for physical,key in zip([13,9,5,1,14,10,6,2],keys):mapping[f'Q-Link {physical}']=I[key]

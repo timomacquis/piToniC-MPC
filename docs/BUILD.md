@@ -1,25 +1,17 @@
-# Construire πToniC — Gen1
+# Construire πToniC — référence 1.0.4
 
-Base actuelle : 1.0.3. Linux/WSL, Python 3 et Pillow, compilateur ARM hard-float. `PITONIC_SYSROOT` permet de choisir le sysroot ; le poste local réutilise `πClideaN/toolchain/root`.
-
-Depuis la racine du projet :
+Guide courant au **20 novembre 2026**. Linux/WSL, Python 3/Pillow et chaîne ARM hard-float `πClideaN/toolchain/root` ; conserver les liens Linux. Depuis la racine de πToniC :
 
 ```sh
-python3 scripts/generate.py
-# Employer ici un Python avec Pillow.
-python3 scripts/build_skin.py
-python3 scripts/build.py
-python3 scripts/build_factory_programs.py
-python3 scripts/package_sample.py
+NO_DEPLOY=1 bash scripts/release_vst2.sh
 ```
 
-La banque `Banks/PatternariumBest150` et ses sources/attributions doivent être présentes. Le paquetage vérifie les empreintes des entrées, du moteur et du skin : si elles diffèrent, reconstruire les sorties correspondantes au lieu de contourner le contrôle.
+Le script lance `scripts/test.sh`, génère le skin, compile le moteur, puis `build_factory_programs.py` pour embarquer les **150 programmes Patternarium BEST**. Il assemble ensuite le dossier SDK dans `build/vst2` et un ZIP ARMv7 intermédiaire dans `dist`.
 
-Les tests sont dans `scripts/test.sh` et `tests/` : moteur/wrapper, effets, presets, Q-Links SAMPLE et LCD. Certaines comparaisons audio privées exigent leur baseline conservée ; leur absence ne doit pas être déclarée comme un test réussi.
+Avec `NO_DEPLOY=1`, rien n’est installé. Sans cette option, la phase de déploiement sauvegarde et remplace le dossier installé puis relance MPC : projet enregistré et autorisation nécessaires. Le binaire de banque final est celui de `Banks/PatternariumBest150/Compiled/`, pas un ancien moteur sans programmes.
 
-Le ZIP final est dans `dist/1.0.3/`. Les archives déjà publiées restent inchangées lors d’une simple mise à jour documentaire. Aucun script de compilation ne vaut autorisation d’installer ou de relancer MPC.
+Tests : moteur et vrai wrapper, état, presets, effets, activité, SAMPLE et LCD. Une baseline privée absente ne doit pas être comptée comme un test réussi. Ne pas substituer des binaires archivés aux résultats du build courant.
 
-[Architecture](IMPLEMENTATION.md) · [Publication commune](../../Documentation/Maintenance/PUBLICATIONS.md).
+[Installation](INSTALLATION.md) · [Gen2 non testé sur appareil](INSTALLATION-GEN2.md). La release publique actuelle utilise **`piToniC-1.0.4-mpc-sdk.zip`**, disponible sous `Releases/1.0.4`.
 
-
-[Gen2 ARM64 build and validation scope](INSTALLATION-GEN2.md).
+Avant une prochaine publication, adapter `scripts/publish_release.sh` au ZIP unique Gen1 + Gen2 avec `Outils/make_sdk_zip.py`, selon [PUBLICATIONS.md](../../Documentation/Maintenance/PUBLICATIONS.md). Cette actualisation ne modifie aucun script, ne reconstruit aucun paquet et n’ajoute aucune qualification matérielle.

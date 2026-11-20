@@ -123,7 +123,7 @@ All eight voices share these effects. Feed them from the MIXER sends; the dry so
 
 ### Delay
 
-**SYNC** follows MPC's tempo. Touch TIME to choose **1/16, 1/8, 1/8 D, 1/4 or 1/2**. D means dotted.
+**SYNC** follows MPC's tempo. Turn TIME to choose **1/16, 1/8, 1/8 D, 1/4 or 1/2**. D means dotted.
 
 Switch to **FREE** for **20–1,500 ms**.
 
@@ -134,6 +134,20 @@ The stereo delay crosses its feedback between left and right. Changing TIME move
 SYNC uses valid host tempo between 20 and 400 BPM; it falls back to 120 BPM before receiving tempo. The buffer covers all offered divisions within that range.
 
 **ON / OFF** fades the effect input and return. The internal tail drains while OFF; quickly re-enabling can reveal the remainder.
+
+### EXTENDED (1.1.0)
+
+The **EXTENDED** button at the bottom of the page swaps the reverb and delay for πMorpH's **Tidal Verb** and **Dub Station** delay. Lit (amber), the page shows their controls; off, the original effects return. ON, RETURN and the MIXER sends are shared by both.
+
+Existing presets and projects open with EXTENDED off and sound as before. A new instance starts with EXTENDED on.
+
+- **TYPE** (next to the REVERB title): ROOM, HALL, SPRING, PLATE, MODULATED, REVERSE, HALO, HALO+, ABYSS, CASCADE.
+- **DECAY**, **LIVELINESS**, **WARMTH** shape the tail's length, movement and warmth.
+- **SYNC / FREE** and **TIME**: **1/16, 1/8, 1/8 D, 1/4, 1/4 D, 1/2, 1** in SYNC; **10–2,000 ms** in FREE.
+- **FEEDBACK** up to 120% for dub self-oscillation.
+- **FILTER**: low-pass to the left (LP), high-pass to the right (HP), neutral at the centre.
+
+With no send open, the EXTENDED effects use no CPU.
 
 ## 6. MIXER
 
@@ -172,6 +186,7 @@ Left to right on the Force's eight physical encoders:
 | NOISE | Noise Mix · Cutoff · Resonance · Noise Attack · Noise Decay · unused · unused · unused |
 | CHARACTER | Drive · EQ Frequency · EQ Gain · Level · Osc Velocity · Noise Velocity · Pan · unused |
 | EFFECTS | Reverb Size · Decay · Damping · Return · Delay Time · Feedback · Tone · Return |
+| EFFECTS · EXTENDED | Decay · Liveliness · Warmth · Return · Delay Time · Feedback · Filter · Return |
 | MIXER | Level A01 through A08 |
 
 TONE, NOISE and CHARACTER follow the selected voice. EFFECTS controls the shared processors; its TIME encoder follows SYNC / FREE. MIXER always controls all eight levels. Use touch and the data wheel for sends.

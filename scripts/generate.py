@@ -1,5 +1,5 @@
 import json,sys,hashlib,shutil
-from config import B,FIELDS,FX_FIELDS
+from config import B,FIELDS,FX_FIELDS,FXN_FIELDS
 sys.path.insert(0,str(B/'third_party/mpc-wrapper/tools'))
 import gen_vst
 P=[dict(key='selected',name='Voice',min=0,max=7,default=0,display='int',options=[f'A{i+1:02}' for i in range(8)])]
@@ -46,13 +46,22 @@ for v in range(8):
 for i in range(576):P.append(dict(key=f'sample_lcd{i}',name='LCD waveform',min=0,max=224,default=0,poll=False))
 P.append(dict(key='sample_stereo',name='LCD stereo',min=0,max=1,default=0,poll=False))
 P.append(dict(key='sample_marker',name='LCD START',min=0,max=99.9,default=0,poll=False))
+# 1.1.0 additions (effets NEW). All 996 published parameter indices stay fixed.
+for key,name,lo,hi,default,unit in FXN_FIELDS:
+ p=dict(key=key,name=name,min=lo,max=hi,default=default,dynamic_display=True,poll=False)
+ if isinstance(unit,list):p.update(options=unit,display='int')
+ P.append(p)
+for k in ['fxn_rtype','fxn_ddiv']:P.append(dict(key=k+'__open',name='Options',min=0,max=1,default=0,popup_of=k))
+P.append(dict(key='fxn_time',name='DELAY TIME',min=0,max=1,default=.5,dynamic_display=True,poll=False))
+# Q-Links de la page FX : alias qui pilotent les réglages du mode affiché (CLASSIC ou NEW).
+for i in range(8):P.append(dict(key=f'fxq{i}',name='FX',min=0,max=1,default=.5,dynamic_display=True,dynamic_name=True,poll=False))
 keys=[p['key'] for p in P];lock=B/'params.lock'
 if lock.exists():assert keys[:len(old:=lock.read_text().splitlines())]==old,'Parameter indices changed'
 lock.write_text('\n'.join(keys)+'\n')
 (B/'params.json').write_text(json.dumps(P,indent=2)+'\n');(B/'build').mkdir(exist_ok=True)
 cfg=gen_vst.load(str(B/'vst.json'));gen_vst.gen_params(cfg,P,str(B/'build/params.h'))
 with (B/'build/params.h').open('a') as f:
- f.write('\nstatic const unsigned char PICN_AUTOMATABLE[NPARAMS]={'+','.join('1' if (p['key'].startswith(('v','send','rev_','del_')) and '__open' not in p['key']) else '0' for p in P)+'};\n')
+ f.write('\nstatic const unsigned char PICN_AUTOMATABLE[NPARAMS]={'+','.join('1' if (p['key'].startswith(('v','send','rev_','del_','fxn_')) and '__open' not in p['key'] and p['key']!='fxn_time') else '0' for p in P)+'};\n')
  f.write('static const unsigned short PICN_PARAM_LOOKUP[NPARAMS]={'+','.join(str(i) for i in sorted(range(len(P)),key=lambda i:keys[i]))+'};\n')
 # Musical taper for Hz and time controls; canonical storage remains physical units.
 curved={'freq','attack','decay','modrate','cutoff','natk','ndcy','eqfreq'}

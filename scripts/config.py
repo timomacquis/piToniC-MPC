@@ -1,6 +1,6 @@
 from pathlib import Path
 B=Path(__file__).resolve().parents[1]
-VERSION='1.0.4'
+VERSION='1.1.0'
 FOLDER='Timo - VST - πToniC'
 # Physical units. All canonical voice parameters stay at fixed append-only indices.
 FIELDS=[
@@ -24,6 +24,16 @@ FX_FIELDS=[
  ('del_on','DELAY',0,1,1,['OFF','ON']),('del_sync','CLOCK',0,1,1,['FREE','SYNC']),
  ('del_div','TIME',0,4,2,['1/16','1/8','1/8 D','1/4','1/2']),('del_ms','TIME',20,1500,375,'ms'),
  ('del_feedback','FEEDBACK',0,90,35,'%'),('del_tone','TONE',0,100,55,'%'),('del_return','RETURN',0,100,50,'%')]
+
+# 1.1.0 : effets NEW (Tidal Verb + Dub Station, repris de πMorpH 0.2.0). Ajoutés à la fin : aucun indice existant ne bouge.
+TV_TYPES=['ROOM','HALL','SPRING','PLATE','MODULATED','REVERSE','HALO','HALO+','ABYSS','CASCADE']
+DUB_DIVS=['1/16','1/8','1/8 D','1/4','1/4 D','1/2','1']
+FXN_FIELDS=[
+ ('fxn_mode','EXTENDED',0,1,1,['OFF','ON']),
+ ('fxn_rtype','TYPE',0,9,1,TV_TYPES),('fxn_rdecay','DECAY',0,100,55,'%'),
+ ('fxn_rlive','LIVELINESS',0,100,60,'%'),('fxn_rwarmth','WARMTH',0,100,35,'%'),
+ ('fxn_dsync','CLOCK',0,1,1,['FREE','SYNC']),('fxn_ddiv','TIME',0,6,3,DUB_DIVS),('fxn_dms','TIME',10,2000,375,'ms'),
+ ('fxn_dfeedback','FEEDBACK',0,120,45,'%'),('fxn_dfilter','FILTER',-100,100,0,'')]
 
 # Canonical product description for future package metadata.
 DESCRIPTION = 'A Microtonic-inspired drum machine. πToniC features 8 independent drum voices, each combining filtered noise with a morphing oscillator or WAV sample playback. Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and individual voice controls. Shared stereo reverb and tempo-synced delay complete the engine.'

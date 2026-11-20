@@ -18,6 +18,7 @@
 #define PI 3.14159265358979323846f
 #define TABLE 4096
 #include "effects.h"
+#include "fx_new.h"
 #include "sample.h"
 enum {FREQ,WAVE,ATK,DCY,MODE,AMT,RATE,MVEL,MIX,FILTER,CUT,RES,NATK,NDCY,ENV,STEREO,DRIVE,EQF,EQG,LEVEL,OVEL,NVEL,PAN,CHOKE};
 typedef struct {float value,attack_coeff,decay_coeff;int age,attack,decay,linear;} Env;
@@ -38,6 +39,7 @@ typedef struct {
  uint32_t rng;
  uint64_t activity_until[8];uint8_t activity[8],activity_dirty[8];
  Effects fx;float fx_time_accum;float sends[8][2],send_smooth[8][2];uint8_t fx_dirty[29];
+ FxNew *fxn;int fx_new;float fxn_p[FXN_COUNT],fxn_g[2];uint8_t fxn_dirty[FXN_COUNT+10];
 } PT;
 static float clamp(float x,float a,float b){return x<a?a:x>b?b:x;}
 static float lookup(const float *t,float n){float p=clamp(n,0,1)*TABLE;int i=(int)p;if(i==TABLE)return t[i];return t[i]+(t[i+1]-t[i])*(p-i);}
@@ -93,8 +95,15 @@ static float osc(PT *p,Voice *v,float hz,float morph){
  else{float saw=2*t-1-blep(t,dt),sq=(t<.5f?1:-1)+blep(t,dt)-blep(fmodf(t+.5f,1),dt);result=saw+(sq-saw)*(w-2);}
  v->phase+=dt;if(v->phase>=1)v->phase-=1;return result;
 }
+#include "fx_new_engine.h"
+/* 1.1.0 : mode NEW. Bus collectés par bloc, effets NEW en parallèle, mêmes ON/RETURN que CLASSIC (rampe sur le bloc). */
+static void render_new(PT *p,int16_t *out,int frames,int usefx,const float *sum,const float *rev,const float *del){
+ float wr[256],wd[256];if(usefx)fxn_process(p->fxn,rev,del,wr,wd,frames);else for(int i=0;i<frames*2;i++)wr[i]=wd[i]=0;
+ float tr=p->fx.param[REV_ON]>.5f?p->fx.param[REV_RETURN]/100:0,td=p->fx.param[DEL_ON]>.5f?p->fx.param[DEL_RETURN]/100:0,r0=p->fxn_g[0],d0=p->fxn_g[1];
+ for(int n=0;n<frames;n++){float t=(n+1.f)/frames,gr=r0+(tr-r0)*t,gd=d0+(td-d0)*t;for(int k=0;k<2;k++)out[n*2+k]=(int16_t)(clamp((sum[n*2+k]+wr[n*2+k]*gr+wd[n*2+k]*gd)*.25f,-1,1)*32767);}
+ p->fxn_g[0]=tr;p->fxn_g[1]=td;}
 static void render(void *ptr,int16_t *out,int frames){PT *p=ptr;
- if(p->samples)for(int i=0;i<8;i++)if(sp_commit(p->samples,i)){sample_release(&p->v[i]);p->sample_dirty=1;}Sample *sample_data[8]={0};int sample_ready[8]={0};if(p->samples)for(int i=0;i<8;i++){sample_data[i]=p->samples->current[i];sample_ready[i]=sample_data[i]&&atomic_load(&p->samples->status[i])==2&&!strcmp(sample_data[i]->path,p->sample_paths[i]);}int usefx=p->fx.rev_left||p->fx.del_left;
+ if(p->samples)for(int i=0;i<8;i++)if(sp_commit(p->samples,i)){sample_release(&p->v[i]);p->sample_dirty=1;}Sample *sample_data[8]={0};int sample_ready[8]={0};if(p->samples)for(int i=0;i<8;i++){sample_data[i]=p->samples->current[i];sample_ready[i]=sample_data[i]&&atomic_load(&p->samples->status[i])==2&&!strcmp(sample_data[i]->path,p->sample_paths[i]);}int usefx=p->fx.rev_left||p->fx.del_left;const int nf=p->fx_new&&p->fxn;if(nf&&fxn_busy(p->fxn))usefx=1;float nb_sum[256],nb_rev[256],nb_del[256];
  for(int i=0;i<8;i++)if(p->v[i].active&&(p->sends[i][0]>0||p->sends[i][1]>0||p->send_smooth[i][0]>1e-7f||p->send_smooth[i][1]>1e-7f))usefx=1;
  for(int n=0;n<frames;n++){
  float sum[2]={0,0},rev[2]={0,0},del[2]={0,0};for(int i=0;i<8;i++){
@@ -111,15 +120,17 @@ static void render(void *ptr,int16_t *out,int frames){PT *p=ptr;
  x*=v->level*(k?v->pan_r:v->pan_l);if(v->cross)x=x*(1-v->cross/32.f)+v->fade[k]*(v->cross/32.f);if(v->release)x*=v->release/48.f;v->last[k]=x;sum[k]+=x;if(usefx){rev[k]+=x*p->send_smooth[i][0];del[k]+=x*p->send_smooth[i][1];}}
  if(v->cross)v->cross--;if(v->release&&!--v->release)v->active=0;
  if((v->amp.value==0||v->mix_osc==0||(p->source[i]&&(!sample_ready[i]||p->position[i]>=sample_data[i]->frames)))&&(v->noise.value==0||v->mix_noise==0)&&(!v->clap_left||v->mix_noise==0)&& !v->cross)v->active=0;
- }float wet[2]={0,0};if(usefx)fx_process(&p->fx,rev,del,wet);for(int k=0;k<2;k++)out[n*2+k]=(int16_t)(clamp((sum[k]+wet[k])*.25f,-1,1)*32767);p->clock++;
-}for(int i=0;i<8;i++)if(p->activity[i]&&p->clock>=p->activity_until[i]){p->activity[i]=0;p->activity_dirty[i]=1;}
+ }if(nf){for(int k=0;k<2;k++){nb_sum[n*2+k]=sum[k];nb_rev[n*2+k]=rev[k];nb_del[n*2+k]=del[k];}p->clock++;continue;}
+ float wet[2]={0,0};if(usefx)fx_process(&p->fx,rev,del,wet);for(int k=0;k<2;k++)out[n*2+k]=(int16_t)(clamp((sum[k]+wet[k])*.25f,-1,1)*32767);p->clock++;
+}if(nf)render_new(p,out,frames,usefx,nb_sum,nb_rev,nb_del);
+ for(int i=0;i<8;i++)if(p->activity[i]&&p->clock>=p->activity_until[i]){p->activity[i]=0;p->activity_dirty[i]=1;}
 }
-static void *create(const char *dir){(void)dir;PT *p=calloc(1,sizeof *p);if(!p)return NULL;p->state_valid=1;p->samples=sp_create();p->rng=0x70695443;fx_init(&p->fx);
+static void *create(const char *dir){(void)dir;PT *p=calloc(1,sizeof *p);if(!p)return NULL;p->state_valid=1;p->samples=sp_create();p->rng=0x70695443;fx_init(&p->fx);p->fxn=fxn_create();p->fx_new=1;for(int i=0;i<FXN_COUNT;i++)p->fxn_p[i]=fxn_defaults[i];
  for(int i=0;i<=TABLE;i++){float t=(float)i/TABLE;p->sine[i]=sinf(2*PI*t);p->exp2tab[i]=exp2f(-8+16*t);p->tanh_table[i]=tanhf(-8+16*t);}
  for(int i=0;i<8;i++){Voice *v=&p->v[i];for(int j=0;j<PT_FIELDS;j++)v->banks[0][j]=v->banks[1][j]=pt_fields[j].def;v->noise_seed[0]=123456789+i*977;v->noise_seed[1]=987654321+i*991;v->mod_seed=1009+i*997;cache(v);v->level=v->level_target;}
  return p;
 }
-static void destroy(void *ptr){PT *p=ptr;sp_destroy(p->samples);free(p);}
+static void destroy(void *ptr){PT *p=ptr;sp_destroy(p->samples);fxn_destroy(p->fxn);free(p);}
 static int parse_key(const char *k,int *v,int *f){int n=0;if(sscanf(k,"v%d_%n",v,&n)!=1||*v<0||*v>7||n<3)return 0;for(int j=0;j<PT_FIELDS;j++)if(!strcmp(k+n,pt_fields[j].key)){*f=j;return 1;}if(!strcmp(k+n,"mute")){*f=PT_FIELDS;return 1;}if(!strcmp(k+n,"solo")){*f=PT_FIELDS+1;return 1;}return 0;}
 static int alias(const char *k,int *field){int page,i,n=0;if(sscanf(k,"q%d_%d%n",&page,&i,&n)==2&&k[n]==0&&page>=0&&page<3&&i>=0&&i<8){*field=page*8+i;return 1;}return 0;}
 static void change(PT *p,int v,int f,float x){Voice *voice=&p->v[v];float old=f==PT_FIELDS?voice->mute:f==PT_FIELDS+1?voice->solo:values(voice)[f];if(f>=PT_FIELDS)x=x>.5f;else{x=clamp(x,pt_fields[f].lo,pt_fields[f].hi);if(pt_fields[f].options)x=roundf(x);}if(old==x)return;if(f>=PT_FIELDS){int on=x>.5f;if(f==PT_FIELDS)voice->mute=on;else voice->solo=on;int solo=0;for(int i=0;i<8;i++)solo|=p->v[i].solo;for(int i=0;i<8;i++)if(p->v[i].mute||(solo&&!p->v[i].solo))release(&p->v[i]);}else{const PTField *d=&pt_fields[f];x=clamp(x,d->lo,d->hi);if(d->options)x=roundf(x);values(voice)[f]=x;cache(voice);}if(v==p->selected&&f<PT_FIELDS&&!p->sample_controls_dirty)p->sample_controls_dirty=1;p->changed[1+v*(PT_FIELDS+2)+f]=1;if(v==p->selected&&f<PT_FIELDS)p->changed[1+8*(PT_FIELDS+2)+4+8+8+f]=1;}
@@ -153,12 +164,17 @@ static void state_set(PT *p,const char *str){Voice staged[8];memcpy(staged,p->v,
  if(end==s||errno||!isfinite(x)||x<lo||x>hi||(i>=16&&(i-16==REV_ON||i-16==DEL_ON||i-16==DEL_SYNC||i-16==DEL_DIV)&&x!=roundf(x)))return;
  if(i<16)send[i/2][i%2]=x;else fx[i-16]=x;s=end;}
  while(*s==' '||*s=='\n'||*s=='\r'||*s=='\t')s++;}
+ int fx_new=0;float fxn[FXN_COUNT];memcpy(fxn,fxn_defaults,sizeof fxn);
+ if(!strncmp(s,"FX2 ",4)){s+=4;char *end;errno=0;float m=strtof(s,&end);if(end==s||errno||(m!=0&&m!=1))return;fx_new=(int)m;s=end;
+ for(int i=0;i<FXN_COUNT;i++){errno=0;float x=strtof(s,&end);if(end==s||errno||!isfinite(x)||x<fxn_lo[i]||x>fxn_hi[i]||(fxn_int[i]&&x!=roundf(x)))return;fxn[i]=x;s=end;}
+ while(*s==' '||*s=='\n'||*s=='\r'||*s=='\t')s++;}
  int sources[8]={0};float tunes[8][2]={{0}},starts[8][2]={{0}};char paths[8][SP_PATH]={{0}};if(!sample_state_read(&s,sources,tunes,starts,paths))return;
  if(p->samples&&memcmp(p->sample_paths,paths,sizeof paths)){if(!sp_start(p->samples))return;pthread_mutex_lock(&p->samples->mutex); /* 1.0.4 : attendre, ne plus rejeter l'état */for(int v=0;v<8;v++){memcpy(p->samples->requested[v],paths[v],SP_PATH);atomic_fetch_add(&p->samples->request[v],1);atomic_store(&p->samples->status[v],paths[v][0]?1:0);}pthread_mutex_unlock(&p->samples->mutex);p->samples->browser=0;}
  if(p->samples)p->samples->browser=0;
  memcpy(p->sample_paths,paths,sizeof paths);memcpy(p->source,sources,sizeof sources);memcpy(p->tune,tunes,sizeof tunes);memcpy(p->start,starts,sizeof starts);p->sample_dirty=1;
  memcpy(p->sends,send,sizeof send);memset(p->send_smooth,0,sizeof p->send_smooth);
  float bpm=p->fx.bpm;if(p->fx.rev_left||p->fx.del_left)fx_init(&p->fx);p->fx.bpm=bpm;memcpy(p->fx.param,fx,sizeof fx);p->fx.ready=0;p->fx_time_accum=0;fx_cache(&p->fx);memset(p->fx_dirty,1,sizeof p->fx_dirty);
+ fxn_apply_all(p,fx_new,fxn);
  for(int v=0;v<8;v++){memcpy(p->v[v].banks,staged[v].banks,sizeof staged[v].banks);p->v[v].bank=staged[v].bank;p->v[v].mute=staged[v].mute;p->v[v].solo=staged[v].solo;p->v[v].active=0;if(p->activity[v]){p->activity[v]=0;p->activity_dirty[v]=1;}cache(&p->v[v]);notify_voice(p,v);}p->selected=selected;p->changed[0]=1;p->state_valid=1;
 }
 static void sample_change(PT *p){if(!p->sample_dirty)p->sample_dirty=1;}
@@ -220,7 +236,8 @@ static void set(void *ptr,const char *key,const char *val){PT *p=ptr;if(!strcmp(
  if(fabsf(delta)<.125f){p->fx_time_accum+=delta;value=p->fx.param[DEL_DIV];if(fabsf(p->fx_time_accum)>=.04f){value=clamp(value+(p->fx_time_accum>0?1:-1),0,4);p->fx_time_accum=0;}}
  else{value=roundf(clamp(x,0,1)*4);p->fx_time_accum=0;}}
  else value=20+1480*clamp(x,0,1);if(value!=p->fx.param[fi]){p->fx.param[fi]=value;fx_cache(&p->fx);p->fx_dirty[16+fi]=p->fx_dirty[28]=1;}return;}
- if(!strcmp(key,"lfo_bpm")){if(x>=20&&x<=400){p->fx.bpm=x;fx_cache(&p->fx);}return;}
+ if(!strcmp(key,"lfo_bpm")){if(x>=20&&x<=400){p->fx.bpm=x;fx_cache(&p->fx);fxn_bpm(p->fxn,x);}return;}
+ if(fxn_set_key(p,key,x))return;
  int si,sn=0;char which[16];if(!strncmp(key,"send",4)&&sscanf(key,"send%d_%15s%n",&si,which,&sn)==2&&key[sn]==0&&si>=0&&si<8){int k=!strcmp(which,"reverb")?0:!strcmp(which,"delay")?1:-1;if(k>=0){x=clamp(x,0,100);if(p->sends[si][k]!=x){p->sends[si][k]=x;p->fx_dirty[si*2+k]=1;}}return;}
  if(key[0]=='r'||key[0]=='d')for(int i=0;i<FX_COUNT;i++)if(!strcmp(key,fx_keys[i])){x=clamp(x,fx_lo[i],fx_hi[i]);if(i==REV_ON||i==DEL_ON||i==DEL_SYNC||i==DEL_DIV)x=roundf(x);if(p->fx.param[i]!=x){p->fx.param[i]=x;if(i==DEL_SYNC||i==DEL_DIV)p->fx_time_accum=0;fx_cache(&p->fx);p->fx_dirty[16+i]=1;if(i==DEL_DIV||i==DEL_MS||i==DEL_SYNC)p->fx_dirty[28]=1;}return;}
  if(!strcmp(key,"selected")){p->selected=(int)clamp(roundf(x),0,7);p->sample_dirty=1;p->changed[0]=1;notify_voice(p,p->selected);return;}
@@ -234,6 +251,7 @@ static int get(void *ptr,const char *key,char *buf,int len){PT *p=ptr;int v,f,n=
  if(len<2)return 0;int sample_result=sample_get(p,key,buf,len);if(sample_result>=0)return sample_result;if(!strcmp(key,"state_valid"))return snprintf(buf,len,"%d",p->state_valid);
  if(!strcmp(key,"state")){int used=snprintf(buf,len,"PT1 %d ",p->selected);for(int i=0;i<8;i++){Voice *v=&p->v[i];if(used>=len)return 0;used+=snprintf(buf+used,len-used,"%d %d %d ",v->bank,v->mute,v->solo);for(int b=0;b<2;b++)for(int f=0;f<PT_FIELDS;f++){if(used>=len)return 0;used+=snprintf(buf+used,len-used,"%.9g ",v->banks[b][f]);}}int extended=memcmp(p->fx.param,fx_defaults,sizeof fx_defaults)!=0;for(int v=0;v<8;v++)extended|=p->sends[v][0]!=0||p->sends[v][1]!=0;
  if(extended){if(used>=len)return 0;used+=snprintf(buf+used,len-used,"FX1 ");for(int i=0;i<28;i++){if(used>=len)return 0;float x=i<16?p->sends[i/2][i%2]:p->fx.param[i-16];used+=snprintf(buf+used,len-used,"%.9g ",x);}}
+ {int x2=p->fx_new||memcmp(p->fxn_p,fxn_defaults,sizeof p->fxn_p)!=0;if(x2){if(used>=len)return 0;used+=snprintf(buf+used,len-used,"FX2 %d ",p->fx_new);for(int i=0;i<FXN_COUNT;i++){if(used>=len)return 0;used+=snprintf(buf+used,len-used,"%.9g ",p->fxn_p[i]);}}}
  if(p->samples){int has=0;for(int v=0;v<8;v++)has|=p->source[v]||p->sample_paths[v][0]||p->tune[v][0]!=0||p->tune[v][1]!=0||p->start[v][0]!=0||p->start[v][1]!=0;
  if(has){if(used>=len){return 0;}used+=snprintf(buf+used,len-used,"SM1 ");for(int v=0;v<8;v++){if(used>=len){return 0;}used+=snprintf(buf+used,len-used,"%d %.9g %.9g %.9g %.9g ",p->source[v],p->tune[v][0],p->start[v][0],p->tune[v][1],p->start[v][1]);const unsigned char *path=(const unsigned char*)p->sample_paths[v];if(!*path&&used<len)used+=snprintf(buf+used,len-used,"-");while(*path){if(used+2>=len){return 0;}used+=snprintf(buf+used,len-used,"%02x",*path++);}if(used<len)used+=snprintf(buf+used,len-used," ");}}
  }
@@ -243,6 +261,7 @@ static int get(void *ptr,const char *key,char *buf,int len){PT *p=ptr;int v,f,n=
  if(sscanf(key,"ab%d%n",&v,&n)==1&&key[n]==0&&v>=0&&v<8)return snprintf(buf,len,"%d",p->v[v].bank);
  if(!strcmp(key,"fx_time"))return snprintf(buf,len,"%.9g",p->fx.param[DEL_SYNC]>.5f?p->fx.param[DEL_DIV]/4:(p->fx.param[DEL_MS]-20)/1480);
  if(!strcmp(key,"fx_time_display"))return get(ptr,p->fx.param[DEL_SYNC]>.5f?"del_div_display":"del_ms_display",buf,len);
+ {int r=fxn_get_key(p,key,buf,len);if(r>=0)return r;}
  int si,sn=0;char which[16];if(!strncmp(key,"send",4)&&sscanf(key,"send%d_%15s%n",&si,which,&sn)==2&&key[sn]==0&&si>=0&&si<8){int display=strstr(which,"_display")!=NULL;if(display)*strstr(which,"_display")=0;int k=!strcmp(which,"reverb")?0:!strcmp(which,"delay")?1:-1;if(k>=0)return snprintf(buf,len,display?"%.0f %%":"%.9g",p->sends[si][k]);}
  if(key[0]=='r'||key[0]=='d')for(int i=0;i<FX_COUNT;i++){size_t length=strlen(fx_keys[i]);int match=!strncmp(key,fx_keys[i],length);int display=match&&!strcmp(key+length,"_display");if((match&&key[length]==0)||display){float x=p->fx.param[i];if(display){if(i==REV_ON||i==DEL_ON)return snprintf(buf,len,"%s",x>.5f?"ON":"OFF");if(i==DEL_SYNC)return snprintf(buf,len,"%s",x>.5f?"SYNC":"FREE");if(i==DEL_DIV){static const char *div[]={"1/16","1/8","1/8 D","1/4","1/2"};return snprintf(buf,len,"%s",div[(int)x]);}return snprintf(buf,len,i==REV_DECAY?"%.1f s":i==DEL_MS?"%.0f ms":"%.0f %%",x);}return snprintf(buf,len,"%.9g",x);}}
  char bare[80];size_t k=strlen(key);int display=k>8&&!strcmp(key+k-8,"_display"),name=k>5&&!strcmp(key+k-5,"_name");if(k>=sizeof bare)return 0;strcpy(bare,key);if(display)bare[k-8]=0;if(name)bare[k-5]=0;
@@ -262,7 +281,7 @@ int mpc_engine_changed(void *ptr,char *key,int len){PT *p=ptr;
  if(p->samples){unsigned rev=atomic_load(&p->samples->revision);if(rev!=p->sample_revision){p->sample_revision=rev;p->sample_dirty=1;}}
  if(p->sample_controls_dirty){static const char *c[]={"sample_tune","sample_start","tone_q0","tone_q1","tone_q2","tone_q3","tone_q4","tone_q5","tone_q6"};int i=p->sample_controls_dirty-1;if(i<9){p->sample_controls_dirty++;snprintf(key,len,"%s",c[i]);return 1;}if(i<25){p->sample_controls_dirty++;snprintf(key,len,"v%d_sample_%s",(i-9)/2,(i-9)%2?"start":"tune");return 1;}p->sample_controls_dirty=0;}
  if(p->sample_dirty){if(p->sample_dirty==1&&p->samples){p->marker_dirty=1;Sample *seen=p->samples->current[p->selected];int status=atomic_load(&p->samples->status[p->selected]);if(p->source[p->selected]&&(p->lcd_voice!=p->selected||p->lcd_seen!=seen||p->lcd_status!=status)){p->lcd_voice=p->selected;p->lcd_seen=seen;p->lcd_status=status;p->lcd_dirty=1;}else if(!p->source[p->selected]&&p->lcd_dirty){p->lcd_dirty=0;p->lcd_voice=-1;}}static const char *keys[]={"source","load","sample_name","sample_info","sample_status","browse","browse_path","browse_page","browse_up","browse_prev","browse_next","browse_close","browse_sd","browse_media","tone_q0","tone_q1","tone_q2","tone_q3","tone_q4","tone_q5","tone_q6","sample_tune","sample_start"};int at=p->sample_dirty-1;p->sample_dirty++;if(at<(int)(sizeof keys/sizeof keys[0]))snprintf(key,len,"%s",keys[at]);else if(at<23+8)snprintf(key,len,"browse_item%d",at-23);else if(at<31+32)snprintf(key,len,"sample_wave%d",at-31);else if(at<63+8)snprintf(key,len,"v%d_source",at-63);else{p->sample_dirty=0;return mpc_engine_changed(ptr,key,len);}return 1;}
-for(int i=0;i<8;i++)if(p->activity_dirty[i]){p->activity_dirty[i]=0;snprintf(key,len,"activity%d",i);return 1;}for(int i=0;i<29;i++)if(p->fx_dirty[i]){p->fx_dirty[i]=0;if(i<16)snprintf(key,len,"send%d_%s",i/2,i%2?"delay":"reverb");else if(i<28)snprintf(key,len,"%s",fx_keys[i-16]);else snprintf(key,len,"fx_time");return 1;}unsigned total=sizeof p->changed;for(unsigned i=0;i<total;i++){unsigned at=p->cursor++%total;if(!p->changed[at])continue;p->changed[at]=0;if(at==0)snprintf(key,len,"selected");else if(at<1+8*(PT_FIELDS+2)){unsigned a=at-1,f=a%(PT_FIELDS+2);snprintf(key,len,"v%u_%s",a/(PT_FIELDS+2),f<PT_FIELDS?pt_fields[f].key:f==PT_FIELDS?"mute":"solo");}else if(at>=1+8*(PT_FIELDS+2)+4+8+8){unsigned a=at-(1+8*(PT_FIELDS+2)+4+8+8);snprintf(key,len,"q%u_%u",a/8,a%8);}else if(at>=1+8*(PT_FIELDS+2)+4+8)snprintf(key,len,"ab%u",at-(1+8*(PT_FIELDS+2)+4+8));else continue;return 1;}
+for(int i=0;i<8;i++)if(p->activity_dirty[i]){p->activity_dirty[i]=0;snprintf(key,len,"activity%d",i);return 1;}if(fxn_next_dirty(p,key,len))return 1;for(int i=0;i<29;i++)if(p->fx_dirty[i]){p->fx_dirty[i]=0;if(i<16)snprintf(key,len,"send%d_%s",i/2,i%2?"delay":"reverb");else if(i<28)snprintf(key,len,"%s",fx_keys[i-16]);else snprintf(key,len,"fx_time");return 1;}unsigned total=sizeof p->changed;for(unsigned i=0;i<total;i++){unsigned at=p->cursor++%total;if(!p->changed[at])continue;p->changed[at]=0;if(at==0)snprintf(key,len,"selected");else if(at<1+8*(PT_FIELDS+2)){unsigned a=at-1,f=a%(PT_FIELDS+2);snprintf(key,len,"v%u_%s",a/(PT_FIELDS+2),f<PT_FIELDS?pt_fields[f].key:f==PT_FIELDS?"mute":"solo");}else if(at>=1+8*(PT_FIELDS+2)+4+8+8){unsigned a=at-(1+8*(PT_FIELDS+2)+4+8+8);snprintf(key,len,"q%u_%u",a/8,a%8);}else if(at>=1+8*(PT_FIELDS+2)+4+8)snprintf(key,len,"ab%u",at-(1+8*(PT_FIELDS+2)+4+8));else continue;return 1;}
  if(p->marker_dirty){p->marker_dirty=0;snprintf(key,len,"sample_marker");return 1;}
  if(p->lcd_dirty){int at=p->lcd_dirty++-1;if(!at){snprintf(key,len,"sample_stereo");return 1;}if(at<=2*SP_LCD_COLS){snprintf(key,len,"sample_lcd%d",at-1);return 1;}p->lcd_dirty=0;}
  return 0;}

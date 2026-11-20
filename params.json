@@ -8725,5 +8725,233 @@
     "max": 99.9,
     "default": 0,
     "poll": false
+  },
+  {
+    "key": "fxn_mode",
+    "name": "EXTENDED",
+    "min": 0,
+    "max": 1,
+    "default": 1,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "OFF",
+      "ON"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "fxn_rtype",
+    "name": "TYPE",
+    "min": 0,
+    "max": 9,
+    "default": 1,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "ROOM",
+      "HALL",
+      "SPRING",
+      "PLATE",
+      "MODULATED",
+      "REVERSE",
+      "HALO",
+      "HALO+",
+      "ABYSS",
+      "CASCADE"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "fxn_rdecay",
+    "name": "DECAY",
+    "min": 0,
+    "max": 100,
+    "default": 55,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "fxn_rlive",
+    "name": "LIVELINESS",
+    "min": 0,
+    "max": 100,
+    "default": 60,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "fxn_rwarmth",
+    "name": "WARMTH",
+    "min": 0,
+    "max": 100,
+    "default": 35,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "fxn_dsync",
+    "name": "CLOCK",
+    "min": 0,
+    "max": 1,
+    "default": 1,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "FREE",
+      "SYNC"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "fxn_ddiv",
+    "name": "TIME",
+    "min": 0,
+    "max": 6,
+    "default": 3,
+    "dynamic_display": true,
+    "poll": false,
+    "options": [
+      "1/16",
+      "1/8",
+      "1/8 D",
+      "1/4",
+      "1/4 D",
+      "1/2",
+      "1"
+    ],
+    "display": "int"
+  },
+  {
+    "key": "fxn_dms",
+    "name": "TIME",
+    "min": 10,
+    "max": 2000,
+    "default": 375,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "fxn_dfeedback",
+    "name": "FEEDBACK",
+    "min": 0,
+    "max": 120,
+    "default": 45,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "fxn_dfilter",
+    "name": "FILTER",
+    "min": -100,
+    "max": 100,
+    "default": 0,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "fxn_rtype__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "fxn_rtype"
+  },
+  {
+    "key": "fxn_ddiv__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "fxn_ddiv"
+  },
+  {
+    "key": "fxn_time",
+    "name": "DELAY TIME",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "fxq0",
+    "name": "FX",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "fxq1",
+    "name": "FX",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "fxq2",
+    "name": "FX",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "fxq3",
+    "name": "FX",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "fxq4",
+    "name": "FX",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "fxq5",
+    "name": "FX",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "fxq6",
+    "name": "FX",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "fxq7",
+    "name": "FX",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
   }
 ]

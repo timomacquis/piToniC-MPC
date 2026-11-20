@@ -20,9 +20,22 @@ for item in items:header.append('{'+json.dumps(item['name'])+','+json.dumps(item
 header.append('};');(generated/'pitonic_factory_programs.h').write_text('\n'.join(header)+'\n')
 (generated/'program-list.json').write_text(json.dumps([{k:v for k,v in i.items() if k!='state'} for i in items],indent=2)+'\n')
 flags=['-std=c11','-D_POSIX_C_SOURCE=200809L','-O2','-fPIC','-shared','-DPITONIC_FACTORY_PROGRAMS=1','-I'+str(generated),'-Ibuild','-Isrc','-Ithird_party/mpc-wrapper/wrapper'];sources=['src/engine.c','third_party/mpc-wrapper/wrapper/vst2_wrap.c'];libs=['-lpthread','-lm','-ldl']
-subprocess.run(['gcc',*flags,*sources,*libs,'-o',str(out/'pitonic-x86_64.so')],check=True)
+# 1.1.0 : moteur C + pont C++ des effets NEW, mêmes options que scripts/build.py (sysroot Gen1 de πMorpH pour l'ARM).
+cflags=[f for f in flags if f!='-shared'];cxx=['-std=c++17','-O2','-fPIC','-fno-exceptions','-fno-rtti','-Isrc','-D_POSIX_C_SOURCE=200809L']
+def objs(tag,cc_,extra,e=None):
+ o=[]
+ for src in sources:
+  t=str(out/f'{Path(src).stem}-{tag}.o');subprocess.run([str(cc_),*extra,*cflags,'-c',src,'-o',t],env=e,check=True);o.append(t)
+ return o
+subprocess.run(['g++',*cxx,'-c','src/fx_new.cpp','-o',str(out/'fx_new-x86_64.o')],check=True)
+subprocess.run(['g++','-shared',*objs('x86_64','gcc',[]),str(out/'fx_new-x86_64.o'),*libs,'-o',str(out/'pitonic-x86_64.so')],check=True)
 root=Path(os.environ.get('PITONIC_SYSROOT',str(B.parent/'πClideaN/toolchain/root')));cc=root/'usr/bin/arm-linux-gnueabihf-gcc-12';env=dict(os.environ);env['PATH']=str(root/'usr/bin')+os.pathsep+env.get('PATH','');env['LD_LIBRARY_PATH']=str(root/'usr/lib/x86_64-linux-gnu')+os.pathsep+env.get('LD_LIBRARY_PATH','')
-subprocess.run([str(cc),'--sysroot='+str(root),'-march=armv7-a','-mfpu=neon','-mfloat-abi=hard',*flags,*sources,'-static-libgcc',*libs,'-o',str(out/'pitonic.so')],env=env,check=True)
-inputs=[B/'params.json',B/'build/params.h',*list((B/'src').glob('*')),*list((B/'third_party/mpc-wrapper/wrapper').glob('*')),generated/'pitonic_factory_programs.h',Path(__file__)]
+old=Path(os.environ.get('PITONIC_GEN1_SYSROOT',B.parent/'πMorpH/build/gen1-sysroot'));lib=old/'usr/arm-linux-gnueabihf/lib';stdlib=old/'usr/lib/gcc-cross/arm-linux-gnueabihf/10'
+arm=['--sysroot='+str(old),'-isystem',str(old/'usr/arm-linux-gnueabihf/include'),'-B'+str(lib)+'/','-L'+str(lib),'-L'+str(stdlib),'-march=armv7-a','-mfpu=neon','-mfloat-abi=hard']
+cpp10=['-nostdinc++','-isystem',str(old/'usr/arm-linux-gnueabihf/include/c++/10'),'-isystem',str(old/'usr/arm-linux-gnueabihf/include/c++/10/arm-linux-gnueabihf')]
+cxxc=root/'usr/bin/arm-linux-gnueabihf-g++-12'
+subprocess.run([str(cxxc),*cpp10,*arm,*cxx,'-c','src/fx_new.cpp','-o',str(out/'fx_new-armv7.o')],env=env,check=True)
+subprocess.run([str(cxxc),*arm,'-shared',*objs('armv7',cc,arm,env),str(out/'fx_new-armv7.o'),'-static-libstdc++','-static-libgcc',*libs,'-o',str(out/'pitonic.so')],env=env,check=True)
+inputs=[B/'params.json',B/'build/params.h',*list((B/'src').rglob('*')),*list((B/'third_party/mpc-wrapper/wrapper').glob('*')),generated/'pitonic_factory_programs.h',Path(__file__)]
 receipt={'private_only':private_only,'programs':len(items),'inputs':{str(f.relative_to(B)):hashlib.sha256(f.read_bytes()).hexdigest() for f in inputs if f.is_file()},'outputs':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.so')}}
 (out/'BUILD.json').write_text(json.dumps(receipt,indent=2)+'\n');print('ARMv7 and PC plugins expose',len(items),'complete-state native VST programs.')

@@ -13,7 +13,16 @@ root=Path(os.environ.get('PITONIC_AARCH64_SYSROOT','/home/greg/forcework/gen2-to
 env=dict(os.environ,PATH=str(root/'usr/bin')+':'+os.environ['PATH'],LD_LIBRARY_PATH=str(root/'usr/lib/x86_64-linux-gnu')+':'+os.environ.get('LD_LIBRARY_PATH',''))
 flags=['-std=c11','-D_POSIX_C_SOURCE=200809L','-O2','-fPIC','-shared','-DPITONIC_FACTORY_PROGRAMS=1','-IBanks/PatternariumBest150/Generated','-Ibuild','-Isrc','-Ithird_party/mpc-wrapper/wrapper']
 so=out/'pitonic.so'
-subprocess.run([str(root/'usr/bin/aarch64-linux-gnu-gcc-12'),'--sysroot='+str(root),'-B'+str(root/'usr/aarch64-linux-gnu/lib')+'/',*flags,'src/engine.c','third_party/mpc-wrapper/wrapper/vst2_wrap.c','-static-libgcc','-lpthread','-lm','-ldl','-Wl,--no-undefined','-Wl,-z,relro,-z,now,-z,noexecstack','-o',str(so)],env=env,check=True)
+# 1.1.0 : moteur C + pont C++ des effets NEW. Comme πMorpH 0.2.0 : sysroot « compat » (glibc et libstdc++ 10), libstdc++ statique.
+compat=Path(os.environ.get('PITONIC_AARCH64_COMPAT','/home/greg/forcework/gen2-toolchain/compat'))
+extra=['--sysroot='+str(compat),'-B'+str(compat/'usr/lib/gcc-cross/aarch64-linux-gnu/10')+'/','-B'+str(compat/'usr/aarch64-linux-gnu/lib')+'/','-L'+str(compat/'usr/aarch64-linux-gnu/lib'),'-L'+str(compat/'usr/lib/gcc-cross/aarch64-linux-gnu/10'),'-O2','-fPIC','-pthread','-isystem',str(compat/'usr/aarch64-linux-gnu/include')]
+cdefs=[f for f in flags if f not in ('-O2','-fPIC','-shared')]
+objects=[]
+for source,c in [('src/engine.c',True),('third_party/mpc-wrapper/wrapper/vst2_wrap.c',True),('src/fx_new.cpp',False)]:
+ obj=out/(Path(source).stem+'.o');objects.append(str(obj))
+ cpp=[] if c else ['-nostdinc++','-isystem',str(compat/'usr/aarch64-linux-gnu/include/c++/10'),'-isystem',str(compat/'usr/aarch64-linux-gnu/include/c++/10/aarch64-linux-gnu'),'-std=c++17','-fno-exceptions','-fno-rtti','-Isrc','-D_POSIX_C_SOURCE=200809L']
+ subprocess.run([str(root/'usr/bin'/('aarch64-linux-gnu-gcc-12' if c else 'aarch64-linux-gnu-g++-12')),*cpp,*extra,*(cdefs if c else []),'-c',source,'-o',str(obj)],env=env,check=True)
+subprocess.run([str(root/'usr/bin/aarch64-linux-gnu-g++-12'),*extra,'-shared',*objects,'-static-libstdc++','-static-libgcc','-lpthread','-lm','-ldl','-Wl,--no-undefined','-Wl,-z,relro,-z,now,-z,noexecstack','-o',str(so)],env=env,check=True)
 subprocess.run([str(root/'usr/bin/aarch64-linux-gnu-strip'),str(so)],env=env,check=True)
 report=subprocess.check_output([str(root/'usr/bin/aarch64-linux-gnu-readelf'),'-h','-d','--version-info',str(so)],env=env,text=True)
 (out/'ELF.txt').write_text(report)
