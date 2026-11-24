@@ -214,6 +214,8 @@ for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
   for v in range(8):
    x=20+v*156;bitmap(f'strip{v}.png',148,456,'',PANEL);parts.append(art(f'strip{v}.png',x,80,148,456))
    parts.extend([dial(f'v{v}_level','LEVEL',x+3,84,142,90,slider=True),dial(f'v{v}_pan','PAN',x+3,182,142,90,slider=True),dial(f'send{v}_reverb','REVERB',x+3,280,142,90,slider=True),dial(f'send{v}_delay','DELAY',x+3,378,142,90,slider=True),toggle(f'v{v}_mute','M',x+10,480,59,44),toggle(f'v{v}_solo','S',x+79,480,59,44)])
+  # 1.1.1 : import d'un kit MicroTonic (.mtpreset), aligné sur A / B ; état de l'import à droite.
+  parts.append(toggle('kit_import','IMPORT KIT',20,548,280,52));parts.append(readout('kit_status',316,548,570,52,22))
  else:
   # Shared effects: each side owns four controls, with one central separator.
   im=Image.new('RGB',(2,420),EDGE);im.save(A/'effects_divider.png');parts.append(art('effects_divider.png',639,92,2,420))
@@ -246,6 +248,18 @@ for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
   for i in range(8):
    key=f'browse_item{i}';fn='compact_sample_entry.png';bitmap(fn,560,36,'',FIELD)
    cs.append(place(local('compact_sample_entry'+str(i),[art(fn,0,0,560,36),label(12,2,536,32,n=26)],[action('Toggle Switch')]),key,x+24+(i%2)*572,y+148+(i//2)*48,560,36))
+  cs.append(toggle('browse_prev','PREVIOUS',x+24,y+354,180,36));cs.append(readout('browse_page',x+(w-260)//2,y+354,260,36,24));cs.append(toggle('browse_next','NEXT',x+w-204,y+354,180,36));finish_modal(parts,cs,cond)
+
+ if page==4:
+  # 1.1.1 : même navigateur que LOAD SAMPLE, filtré sur .mtpreset (dossier mémorisé à part).
+  cond=[gate('kit_browse',1)]
+  cs,x,y,w,h,_,_,_=modal_base(parts,'kit_import','IMPORT KIT — MicroTonic .mtpreset',[''],'kit_browse',cond,close_key='browse_close',width=1180,height=418,caption='IMPORT KIT')
+  compact_layout[-1].update(kind='kit_browser',columns=2,options=8)
+  cs.append(readout('browse_path',x+24,y+100,w-48,36,24))
+  for key,caption,dx,bw in [('browse_up','UP',24,120),('browse_sd','USER / SD',156,180),('browse_media','DRIVES',348,180),('browse_close','CLOSE',w-184,160)]:cs.append(toggle(key,caption,x+dx,y+54,bw,36))
+  for i in range(8):
+   key=f'browse_item{i}';fn='compact_sample_entry.png';bitmap(fn,560,36,'',FIELD)
+   cs.append(place(local('compact_kit_entry'+str(i),[art(fn,0,0,560,36),label(12,2,536,32,n=26)],[action('Toggle Switch')]),key,x+24+(i%2)*572,y+148+(i//2)*48,560,36))
   cs.append(toggle('browse_prev','PREVIOUS',x+24,y+354,180,36));cs.append(readout('browse_page',x+(w-260)//2,y+354,260,36,24));cs.append(toggle('browse_next','NEXT',x+w-204,y+354,180,36));finish_modal(parts,cs,cond)
 
  name=local('page'+str(page),parts);tabs.append(dict(version=3,tabName=title,fnKeyIndex=page,fnKeySubIndex=0,qlinkBoundsData=['0 0 0 0'],componentName=name,initialSize='0 0 1280 628',scale=1.))

@@ -55,6 +55,10 @@ for k in ['fxn_rtype','fxn_ddiv']:P.append(dict(key=k+'__open',name='Options',mi
 P.append(dict(key='fxn_time',name='DELAY TIME',min=0,max=1,default=.5,dynamic_display=True,poll=False))
 # Q-Links de la page FX : alias qui pilotent les réglages du mode affiché (CLASSIC ou NEW).
 for i in range(8):P.append(dict(key=f'fxq{i}',name='FX',min=0,max=1,default=.5,dynamic_display=True,dynamic_name=True,poll=False))
+# 1.1.1 : import de kit MicroTonic .mtpreset (page MIXER). Tous les indices publiés restent fixes.
+P.append(dict(key='kit_import',name='IMPORT KIT',min=0,max=1,default=0,momentary=True,poll=False))
+P.append(dict(key='kit_browse',name='Kit browser',min=0,max=1,default=0,poll=False))
+P.append(dict(key='kit_status',name='kit_status',min=0,max=1,default=0,dynamic_display=True,poll=False))
 keys=[p['key'] for p in P];lock=B/'params.lock'
 if lock.exists():assert keys[:len(old:=lock.read_text().splitlines())]==old,'Parameter indices changed'
 lock.write_text('\n'.join(keys)+'\n')

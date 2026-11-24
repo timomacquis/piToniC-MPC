@@ -47,7 +47,7 @@
   {
     "key": "v0_decay",
     "name": "A01 AMP DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 260,
     "dynamic_display": true,
@@ -123,7 +123,7 @@
     "key": "v0_cutoff",
     "name": "A01 CUTOFF",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 2500,
     "dynamic_display": true,
     "poll": false
@@ -149,7 +149,7 @@
   {
     "key": "v0_ndcy",
     "name": "A01 NOISE DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 120,
     "dynamic_display": true,
@@ -197,7 +197,7 @@
     "key": "v0_eqfreq",
     "name": "A01 EQ FREQUENCY",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 200,
     "dynamic_display": true,
     "poll": false
@@ -205,8 +205,8 @@
   {
     "key": "v0_eqgain",
     "name": "A01 EQ GAIN",
-    "min": -24,
-    "max": 24,
+    "min": -40,
+    "max": 40,
     "default": 0,
     "dynamic_display": true,
     "poll": false
@@ -315,7 +315,7 @@
   {
     "key": "v1_decay",
     "name": "A02 AMP DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 260,
     "dynamic_display": true,
@@ -391,7 +391,7 @@
     "key": "v1_cutoff",
     "name": "A02 CUTOFF",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 2500,
     "dynamic_display": true,
     "poll": false
@@ -417,7 +417,7 @@
   {
     "key": "v1_ndcy",
     "name": "A02 NOISE DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 120,
     "dynamic_display": true,
@@ -465,7 +465,7 @@
     "key": "v1_eqfreq",
     "name": "A02 EQ FREQUENCY",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 200,
     "dynamic_display": true,
     "poll": false
@@ -473,8 +473,8 @@
   {
     "key": "v1_eqgain",
     "name": "A02 EQ GAIN",
-    "min": -24,
-    "max": 24,
+    "min": -40,
+    "max": 40,
     "default": 0,
     "dynamic_display": true,
     "poll": false
@@ -583,7 +583,7 @@
   {
     "key": "v2_decay",
     "name": "A03 AMP DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 260,
     "dynamic_display": true,
@@ -659,7 +659,7 @@
     "key": "v2_cutoff",
     "name": "A03 CUTOFF",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 2500,
     "dynamic_display": true,
     "poll": false
@@ -685,7 +685,7 @@
   {
     "key": "v2_ndcy",
     "name": "A03 NOISE DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 120,
     "dynamic_display": true,
@@ -733,7 +733,7 @@
     "key": "v2_eqfreq",
     "name": "A03 EQ FREQUENCY",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 200,
     "dynamic_display": true,
     "poll": false
@@ -741,8 +741,8 @@
   {
     "key": "v2_eqgain",
     "name": "A03 EQ GAIN",
-    "min": -24,
-    "max": 24,
+    "min": -40,
+    "max": 40,
     "default": 0,
     "dynamic_display": true,
     "poll": false
@@ -851,7 +851,7 @@
   {
     "key": "v3_decay",
     "name": "A04 AMP DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 260,
     "dynamic_display": true,
@@ -927,7 +927,7 @@
     "key": "v3_cutoff",
     "name": "A04 CUTOFF",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 2500,
     "dynamic_display": true,
     "poll": false
@@ -953,7 +953,7 @@
   {
     "key": "v3_ndcy",
     "name": "A04 NOISE DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 120,
     "dynamic_display": true,
@@ -1001,7 +1001,7 @@
     "key": "v3_eqfreq",
     "name": "A04 EQ FREQUENCY",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 200,
     "dynamic_display": true,
     "poll": false
@@ -1009,8 +1009,8 @@
   {
     "key": "v3_eqgain",
     "name": "A04 EQ GAIN",
-    "min": -24,
-    "max": 24,
+    "min": -40,
+    "max": 40,
     "default": 0,
     "dynamic_display": true,
     "poll": false
@@ -1119,7 +1119,7 @@
   {
     "key": "v4_decay",
     "name": "A05 AMP DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 260,
     "dynamic_display": true,
@@ -1195,7 +1195,7 @@
     "key": "v4_cutoff",
     "name": "A05 CUTOFF",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 2500,
     "dynamic_display": true,
     "poll": false
@@ -1221,7 +1221,7 @@
   {
     "key": "v4_ndcy",
     "name": "A05 NOISE DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 120,
     "dynamic_display": true,
@@ -1269,7 +1269,7 @@
     "key": "v4_eqfreq",
     "name": "A05 EQ FREQUENCY",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 200,
     "dynamic_display": true,
     "poll": false
@@ -1277,8 +1277,8 @@
   {
     "key": "v4_eqgain",
     "name": "A05 EQ GAIN",
-    "min": -24,
-    "max": 24,
+    "min": -40,
+    "max": 40,
     "default": 0,
     "dynamic_display": true,
     "poll": false
@@ -1387,7 +1387,7 @@
   {
     "key": "v5_decay",
     "name": "A06 AMP DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 260,
     "dynamic_display": true,
@@ -1463,7 +1463,7 @@
     "key": "v5_cutoff",
     "name": "A06 CUTOFF",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 2500,
     "dynamic_display": true,
     "poll": false
@@ -1489,7 +1489,7 @@
   {
     "key": "v5_ndcy",
     "name": "A06 NOISE DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 120,
     "dynamic_display": true,
@@ -1537,7 +1537,7 @@
     "key": "v5_eqfreq",
     "name": "A06 EQ FREQUENCY",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 200,
     "dynamic_display": true,
     "poll": false
@@ -1545,8 +1545,8 @@
   {
     "key": "v5_eqgain",
     "name": "A06 EQ GAIN",
-    "min": -24,
-    "max": 24,
+    "min": -40,
+    "max": 40,
     "default": 0,
     "dynamic_display": true,
     "poll": false
@@ -1655,7 +1655,7 @@
   {
     "key": "v6_decay",
     "name": "A07 AMP DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 260,
     "dynamic_display": true,
@@ -1731,7 +1731,7 @@
     "key": "v6_cutoff",
     "name": "A07 CUTOFF",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 2500,
     "dynamic_display": true,
     "poll": false
@@ -1757,7 +1757,7 @@
   {
     "key": "v6_ndcy",
     "name": "A07 NOISE DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 120,
     "dynamic_display": true,
@@ -1805,7 +1805,7 @@
     "key": "v6_eqfreq",
     "name": "A07 EQ FREQUENCY",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 200,
     "dynamic_display": true,
     "poll": false
@@ -1813,8 +1813,8 @@
   {
     "key": "v6_eqgain",
     "name": "A07 EQ GAIN",
-    "min": -24,
-    "max": 24,
+    "min": -40,
+    "max": 40,
     "default": 0,
     "dynamic_display": true,
     "poll": false
@@ -1923,7 +1923,7 @@
   {
     "key": "v7_decay",
     "name": "A08 AMP DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 260,
     "dynamic_display": true,
@@ -1999,7 +1999,7 @@
     "key": "v7_cutoff",
     "name": "A08 CUTOFF",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 2500,
     "dynamic_display": true,
     "poll": false
@@ -2025,7 +2025,7 @@
   {
     "key": "v7_ndcy",
     "name": "A08 NOISE DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 120,
     "dynamic_display": true,
@@ -2073,7 +2073,7 @@
     "key": "v7_eqfreq",
     "name": "A08 EQ FREQUENCY",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 200,
     "dynamic_display": true,
     "poll": false
@@ -2081,8 +2081,8 @@
   {
     "key": "v7_eqgain",
     "name": "A08 EQ GAIN",
-    "min": -24,
-    "max": 24,
+    "min": -40,
+    "max": 40,
     "default": 0,
     "dynamic_display": true,
     "poll": false
@@ -2390,7 +2390,7 @@
   {
     "key": "q0_3",
     "name": "AMP DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 260,
     "dynamic_display": true,
@@ -2473,7 +2473,7 @@
     "key": "q1_2",
     "name": "CUTOFF",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 2500,
     "dynamic_display": true,
     "dynamic_name": true,
@@ -2502,7 +2502,7 @@
   {
     "key": "q1_5",
     "name": "NOISE DECAY",
-    "min": 10,
+    "min": 1,
     "max": 10000,
     "default": 120,
     "dynamic_display": true,
@@ -2554,7 +2554,7 @@
     "key": "q2_1",
     "name": "EQ FREQUENCY",
     "min": 20,
-    "max": 18000,
+    "max": 20000,
     "default": 200,
     "dynamic_display": true,
     "dynamic_name": true,
@@ -2563,8 +2563,8 @@
   {
     "key": "q2_2",
     "name": "EQ GAIN",
-    "min": -24,
-    "max": 24,
+    "min": -40,
+    "max": 40,
     "default": 0,
     "dynamic_display": true,
     "dynamic_name": true,
@@ -8952,6 +8952,32 @@
     "default": 0.5,
     "dynamic_display": true,
     "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "kit_import",
+    "name": "IMPORT KIT",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "momentary": true,
+    "poll": false
+  },
+  {
+    "key": "kit_browse",
+    "name": "Kit browser",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "poll": false
+  },
+  {
+    "key": "kit_status",
+    "name": "kit_status",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "dynamic_display": true,
     "poll": false
   }
 ]

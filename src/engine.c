@@ -4,6 +4,7 @@
  * No Microtonic binaries, presets, algorithms or TR GPL source incorporated.
  * Native MPC engine: shared send effects; no file I/O or allocations in render/set/get, no locks in render.
  * set() may wait briefly on the sample worker mutex (held only for short copies).
+ * 1.1.1: .mtpreset kits are read by the sample worker and applied at the start of render.
  */
 #include "engine.h"
 #include "fields.h"
@@ -59,7 +60,7 @@ static float env_next(Env *e){
  if(e->age<INT_MAX)e->age++;return e->value;
 }
 static void biquad_set(Biquad *b,float hz,float q,int type,float gain){
- float w=2*PI*clamp(hz,20,SR*.45f)/SR,c=cosf(w),a=sinf(w)/(2*clamp(q,.1f,20)),a0;
+ float w=2*PI*clamp(hz,20,20000)/SR,c=cosf(w),a=sinf(w)/(2*clamp(q,.1f,20)),a0;
  if(type==3){float A=powf(10,gain/40);a0=1+a/A;b->b0=(1+a*A)/a0;b->b1=-2*c/a0;b->b2=(1-a*A)/a0;b->a1=b->b1;b->a2=(1-a/A)/a0;}
  else{a0=1+a;if(type==0){b->b0=(1-c)*.5f/a0;b->b1=(1-c)/a0;b->b2=b->b0;}else if(type==2){b->b0=(1+c)*.5f/a0;b->b1=-(1+c)/a0;b->b2=b->b0;}else{b->b0=a/a0;b->b1=0;b->b2=-a/a0;}b->a1=-2*c/a0;b->a2=(1-a)/a0;}
 }
@@ -102,7 +103,20 @@ static void render_new(PT *p,int16_t *out,int frames,int usefx,const float *sum,
  float tr=p->fx.param[REV_ON]>.5f?p->fx.param[REV_RETURN]/100:0,td=p->fx.param[DEL_ON]>.5f?p->fx.param[DEL_RETURN]/100:0,r0=p->fxn_g[0],d0=p->fxn_g[1];
  for(int n=0;n<frames;n++){float t=(n+1.f)/frames,gr=r0+(tr-r0)*t,gd=d0+(td-d0)*t;for(int k=0;k<2;k++)out[n*2+k]=(int16_t)(clamp((sum[n*2+k]+wr[n*2+k]*gr+wd[n*2+k]*gd)*.25f,-1,1)*32767);}
  p->fxn_g[0]=tr;p->fxn_g[1]=td;}
+/* 1.1.1 : import d'un kit .mtpreset, appliqué au début du rendu (fil audio),
+ * sans allocation ni verrou. Les 8 voix reçoivent le même son en A et B,
+ * passent en SYNTH, sans mute ni solo, sur la banque A ; sends à 0. Les
+ * réglages des effets, les samples chargés et les réglages TUNE/START restent. */
+static void kit_apply(PT *p,const MTKit *k){
+ for(int v=0;v<8;v++){Voice *voice=&p->v[v];sample_release(voice);
+  for(int b=0;b<2;b++)memcpy(voice->banks[b],k->values[v],sizeof k->values[v]);
+  voice->bank=0;voice->mute=voice->solo=0;p->source[v]=0;
+  for(int s=0;s<2;s++){p->sends[v][s]=0;p->fx_dirty[v*2+s]=1;}
+  cache(voice);notify_voice(p,v);}
+ p->sample_dirty=1;if(!p->sample_controls_dirty)p->sample_controls_dirty=1;p->changed[0]=1;
+}
 static void render(void *ptr,int16_t *out,int frames){PT *p=ptr;
+ if(p->samples){MTKit *kit=sp_kit_take(p->samples);if(kit){kit_apply(p,kit);sp_kit_retire(p->samples,kit);}}
  if(p->samples)for(int i=0;i<8;i++)if(sp_commit(p->samples,i)){sample_release(&p->v[i]);p->sample_dirty=1;}Sample *sample_data[8]={0};int sample_ready[8]={0};if(p->samples)for(int i=0;i<8;i++){sample_data[i]=p->samples->current[i];sample_ready[i]=sample_data[i]&&atomic_load(&p->samples->status[i])==2&&!strcmp(sample_data[i]->path,p->sample_paths[i]);}int usefx=p->fx.rev_left||p->fx.del_left;const int nf=p->fx_new&&p->fxn;if(nf&&fxn_busy(p->fxn))usefx=1;float nb_sum[256],nb_rev[256],nb_del[256];
  for(int i=0;i<8;i++)if(p->v[i].active&&(p->sends[i][0]>0||p->sends[i][1]>0||p->send_smooth[i][0]>1e-7f||p->send_smooth[i][1]>1e-7f))usefx=1;
  for(int n=0;n<frames;n++){
@@ -137,7 +151,7 @@ static void change(PT *p,int v,int f,float x){Voice *voice=&p->v[v];float old=f=
 static int protected(int f){return f==LEVEL||f==PAN||f==CHOKE;}
 static void randomize(PT *p,int small){Voice *v=&p->v[p->selected];if(!v->bank){memcpy(v->banks[1],v->banks[0],sizeof v->banks[0]);p->tune[p->selected][1]=p->tune[p->selected][0];p->start[p->selected][1]=p->start[p->selected][0];v->bank=1;}
  float *f=values(v);for(int j=0;j<PT_FIELDS;j++){if(protected(j)||(p->source[p->selected]&&(j==FREQ||j==WAVE)))continue;const PTField *d=&pt_fields[j];float u=(random_sample(&p->rng)+1)*.5f;
- float lo=d->lo,hi=d->hi;if(j==FREQ)hi=10000;if(j==ATK||j==NATK)hi=80;if(j==DCY||j==NDCY)hi=1800;if(j==DRIVE)hi=20;if(j==EQG){lo=-9;hi=9;}if(j==RES)hi=5;
+ float lo=d->lo,hi=d->hi;if(j==FREQ)hi=10000;if(j==ATK||j==NATK)hi=80;if(j==DCY||j==NDCY){lo=10;hi=1800;}if(j==CUT||j==EQF)hi=18000;if(j==DRIVE)hi=20;if(j==EQG){lo=-9;hi=9;}if(j==RES)hi=5;
  float x=small?f[j]+(u-.5f)*(hi-lo)*.08f:lo+u*(hi-lo);if(!small&&(j==FREQ||j==CUT||j==EQF||j==DCY||j==NDCY))x=fmaxf(lo,1)*powf(hi/fmaxf(lo,1),u);if(d->options)x=small?f[j]:floorf(u*d->options);f[j]=clamp(d->options?roundf(x):x,d->lo,d->hi);}
  if(p->source[p->selected]){int i=p->selected,b=v->bank;float u=random_sample(&p->rng);p->tune[i][b]=clamp(small?p->tune[i][b]+u:12*u,-48,48);p->start[i][b]=clamp(small?p->start[i][b]+random_sample(&p->rng):5*(random_sample(&p->rng)+1),0,99.9f);}
  cache(v);notify_voice(p,p->selected);p->sample_dirty=1;
@@ -194,12 +208,12 @@ static int sample_set(PT *p,const char *key,const char *val){SampleIO *io=p->sam
  if(p->source[v]&&i<2){if(i==0)p->tune[v][p->v[v].bank]=-48+96*x;else p->start[v][p->v[v].bank]=99.9f*x;}
  else {const PTField *d=&pt_fields[f];float value=(f==FREQ||f==ATK||f==DCY||f==RATE)?((d->lo+(d->lo==0?1:0))*powf((d->hi+(d->lo==0?1:0))/(d->lo+(d->lo==0?1:0)),x)-(d->lo==0?1:0)):d->lo+x*(d->hi-d->lo);change(p,v,f,value);}sample_controls(p);return 1;}
  if(!io)return 0;
- if(!strcmp(key,"load")){if(x>.5f){io->browser=1;io->owner=v;char path[SP_PATH];if(!pthread_mutex_lock(&io->mutex)){snprintf(path,sizeof path,"%s",io->directory);pthread_mutex_unlock(&io->mutex);sp_nav(io,path);}sample_change(p);}return 1;}
+ if(!strcmp(key,"load")||!strcmp(key,"kit_import")){if(x>.5f){int kit=key[0]=='k';io->browser=kit?2:1;io->owner=v;char path[SP_PATH];if(!pthread_mutex_lock(&io->mutex)){snprintf(path,sizeof path,"%s",io->dirs[kit]);pthread_mutex_unlock(&io->mutex);sp_nav(io,path);}sample_change(p);}return 1;}
  if(!strcmp(key,"browse_close")){if(x>.5f){io->browser=0;sample_change(p);}return 1;}
  if(!strcmp(key,"browse_sd")||!strcmp(key,"browse_media")){if(x>.5f)sp_nav(io,!strcmp(key,"browse_sd")?"/sdcard":"/media");return 1;}
  if(!strcmp(key,"browse_up")){if(x>.5f){char path[SP_PATH];if(pthread_mutex_lock(&io->mutex))return 1;snprintf(path,sizeof path,"%s",io->directory);pthread_mutex_unlock(&io->mutex);char *slash=strrchr(path,'/');if(slash==path)path[1]=0;else if(slash)*slash=0;sp_nav(io,path);}return 1;}
  if(!strcmp(key,"browse_prev")||!strcmp(key,"browse_next")){if(x>.5f&&!pthread_mutex_lock(&io->mutex)){int next=io->page+(!strcmp(key,"browse_next")?1:-1);if(next>=0&&next*8<io->count)io->page=next;pthread_mutex_unlock(&io->mutex);sample_change(p);}return 1;}
- if(sscanf(key,"browse_item%d%n",&i,&n)==1&&key[n]==0&&i>=0&&i<8){if(x>.5f&&!pthread_mutex_lock(&io->mutex)){int item=io->page*8+i,dir=0;char path[SP_PATH]={0};if(item<io->count){dir=io->entries[item].directory;if(snprintf(path,sizeof path,"%s/%s",io->directory,io->entries[item].name)>=(int)sizeof path)path[0]=0;}pthread_mutex_unlock(&io->mutex);if(path[0]){if(dir)sp_nav(io,path);else if(sp_request(io,io->owner,path)){snprintf(p->sample_paths[io->owner],SP_PATH,"%s",path);sample_release(&p->v[io->owner]);io->browser=0;sample_change(p);}}}return 1;}
+ if(sscanf(key,"browse_item%d%n",&i,&n)==1&&key[n]==0&&i>=0&&i<8){if(x>.5f&&!pthread_mutex_lock(&io->mutex)){int item=io->page*8+i,dir=0,listing=io->listing;char path[SP_PATH]={0};if(item<io->count){dir=io->entries[item].directory;if(snprintf(path,sizeof path,"%s/%s",io->directory,io->entries[item].name)>=(int)sizeof path)path[0]=0;}pthread_mutex_unlock(&io->mutex);if(path[0]){if(dir)sp_nav(io,path);else if(io->browser==2){if(listing==1&&sp_kit_request(io,path)){io->browser=0;sample_change(p);}}else if(listing==0&&sp_request(io,io->owner,path)){snprintf(p->sample_paths[io->owner],SP_PATH,"%s",path);sample_release(&p->v[io->owner]);io->browser=0;sample_change(p);}}}return 1;}
  return 0;
 }
 static int sample_get(PT *p,const char *key,char *buf,int len){SampleIO *io=p->samples;int v=p->selected,n=0,i;Voice *voice=&p->v[v];
@@ -219,7 +233,9 @@ static int sample_get(PT *p,const char *key,char *buf,int len){SampleIO *io=p->s
  if(!strcmp(key,"sample_marker")){Sample *s=io?io->current[v]:NULL;float x=p->start[v][voice->bank];if(s&&s->lcd_frames&&atomic_load(&io->status[v])==2)x=x*s->frames/s->lcd_frames;return snprintf(buf,len,"%.9g",clamp(x,0,99.9f));}
  if(!strcmp(key,"sample_stereo")){Sample *s=io?io->current[v]:NULL;return snprintf(buf,len,"%d",s&&atomic_load(&io->status[v])==2&&s->channels==2);}
  if(sscanf(key,"sample_lcd%d%n",&i,&n)==1&&key[n]==0&&i>=0&&i<2*SP_LCD_COLS){Sample *s=io?io->current[v]:NULL;return snprintf(buf,len,"%u",s&&atomic_load(&io->status[v])==2?s->lcd[i/SP_LCD_COLS][i%SP_LCD_COLS]:0);}
- if(!strcmp(key,"browse"))return snprintf(buf,len,"%d",io?io->browser:0);
+ if(!strcmp(key,"browse"))return snprintf(buf,len,"%d",io&&io->browser==1);
+ if(!strcmp(key,"kit_browse"))return snprintf(buf,len,"%d",io&&io->browser==2);
+ if(!strcmp(key,"kit_status")||!strcmp(key,"kit_status_display")){int st=io?atomic_load(&io->kit_status):0;if(st==0)return snprintf(buf,len,"MicroTonic kit (.mtpreset)");if(st==1)return snprintf(buf,len,"Reading kit...");if(pthread_mutex_trylock(&io->mutex))return snprintf(buf,len,"...");int r=snprintf(buf,len,"%s",io->kit_message);pthread_mutex_unlock(&io->mutex);return r;}
  if(!strcmp(key,"browse_path")||!strcmp(key,"browse_path_display")){if(!io||pthread_mutex_trylock(&io->mutex))return snprintf(buf,len,"...");int result=snprintf(buf,len,"%s",io->directory);pthread_mutex_unlock(&io->mutex);return result;}
  if(!strcmp(key,"browse_page")||!strcmp(key,"browse_page_display")){if(!io||pthread_mutex_trylock(&io->mutex))return snprintf(buf,len,"...");int result=snprintf(buf,len,"%d / %d%s",io->page+1,io->count?(io->count+7)/8:1,io->overflow?" (first 256 entries)":"");pthread_mutex_unlock(&io->mutex);return result;}
  if(!strncmp(key,"browse_item",11)){char suffix[20]={0};if(sscanf(key,"browse_item%d%19s",&i,suffix)>=1&&i>=0&&i<8){if(strcmp(suffix,"_display")&&strcmp(suffix,"_name"))return snprintf(buf,len,"0");if(!io||pthread_mutex_trylock(&io->mutex))return snprintf(buf,len,"...");int at=io->page*8+i;int result=at<io->count?snprintf(buf,len,"%s%s",io->entries[at].directory?"[DIR] ":"",io->entries[at].name):snprintf(buf,len,"—");pthread_mutex_unlock(&io->mutex);return result;}}
@@ -280,7 +296,7 @@ int mpc_engine_changed(void *ptr,char *key,int len){PT *p=ptr;
  if(p->qlink_sample_context!=p->source[p->selected]){p->qlink_sample_context=p->source[p->selected];snprintf(key,len,"qlink_names");return 1;}
  if(p->samples){unsigned rev=atomic_load(&p->samples->revision);if(rev!=p->sample_revision){p->sample_revision=rev;p->sample_dirty=1;}}
  if(p->sample_controls_dirty){static const char *c[]={"sample_tune","sample_start","tone_q0","tone_q1","tone_q2","tone_q3","tone_q4","tone_q5","tone_q6"};int i=p->sample_controls_dirty-1;if(i<9){p->sample_controls_dirty++;snprintf(key,len,"%s",c[i]);return 1;}if(i<25){p->sample_controls_dirty++;snprintf(key,len,"v%d_sample_%s",(i-9)/2,(i-9)%2?"start":"tune");return 1;}p->sample_controls_dirty=0;}
- if(p->sample_dirty){if(p->sample_dirty==1&&p->samples){p->marker_dirty=1;Sample *seen=p->samples->current[p->selected];int status=atomic_load(&p->samples->status[p->selected]);if(p->source[p->selected]&&(p->lcd_voice!=p->selected||p->lcd_seen!=seen||p->lcd_status!=status)){p->lcd_voice=p->selected;p->lcd_seen=seen;p->lcd_status=status;p->lcd_dirty=1;}else if(!p->source[p->selected]&&p->lcd_dirty){p->lcd_dirty=0;p->lcd_voice=-1;}}static const char *keys[]={"source","load","sample_name","sample_info","sample_status","browse","browse_path","browse_page","browse_up","browse_prev","browse_next","browse_close","browse_sd","browse_media","tone_q0","tone_q1","tone_q2","tone_q3","tone_q4","tone_q5","tone_q6","sample_tune","sample_start"};int at=p->sample_dirty-1;p->sample_dirty++;if(at<(int)(sizeof keys/sizeof keys[0]))snprintf(key,len,"%s",keys[at]);else if(at<23+8)snprintf(key,len,"browse_item%d",at-23);else if(at<31+32)snprintf(key,len,"sample_wave%d",at-31);else if(at<63+8)snprintf(key,len,"v%d_source",at-63);else{p->sample_dirty=0;return mpc_engine_changed(ptr,key,len);}return 1;}
+ if(p->sample_dirty){if(p->sample_dirty==1&&p->samples){p->marker_dirty=1;Sample *seen=p->samples->current[p->selected];int status=atomic_load(&p->samples->status[p->selected]);if(p->source[p->selected]&&(p->lcd_voice!=p->selected||p->lcd_seen!=seen||p->lcd_status!=status)){p->lcd_voice=p->selected;p->lcd_seen=seen;p->lcd_status=status;p->lcd_dirty=1;}else if(!p->source[p->selected]&&p->lcd_dirty){p->lcd_dirty=0;p->lcd_voice=-1;}}static const char *keys[]={"source","load","sample_name","sample_info","sample_status","browse","browse_path","browse_page","browse_up","browse_prev","browse_next","browse_close","browse_sd","browse_media","tone_q0","tone_q1","tone_q2","tone_q3","tone_q4","tone_q5","tone_q6","sample_tune","sample_start"};int at=p->sample_dirty-1;p->sample_dirty++;if(at<(int)(sizeof keys/sizeof keys[0]))snprintf(key,len,"%s",keys[at]);else if(at<23+8)snprintf(key,len,"browse_item%d",at-23);else if(at<31+32)snprintf(key,len,"sample_wave%d",at-31);else if(at<63+8)snprintf(key,len,"v%d_source",at-63);else if(at<71+3){static const char *kit[]={"kit_import","kit_browse","kit_status"};snprintf(key,len,"%s",kit[at-71]);}else{p->sample_dirty=0;return mpc_engine_changed(ptr,key,len);}return 1;}
 for(int i=0;i<8;i++)if(p->activity_dirty[i]){p->activity_dirty[i]=0;snprintf(key,len,"activity%d",i);return 1;}if(fxn_next_dirty(p,key,len))return 1;for(int i=0;i<29;i++)if(p->fx_dirty[i]){p->fx_dirty[i]=0;if(i<16)snprintf(key,len,"send%d_%s",i/2,i%2?"delay":"reverb");else if(i<28)snprintf(key,len,"%s",fx_keys[i-16]);else snprintf(key,len,"fx_time");return 1;}unsigned total=sizeof p->changed;for(unsigned i=0;i<total;i++){unsigned at=p->cursor++%total;if(!p->changed[at])continue;p->changed[at]=0;if(at==0)snprintf(key,len,"selected");else if(at<1+8*(PT_FIELDS+2)){unsigned a=at-1,f=a%(PT_FIELDS+2);snprintf(key,len,"v%u_%s",a/(PT_FIELDS+2),f<PT_FIELDS?pt_fields[f].key:f==PT_FIELDS?"mute":"solo");}else if(at>=1+8*(PT_FIELDS+2)+4+8+8){unsigned a=at-(1+8*(PT_FIELDS+2)+4+8+8);snprintf(key,len,"q%u_%u",a/8,a%8);}else if(at>=1+8*(PT_FIELDS+2)+4+8)snprintf(key,len,"ab%u",at-(1+8*(PT_FIELDS+2)+4+8));else continue;return 1;}
  if(p->marker_dirty){p->marker_dirty=0;snprintf(key,len,"sample_marker");return 1;}
  if(p->lcd_dirty){int at=p->lcd_dirty++-1;if(!at){snprintf(key,len,"sample_stereo");return 1;}if(at<=2*SP_LCD_COLS){snprintf(key,len,"sample_lcd%d",at-1);return 1;}p->lcd_dirty=0;}

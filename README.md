@@ -34,11 +34,11 @@ Shared stereo reverb and tempo-synced delay complete the engine.
 
 ## Download and install
 
-πToniC **1.0.4** — [release v1.0.4](https://github.com/timomacquis/piToniC-MPC/releases/tag/v1.0.4):
+πToniC **1.1.2** — [release v1.1.2](https://github.com/timomacquis/piToniC-MPC/releases/tag/v1.1.2):
 
 | Device generation | Download |
 | --- | --- |
-| **Gen1 / Force** (ARM32) and **Gen2** (ARM64, not tested on hardware) | [piToniC-1.0.4-mpc-sdk.zip](https://github.com/timomacquis/piToniC-MPC/releases/download/v1.0.4/piToniC-1.0.4-mpc-sdk.zip) |
+| **Gen1 / Force** (ARM32) and **Gen2** (ARM64, not tested on hardware) | [piToniC-1.1.2-mpc-sdk.zip](https://github.com/timomacquis/piToniC-MPC/releases/download/v1.1.2/piToniC-1.1.2-mpc-sdk.zip) |
 
 Unzip, copy the folder **`Timo - VST - πToniC`** into **`VST2 Plugins`** at the root of a drive (User Memory: `/sdcard/VST2 Plugins`), then restart MPC. This is the installation method defined by Akai's plugin SDK: no installer script, no `Synths` folder, no MPC.settings entry. Requires MPC OS 3.10.1+ with Enhancements and External Plugin Support enabled. Hardware use: Akai Force.
 

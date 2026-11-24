@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <time.h>
 #include <strings.h>
+#include "mtpreset.h"
 #define SP_PATH 1024
 #define SP_ENTRIES 256
 #define SP_BINS 32
@@ -27,6 +28,12 @@ typedef struct {
  atomic_int status[8];atomic_uint revision;
  char directory[SP_PATH],navigation[SP_PATH];SPEntry entries[SP_ENTRIES];int count,page,overflow;
  unsigned nav_seen;atomic_uint nav_request;int browser,owner;
+ /* 1.1.1 : import de kit .mtpreset. browser 1 = LOAD SAMPLE, 2 = IMPORT KIT.
+  * Filtre 0 = .wav, 1 = .mtpreset ; un dossier mémorisé par filtre.
+  * Le worker lit le kit, render l'applique puis le rend au worker pour libération. */
+ int nav_filter,listing;char dirs[2][SP_PATH];
+ char kit_path[SP_PATH],kit_message[SP_PATH];atomic_uint kit_request;unsigned kit_seen;
+ _Atomic(MTKit*) kit_pending,kit_retired;atomic_int kit_status;
 } SampleIO;
 static unsigned sp_u16(const unsigned char *p){return p[0]|p[1]<<8;}
 static unsigned sp_u32(const unsigned char *p){return (unsigned)p[0]|(unsigned)p[1]<<8|(unsigned)p[2]<<16|(unsigned)p[3]<<24;}
@@ -77,24 +84,47 @@ static Sample *sp_read(const char *path,int *status){
  fclose(f);*status=2;return s;
 }
 static int sp_entry_cmp(const void *a,const void *b){const SPEntry *x=a,*y=b;if(x->directory!=y->directory)return y->directory-x->directory;return strcasecmp(x->name,y->name);}
-static void sp_scan(SampleIO *io,const char *path){SPEntry *list=calloc(SP_ENTRIES,sizeof *list);if(!list)return;int count=0,overflow=0;DIR *d=opendir(path);
- if(d){struct dirent *e;while((e=readdir(d))){if(e->d_name[0]=='.')continue;char full[SP_PATH];if(snprintf(full,sizeof full,"%s/%s",path,e->d_name)>=(int)sizeof full)continue;struct stat st;if(stat(full,&st))continue;int directory=S_ISDIR(st.st_mode);size_t len=strlen(e->d_name);if(!directory&&(!S_ISREG(st.st_mode)||len<4||strcasecmp(e->d_name+len-4,".wav")))continue;if(count==SP_ENTRIES){overflow=1;continue;}snprintf(list[count].name,256,"%s",e->d_name);list[count++].directory=directory;}closedir(d);qsort(list,count,sizeof *list,sp_entry_cmp);}
- pthread_mutex_lock(&io->mutex);memcpy(io->entries,list,SP_ENTRIES*sizeof *list);io->count=count;io->overflow=overflow;io->page=0;snprintf(io->directory,SP_PATH,"%s",path);pthread_mutex_unlock(&io->mutex);free(list);atomic_fetch_add(&io->revision,1);
+static void sp_scan(SampleIO *io,const char *path,int filter){static const char *const ext[2]={".wav",".mtpreset"};const size_t ext_len=strlen(ext[filter]);SPEntry *list=calloc(SP_ENTRIES,sizeof *list);if(!list)return;int count=0,overflow=0;DIR *d=opendir(path);
+ if(d){struct dirent *e;while((e=readdir(d))){if(e->d_name[0]=='.')continue;char full[SP_PATH];if(snprintf(full,sizeof full,"%s/%s",path,e->d_name)>=(int)sizeof full)continue;struct stat st;if(stat(full,&st))continue;int directory=S_ISDIR(st.st_mode);size_t len=strlen(e->d_name);if(!directory&&(!S_ISREG(st.st_mode)||len<=ext_len||strcasecmp(e->d_name+len-ext_len,ext[filter])))continue;if(count==SP_ENTRIES){overflow=1;continue;}snprintf(list[count].name,256,"%s",e->d_name);list[count++].directory=directory;}closedir(d);qsort(list,count,sizeof *list,sp_entry_cmp);}
+ pthread_mutex_lock(&io->mutex);memcpy(io->entries,list,SP_ENTRIES*sizeof *list);io->count=count;io->overflow=overflow;io->page=0;io->listing=filter;snprintf(io->directory,SP_PATH,"%s",path);snprintf(io->dirs[filter],SP_PATH,"%s",path);pthread_mutex_unlock(&io->mutex);free(list);atomic_fetch_add(&io->revision,1);
+}
+/* Worker : lit un .mtpreset et prépare le message affiché (nom du fichier sans extension). */
+static void sp_kit_read(SampleIO *io,unsigned request){
+ char path[SP_PATH];pthread_mutex_lock(&io->mutex);snprintf(path,SP_PATH,"%s",io->kit_path);pthread_mutex_unlock(&io->mutex);
+ const char *slash=strrchr(path,'/');char name[256];snprintf(name,sizeof name,"%s",slash?slash+1:path);size_t n=strlen(name);if(n>9&&!strcasecmp(name+n-9,".mtpreset"))name[n-9]=0;
+ MTKit *kit=malloc(sizeof *kit);int ok=kit&&mt_load(path,kit);
+ pthread_mutex_lock(&io->mutex);
+ if(request==atomic_load(&io->kit_request)){
+  if(ok){
+   if(kit->clamped)snprintf(io->kit_message,SP_PATH,"Imported: %s — %d value%s limited",name,kit->clamped,kit->clamped>1?"s":"");
+   else snprintf(io->kit_message,SP_PATH,"Imported: %s",name);
+   free(atomic_exchange(&io->kit_pending,kit));kit=NULL;atomic_store(&io->kit_status,2);
+  }
+  else{snprintf(io->kit_message,SP_PATH,"%s — %s",kit?kit->message:"Out of memory",name);atomic_store(&io->kit_status,3);}
+ }
+ pthread_mutex_unlock(&io->mutex);free(kit);atomic_fetch_add(&io->revision,1);
 }
 static void *sp_worker(void *arg){SampleIO *io=arg;
  while(!atomic_load(&io->stop)){
  for(int i=0;i<8;i++){sp_free(atomic_exchange(&io->retired[i],NULL));unsigned seq=atomic_load(&io->request[i]);if(seq==io->seen[i])continue;char path[SP_PATH];pthread_mutex_lock(&io->mutex);snprintf(path,SP_PATH,"%s",io->requested[i]);pthread_mutex_unlock(&io->mutex);io->seen[i]=seq;int status=0;Sample *s=path[0]?sp_read(path,&status):calloc(1,sizeof(Sample));
  pthread_mutex_lock(&io->mutex);if(seq!=atomic_load(&io->request[i])){pthread_mutex_unlock(&io->mutex);sp_free(s);continue;}sp_free(atomic_exchange(&io->pending[i],s));atomic_store(&io->status[i],status);pthread_mutex_unlock(&io->mutex);atomic_fetch_add(&io->revision,1);
  }
- unsigned nav=atomic_load(&io->nav_request);if(nav!=io->nav_seen){char path[SP_PATH];pthread_mutex_lock(&io->mutex);snprintf(path,SP_PATH,"%s",io->navigation);pthread_mutex_unlock(&io->mutex);io->nav_seen=nav;sp_scan(io,path);}
+ unsigned nav=atomic_load(&io->nav_request);if(nav!=io->nav_seen){char path[SP_PATH];pthread_mutex_lock(&io->mutex);snprintf(path,SP_PATH,"%s",io->navigation);int filter=io->nav_filter;pthread_mutex_unlock(&io->mutex);io->nav_seen=nav;sp_scan(io,path,filter);}
+ free(atomic_exchange(&io->kit_retired,NULL));
+ unsigned kit=atomic_load(&io->kit_request);if(kit!=io->kit_seen){io->kit_seen=kit;sp_kit_read(io,kit);}
  struct timespec delay={0,10000000};nanosleep(&delay,NULL);
  }return NULL;
 }
-static SampleIO *sp_create(void){SampleIO *io=calloc(1,sizeof *io);if(!io)return NULL;pthread_mutex_init(&io->mutex,NULL);strcpy(io->directory,"/media");return io;}
-static void sp_destroy(SampleIO *io){if(!io)return;atomic_store(&io->stop,1);if(io->started)pthread_join(io->thread,NULL);for(int i=0;i<8;i++){sp_free(io->current[i]);sp_free(atomic_load(&io->pending[i]));sp_free(atomic_load(&io->retired[i]));}pthread_mutex_destroy(&io->mutex);free(io);}
+static SampleIO *sp_create(void){SampleIO *io=calloc(1,sizeof *io);if(!io)return NULL;pthread_mutex_init(&io->mutex,NULL);strcpy(io->directory,"/media");strcpy(io->dirs[0],"/media");strcpy(io->dirs[1],"/media");return io;}
+static void sp_destroy(SampleIO *io){if(!io)return;atomic_store(&io->stop,1);if(io->started)pthread_join(io->thread,NULL);for(int i=0;i<8;i++){sp_free(io->current[i]);sp_free(atomic_load(&io->pending[i]));sp_free(atomic_load(&io->retired[i]));}free(atomic_load(&io->kit_pending));free(atomic_load(&io->kit_retired));pthread_mutex_destroy(&io->mutex);free(io);}
 static int sp_start(SampleIO *io){if(io->started)return 1;if(pthread_create(&io->thread,NULL,sp_worker,io))return 0;io->started=1;return 1;}
 static int sp_request(SampleIO *io,int v,const char *path){if(!io||v<0||v>=8||strlen(path)>=SP_PATH||(path[0]&&path[0]!='/')||strchr(path,'\n')||strchr(path,'\r'))return 0;
  if(!sp_start(io)||pthread_mutex_lock(&io->mutex))return 0;snprintf(io->requested[v],SP_PATH,"%s",path);atomic_fetch_add(&io->request[v],1);atomic_store(&io->status[v],path[0]?1:0);pthread_mutex_unlock(&io->mutex);return 1;}
-static void sp_nav(SampleIO *io,const char *path){if(!io||strlen(path)>=SP_PATH||!sp_start(io)||pthread_mutex_lock(&io->mutex))return;snprintf(io->navigation,SP_PATH,"%s",path);atomic_fetch_add(&io->nav_request,1);pthread_mutex_unlock(&io->mutex);}
+static void sp_nav(SampleIO *io,const char *path){if(!io||strlen(path)>=SP_PATH||!sp_start(io)||pthread_mutex_lock(&io->mutex))return;snprintf(io->navigation,SP_PATH,"%s",path);io->nav_filter=io->browser==2;atomic_fetch_add(&io->nav_request,1);pthread_mutex_unlock(&io->mutex);}
 /* Audio-side ownership transfer only; worker frees retired buffers. */
 static int sp_commit(SampleIO *io,int i){if(!io||atomic_load(&io->retired[i]))return 0;Sample *s=atomic_exchange(&io->pending[i],NULL);if(!s)return 0;Sample *old=io->current[i];io->current[i]=s;atomic_store(&io->retired[i],old);return 1;}
+/* 1.1.1 : demande d'import (fil hôte) ; take/retire côté render, sans verrou ni allocation. */
+static int sp_kit_request(SampleIO *io,const char *path){if(!io||!path[0]||path[0]!='/'||strlen(path)>=SP_PATH||!sp_start(io)||pthread_mutex_lock(&io->mutex))return 0;
+ snprintf(io->kit_path,SP_PATH,"%s",path);atomic_fetch_add(&io->kit_request,1);atomic_store(&io->kit_status,1);pthread_mutex_unlock(&io->mutex);return 1;}
+static MTKit *sp_kit_take(SampleIO *io){if(!io||atomic_load(&io->kit_retired))return NULL;return atomic_exchange(&io->kit_pending,NULL);}
+static void sp_kit_retire(SampleIO *io,MTKit *kit){atomic_store(&io->kit_retired,kit);}

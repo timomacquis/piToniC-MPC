@@ -30,9 +30,17 @@ gcc $FLAGS -c tests/classic_regression.c -o build/classic-regression.o
 g++ -fsanitize=address,undefined build/classic-regression.o $FXN -lpthread -lm -o build/classic-regression
 # CLASSIC doit rester identique au bit près au moteur du dernier commit, compilé ici avec le même compilateur.
 OLD=build/classic-old; rm -rf $OLD; mkdir -p $OLD/src $OLD/tests; cp src/*.h $OLD/src/; git show HEAD:./src/engine.c > $OLD/src/engine.c; cp tests/classic_regression.c $OLD/tests/
-gcc $FLAGS -c $OLD/tests/classic_regression.c -o $OLD/cr.o; g++ -fsanitize=address,undefined $OLD/cr.o -lpthread -lm -o $OLD/cr
+gcc $FLAGS -c $OLD/tests/classic_regression.c -o $OLD/cr.o; g++ -fsanitize=address,undefined $OLD/cr.o $FXN -lpthread -lm -o $OLD/cr
 A=$(./$OLD/cr classic); N=$(./build/classic-regression classic)
 if [ "$A" = "$N" ]; then echo "PASS classic FX byte-identical to HEAD ($N)"; else echo "FAIL classic FX differs from HEAD: avant $A, après $N"; exit 1; fi
 gcc $FLAGS -c tests/fxnew_test.c -o build/fxnew-test.o
 g++ -fsanitize=address,undefined build/fxnew-test.o $FXN -lpthread -lm -o build/fxnew-test
 ASAN_OPTIONS=detect_leaks=1 ./build/fxnew-test
+# 1.1.1 : import de kit MicroTonic .mtpreset (lecteur, moteur, comparaison aux 150 kits si l'archive locale est présente).
+gcc $FLAGS -c tests/mtpreset_test.c -o build/mtpreset-test.o
+g++ -fsanitize=address,undefined build/mtpreset-test.o -lm -o build/mtpreset-test
+ASAN_OPTIONS=detect_leaks=1 ./build/mtpreset-test
+gcc $FLAGS -c tests/kit_import_test.c -o build/kit-import-test.o
+g++ -fsanitize=address,undefined build/kit-import-test.o $FXN -lpthread -lm -o build/kit-import-test
+ASAN_OPTIONS=detect_leaks=1 ./build/kit-import-test
+ASAN_OPTIONS=detect_leaks=0 python3 tests/mtpreset_compare.py build/mtpreset-test
