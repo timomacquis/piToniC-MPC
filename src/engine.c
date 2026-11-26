@@ -21,6 +21,7 @@
 #include "effects.h"
 #include "fx_new.h"
 #include "sample.h"
+#include "wavetable.h"
 enum {FREQ,WAVE,ATK,DCY,MODE,AMT,RATE,MVEL,MIX,FILTER,CUT,RES,NATK,NDCY,ENV,STEREO,DRIVE,EQF,EQG,LEVEL,OVEL,NVEL,PAN,CHOKE};
 typedef struct {float value,attack_coeff,decay_coeff;int age,attack,decay,linear;} Env;
 typedef struct {float b0,b1,b2,a1,a2,z1,z2;} Biquad;
@@ -31,9 +32,11 @@ typedef struct {
  float pan_l,pan_r,mix_osc,mix_noise,drive,level,level_target;
  float last[2],fade[2];int cross,release,active,clap_left,clap_timer,clap_gap;
  uint32_t noise_seed[2],mod_seed;uint64_t started;
+ float wt_s; /* 1.2.0 : avancée du balayage WAVETABLE (1 = SCAN TIME) */
 } Voice;
 typedef struct {
  Voice v[8];int selected,state_valid;uint64_t clock;
+ int wt_table[8][2],wt_scan[8][2];float wt_end[8][2],wt_time[8][2];uint64_t wt_dirty; /* 1.2.0, par voix et banque A/B */
  SampleIO *samples;char sample_paths[8][SP_PATH];int source[8];float tune[8][2],start[8][2];double position[8];unsigned sample_revision;int sample_dirty,sample_controls_dirty,qlink_sample_context,lcd_dirty,lcd_voice,lcd_status,marker_dirty;Sample *lcd_seen;
  uint8_t changed[8*(PT_FIELDS+2)+1+4+8+8+24];unsigned cursor;
  float sine[TABLE+1],exp2tab[TABLE+1],tanh_table[TABLE+1];
@@ -80,7 +83,7 @@ static void trigger(PT *p,int index,int vel){Voice *v=&p->v[index];float *f=valu
  if(v->mute||(solo&&!v->solo))return;
  int group=(int)f[CHOKE];if(group)for(int i=0;i<8;i++)if(i!=index&&(int)values(&p->v[i])[CHOKE]==group){if(i<index&&p->v[i].active&&p->v[i].started==p->clock)return;release(&p->v[i]);}
  p->activity_until[index]=p->clock+6174;if(!p->activity[index]){p->activity[index]=1;p->activity_dirty[index]=1;}
- v->fade[0]=v->last[0];v->fade[1]=v->last[1];v->cross=32;v->active=1;v->release=0;v->started=p->clock;v->phase=0;v->lfo=0;p->position[index]=p->samples&&p->samples->current[index]?p->start[index][v->bank]*.01*p->samples->current[index]->frames:0;
+ v->fade[0]=v->last[0];v->fade[1]=v->last[1];v->cross=32;v->active=1;v->release=0;v->started=p->clock;v->phase=0;v->wt_s=0;v->lfo=0;p->position[index]=p->samples&&p->samples->current[index]?p->start[index][v->bank]*.01*p->samples->current[index]->frames:0;
  float norm=vel/127.f;v->osc_vel=velocity(norm,f[OVEL]);v->noise_vel=velocity(norm,f[NVEL]);v->mod_vel=velocity(norm,f[MVEL]);
  v->random_held=random_sample(&v->mod_seed);v->random_lp=v->random_held;
  env_start(&v->amp,f[ATK],f[DCY],0);env_start(&v->noise,f[NATK],f[NDCY],(int)f[ENV]==1);
@@ -96,6 +99,31 @@ static float osc(PT *p,Voice *v,float hz,float morph){
  else{float saw=2*t-1-blep(t,dt),sq=(t<.5f?1:-1)+blep(t,dt)-blep(fmodf(t+.5f,1),dt);result=saw+(sq-saw)*(w-2);}
  v->phase+=dt;if(v->phase>=1)v->phase-=1;return result;
 }
+/* 1.2.0 : source WAVETABLE. POS = champ WAVE ; TABLE, END, SCAN TIME et SCAN sont rangés hors des 24 champs
+ * (comme TUNE/START), un jeu par banque A/B. Les sources SYNTH et SAMPLE ne changent pas. */
+#define WT_END_DEF 100.f
+#define WT_TIME_DEF 200.f
+static const char *const wt_table_names[WT_TABLES]={"PWM","HARMONICS","FORMANT","SYNC","FOLD","CRUSH","FM","NOISE"};
+static const char *const wt_scan_names[3]={"ONE","LOOP","PING-PONG"};
+static void wt_defaults(PT *p){for(int v=0;v<8;v++)for(int b=0;b<2;b++){p->wt_table[v][b]=0;p->wt_scan[v][b]=0;p->wt_end[v][b]=WT_END_DEF;p->wt_time[v][b]=WT_TIME_DEF;}}
+static int wt_is_default(PT *p){for(int v=0;v<8;v++){if(p->source[v]==2)return 0;for(int b=0;b<2;b++)if(p->wt_table[v][b]||p->wt_scan[v][b]||p->wt_end[v][b]!=WT_END_DEF||p->wt_time[v][b]!=WT_TIME_DEF)return 0;}return 1;}
+/* Notifications : bits 0..31 = v<n>_wt_table/end/time/scan, 32..40 = tone_q0..tone_q8. */
+static void wt_mark(PT *p){p->wt_dirty|=(1ull<<41)-1;}
+static void wt_mark_voice(PT *p,int v){p->wt_dirty|=(15ull<<(4*v))|(511ull<<32);}
+static float wt_osc(PT *p,Voice *v,int i,float hz){int b=v->bank;float *f=values(v);float dt=clamp(hz/SR,.00001f,.45f);
+ float u=wt_scan_shape(p->wt_scan[i][b],v->wt_s);v->wt_s+=1000.f/(p->wt_time[i][b]*SR);if(v->wt_s>4.f)v->wt_s=p->wt_scan[i][b]==0?2.f:v->wt_s-4.f;
+ float start=f[WAVE]/100,pos=start+(p->wt_end[i][b]/100-start)*u;
+ float r=wt_read(p->wt_table[i][b],pos,v->phase,wt_level(dt));v->phase+=dt;if(v->phase>=1)v->phase-=1;return r;}
+/* SOURCE : valeur du paramètre (0 SYNTH, 1 WAVETABLE, 2 SAMPLE) <-> code interne et d'état (0 SYNTH, 1 SAMPLE, 2 WAVETABLE).
+ * SAMPLE reste la valeur haute du paramètre : automations et p-locks enregistrés avant la 1.2.0 restent valides. */
+static int source_from_param(float x){int i=(int)roundf(clamp(x,0,2));return i==0?0:i==1?2:1;}
+static int source_to_param(int s){return s==0?0:s==2?1:2;}
+/* 1.2.0 : alias TONE (tone_q0..8) selon la source de la voix affichée, dans l'ordre des Q-Links de l'onglet.
+ * SYNTH : FREQUENCY, WAVE MORPH, AMP ATTACK, AMP DECAY, PITCH AMOUNT, PITCH TIME / RATE, PITCH VELOCITY, -, -.
+ * SAMPLE : idem avec TUNE, START en tête. WAVETABLE : FREQUENCY, POS, END, SCAN TIME, puis les 5 réglages AMP / PITCH. */
+enum {TQ_NONE=-1,TQ_END=-2,TQ_TIME=-3,TQ_TUNE=-4,TQ_START=-5};
+static int tone_target(PT *p,int v,int i){static const int base[7]={FREQ,WAVE,ATK,DCY,AMT,RATE,MVEL},wt[9]={FREQ,WAVE,TQ_END,TQ_TIME,ATK,DCY,AMT,RATE,MVEL};
+ if(i<0||i>8)return TQ_NONE;int src=p->source[v];if(src==2)return wt[i];if(i>6)return TQ_NONE;if(src==1&&i<2)return i==0?TQ_TUNE:TQ_START;return base[i];}
 #include "fx_new_engine.h"
 /* 1.1.0 : mode NEW. Bus collectés par bloc, effets NEW en parallèle, mêmes ON/RETURN que CLASSIC (rampe sur le bloc). */
 static void render_new(PT *p,int16_t *out,int frames,int usefx,const float *sum,const float *rev,const float *del){
@@ -113,7 +141,7 @@ static void kit_apply(PT *p,const MTKit *k){
   voice->bank=0;voice->mute=voice->solo=0;p->source[v]=0;
   for(int s=0;s<2;s++){p->sends[v][s]=0;p->fx_dirty[v*2+s]=1;}
   cache(voice);notify_voice(p,v);}
- p->sample_dirty=1;if(!p->sample_controls_dirty)p->sample_controls_dirty=1;p->changed[0]=1;
+ p->sample_dirty=1;if(!p->sample_controls_dirty)p->sample_controls_dirty=1;p->changed[0]=1;wt_mark(p);
 }
 static void render(void *ptr,int16_t *out,int frames){PT *p=ptr;
  if(p->samples){MTKit *kit=sp_kit_take(p->samples);if(kit){kit_apply(p,kit);sp_kit_retire(p->samples,kit);}}
@@ -125,6 +153,7 @@ static void render(void *ptr,int16_t *out,int frames){PT *p=ptr;
  if((int)f[MODE]==0)mod=env_next(&v->pitch)*f[AMT];else if((int)f[MODE]==1){mod=sine(p,v->lfo)*clamp(f[AMT],-48,48);v->lfo+=clamp(f[RATE],0,2000)/SR;v->lfo-=floorf(v->lfo);}else{if(f[RATE]>0)v->random_lp+=v->random_a*(random_sample(&v->mod_seed)-v->random_lp);mod=v->random_lp*clamp(f[AMT],-48,48);}
  float amp_value=env_next(&v->amp);float envelope=amp_value*v->osc_vel*v->mix_osc;float tone=0,tone_r=0;
  if(!p->source[i])tone=tone_r=osc(p,v,clamp(f[FREQ]*ratio(p,mod*v->mod_vel),20,SR*.45f),f[WAVE])*amp_value*v->osc_vel*v->mix_osc;
+ else if(p->source[i]==2)tone=tone_r=wt_osc(p,v,i,clamp(f[FREQ]*ratio(p,mod*v->mod_vel),20,SR*.45f))*amp_value*v->osc_vel*v->mix_osc;
  else if(sample_ready[i]){Sample *sample=sample_data[i];double at=p->position[i];if(sample&&at<sample->frames){unsigned a=(unsigned)at,b=a+1<sample->frames?a+1:a;float t=(float)(at-a);tone=(sample->data[a*sample->channels]+(sample->data[b*sample->channels]-sample->data[a*sample->channels])*t)*envelope;if(sample->channels==2)tone_r=(sample->data[a*2+1]+(sample->data[b*2+1]-sample->data[a*2+1])*t)*envelope;else tone_r=tone;float tail=(sample->frames-at)<32?(float)((sample->frames-at)/32):1;tone*=tail;tone_r*=tail;p->position[i]+=sample->rate/SR*ratio(p,p->tune[i][v->bank]+mod*v->mod_vel);}}
  if(v->clap_left&&--v->clap_timer<=0){v->clap_left--;v->clap_timer=v->clap_gap;env_start(&v->noise,0,f[NDCY],0);}
  float noise=env_next(&v->noise)*v->noise_vel*v->mix_noise;
@@ -133,13 +162,13 @@ static void render(void *ptr,int16_t *out,int frames){PT *p=ptr;
  for(int k=0;k<2;k++){float x=(k?tone_r:tone)+(k?nr:nl)*noise;if(f[DRIVE]>.01f)x=saturate(p,x*v->drive);if(fabsf(f[EQG])>.001f)x=biquad(&v->eq[k],x);
  x*=v->level*(k?v->pan_r:v->pan_l);if(v->cross)x=x*(1-v->cross/32.f)+v->fade[k]*(v->cross/32.f);if(v->release)x*=v->release/48.f;v->last[k]=x;sum[k]+=x;if(usefx){rev[k]+=x*p->send_smooth[i][0];del[k]+=x*p->send_smooth[i][1];}}
  if(v->cross)v->cross--;if(v->release&&!--v->release)v->active=0;
- if((v->amp.value==0||v->mix_osc==0||(p->source[i]&&(!sample_ready[i]||p->position[i]>=sample_data[i]->frames)))&&(v->noise.value==0||v->mix_noise==0)&&(!v->clap_left||v->mix_noise==0)&& !v->cross)v->active=0;
+ if((v->amp.value==0||v->mix_osc==0||(p->source[i]==1&&(!sample_ready[i]||p->position[i]>=sample_data[i]->frames)))&&(v->noise.value==0||v->mix_noise==0)&&(!v->clap_left||v->mix_noise==0)&& !v->cross)v->active=0;
  }if(nf){for(int k=0;k<2;k++){nb_sum[n*2+k]=sum[k];nb_rev[n*2+k]=rev[k];nb_del[n*2+k]=del[k];}p->clock++;continue;}
  float wet[2]={0,0};if(usefx)fx_process(&p->fx,rev,del,wet);for(int k=0;k<2;k++)out[n*2+k]=(int16_t)(clamp((sum[k]+wet[k])*.25f,-1,1)*32767);p->clock++;
 }if(nf)render_new(p,out,frames,usefx,nb_sum,nb_rev,nb_del);
  for(int i=0;i<8;i++)if(p->activity[i]&&p->clock>=p->activity_until[i]){p->activity[i]=0;p->activity_dirty[i]=1;}
 }
-static void *create(const char *dir){(void)dir;PT *p=calloc(1,sizeof *p);if(!p)return NULL;p->state_valid=1;p->samples=sp_create();p->rng=0x70695443;fx_init(&p->fx);p->fxn=fxn_create();p->fx_new=1;for(int i=0;i<FXN_COUNT;i++)p->fxn_p[i]=fxn_defaults[i];
+static void *create(const char *dir){(void)dir;PT *p=calloc(1,sizeof *p);if(!p)return NULL;p->state_valid=1;p->samples=sp_create();p->rng=0x70695443;wt_init();wt_defaults(p);fx_init(&p->fx);p->fxn=fxn_create();p->fx_new=1;for(int i=0;i<FXN_COUNT;i++)p->fxn_p[i]=fxn_defaults[i];
  for(int i=0;i<=TABLE;i++){float t=(float)i/TABLE;p->sine[i]=sinf(2*PI*t);p->exp2tab[i]=exp2f(-8+16*t);p->tanh_table[i]=tanhf(-8+16*t);}
  for(int i=0;i<8;i++){Voice *v=&p->v[i];for(int j=0;j<PT_FIELDS;j++)v->banks[0][j]=v->banks[1][j]=pt_fields[j].def;v->noise_seed[0]=123456789+i*977;v->noise_seed[1]=987654321+i*991;v->mod_seed=1009+i*997;cache(v);v->level=v->level_target;}
  return p;
@@ -149,22 +178,32 @@ static int parse_key(const char *k,int *v,int *f){int n=0;if(sscanf(k,"v%d_%n",v
 static int alias(const char *k,int *field){int page,i,n=0;if(sscanf(k,"q%d_%d%n",&page,&i,&n)==2&&k[n]==0&&page>=0&&page<3&&i>=0&&i<8){*field=page*8+i;return 1;}return 0;}
 static void change(PT *p,int v,int f,float x){Voice *voice=&p->v[v];float old=f==PT_FIELDS?voice->mute:f==PT_FIELDS+1?voice->solo:values(voice)[f];if(f>=PT_FIELDS)x=x>.5f;else{x=clamp(x,pt_fields[f].lo,pt_fields[f].hi);if(pt_fields[f].options)x=roundf(x);}if(old==x)return;if(f>=PT_FIELDS){int on=x>.5f;if(f==PT_FIELDS)voice->mute=on;else voice->solo=on;int solo=0;for(int i=0;i<8;i++)solo|=p->v[i].solo;for(int i=0;i<8;i++)if(p->v[i].mute||(solo&&!p->v[i].solo))release(&p->v[i]);}else{const PTField *d=&pt_fields[f];x=clamp(x,d->lo,d->hi);if(d->options)x=roundf(x);values(voice)[f]=x;cache(voice);}if(v==p->selected&&f<PT_FIELDS&&!p->sample_controls_dirty)p->sample_controls_dirty=1;p->changed[1+v*(PT_FIELDS+2)+f]=1;if(v==p->selected&&f<PT_FIELDS)p->changed[1+8*(PT_FIELDS+2)+4+8+8+f]=1;}
 static int protected(int f){return f==LEVEL||f==PAN||f==CHOKE;}
-static void randomize(PT *p,int small){Voice *v=&p->v[p->selected];if(!v->bank){memcpy(v->banks[1],v->banks[0],sizeof v->banks[0]);p->tune[p->selected][1]=p->tune[p->selected][0];p->start[p->selected][1]=p->start[p->selected][0];v->bank=1;}
- float *f=values(v);for(int j=0;j<PT_FIELDS;j++){if(protected(j)||(p->source[p->selected]&&(j==FREQ||j==WAVE)))continue;const PTField *d=&pt_fields[j];float u=(random_sample(&p->rng)+1)*.5f;
+static void randomize(PT *p,int small){Voice *v=&p->v[p->selected];if(!v->bank){memcpy(v->banks[1],v->banks[0],sizeof v->banks[0]);p->tune[p->selected][1]=p->tune[p->selected][0];p->start[p->selected][1]=p->start[p->selected][0];{int i=p->selected;p->wt_table[i][1]=p->wt_table[i][0];p->wt_end[i][1]=p->wt_end[i][0];p->wt_time[i][1]=p->wt_time[i][0];p->wt_scan[i][1]=p->wt_scan[i][0];}v->bank=1;}
+ float *f=values(v);for(int j=0;j<PT_FIELDS;j++){if(protected(j)||(p->source[p->selected]==1&&(j==FREQ||j==WAVE)))continue;const PTField *d=&pt_fields[j];float u=(random_sample(&p->rng)+1)*.5f;
  float lo=d->lo,hi=d->hi;if(j==FREQ)hi=10000;if(j==ATK||j==NATK)hi=80;if(j==DCY||j==NDCY){lo=10;hi=1800;}if(j==CUT||j==EQF)hi=18000;if(j==DRIVE)hi=20;if(j==EQG){lo=-9;hi=9;}if(j==RES)hi=5;
  float x=small?f[j]+(u-.5f)*(hi-lo)*.08f:lo+u*(hi-lo);if(!small&&(j==FREQ||j==CUT||j==EQF||j==DCY||j==NDCY))x=fmaxf(lo,1)*powf(hi/fmaxf(lo,1),u);if(d->options)x=small?f[j]:floorf(u*d->options);f[j]=clamp(d->options?roundf(x):x,d->lo,d->hi);}
- if(p->source[p->selected]){int i=p->selected,b=v->bank;float u=random_sample(&p->rng);p->tune[i][b]=clamp(small?p->tune[i][b]+u:12*u,-48,48);p->start[i][b]=clamp(small?p->start[i][b]+random_sample(&p->rng):5*(random_sample(&p->rng)+1),0,99.9f);}
+ if(p->source[p->selected]==2){int i=p->selected,b=v->bank;float u=(random_sample(&p->rng)+1)*.5f;p->wt_end[i][b]=clamp(small?p->wt_end[i][b]+(u-.5f)*8:u*100,0,100);u=(random_sample(&p->rng)+1)*.5f;p->wt_time[i][b]=clamp(small?p->wt_time[i][b]*(1+(u-.5f)*.2f):10*powf(200,u),1,10000);if(!small){p->wt_table[i][b]=(int)((random_sample(&p->rng)+1)*.5f*WT_TABLES)%WT_TABLES;p->wt_scan[i][b]=(int)((random_sample(&p->rng)+1)*.5f*3)%3;}wt_mark_voice(p,i);}
+ if(p->source[p->selected]==1){int i=p->selected,b=v->bank;float u=random_sample(&p->rng);p->tune[i][b]=clamp(small?p->tune[i][b]+u:12*u,-48,48);p->start[i][b]=clamp(small?p->start[i][b]+random_sample(&p->rng):5*(random_sample(&p->rng)+1),0,99.9f);}
  cache(v);notify_voice(p,p->selected);p->sample_dirty=1;
 }
 static int sp_hex_value(char c){return c>='0'&&c<='9'?c-'0':c>='a'&&c<='f'?c-'a'+10:-1;}
 static int sample_state_read(const char **text,int source[8],float tune[8][2],float start[8][2],char paths[8][SP_PATH]){
  const char *s=*text;while(*s==' '||*s=='\n'||*s=='\r'||*s=='\t')s++;
- if(!*s){*text=s;return 1;}if(strncmp(s,"SM1 ",4))return 0;s+=4;
- for(int v=0;v<8;v++){int n=0;if(sscanf(s,"%d %n",&source[v],&n)!=1||!n||source[v]<0||source[v]>1)return 0;s+=n;
+ if(!*s||!strncmp(s,"WT1 ",4)){*text=s;return 1;}if(strncmp(s,"SM1 ",4))return 0;s+=4;
+ for(int v=0;v<8;v++){int n=0;if(sscanf(s,"%d %n",&source[v],&n)!=1||!n||source[v]<0||source[v]>2)return 0;s+=n;
  for(int b=0;b<2;b++){char *end;errno=0;tune[v][b]=strtof(s,&end);if(errno||end==s||!isfinite(tune[v][b])||tune[v][b]<-48||tune[v][b]>48)return 0;s=end;start[v][b]=strtof(s,&end);if(errno||end==s||!isfinite(start[v][b])||start[v][b]<0||start[v][b]>99.9f)return 0;s=end;}
  while(*s==' ')s++;if(*s=='-')s++;else {int at=0;while(*s&&*s!=' '){if(at>=SP_PATH-1)return 0;int a=sp_hex_value(s[0]),b=s[0]?sp_hex_value(s[1]):-1;if(a<0||b<0||!(a*16+b))return 0;paths[v][at++]=(char)(a*16+b);s+=2;}paths[v][at]=0;if(paths[v][0]!='/')return 0;}
  while(*s==' ')s++;
- }while(*s==' '||*s=='\n'||*s=='\r'||*s=='\t')s++;if(*s)return 0;*text=s;return 1;
+ }while(*s==' '||*s=='\n'||*s=='\r'||*s=='\t')s++;if(*s&&strncmp(s,"WT1 ",4))return 0;*text=s;return 1;
+}
+/* 1.2.0 : bloc optionnel WT1, après SM1 (absent = réglages par défaut). 8 voix x 2 banques : TABLE END TIME SCAN. */
+static int wt_state_read(const char **text,int table[8][2],float end_[8][2],float time_[8][2],int scan[8][2]){
+ const char *s=*text;while(*s==' '||*s=='\n'||*s=='\r'||*s=='\t')s++;if(!*s){*text=s;return 1;}if(strncmp(s,"WT1 ",4))return 0;s+=4;
+ for(int v=0;v<8;v++)for(int b=0;b<2;b++){int n=0;char *e;if(sscanf(s,"%d %n",&table[v][b],&n)!=1||!n||table[v][b]<0||table[v][b]>=WT_TABLES)return 0;s+=n;
+  errno=0;end_[v][b]=strtof(s,&e);if(errno||e==s||!isfinite(end_[v][b])||end_[v][b]<0||end_[v][b]>100)return 0;s=e;
+  errno=0;time_[v][b]=strtof(s,&e);if(errno||e==s||!isfinite(time_[v][b])||time_[v][b]<1||time_[v][b]>10000)return 0;s=e;
+  n=0;if(sscanf(s," %d %n",&scan[v][b],&n)!=1||!n||scan[v][b]<0||scan[v][b]>2)return 0;s+=n;}
+ while(*s==' '||*s=='\n'||*s=='\r'||*s=='\t')s++;if(*s)return 0;*text=s;return 1;
 }
 
 static void state_set(PT *p,const char *str){Voice staged[8];memcpy(staged,p->v,sizeof staged);const char *s=str;int n=0,selected;
@@ -183,9 +222,11 @@ static void state_set(PT *p,const char *str){Voice staged[8];memcpy(staged,p->v,
  for(int i=0;i<FXN_COUNT;i++){errno=0;float x=strtof(s,&end);if(end==s||errno||!isfinite(x)||x<fxn_lo[i]||x>fxn_hi[i]||(fxn_int[i]&&x!=roundf(x)))return;fxn[i]=x;s=end;}
  while(*s==' '||*s=='\n'||*s=='\r'||*s=='\t')s++;}
  int sources[8]={0};float tunes[8][2]={{0}},starts[8][2]={{0}};char paths[8][SP_PATH]={{0}};if(!sample_state_read(&s,sources,tunes,starts,paths))return;
+ int wtt[8][2],wts[8][2];float wte[8][2],wtm[8][2];for(int v=0;v<8;v++)for(int b=0;b<2;b++){wtt[v][b]=wts[v][b]=0;wte[v][b]=WT_END_DEF;wtm[v][b]=WT_TIME_DEF;}if(!wt_state_read(&s,wtt,wte,wtm,wts))return;
  if(p->samples&&memcmp(p->sample_paths,paths,sizeof paths)){if(!sp_start(p->samples))return;pthread_mutex_lock(&p->samples->mutex); /* 1.0.4 : attendre, ne plus rejeter l'état */for(int v=0;v<8;v++){memcpy(p->samples->requested[v],paths[v],SP_PATH);atomic_fetch_add(&p->samples->request[v],1);atomic_store(&p->samples->status[v],paths[v][0]?1:0);}pthread_mutex_unlock(&p->samples->mutex);p->samples->browser=0;}
  if(p->samples)p->samples->browser=0;
  memcpy(p->sample_paths,paths,sizeof paths);memcpy(p->source,sources,sizeof sources);memcpy(p->tune,tunes,sizeof tunes);memcpy(p->start,starts,sizeof starts);p->sample_dirty=1;
+ memcpy(p->wt_table,wtt,sizeof wtt);memcpy(p->wt_end,wte,sizeof wte);memcpy(p->wt_time,wtm,sizeof wtm);memcpy(p->wt_scan,wts,sizeof wts);wt_mark(p);
  memcpy(p->sends,send,sizeof send);memset(p->send_smooth,0,sizeof p->send_smooth);
  float bpm=p->fx.bpm;if(p->fx.rev_left||p->fx.del_left)fx_init(&p->fx);p->fx.bpm=bpm;memcpy(p->fx.param,fx,sizeof fx);p->fx.ready=0;p->fx_time_accum=0;fx_cache(&p->fx);memset(p->fx_dirty,1,sizeof p->fx_dirty);
  fxn_apply_all(p,fx_new,fxn);
@@ -197,16 +238,17 @@ static int sample_set(PT *p,const char *key,const char *val){SampleIO *io=p->sam
  if(!strcmp(key,"sample_path")){if(io&&sp_request(io,v,val)){snprintf(p->sample_paths[v],SP_PATH,"%s",val);sample_release(&p->v[v]);sample_change(p);}return 1;}
  if(!strcmp(key,"browse_path_set")){if(io)sp_nav(io,val);return 1;}
  if(!numeric)return 0;
- if(!strcmp(key,"source")){int mode=x>.5f;if(p->source[v]!=mode){p->source[v]=mode;sample_release(&p->v[v]);sample_change(p);}return 1;}
- if(sscanf(key,"v%d_source%n",&i,&n)==1&&key[n]==0&&i>=0&&i<8){int mode=x>.5f;if(p->source[i]!=mode){p->source[i]=mode;sample_release(&p->v[i]);sample_change(p);}return 1;}
+ if(!strcmp(key,"source")){int mode=source_from_param(x);if(p->source[v]!=mode){p->source[v]=mode;sample_release(&p->v[v]);sample_change(p);}return 1;}
+ if(sscanf(key,"v%d_source%n",&i,&n)==1&&key[n]==0&&i>=0&&i<8){int mode=source_from_param(x);if(p->source[i]!=mode){p->source[i]=mode;sample_release(&p->v[i]);sample_change(p);}return 1;}
  if(sscanf(key,"v%d_sample_tune%n",&i,&n)==1&&key[n]==0&&i>=0&&i<8){p->tune[i][p->v[i].bank]=clamp(x,-48,48);sample_controls(p);return 1;}
  if(sscanf(key,"v%d_sample_start%n",&i,&n)==1&&key[n]==0&&i>=0&&i<8){p->start[i][p->v[i].bank]=clamp(x,0,99.9f);sample_controls(p);return 1;}
  if(!strcmp(key,"sample_tune")){p->tune[v][p->v[v].bank]=clamp(x,-48,48);sample_controls(p);return 1;}
  if(!strcmp(key,"sample_start")){p->start[v][p->v[v].bank]=clamp(x,0,99.9f);sample_controls(p);return 1;}
- if(sscanf(key,"tone_q%d%n",&i,&n)==1&&key[n]==0&&i>=0&&i<7){
- static const int fields[7]={FREQ,WAVE,ATK,DCY,AMT,RATE,MVEL};int f=fields[i];x=clamp(x,0,1);
- if(p->source[v]&&i<2){if(i==0)p->tune[v][p->v[v].bank]=-48+96*x;else p->start[v][p->v[v].bank]=99.9f*x;}
- else {const PTField *d=&pt_fields[f];float value=(f==FREQ||f==ATK||f==DCY||f==RATE)?((d->lo+(d->lo==0?1:0))*powf((d->hi+(d->lo==0?1:0))/(d->lo+(d->lo==0?1:0)),x)-(d->lo==0?1:0)):d->lo+x*(d->hi-d->lo);change(p,v,f,value);}sample_controls(p);return 1;}
+ if(sscanf(key,"tone_q%d%n",&i,&n)==1&&key[n]==0&&i>=0&&i<9){int t=tone_target(p,v,i),b=p->v[v].bank;x=clamp(x,0,1);
+ if(t==TQ_NONE)return 1;
+ if(t==TQ_TUNE)p->tune[v][b]=-48+96*x;else if(t==TQ_START)p->start[v][b]=99.9f*x;
+ else if(t==TQ_END){p->wt_end[v][b]=100*x;wt_mark_voice(p,v);}else if(t==TQ_TIME){p->wt_time[v][b]=powf(10000,x);wt_mark_voice(p,v);}
+ else {int f=t;const PTField *d=&pt_fields[f];float value=(f==FREQ||f==ATK||f==DCY||f==RATE)?((d->lo+(d->lo==0?1:0))*powf((d->hi+(d->lo==0?1:0))/(d->lo+(d->lo==0?1:0)),x)-(d->lo==0?1:0)):d->lo+x*(d->hi-d->lo);change(p,v,f,value);}sample_controls(p);return 1;}
  if(!io)return 0;
  if(!strcmp(key,"load")||!strcmp(key,"kit_import")){if(x>.5f){int kit=key[0]=='k';io->browser=kit?2:1;io->owner=v;char path[SP_PATH];if(!pthread_mutex_lock(&io->mutex)){snprintf(path,sizeof path,"%s",io->dirs[kit]);pthread_mutex_unlock(&io->mutex);sp_nav(io,path);}sample_change(p);}return 1;}
  if(!strcmp(key,"browse_close")){if(x>.5f){io->browser=0;sample_change(p);}return 1;}
@@ -217,8 +259,8 @@ static int sample_set(PT *p,const char *key,const char *val){SampleIO *io=p->sam
  return 0;
 }
 static int sample_get(PT *p,const char *key,char *buf,int len){SampleIO *io=p->samples;int v=p->selected,n=0,i;Voice *voice=&p->v[v];
- if(!strcmp(key,"source"))return snprintf(buf,len,"%d",p->source[v]);
- if(sscanf(key,"v%d_source%n",&i,&n)==1&&key[n]==0&&i>=0&&i<8)return snprintf(buf,len,"%d",p->source[i]);
+ if(!strcmp(key,"source"))return snprintf(buf,len,"%d",source_to_param(p->source[v]));
+ if(sscanf(key,"v%d_source%n",&i,&n)==1&&key[n]==0&&i>=0&&i<8)return snprintf(buf,len,"%d",source_to_param(p->source[i]));
  if(sscanf(key,"v%d_sample_tune%n",&i,&n)==1&&i>=0&&i<8&&(!key[n]||!strcmp(key+n,"_display")))return snprintf(buf,len,key[n]?"%+.1f st":"%.9g",p->tune[i][p->v[i].bank]);
  if(sscanf(key,"v%d_sample_start%n",&i,&n)==1&&i>=0&&i<8&&(!key[n]||!strcmp(key+n,"_display")))return snprintf(buf,len,key[n]?"%.1f %%":"%.9g",p->start[i][p->v[i].bank]);
  if(!strcmp(key,"sample_tune")||!strcmp(key,"sample_tune_display"))return snprintf(buf,len,strstr(key,"display")?"%+.1f st":"%.9g",p->tune[v][voice->bank]);
@@ -239,14 +281,32 @@ static int sample_get(PT *p,const char *key,char *buf,int len){SampleIO *io=p->s
  if(!strcmp(key,"browse_path")||!strcmp(key,"browse_path_display")){if(!io||pthread_mutex_trylock(&io->mutex))return snprintf(buf,len,"...");int result=snprintf(buf,len,"%s",io->directory);pthread_mutex_unlock(&io->mutex);return result;}
  if(!strcmp(key,"browse_page")||!strcmp(key,"browse_page_display")){if(!io||pthread_mutex_trylock(&io->mutex))return snprintf(buf,len,"...");int result=snprintf(buf,len,"%d / %d%s",io->page+1,io->count?(io->count+7)/8:1,io->overflow?" (first 256 entries)":"");pthread_mutex_unlock(&io->mutex);return result;}
  if(!strncmp(key,"browse_item",11)){char suffix[20]={0};if(sscanf(key,"browse_item%d%19s",&i,suffix)>=1&&i>=0&&i<8){if(strcmp(suffix,"_display")&&strcmp(suffix,"_name"))return snprintf(buf,len,"0");if(!io||pthread_mutex_trylock(&io->mutex))return snprintf(buf,len,"...");int at=io->page*8+i;int result=at<io->count?snprintf(buf,len,"%s%s",io->entries[at].directory?"[DIR] ":"",io->entries[at].name):snprintf(buf,len,"—");pthread_mutex_unlock(&io->mutex);return result;}}
- if(!strncmp(key,"tone_q",6)&&sscanf(key+6,"%d%n",&i,&n)==1&&i>=0&&i<7){static const int fields[]={FREQ,WAVE,ATK,DCY,AMT,RATE,MVEL};int f=fields[i];const char *suffix=key+6+n;
- if(!strcmp(suffix,"_name"))return snprintf(buf,len,"%s",p->source[v]&&i<2?(i==0?"TUNE":"START"):pt_fields[f].name);
- float x=p->source[v]&&i<2?(i==0?p->tune[v][voice->bank]:p->start[v][voice->bank]):values(voice)[f];
- if(!strcmp(suffix,"_display")){if(p->source[v]&&i<2)return snprintf(buf,len,i==0?"%+.1f st":"%.1f %%",x);return snprintf(buf,len,"%.2f %s",x,f==RATE?((int)values(voice)[MODE]==0?"ms":"Hz"):pt_fields[f].unit);}
- const PTField *d=&pt_fields[f];float norm=p->source[v]&&i<2?(i==0?(x+48)/96:x/99.9f):(f==FREQ||f==ATK||f==DCY||f==RATE)?logf((x+(d->lo==0?1:0))/(d->lo+(d->lo==0?1:0)))/logf((d->hi+(d->lo==0?1:0))/(d->lo+(d->lo==0?1:0))):(x-d->lo)/(d->hi-d->lo);return snprintf(buf,len,"%.9g",norm);}
+ if(!strncmp(key,"tone_q",6)&&sscanf(key+6,"%d%n",&i,&n)==1&&i>=0&&i<9){int t=tone_target(p,v,i),b=voice->bank;const char *suffix=key+6+n;
+ if(!strcmp(suffix,"_name"))return snprintf(buf,len,"%s",t==TQ_NONE?"—":t==TQ_TUNE?"TUNE":t==TQ_START?"START":t==TQ_END?"END":t==TQ_TIME?"SCAN TIME":(t==WAVE&&p->source[v]==2)?"POS":pt_fields[t].name);
+ if(!strcmp(suffix,"_display")){switch(t){case TQ_NONE:return snprintf(buf,len,"—");case TQ_TUNE:return snprintf(buf,len,"%+.1f st",p->tune[v][b]);case TQ_START:return snprintf(buf,len,"%.1f %%",p->start[v][b]);
+  case TQ_END:return snprintf(buf,len,"%.2f %%",p->wt_end[v][b]);case TQ_TIME:return snprintf(buf,len,"%.2f ms",p->wt_time[v][b]);default:break;}
+  float x=values(voice)[t];return snprintf(buf,len,"%.2f %s",x,t==RATE?((int)values(voice)[MODE]==0?"ms":"Hz"):pt_fields[t].unit);}
+ float norm;switch(t){case TQ_NONE:norm=0;break;case TQ_TUNE:norm=(p->tune[v][b]+48)/96;break;case TQ_START:norm=p->start[v][b]/99.9f;break;case TQ_END:norm=p->wt_end[v][b]/100;break;case TQ_TIME:norm=logf(p->wt_time[v][b])/logf(10000);break;
+  default:{int f=t;const PTField *d=&pt_fields[f];float x=values(voice)[f];norm=(f==FREQ||f==ATK||f==DCY||f==RATE)?logf((x+(d->lo==0?1:0))/(d->lo+(d->lo==0?1:0)))/logf((d->hi+(d->lo==0?1:0))/(d->lo+(d->lo==0?1:0))):(x-d->lo)/(d->hi-d->lo);}}
+ return snprintf(buf,len,"%.9g",norm);}
  return -1;
 }
+/* 1.2.0 : réglages WAVETABLE par voix (banque affichée) : v<n>_wt_table, _end, _time, _scan. */
+static int wt_key(const char *key,int *v,const char **rest){int n=0;if(sscanf(key,"v%d_wt_%n",v,&n)==1&&n&&*v>=0&&*v<8){*rest=key+n;return 1;}return 0;}
+static int wt_set(PT *p,const char *key,float x){int v;const char *r;if(!wt_key(key,&v,&r))return 0;int b=p->v[v].bank;
+ if(!strcmp(r,"table"))p->wt_table[v][b]=(int)roundf(clamp(x,0,WT_TABLES-1));
+ else if(!strcmp(r,"end"))p->wt_end[v][b]=clamp(x,0,100);
+ else if(!strcmp(r,"time"))p->wt_time[v][b]=clamp(x,1,10000);
+ else if(!strcmp(r,"scan"))p->wt_scan[v][b]=(int)roundf(clamp(x,0,2));
+ else return 0;wt_mark_voice(p,v);return 1;}
+static int wt_get(PT *p,const char *key,char *buf,int len){int v;const char *r;if(!wt_key(key,&v,&r))return -1;int b=p->v[v].bank;size_t k=strlen(r);int display=k>8&&!strcmp(r+k-8,"_display");size_t m=k-(display?8:0);char what[16];if(m>=sizeof what)return -1;memcpy(what,r,m);what[m]=0;
+ if(!strcmp(what,"table"))return display?snprintf(buf,len,"%s",wt_table_names[p->wt_table[v][b]]):snprintf(buf,len,"%d",p->wt_table[v][b]);
+ if(!strcmp(what,"scan"))return display?snprintf(buf,len,"%s",wt_scan_names[p->wt_scan[v][b]]):snprintf(buf,len,"%d",p->wt_scan[v][b]);
+ if(!strcmp(what,"end"))return snprintf(buf,len,display?"%.2f %%":"%.9g",p->wt_end[v][b]);
+ if(!strcmp(what,"time"))return snprintf(buf,len,display?"%.2f ms":"%.9g",p->wt_time[v][b]);
+ return -1;}
 static void set(void *ptr,const char *key,const char *val){PT *p=ptr;if(!strcmp(key,"state")){state_set(p,val);return;}if(sample_set(p,key,val))return;char *end;float x=strtof(val,&end);if(end==val||*end||!isfinite(x))return;
+ if(wt_set(p,key,x))return;
  if(!strcmp(key,"fx_time")){int fi=p->fx.param[DEL_SYNC]>.5f?DEL_DIV:DEL_MS;float value;
  if(fi==DEL_DIV){float delta=clamp(x,0,1)-p->fx.param[DEL_DIV]/4;
  if(fabsf(delta)<.125f){p->fx_time_accum+=delta;value=p->fx.param[DEL_DIV];if(fabsf(p->fx_time_accum)>=.04f){value=clamp(value+(p->fx_time_accum>0?1:-1),0,4);p->fx_time_accum=0;}}
@@ -256,21 +316,22 @@ static void set(void *ptr,const char *key,const char *val){PT *p=ptr;if(!strcmp(
  if(fxn_set_key(p,key,x))return;
  int si,sn=0;char which[16];if(!strncmp(key,"send",4)&&sscanf(key,"send%d_%15s%n",&si,which,&sn)==2&&key[sn]==0&&si>=0&&si<8){int k=!strcmp(which,"reverb")?0:!strcmp(which,"delay")?1:-1;if(k>=0){x=clamp(x,0,100);if(p->sends[si][k]!=x){p->sends[si][k]=x;p->fx_dirty[si*2+k]=1;}}return;}
  if(key[0]=='r'||key[0]=='d')for(int i=0;i<FX_COUNT;i++)if(!strcmp(key,fx_keys[i])){x=clamp(x,fx_lo[i],fx_hi[i]);if(i==REV_ON||i==DEL_ON||i==DEL_SYNC||i==DEL_DIV)x=roundf(x);if(p->fx.param[i]!=x){p->fx.param[i]=x;if(i==DEL_SYNC||i==DEL_DIV)p->fx_time_accum=0;fx_cache(&p->fx);p->fx_dirty[16+i]=1;if(i==DEL_DIV||i==DEL_MS||i==DEL_SYNC)p->fx_dirty[28]=1;}return;}
- if(!strcmp(key,"selected")){p->selected=(int)clamp(roundf(x),0,7);p->sample_dirty=1;p->changed[0]=1;notify_voice(p,p->selected);return;}
- int v,f,n=0;if(sscanf(key,"select%d%n",&v,&n)==1&&key[n]==0&&v>=0&&v<8){if(x>.5f){p->selected=v;p->sample_dirty=1;p->changed[0]=1;notify_voice(p,v);}return;}
+ if(!strcmp(key,"selected")){p->selected=(int)clamp(roundf(x),0,7);p->sample_dirty=1;p->changed[0]=1;notify_voice(p,p->selected);wt_mark(p);return;}
+ int v,f,n=0;if(sscanf(key,"select%d%n",&v,&n)==1&&key[n]==0&&v>=0&&v<8){if(x>.5f){p->selected=v;p->sample_dirty=1;wt_mark(p);p->changed[0]=1;notify_voice(p,v);}return;}
  if(parse_key(key,&v,&f)){change(p,v,f,x);return;}if(alias(key,&f)){change(p,p->selected,f,x);return;}
  if(x<=.5f)return;if(!strcmp(key,"trigger"))trigger(p,p->selected,110);
  else if(!strcmp(key,"alter"))randomize(p,1);else if(!strcmp(key,"random"))randomize(p,0);
- else if(!strcmp(key,"compare")){Voice *voice=&p->v[p->selected];float keep[3]={values(voice)[LEVEL],values(voice)[PAN],values(voice)[CHOKE]};voice->bank^=1;values(voice)[LEVEL]=keep[0];values(voice)[PAN]=keep[1];values(voice)[CHOKE]=keep[2];cache(voice);notify_voice(p,p->selected);p->sample_dirty=1;}
+ else if(!strcmp(key,"compare")){Voice *voice=&p->v[p->selected];float keep[3]={values(voice)[LEVEL],values(voice)[PAN],values(voice)[CHOKE]};voice->bank^=1;values(voice)[LEVEL]=keep[0];values(voice)[PAN]=keep[1];values(voice)[CHOKE]=keep[2];cache(voice);notify_voice(p,p->selected);p->sample_dirty=1;wt_mark(p);}
 }
 static int get(void *ptr,const char *key,char *buf,int len){PT *p=ptr;int v,f,n=0;float x;
- if(len<2)return 0;int sample_result=sample_get(p,key,buf,len);if(sample_result>=0)return sample_result;if(!strcmp(key,"state_valid"))return snprintf(buf,len,"%d",p->state_valid);
+ if(len<2)return 0;{int r=wt_get(p,key,buf,len);if(r>=0)return r;}int sample_result=sample_get(p,key,buf,len);if(sample_result>=0)return sample_result;if(!strcmp(key,"state_valid"))return snprintf(buf,len,"%d",p->state_valid);
  if(!strcmp(key,"state")){int used=snprintf(buf,len,"PT1 %d ",p->selected);for(int i=0;i<8;i++){Voice *v=&p->v[i];if(used>=len)return 0;used+=snprintf(buf+used,len-used,"%d %d %d ",v->bank,v->mute,v->solo);for(int b=0;b<2;b++)for(int f=0;f<PT_FIELDS;f++){if(used>=len)return 0;used+=snprintf(buf+used,len-used,"%.9g ",v->banks[b][f]);}}int extended=memcmp(p->fx.param,fx_defaults,sizeof fx_defaults)!=0;for(int v=0;v<8;v++)extended|=p->sends[v][0]!=0||p->sends[v][1]!=0;
  if(extended){if(used>=len)return 0;used+=snprintf(buf+used,len-used,"FX1 ");for(int i=0;i<28;i++){if(used>=len)return 0;float x=i<16?p->sends[i/2][i%2]:p->fx.param[i-16];used+=snprintf(buf+used,len-used,"%.9g ",x);}}
  {int x2=p->fx_new||memcmp(p->fxn_p,fxn_defaults,sizeof p->fxn_p)!=0;if(x2){if(used>=len)return 0;used+=snprintf(buf+used,len-used,"FX2 %d ",p->fx_new);for(int i=0;i<FXN_COUNT;i++){if(used>=len)return 0;used+=snprintf(buf+used,len-used,"%.9g ",p->fxn_p[i]);}}}
  if(p->samples){int has=0;for(int v=0;v<8;v++)has|=p->source[v]||p->sample_paths[v][0]||p->tune[v][0]!=0||p->tune[v][1]!=0||p->start[v][0]!=0||p->start[v][1]!=0;
  if(has){if(used>=len){return 0;}used+=snprintf(buf+used,len-used,"SM1 ");for(int v=0;v<8;v++){if(used>=len){return 0;}used+=snprintf(buf+used,len-used,"%d %.9g %.9g %.9g %.9g ",p->source[v],p->tune[v][0],p->start[v][0],p->tune[v][1],p->start[v][1]);const unsigned char *path=(const unsigned char*)p->sample_paths[v];if(!*path&&used<len)used+=snprintf(buf+used,len-used,"-");while(*path){if(used+2>=len){return 0;}used+=snprintf(buf+used,len-used,"%02x",*path++);}if(used<len)used+=snprintf(buf+used,len-used," ");}}
  }
+ if(!wt_is_default(p)){if(used>=len)return 0;used+=snprintf(buf+used,len-used,"WT1 ");for(int v=0;v<8;v++)for(int b=0;b<2;b++){if(used>=len)return 0;used+=snprintf(buf+used,len-used,"%d %.9g %.9g %d ",p->wt_table[v][b],p->wt_end[v][b],p->wt_time[v][b],p->wt_scan[v][b]);}}
  return used<len?used:0;}
  if(sscanf(key,"activity%d%n",&v,&n)==1&&key[n]==0&&v>=0&&v<8)return snprintf(buf,len,"%d",p->activity[v]);
  if(!strcmp(key,"selected"))return snprintf(buf,len,"%d",p->selected);
@@ -295,8 +356,9 @@ int mpc_engine_changed(void *ptr,char *key,int len){PT *p=ptr;
  /* Rename physical Q-Link aliases only when their actual source context changes. */
  if(p->qlink_sample_context!=p->source[p->selected]){p->qlink_sample_context=p->source[p->selected];snprintf(key,len,"qlink_names");return 1;}
  if(p->samples){unsigned rev=atomic_load(&p->samples->revision);if(rev!=p->sample_revision){p->sample_revision=rev;p->sample_dirty=1;}}
- if(p->sample_controls_dirty){static const char *c[]={"sample_tune","sample_start","tone_q0","tone_q1","tone_q2","tone_q3","tone_q4","tone_q5","tone_q6"};int i=p->sample_controls_dirty-1;if(i<9){p->sample_controls_dirty++;snprintf(key,len,"%s",c[i]);return 1;}if(i<25){p->sample_controls_dirty++;snprintf(key,len,"v%d_sample_%s",(i-9)/2,(i-9)%2?"start":"tune");return 1;}p->sample_controls_dirty=0;}
- if(p->sample_dirty){if(p->sample_dirty==1&&p->samples){p->marker_dirty=1;Sample *seen=p->samples->current[p->selected];int status=atomic_load(&p->samples->status[p->selected]);if(p->source[p->selected]&&(p->lcd_voice!=p->selected||p->lcd_seen!=seen||p->lcd_status!=status)){p->lcd_voice=p->selected;p->lcd_seen=seen;p->lcd_status=status;p->lcd_dirty=1;}else if(!p->source[p->selected]&&p->lcd_dirty){p->lcd_dirty=0;p->lcd_voice=-1;}}static const char *keys[]={"source","load","sample_name","sample_info","sample_status","browse","browse_path","browse_page","browse_up","browse_prev","browse_next","browse_close","browse_sd","browse_media","tone_q0","tone_q1","tone_q2","tone_q3","tone_q4","tone_q5","tone_q6","sample_tune","sample_start"};int at=p->sample_dirty-1;p->sample_dirty++;if(at<(int)(sizeof keys/sizeof keys[0]))snprintf(key,len,"%s",keys[at]);else if(at<23+8)snprintf(key,len,"browse_item%d",at-23);else if(at<31+32)snprintf(key,len,"sample_wave%d",at-31);else if(at<63+8)snprintf(key,len,"v%d_source",at-63);else if(at<71+3){static const char *kit[]={"kit_import","kit_browse","kit_status"};snprintf(key,len,"%s",kit[at-71]);}else{p->sample_dirty=0;return mpc_engine_changed(ptr,key,len);}return 1;}
+ if(p->wt_dirty){static const char *k[]={"table","end","time","scan"};for(int b=0;b<41;b++)if(p->wt_dirty>>b&1){p->wt_dirty&=~(1ull<<b);if(b<32)snprintf(key,len,"v%d_wt_%s",b/4,k[b%4]);else snprintf(key,len,"tone_q%d",b-32);return 1;}}
+ if(p->sample_controls_dirty){static const char *c[]={"sample_tune","sample_start","tone_q0","tone_q1","tone_q2","tone_q3","tone_q4","tone_q5","tone_q6","tone_q7","tone_q8"};int i=p->sample_controls_dirty-1;if(i<11){p->sample_controls_dirty++;snprintf(key,len,"%s",c[i]);return 1;}if(i<27){p->sample_controls_dirty++;snprintf(key,len,"v%d_sample_%s",(i-11)/2,(i-11)%2?"start":"tune");return 1;}p->sample_controls_dirty=0;}
+ if(p->sample_dirty){if(p->sample_dirty==1&&p->samples){p->marker_dirty=1;Sample *seen=p->samples->current[p->selected];int status=atomic_load(&p->samples->status[p->selected]);if(p->source[p->selected]==1&&(p->lcd_voice!=p->selected||p->lcd_seen!=seen||p->lcd_status!=status)){p->lcd_voice=p->selected;p->lcd_seen=seen;p->lcd_status=status;p->lcd_dirty=1;}else if(p->source[p->selected]!=1&&p->lcd_dirty){p->lcd_dirty=0;p->lcd_voice=-1;}}static const char *keys[]={"source","load","sample_name","sample_info","sample_status","browse","browse_path","browse_page","browse_up","browse_prev","browse_next","browse_close","browse_sd","browse_media","tone_q0","tone_q1","tone_q2","tone_q3","tone_q4","tone_q5","tone_q6","sample_tune","sample_start"};int at=p->sample_dirty-1;p->sample_dirty++;if(at<(int)(sizeof keys/sizeof keys[0]))snprintf(key,len,"%s",keys[at]);else if(at<23+8)snprintf(key,len,"browse_item%d",at-23);else if(at<31+32)snprintf(key,len,"sample_wave%d",at-31);else if(at<63+8)snprintf(key,len,"v%d_source",at-63);else if(at<71+3){static const char *kit[]={"kit_import","kit_browse","kit_status"};snprintf(key,len,"%s",kit[at-71]);}else{p->sample_dirty=0;return mpc_engine_changed(ptr,key,len);}return 1;}
 for(int i=0;i<8;i++)if(p->activity_dirty[i]){p->activity_dirty[i]=0;snprintf(key,len,"activity%d",i);return 1;}if(fxn_next_dirty(p,key,len))return 1;for(int i=0;i<29;i++)if(p->fx_dirty[i]){p->fx_dirty[i]=0;if(i<16)snprintf(key,len,"send%d_%s",i/2,i%2?"delay":"reverb");else if(i<28)snprintf(key,len,"%s",fx_keys[i-16]);else snprintf(key,len,"fx_time");return 1;}unsigned total=sizeof p->changed;for(unsigned i=0;i<total;i++){unsigned at=p->cursor++%total;if(!p->changed[at])continue;p->changed[at]=0;if(at==0)snprintf(key,len,"selected");else if(at<1+8*(PT_FIELDS+2)){unsigned a=at-1,f=a%(PT_FIELDS+2);snprintf(key,len,"v%u_%s",a/(PT_FIELDS+2),f<PT_FIELDS?pt_fields[f].key:f==PT_FIELDS?"mute":"solo");}else if(at>=1+8*(PT_FIELDS+2)+4+8+8){unsigned a=at-(1+8*(PT_FIELDS+2)+4+8+8);snprintf(key,len,"q%u_%u",a/8,a%8);}else if(at>=1+8*(PT_FIELDS+2)+4+8)snprintf(key,len,"ab%u",at-(1+8*(PT_FIELDS+2)+4+8));else continue;return 1;}
  if(p->marker_dirty){p->marker_dirty=0;snprintf(key,len,"sample_marker");return 1;}
  if(p->lcd_dirty){int at=p->lcd_dirty++-1;if(!at){snprintf(key,len,"sample_stereo");return 1;}if(at<=2*SP_LCD_COLS){snprintf(key,len,"sample_lcd%d",at-1);return 1;}p->lcd_dirty=0;}

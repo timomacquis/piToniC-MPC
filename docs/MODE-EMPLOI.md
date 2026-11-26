@@ -2,7 +2,7 @@
 
 Une boîte à rythmes inspirée de Microtonic.
 
-πToniC propose 8 voix de percussion indépendantes, chacune associant du bruit filtré à un oscillateur à forme variable ou à la lecture d’un sample WAV.
+πToniC propose 8 voix de percussion indépendantes, chacune associant du bruit filtré à un oscillateur à forme variable, à une table d’ondes balayée ou à la lecture d’un sample WAV.
 
 Son moteur sonore réunit modulation de hauteur, enveloppes d’amplitude, drive, EQ et réglages individuels par voix.
 
@@ -38,7 +38,7 @@ A02 joue : son bouton s’illumine en azur, tandis qu’A03 reste sélectionnée
 
 ## TONE
 
-Choisissez **SYNTH** pour créer un son, ou **SAMPLE** pour partir d’un WAV. Chaque voix fait son propre choix.
+Choisissez **SYNTH** pour créer un son, **WAVETABLE** pour balayer une table d’ondes, ou **SAMPLE** pour partir d’un WAV. Chaque voix fait son propre choix.
 
 ### SYNTH — façonnez une percussion
 
@@ -53,6 +53,17 @@ Choisissez **SYNTH** pour créer un son, ou **SAMPLE** pour partir d’un WAV. C
 - **PITCH VELOCITY** : influence de la vélocité sur la modulation de hauteur.
 
 La vitesse effective du mode SINE est limitée à 2 000 Hz.
+
+### WAVETABLE — balayez une table (1.2.0)
+
+- **TABLE** : PWM, HARMONICS, FORMANT, SYNC, FOLD, CRUSH, FM ou NOISE. Chaque table enchaîne 16 formes d'onde, calculées sans repliement.
+- **POS** : position de départ dans la table. L'affichage montre la forme correspondante ; le faire glisser au doigt règle POS.
+- **END** : position d'arrivée.
+- **SCAN TIME** : durée du parcours de POS à END, de 1 à 10 000 ms. Le balayage repart à chaque frappe et ne dépend pas de la hauteur.
+- **SCAN** : ONE (aller simple, s'arrête sur END), LOOP (recommence) ou PING-PONG (aller-retour).
+- FREQUENCY, AMP et PITCH fonctionnent comme en SYNTH. Pour un timbre fixe, réglez END à la valeur de POS.
+
+TABLE et SCAN s'ouvrent comme PITCH MODE ; leur valeur s'affiche à côté. Les réglages sont propres à chaque voix et à chaque banque A / B, et peuvent être automatisés ou verrouillés par pas.
 
 ### SAMPLE — partez d’un son
 
@@ -180,6 +191,7 @@ Les presets antérieurs gardent leurs sons : leurs nouveaux sends sont à **zér
 | Onglet | Huit encodeurs |
 | --- | --- |
 | TONE · SYNTH | Frequency · Wave Morph · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate · Pitch Velocity · libre |
+| TONE · WAVETABLE | Frequency · Pos · End · Scan Time · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate ; Pitch Velocity en 9e (2e rangée, KNOB) |
 | TONE · SAMPLE | Tune · Start · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate · Pitch Velocity · libre |
 | NOISE | Noise Mix · Cutoff · Resonance · Noise Attack · Noise Decay · libre · libre · libre |
 | CHARACTER | Drive · EQ Frequency · EQ Gain · Level · Osc Velocity · Noise Velocity · Pan · libre |

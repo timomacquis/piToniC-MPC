@@ -2,7 +2,7 @@
 
 A Microtonic-inspired drum machine.
 
-πToniC features 8 independent drum voices, each combining filtered noise with a morphing oscillator or WAV sample playback.
+πToniC features 8 independent drum voices, each combining filtered noise with a morphing oscillator, a scanned wavetable or WAV sample playback.
 
 Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and individual voice controls.
 
@@ -28,7 +28,7 @@ A02 is playing: its button pulses azure while A03 remains selected for editing.
 
 ## 2. TONE
 
-Choose **SYNTH** to shape a sound, or **SAMPLE** to start with a WAV. Each voice has its own choice.
+Choose **SYNTH** to shape a sound, **WAVETABLE** to scan a wavetable, or **SAMPLE** to start with a WAV. Each voice has its own choice.
 
 ### SYNTH — shape a hit
 
@@ -41,6 +41,17 @@ Choose **SYNTH** to shape a sound, or **SAMPLE** to start with a WAV. Each voice
 - **PITCH AMOUNT** sets the pitch excursion in semitones.
 - **PITCH TIME / RATE** sets milliseconds in DECAY mode and Hz in SINE / RANDOM. The effective sine rate is capped at 2,000 Hz.
 - **PITCH VELOCITY** makes pitch modulation respond to playing velocity.
+
+### WAVETABLE — scan a table (1.2.0)
+
+- **TABLE**: PWM, HARMONICS, FORMANT, SYNC, FOLD, CRUSH, FM or NOISE. Each table chains 16 waveforms, computed without aliasing.
+- **POS** sets the start position in the table. The display shows that waveform; drag it to set POS.
+- **END** sets the end position.
+- **SCAN TIME** sets the travel time from POS to END, 1 to 10,000 ms. The scan restarts on every hit and does not depend on pitch.
+- **SCAN**: ONE (one way, stops on END), LOOP (restarts) or PING-PONG (back and forth).
+- FREQUENCY, AMP and PITCH work as in SYNTH. For a fixed timbre, set END to the POS value.
+
+TABLE and SCAN open like PITCH MODE; their value is shown next to them. Settings belong to each voice and to each A / B bank, and can be automated or locked per step.
 
 ### SAMPLE — start with a sound
 
@@ -182,6 +193,7 @@ Left to right on the Force's eight physical encoders:
 | Page | Controls |
 | --- | --- |
 | TONE · SYNTH | Frequency · Wave Morph · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate · Pitch Velocity · unused |
+| TONE · WAVETABLE | Frequency · Pos · End · Scan Time · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate; Pitch Velocity 9th (second row, KNOB) |
 | TONE · SAMPLE | Tune · Start · Amp Attack · Amp Decay · Pitch Amount · Pitch Time / Rate · Pitch Velocity · unused |
 | NOISE | Noise Mix · Cutoff · Resonance · Noise Attack · Noise Decay · unused · unused · unused |
 | CHARACTER | Drive · EQ Frequency · EQ Gain · Level · Osc Velocity · Noise Velocity · Pan · unused |

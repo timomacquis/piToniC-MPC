@@ -21,7 +21,7 @@ int main(void){
  a->dispatcher(a,effSetProgram,0,1,0,0);state(b,other);assert(!strcmp(legacy,other));
  a->dispatcher(a,effSetProgram,0,-1,0,0);assert(a->dispatcher(a,effGetProgram,0,0,0,0)==1);
  /* Actual VST chunk keeps sample configuration and original paths too. */
- wrap_t *wa=a->object;eng_set(wa,"source","1");eng_set(wa,"sample_path","/missing sample folder/metal.wav");eng_set(wa,"sample_tune","7");state(a,text);assert(strstr(text,"SM1 "));void *sptr=NULL;intptr_t ssize=a->dispatcher(a,effGetChunk,0,0,&sptr,0);assert(ssize>0);char *scopy=malloc(ssize);memcpy(scopy,sptr,ssize);assert(b->dispatcher(b,effSetChunk,0,ssize,scopy,0)==1);state(b,other);assert(!strcmp(text,other));free(scopy);
+ wrap_t *wa=a->object;eng_set(wa,"source","2");eng_set(wa,"sample_path","/missing sample folder/metal.wav");eng_set(wa,"sample_tune","7");state(a,text);assert(strstr(text,"SM1 "));void *sptr=NULL;intptr_t ssize=a->dispatcher(a,effGetChunk,0,0,&sptr,0);assert(ssize>0);char *scopy=malloc(ssize);memcpy(scopy,sptr,ssize);assert(b->dispatcher(b,effSetChunk,0,ssize,scopy,0)==1);state(b,other);assert(!strcmp(text,other));free(scopy);
  a->dispatcher(a,effClose,0,0,0,0);b->dispatcher(b,effClose,0,0,0,0);
  puts("PASS: native program names and full-kit recalls; unchanged indices; edited-preset project round-trip with program index; same-program echo protection; legacy chunks; invalid-state rejection; instance independence.");
 }

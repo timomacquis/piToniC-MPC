@@ -1,5 +1,5 @@
 import json,sys,hashlib,shutil
-from config import B,FIELDS,FX_FIELDS,FXN_FIELDS
+from config import B,FIELDS,FX_FIELDS,FXN_FIELDS,WT_TABLES,WT_SCANS
 sys.path.insert(0,str(B/'third_party/mpc-wrapper/tools'))
 import gen_vst
 P=[dict(key='selected',name='Voice',min=0,max=7,default=0,display='int',options=[f'A{i+1:02}' for i in range(8)])]
@@ -32,8 +32,10 @@ for key,name,lo,hi,default,unit in FX_FIELDS:
 P.append(dict(key='del_div__open',name='Delay time options',min=0,max=1,default=0,popup_of='del_div'))
 P.append(dict(key='fx_time',name='DELAY TIME',min=0,max=1,default=.5,dynamic_display=True,poll=False))
 # Sample additions are appended; published 331 handles stay fixed.
-for v in range(8):P.append(dict(key=f'v{v}_source',name=f'A{v+1:02} SOURCE',min=0,max=1,default=0,options=['SYNTH','SAMPLE'],poll=False))
-P.append(dict(key='source',name='SOURCE',min=0,max=1,default=0,options=['SYNTH','SAMPLE'],poll=False))
+# 1.2.0 : SOURCE passe à 3 choix ; SAMPLE reste la valeur haute (automations et p-locks existants conservés).
+SOURCES=['SYNTH','WAVETABLE','SAMPLE']
+for v in range(8):P.append(dict(key=f'v{v}_source',name=f'A{v+1:02} SOURCE',min=0,max=2,default=0,options=SOURCES,poll=False))
+P.append(dict(key='source',name='SOURCE',min=0,max=2,default=0,options=SOURCES,poll=False))
 for k,n,lo,hi in [('sample_tune','TUNE',-48,48),('sample_start','START',0,99.9)]:P.append(dict(key=k,name=n,min=lo,max=hi,default=0,dynamic_display=True,poll=False))
 for i in range(7):P.append(dict(key=f'tone_q{i}',name='TONE',min=0,max=1,default=.5,dynamic_display=True,dynamic_name=True,poll=False))
 for k in ['load','browse_up','browse_prev','browse_next','browse_close','browse_sd','browse_media']+[f'browse_item{i}' for i in range(8)]:P.append(dict(key=k,name=k.upper(),min=0,max=1,default=0,momentary=True,dynamic_display=k.startswith('browse_item'),poll=False))
@@ -59,6 +61,15 @@ for i in range(8):P.append(dict(key=f'fxq{i}',name='FX',min=0,max=1,default=.5,d
 P.append(dict(key='kit_import',name='IMPORT KIT',min=0,max=1,default=0,momentary=True,poll=False))
 P.append(dict(key='kit_browse',name='Kit browser',min=0,max=1,default=0,poll=False))
 P.append(dict(key='kit_status',name='kit_status',min=0,max=1,default=0,dynamic_display=True,poll=False))
+# 1.2.0 : source WAVETABLE. Tous les indices publiés restent fixes.
+for v in range(8):
+ P.append(dict(key=f'v{v}_wt_table',name=f'A{v+1:02} TABLE',min=0,max=len(WT_TABLES)-1,default=0,options=WT_TABLES,display='int',dynamic_display=True,poll=False))
+ P.append(dict(key=f'v{v}_wt_end',name=f'A{v+1:02} END',min=0,max=100,default=100,dynamic_display=True,poll=False))
+ P.append(dict(key=f'v{v}_wt_time',name=f'A{v+1:02} SCAN TIME',min=1,max=10000,default=200,dynamic_display=True,poll=False))
+ P.append(dict(key=f'v{v}_wt_scan',name=f'A{v+1:02} SCAN',min=0,max=len(WT_SCANS)-1,default=0,options=WT_SCANS,display='int',dynamic_display=True,poll=False))
+for v in range(8):
+ for k in ['wt_table','wt_scan']:P.append(dict(key=f'v{v}_{k}__open',name='Options',min=0,max=1,default=0,popup_of=f'v{v}_{k}'))
+for i in [7,8]:P.append(dict(key=f'tone_q{i}',name='TONE',min=0,max=1,default=.5,dynamic_display=True,dynamic_name=True,poll=False))
 keys=[p['key'] for p in P];lock=B/'params.lock'
 if lock.exists():assert keys[:len(old:=lock.read_text().splitlines())]==old,'Parameter indices changed'
 lock.write_text('\n'.join(keys)+'\n')
@@ -68,7 +79,7 @@ with (B/'build/params.h').open('a') as f:
  f.write('\nstatic const unsigned char PICN_AUTOMATABLE[NPARAMS]={'+','.join('1' if (p['key'].startswith(('v','send','rev_','del_','fxn_')) and '__open' not in p['key'] and p['key']!='fxn_time') else '0' for p in P)+'};\n')
  f.write('static const unsigned short PICN_PARAM_LOOKUP[NPARAMS]={'+','.join(str(i) for i in sorted(range(len(P)),key=lambda i:keys[i]))+'};\n')
 # Musical taper for Hz and time controls; canonical storage remains physical units.
-curved={'freq','attack','decay','modrate','cutoff','natk','ndcy','eqfreq'}
+curved={'freq','attack','decay','modrate','cutoff','natk','ndcy','eqfreq','wt_time'}
 flags=[]
 for p in P:
  k=p['key'];field=k.split('_',1)[1] if k.startswith('v') and '__open' not in k else FIELDS[int(k[1])*8+int(k[3])][0] if k.startswith('q') else ''

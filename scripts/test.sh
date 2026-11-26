@@ -44,3 +44,11 @@ gcc $FLAGS -c tests/kit_import_test.c -o build/kit-import-test.o
 g++ -fsanitize=address,undefined build/kit-import-test.o $FXN -lpthread -lm -o build/kit-import-test
 ASAN_OPTIONS=detect_leaks=1 ./build/kit-import-test
 ASAN_OPTIONS=detect_leaks=0 python3 tests/mtpreset_compare.py build/mtpreset-test
+# 1.2.0 : source WAVETABLE (tables, balayage, SOURCE à 3 valeurs, état WT1, compatibilité 1.1.2, import .mtpreset).
+gcc $FLAGS -c tests/wavetable_test.c -o build/wavetable-test.o
+g++ -fsanitize=address,undefined build/wavetable-test.o $FXN -lpthread -lm -o build/wavetable-test
+ASAN_OPTIONS=detect_leaks=1 ./build/wavetable-test
+gcc $FLAGS -c tests/wavetable_host_test.c -o build/wavetable-host-test-0.o
+gcc $FLAGS -c src/engine.c -o build/wavetable-host-test-1.o
+g++ -fsanitize=address,undefined build/wavetable-host-test-0.o build/wavetable-host-test-1.o $FXN -lpthread -lm -ldl -o build/wavetable-host-test
+ASAN_OPTIONS=detect_leaks=1 ./build/wavetable-host-test

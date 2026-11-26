@@ -28,7 +28,7 @@ int main(void){
  MTKit want;assert(mt_load(kit,&want));
  PT *p=create(NULL);char buf[512];
  /* State the import must replace or keep. */
- set(p,"send2_reverb","40");set(p,"send5_delay","70");set(p,"v3_mute","1");set(p,"v6_solo","1");set(p,"v4_source","1");
+ set(p,"send2_reverb","40");set(p,"send5_delay","70");set(p,"v3_mute","1");set(p,"v6_solo","1");set(p,"v4_source","2");
  set(p,"selected","1");set(p,"compare","1");assert(p->v[1].bank==1);set(p,"rev_return","33");set(p,"fxn_mode","1");
  /* IMPORT KIT opens the kit browser, not the sample one. */
  set(p,"kit_import","1");text(p,"kit_browse",buf,sizeof buf);assert(!strcmp(buf,"1"));text(p,"browse",buf,sizeof buf);assert(!strcmp(buf,"0"));

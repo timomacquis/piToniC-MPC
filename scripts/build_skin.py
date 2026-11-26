@@ -2,7 +2,7 @@
 import json,math,hashlib,shutil,os,copy,re
 from pathlib import Path
 from PIL import Image,ImageDraw,ImageFont
-from config import B,FIELDS,FOLDER,VERSION,TV_TYPES,DUB_DIVS
+from config import B,FIELDS,FOLDER,VERSION,TV_TYPES,DUB_DIVS,WT_TABLES,WT_SCANS
 # 1.1.0 : interrupteurs à deux libellés (bordure bleue, pas de position neutre).
 TWO_LABELS={'del_sync':('FREE','SYNC'),'fxn_dsync':('FREE','SYNC')}
 P=json.loads((B/'params.json').read_text());I={p['key']:i for i,p in enumerate(P)}
@@ -39,6 +39,7 @@ def enum_of(key):
  m=re.fullmatch(r'(v\d_)?(\w+?)__open',key)
  if not m:return None,None
  f=next((f for f in FIELDS if f[0]==m.group(2) and isinstance(f[5],list)),None)
+ if not f and m.group(2) in ('wt_table','wt_scan'):return key[:-6],(WT_TABLES if m.group(2)=='wt_table' else WT_SCANS)  # 1.2.0
  return (key[:-6],f[5]) if f else (None,None)
 def toggle(key,title,x,y,w,h,extra=None):
  global serial
@@ -130,7 +131,7 @@ im=Image.new('RGBA',(2,120));d=ImageDraw.Draw(im)
 for yy in range(0,120,9):d.line((0,yy,0,min(yy+4,119)),fill=INK,width=1)
 im.save(A/'sample_start_marker.png')
 def sample_lcd(parts):
- sam=[gate('source',1)]
+ sam=[gate('source',2,3)]  # 1.2.0 : SOURCE = SYNTH / WAVETABLE / SAMPLE
  c=art('sample_lcd_frame.png',20,180,596,136);c['bounds']['additionalInvalidatingHandles']=sam;parts.append(c)
  for channel,stereo,y in [(0,0,222),(0,1,188),(1,1,254)]:
   for i in range(LCD_COLS):
@@ -140,22 +141,74 @@ def sample_lcd(parts):
  for i in range(LCD_COLS):
   c=art('sample_start_marker.png',28+i*2,188,2,120);c['bounds']['additionalInvalidatingHandles']=sam+[gate('sample_marker',i,LCD_COLS)];parts.append(c)
 def readout(key,x,y,w,h,n=20):return place(local('sample_read_'+key+'_'+str(len(defs)),[label(0,0,w,h,n=n)]),key,x,y,w,h)
+# 1.2.0 : source WAVETABLE. Bandes d'images dessinées avec les formules de src/wavetable.h (wt_naive) :
+# 8 tables x 8 positions en 288 x 100, l'image affichée suit POS (champ WAVE) ; glisser l'image règle POS.
+WT_W,WT_H,WT_N=288,100,8
+def wt_noise(i):
+ x=0x9E3779B9
+ for _ in range(i+1):x^=(x<<13)&0xffffffff;x^=x>>17;x^=(x<<5)&0xffffffff
+ return (x>>8)*(2.0/16777216.0)-1.0
+WT_NZ=[wt_noise(i) for i in range(512)]
+def wt_naive(t,k,x):
+ i=int(x*512)%512
+ if t==0:return 1 if x<.5-.46*k else -1
+ if t==1:n=1+15*k;return sum(max(0,min(1,n-(h-1)))*math.sin(2*math.pi*h*x)/h for h in range(1,17))
+ if t==2:f=3+6*k;return math.sin(2*math.pi*x*f)*(.5-.5*math.cos(2*math.pi*x))
+ if t==3:ph=(x*(1+6*k))%1;return 1-2*ph
+ if t==4:g=1+5*k;return math.sin(math.pi/2*g*math.sin(2*math.pi*x))
+ if t==5:lv=max(2,round(16-14*k));return round(math.sin(2*math.pi*x)*lv/2)/(lv/2)
+ if t==6:return math.sin(2*math.pi*x+5*k*math.sin(2*math.pi*3*x))
+ return (1-k)*(1 if x<.5 else -1)+k*WT_NZ[i]
+def wt_strip(t):
+ fn=f'wt_{WT_TABLES[t].lower()}.png'
+ if (A/fn).exists():return fn
+ S=2;w,h=WT_W*S,WT_H*S;n=120;ww=w-(24+(WT_N-1)*8)*S
+ curves=[[wt_naive(t,f/(WT_N-1),i/(n-1)) for i in range(n)] for f in range(WT_N)]
+ peak=max(max(abs(v) for v in c) for c in curves) or 1
+ def pts(f):
+  ox=(12+f*8)*S;base=(h-(16+f*8)*S)
+  return [(ox+ww*i/(n-1),base-curves[f][i]/peak*15*S) for i in range(n)],base
+ strip=Image.new('RGB',(WT_W,WT_H*WT_N),'#020405')
+ for cur in range(WT_N):
+  im=Image.new('RGB',(w,h),'#020405');d=ImageDraw.Draw(im)
+  for f in reversed(range(WT_N)):
+   if f!=cur:d.line(pts(f)[0],fill='#29434b',width=S)
+  p,base=pts(cur);d.polygon(p+[(p[-1][0],base),(p[0][0],base)],fill='#2a2618');d.line(p,fill='#c4ab70',width=3*S)
+  strip.paste(im.resize((WT_W,WT_H),Image.LANCZOS),(0,cur*WT_H))
+ strip.save(A/fn);return fn
+def wavetable(parts,v,wtc):
+ # Comme PITCH MODE : bouton bleu qui ouvre la liste, valeur en texte à côté.
+ for k,name,x in [('wt_table','TABLE',20),('wt_scan','SCAN',324)]:
+  parts.append(toggle(f'v{v}_{k}__open',name,x,132,140,42,wtc))
+  lb=label(0,0,140,42,n=24);lb['componentData']['data']['textStyle']['justification']='centred'  # valeur centrée dans sa case
+  parts.append(place(local(f'wt_value_{v}_{k}',[lb]),f'v{v}_{k}',x+152,132,140,42,list(wtc)))
+ c=art('sample_lcd_frame.png',20,180,596,136);c['bounds']['additionalInvalidatingHandles']=list(wtc);parts.append(c)
+ for t in range(len(WT_TABLES)):
+  knob=child('Knob',dict(version=5,knobType='FilmStrip',filmStrip=wt_strip(t),numFrames=WT_N,invert=False,dragOrientation='Vertical',handleName='Data'),0,0,WT_W,WT_H);knob['bounds']['acceptsHWFocus']='No'
+  c=place(local(f'wt_view_{v}_{t}',[knob]),f'v{v}_wave',20+(596-WT_W)//2,180+(136-WT_H)//2,WT_W,WT_H,wtc+[gate(f'v{v}_wt_table',t,len(WT_TABLES))]);c['bounds']['acceptsHWFocus']='No';parts.append(c)
+ parts.append(dial('tone_q0','FREQUENCY',20,336,292,110,wtc));parts.append(dial('tone_q1','POS',324,336,292,110,wtc))
+ parts.append(dial('tone_q2','END',20,450,292,86,wtc));parts.append(dial('tone_q3','SCAN TIME',324,450,292,86,wtc))
 def tone_sample(parts,v):
- selected=[gate('selected',v,8)];syn=selected+[gate(f'v{v}_source',0)];sam=selected+[gate(f'v{v}_source',1)]
- bitmap('source_title.png',128,42,'SOURCE');parts.append(art('source_title.png',20,78,128,42));parts[-1]['bounds']['additionalInvalidatingHandles']=selected
- # Two native radio buttons on one binary parameter.
- for mode,title in enumerate(['SYNTH','SAMPLE']):
-  off=bitmap('source_'+title+'_off.png',128,42,title);on=bitmap('source_'+title+'_on.png',128,42,title,'#383122',AMBER)
-  native=child('Button',dict(version=2,onImage=on,offImage=off,buttonId=mode,numButtonsInGroup=2,handleName='Data',gestureBehaviour='Instant'),0,0,128,42)
-  parts.append(place(local(f'source_select{v}_{mode}',[native],[action('Q-Link')]),f'v{v}_source',350+mode*136,78,128,42,selected))
+ selected=[gate('selected',v,8)];syn=selected+[gate(f'v{v}_source',0,3)];sam=selected+[gate(f'v{v}_source',2,3)];wtc=selected+[gate(f'v{v}_source',1,3)]
+ # 1.2.0 : grille de 4 colonnes x 2 lignes, cases de 140 x 42 (x = 20, 172, 324, 476 ; y = 78, 132).
+ bitmap('source_title.png',140,42,'SOURCE');parts.append(art('source_title.png',20,78,140,42));parts[-1]['bounds']['additionalInvalidatingHandles']=selected
+ # 1.2.0 : trois boutons natifs sur un paramètre à 3 valeurs (SAMPLE reste la valeur haute).
+ for mode,title in enumerate(['SYNTH','WAVETABLE','SAMPLE']):
+  off=bitmap('source3_'+title+'_off.png',140,42,title);on=bitmap('source3_'+title+'_on.png',140,42,title,'#383122',AMBER)
+  native=child('Button',dict(version=2,onImage=on,offImage=off,buttonId=mode,numButtonsInGroup=3,handleName='Data',gestureBehaviour='Instant'),0,0,140,42)
+  parts.append(place(local(f'source_select{v}_{mode}',[native],[action('Q-Link')]),f'v{v}_source',172+mode*152,78,140,42,selected))
  parts.append(dial('tone_q0','FREQUENCY',20,138,292,122,syn));parts.append(dial('tone_q1','WAVE MORPH',324,138,292,122,syn))
  for key,title,x in [('tone_q0','TUNE',20),('tone_q1','START',324)]:parts.append(dial(key,title,x,336,292,110,sam))
  for key,x,y,w,h,n in [('sample_name',30,132,440,36,23)]:parts.append(readout(key,x,y,w,h,n));parts[-1]['bounds']['additionalInvalidatingHandles']=sam
  parts.append(toggle('load','LOAD',486,135,128,30,sam))
- parts.extend([dial('tone_q2','AMP ATTACK',648,138,300,122,selected),dial('tone_q3','AMP DECAY',960,138,300,122,selected)])
+ wavetable(parts,v,wtc)
+ # 1.2.0 : réglages AMP / PITCH sur les alias de l'ordre des Q-Links (tone_q2..6, ou tone_q4..8 en WAVETABLE).
+ for cond,o in [(syn,0),(sam,0),(wtc,2)]:
+  parts.extend([dial(f'tone_q{2+o}','AMP ATTACK',648,138,300,122,cond),dial(f'tone_q{3+o}','AMP DECAY',960,138,300,122,cond)])
+  for key,title,x in [(f'tone_q{4+o}','PITCH AMOUNT',648),(f'tone_q{5+o}','PITCH TIME / RATE',960)]:parts.append(dial(key,title,x,336,300,110,cond))
+  parts.append(dial(f'tone_q{6+o}','PITCH VELOCITY',960,450,300,86,cond))
  parts.append(toggle(f'v{v}_modmode__open','PITCH MODE',648,280,300,42,selected));parts.append(readout(f'v{v}_modmode',972,280,280,42,24));parts[-1]['bounds']['additionalInvalidatingHandles']=selected
- for key,title,x in [('tone_q4','PITCH AMOUNT',648),('tone_q5','PITCH TIME / RATE',960)]:parts.append(dial(key,title,x,336,300,110,selected))
- parts.append(dial('tone_q6','PITCH VELOCITY',960,450,300,86,selected))
+
 
 # Compact selection panels; first-level widgets are kept byte-for-byte intact.
 compact_layout=[]
@@ -188,12 +241,15 @@ def modal_base(parts,key,title,options,flag,cond,close_key=None,width=None,heigh
  return cs,x,y,w,h,bw,cols,footer
 def finish_modal(parts,cs,cond):
  for c in cs:c['bounds']['additionalInvalidatingHandles'].extend(cond);parts.append(c)
-def compact_picker(parts,key,title,options,cond):
+def compact_picker(parts,key,title,options,cond,share=False):
  flag=key+'__open';cs,x,y,w,h,bw,cols,footer=modal_base(parts,flag,title,options,flag,cond,caption=None if key in ('del_div','fxn_ddiv') else title)
  for op,caption in enumerate(options):
   tag='compact_choice_'+hashlib.sha256((key+str(op)).encode()).hexdigest()[:14]
-  for state in [0,1]:bitmap(tag+f'_{state}.png',bw,36,caption,'#383122' if state else FIELD,AMBER if state else INK)
-  native=child('Button',dict(version=2,onImage=tag+'_1.png',offImage=tag+'_0.png',buttonId=op,numButtonsInGroup=len(options),handleName='Data',gestureBehaviour='Instant'),0,0,bw,36)
+  # 1.2.0 (share) : images communes aux 8 voix pour les listes TABLE / SCAN (mémoire d'affichage).
+  img=('compact_shared_'+hashlib.sha256(f'{title}|{caption}|{bw}'.encode()).hexdigest()[:14]) if share else tag
+  for state in [0,1]:
+   if not (share and (A/f'{img}_{state}.png').exists()):bitmap(img+f'_{state}.png',bw,36,caption,'#383122' if state else FIELD,AMBER if state else INK)
+  native=child('Button',dict(version=2,onImage=img+'_1.png',offImage=img+'_0.png',buttonId=op,numButtonsInGroup=len(options),handleName='Data',gestureBehaviour='Instant'),0,0,bw,36)
   cs.append(place(local(tag,[native],[action('Q-Link')]),key,x+24+(op%cols)*(bw+12),y+70+(op//cols)*48,bw,36))
  cs.append(toggle(flag,'CLOSE',x+(w-160)//2,y+footer,160,36));finish_modal(parts,cs,cond)
 
@@ -239,6 +295,8 @@ for page,title in enumerate(['TONE','NOISE','CHARACTER','EFFECTS','MIXER']):
   for v in range(8):
    for f in FIELDS[page*8:page*8+8]:
     if isinstance(f[5],list):compact_picker(parts,f'v{v}_{f[0]}',f[1],f[5],[gate('selected',v,8),gate(f'v{v}_{f[0]}__open',1)])
+   if page==0:  # 1.2.0 : listes TABLE et SCAN de la source WAVETABLE
+    for k,heading,opts in [('wt_table','TABLE',WT_TABLES),('wt_scan','SCAN',WT_SCANS)]:compact_picker(parts,f'v{v}_{k}',heading,opts,[gate('selected',v,8),gate(f'v{v}_{k}__open',1)],share=True)
  if page==0:
   cond=[gate('browse',1)]
   cs,x,y,w,h,_,_,_=modal_base(parts,'load','LOAD SAMPLE',[''], 'browse',cond,close_key='browse_close',width=1180,height=418,caption='LOAD')
@@ -267,10 +325,11 @@ J={'pageData':{'version':1,'info':{'version':1,'type':'CompleteDescription'},'co
 (B/'Validation/UI-Compact-Panels/layout.json').write_text(json.dumps(compact_layout,ensure_ascii=False,indent=2)+'\n')
 (A/'TUI.json').write_text(json.dumps(J,ensure_ascii=False,separators=(',',':')))
 ql=[]
-page_keys=[[f'tone_q{i}' for i in range(7)], [f'q1_{i}' for i in [0,2,3,4,5]], [f'q2_{i}' for i in range(7)], [f'fxq{i}' for i in range(8)], [f'v{i}_level' for i in range(8)]]
+page_keys=[[f'tone_q{i}' for i in range(9)],  # 1.2.0 : END et SCAN TIME en 8e et 9e position (2e rangée)
+ [f'q1_{i}' for i in [0,2,3,4,5]], [f'q2_{i}' for i in range(7)], [f'fxq{i}' for i in range(8)], [f'v{i}_level' for i in range(8)]]
 for page,keys in enumerate(page_keys):
  mapping={f'Q-Link {i}':-1 for i in range(1,17)}
- for physical,key in zip([13,9,5,1,14,10,6,2],keys):mapping[f'Q-Link {physical}']=I[key]
+ for physical,key in zip([13,9,5,1,14,10,6,2,15],keys):mapping[f'Q-Link {physical}']=I[key]
  ql.append({'Tab':page+1,'SubTab':1,'Bank Direction':'Column','Q-Links':mapping})
 for name in ['Q-Links.json','Q-Links - 8by1.json','Q-Links - 4by4.json']:(A/name).write_text(json.dumps({'version':4,'info':{'version':1,'type':'CompleteDescription'},'Screen Mode Q-Links':{'version':4,'map':ql},'Program Mode Q-Links':ql[0]['Q-Links']},indent=2))
 (OUT/'version.xml').write_text(f'<plugincontent version="1.0"><identifier>Timo.vst.πtonic</identifier><version>{VERSION.split("-")[0]}.0</version></plugincontent>\n')

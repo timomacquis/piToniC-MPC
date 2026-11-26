@@ -1,6 +1,6 @@
 from pathlib import Path
 B=Path(__file__).resolve().parents[1]
-VERSION='1.1.2'
+VERSION='1.2.0'
 FOLDER='Timo - VST - πToniC'
 # Physical units. All canonical voice parameters stay at fixed append-only indices.
 FIELDS=[
@@ -36,4 +36,8 @@ FXN_FIELDS=[
  ('fxn_dfeedback','FEEDBACK',0,120,45,'%'),('fxn_dfilter','FILTER',-100,100,0,'')]
 
 # Canonical product description for future package metadata.
-DESCRIPTION = 'A Microtonic-inspired drum machine. πToniC features 8 independent drum voices, each combining filtered noise with a morphing oscillator or WAV sample playback. Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and individual voice controls. Shared stereo reverb and tempo-synced delay complete the engine.'
+DESCRIPTION = 'A Microtonic-inspired drum machine. πToniC features 8 independent drum voices, each combining filtered noise with a morphing oscillator, a scanned wavetable or WAV sample playback. Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and individual voice controls. Shared stereo reverb and tempo-synced delay complete the engine.'
+
+# 1.2.0 : source WAVETABLE (src/wavetable.h). Ordre des tables = valeurs du paramètre v<n>_wt_table.
+WT_TABLES=['PWM','HARMONICS','FORMANT','SYNC','FOLD','CRUSH','FM','NOISE']
+WT_SCANS=['ONE','LOOP','PING-PONG']

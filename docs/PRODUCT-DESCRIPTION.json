@@ -1,7 +1,7 @@
 {
   "en": [
     "A Microtonic-inspired drum machine.",
-    "πToniC features 8 independent drum voices, each combining filtered noise with a morphing oscillator or WAV sample playback.",
+    "πToniC features 8 independent drum voices, each combining filtered noise with a morphing oscillator, a scanned wavetable or WAV sample playback.",
     "Its sound engine includes pitch modulation, amplitude envelopes, drive, EQ and individual voice controls.",
     "Shared stereo reverb and tempo-synced delay complete the engine."
   ],

@@ -3307,10 +3307,11 @@
     "key": "v0_source",
     "name": "A01 SOURCE",
     "min": 0,
-    "max": 1,
+    "max": 2,
     "default": 0,
     "options": [
       "SYNTH",
+      "WAVETABLE",
       "SAMPLE"
     ],
     "poll": false
@@ -3319,10 +3320,11 @@
     "key": "v1_source",
     "name": "A02 SOURCE",
     "min": 0,
-    "max": 1,
+    "max": 2,
     "default": 0,
     "options": [
       "SYNTH",
+      "WAVETABLE",
       "SAMPLE"
     ],
     "poll": false
@@ -3331,10 +3333,11 @@
     "key": "v2_source",
     "name": "A03 SOURCE",
     "min": 0,
-    "max": 1,
+    "max": 2,
     "default": 0,
     "options": [
       "SYNTH",
+      "WAVETABLE",
       "SAMPLE"
     ],
     "poll": false
@@ -3343,10 +3346,11 @@
     "key": "v3_source",
     "name": "A04 SOURCE",
     "min": 0,
-    "max": 1,
+    "max": 2,
     "default": 0,
     "options": [
       "SYNTH",
+      "WAVETABLE",
       "SAMPLE"
     ],
     "poll": false
@@ -3355,10 +3359,11 @@
     "key": "v4_source",
     "name": "A05 SOURCE",
     "min": 0,
-    "max": 1,
+    "max": 2,
     "default": 0,
     "options": [
       "SYNTH",
+      "WAVETABLE",
       "SAMPLE"
     ],
     "poll": false
@@ -3367,10 +3372,11 @@
     "key": "v5_source",
     "name": "A06 SOURCE",
     "min": 0,
-    "max": 1,
+    "max": 2,
     "default": 0,
     "options": [
       "SYNTH",
+      "WAVETABLE",
       "SAMPLE"
     ],
     "poll": false
@@ -3379,10 +3385,11 @@
     "key": "v6_source",
     "name": "A07 SOURCE",
     "min": 0,
-    "max": 1,
+    "max": 2,
     "default": 0,
     "options": [
       "SYNTH",
+      "WAVETABLE",
       "SAMPLE"
     ],
     "poll": false
@@ -3391,10 +3398,11 @@
     "key": "v7_source",
     "name": "A08 SOURCE",
     "min": 0,
-    "max": 1,
+    "max": 2,
     "default": 0,
     "options": [
       "SYNTH",
+      "WAVETABLE",
       "SAMPLE"
     ],
     "poll": false
@@ -3403,10 +3411,11 @@
     "key": "source",
     "name": "SOURCE",
     "min": 0,
-    "max": 1,
+    "max": 2,
     "default": 0,
     "options": [
       "SYNTH",
+      "WAVETABLE",
       "SAMPLE"
     ],
     "poll": false
@@ -8978,6 +8987,578 @@
     "max": 1,
     "default": 0,
     "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_wt_table",
+    "name": "A01 TABLE",
+    "min": 0,
+    "max": 7,
+    "default": 0,
+    "options": [
+      "PWM",
+      "HARMONICS",
+      "FORMANT",
+      "SYNC",
+      "FOLD",
+      "CRUSH",
+      "FM",
+      "NOISE"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_wt_end",
+    "name": "A01 END",
+    "min": 0,
+    "max": 100,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_wt_time",
+    "name": "A01 SCAN TIME",
+    "min": 1,
+    "max": 10000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_wt_scan",
+    "name": "A01 SCAN",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "options": [
+      "ONE",
+      "LOOP",
+      "PING-PONG"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_wt_table",
+    "name": "A02 TABLE",
+    "min": 0,
+    "max": 7,
+    "default": 0,
+    "options": [
+      "PWM",
+      "HARMONICS",
+      "FORMANT",
+      "SYNC",
+      "FOLD",
+      "CRUSH",
+      "FM",
+      "NOISE"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_wt_end",
+    "name": "A02 END",
+    "min": 0,
+    "max": 100,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_wt_time",
+    "name": "A02 SCAN TIME",
+    "min": 1,
+    "max": 10000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v1_wt_scan",
+    "name": "A02 SCAN",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "options": [
+      "ONE",
+      "LOOP",
+      "PING-PONG"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_wt_table",
+    "name": "A03 TABLE",
+    "min": 0,
+    "max": 7,
+    "default": 0,
+    "options": [
+      "PWM",
+      "HARMONICS",
+      "FORMANT",
+      "SYNC",
+      "FOLD",
+      "CRUSH",
+      "FM",
+      "NOISE"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_wt_end",
+    "name": "A03 END",
+    "min": 0,
+    "max": 100,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_wt_time",
+    "name": "A03 SCAN TIME",
+    "min": 1,
+    "max": 10000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v2_wt_scan",
+    "name": "A03 SCAN",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "options": [
+      "ONE",
+      "LOOP",
+      "PING-PONG"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_wt_table",
+    "name": "A04 TABLE",
+    "min": 0,
+    "max": 7,
+    "default": 0,
+    "options": [
+      "PWM",
+      "HARMONICS",
+      "FORMANT",
+      "SYNC",
+      "FOLD",
+      "CRUSH",
+      "FM",
+      "NOISE"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_wt_end",
+    "name": "A04 END",
+    "min": 0,
+    "max": 100,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_wt_time",
+    "name": "A04 SCAN TIME",
+    "min": 1,
+    "max": 10000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v3_wt_scan",
+    "name": "A04 SCAN",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "options": [
+      "ONE",
+      "LOOP",
+      "PING-PONG"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_wt_table",
+    "name": "A05 TABLE",
+    "min": 0,
+    "max": 7,
+    "default": 0,
+    "options": [
+      "PWM",
+      "HARMONICS",
+      "FORMANT",
+      "SYNC",
+      "FOLD",
+      "CRUSH",
+      "FM",
+      "NOISE"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_wt_end",
+    "name": "A05 END",
+    "min": 0,
+    "max": 100,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_wt_time",
+    "name": "A05 SCAN TIME",
+    "min": 1,
+    "max": 10000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v4_wt_scan",
+    "name": "A05 SCAN",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "options": [
+      "ONE",
+      "LOOP",
+      "PING-PONG"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_wt_table",
+    "name": "A06 TABLE",
+    "min": 0,
+    "max": 7,
+    "default": 0,
+    "options": [
+      "PWM",
+      "HARMONICS",
+      "FORMANT",
+      "SYNC",
+      "FOLD",
+      "CRUSH",
+      "FM",
+      "NOISE"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_wt_end",
+    "name": "A06 END",
+    "min": 0,
+    "max": 100,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_wt_time",
+    "name": "A06 SCAN TIME",
+    "min": 1,
+    "max": 10000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v5_wt_scan",
+    "name": "A06 SCAN",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "options": [
+      "ONE",
+      "LOOP",
+      "PING-PONG"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_wt_table",
+    "name": "A07 TABLE",
+    "min": 0,
+    "max": 7,
+    "default": 0,
+    "options": [
+      "PWM",
+      "HARMONICS",
+      "FORMANT",
+      "SYNC",
+      "FOLD",
+      "CRUSH",
+      "FM",
+      "NOISE"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_wt_end",
+    "name": "A07 END",
+    "min": 0,
+    "max": 100,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_wt_time",
+    "name": "A07 SCAN TIME",
+    "min": 1,
+    "max": 10000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v6_wt_scan",
+    "name": "A07 SCAN",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "options": [
+      "ONE",
+      "LOOP",
+      "PING-PONG"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_wt_table",
+    "name": "A08 TABLE",
+    "min": 0,
+    "max": 7,
+    "default": 0,
+    "options": [
+      "PWM",
+      "HARMONICS",
+      "FORMANT",
+      "SYNC",
+      "FOLD",
+      "CRUSH",
+      "FM",
+      "NOISE"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_wt_end",
+    "name": "A08 END",
+    "min": 0,
+    "max": 100,
+    "default": 100,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_wt_time",
+    "name": "A08 SCAN TIME",
+    "min": 1,
+    "max": 10000,
+    "default": 200,
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v7_wt_scan",
+    "name": "A08 SCAN",
+    "min": 0,
+    "max": 2,
+    "default": 0,
+    "options": [
+      "ONE",
+      "LOOP",
+      "PING-PONG"
+    ],
+    "display": "int",
+    "dynamic_display": true,
+    "poll": false
+  },
+  {
+    "key": "v0_wt_table__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v0_wt_table"
+  },
+  {
+    "key": "v0_wt_scan__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v0_wt_scan"
+  },
+  {
+    "key": "v1_wt_table__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v1_wt_table"
+  },
+  {
+    "key": "v1_wt_scan__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v1_wt_scan"
+  },
+  {
+    "key": "v2_wt_table__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v2_wt_table"
+  },
+  {
+    "key": "v2_wt_scan__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v2_wt_scan"
+  },
+  {
+    "key": "v3_wt_table__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v3_wt_table"
+  },
+  {
+    "key": "v3_wt_scan__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v3_wt_scan"
+  },
+  {
+    "key": "v4_wt_table__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v4_wt_table"
+  },
+  {
+    "key": "v4_wt_scan__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v4_wt_scan"
+  },
+  {
+    "key": "v5_wt_table__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v5_wt_table"
+  },
+  {
+    "key": "v5_wt_scan__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v5_wt_scan"
+  },
+  {
+    "key": "v6_wt_table__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v6_wt_table"
+  },
+  {
+    "key": "v6_wt_scan__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v6_wt_scan"
+  },
+  {
+    "key": "v7_wt_table__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v7_wt_table"
+  },
+  {
+    "key": "v7_wt_scan__open",
+    "name": "Options",
+    "min": 0,
+    "max": 1,
+    "default": 0,
+    "popup_of": "v7_wt_scan"
+  },
+  {
+    "key": "tone_q7",
+    "name": "TONE",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
+    "poll": false
+  },
+  {
+    "key": "tone_q8",
+    "name": "TONE",
+    "min": 0,
+    "max": 1,
+    "default": 0.5,
+    "dynamic_display": true,
+    "dynamic_name": true,
     "poll": false
   }
 ]

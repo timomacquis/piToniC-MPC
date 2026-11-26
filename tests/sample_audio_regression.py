@@ -18,7 +18,7 @@ try:
    for api,p in instances:
     # Same deterministic INIT sound, no host/program-index dependency.
     api.set(p,b'v0_mix',b'0');api.set(p,b'v0_modamt',b'0');api.set(p,b'v0_drive',b'0');api.set(p,b'v0_eqgain',b'0')
-    if mode=='SAMPLE':api.set(p,b'source',b'1');api.set(p,b'sample_path',str(wavpath).encode())
+    if mode=='SAMPLE':api.set(p,b'source',b'2');api.set(p,b'sample_path',str(wavpath).encode())
    if mode=='SAMPLE':
     for _ in range(1000):
      for api,p in instances:api.render(p,(C.c_int16*256)(),128)
